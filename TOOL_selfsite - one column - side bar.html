@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+		<meta name="viewport" content="width=device-width">
+	</head>
+	<!--
+
+	*** SELF-SITE ***
+	- add '?admin' to URL to edit
+	- type text-changes into panels
+	- double-click on panels to switch to HTML view - DO NOT USE <TEXTAREA> TAGS!!! (Iframe forms)
+	- use [save]-link on bottom to overwrite/update original or make new pages
+
+	-->
+	<body style="font-family:sans-serif;margin:0;" onresize="redraw();" onload="redraw();">
+		<script>
+			/*** CONFIGURE THIS! (start) ***/
+
+			// How many panels (title, menu, content1-2-3-4..., sidebar, footer) are on this page?
+			var panel_count=5;
+
+			// Initial panel padding (inner spacing) for all panels - remove (0) if content has "own" padding
+			var panel_padding=15;
+
+			// Initial panel margin (outer spacing) for all panels - remove (0) if content has "own" margin
+			var panel_margin=7;
+
+			// Initial border for orientation - remove (0) when content is posted
+			var panel_border=1;
+
+			// Browser/ Display size at which designated panels will collapse (tile vertically)
+			var collapse_width=725;
+
+			// Which panels are collapsing (tiling vertically) when the screen is too narrow (mobile device view)?
+			var collapsing_panels=[3,4];
+
+			// fixed width panel (e.g. side bar)
+			var fixed_panel_number=4;
+
+			// fixed width panel (e.g. side bar)
+			var fixed_panel_width=400;
+
+			/*** CONFIGURE THIS! (end) ***/
+
+			if(window.location.href.indexOf('?')<0){
+				window.location.href+='?'+Date.now();
+			}else{
+				lr=window.location.href;
+				if(lr.substr(lr.indexOf('?')+1)<Date.now()){window.location.href=lr.substr(0,lr.indexOf('?'))+'?'+(Date.now()+60000);}
+			}
+		</script>
+
+		<!-- TOP PANEL -->
+		<div id="cpnl1" ondblclick="toggleEdit(this);" onblur="tdl('inline');" style="text-align:center;">[TITLE]</div>
+		<!-- MENU PANEL -->
+		<div id="cpnl2" ondblclick="toggleEdit(this);" onblur="tdl('inline');" style="text-align:right;">[MENU]</div>
+
+		<!-- MAIN PANEL -->
+		<div id="div_content" style="display:flex;justify-content:space-evenly;">
+
+			<!-- CONTENT PANEL -->
+			<div id="cpnl3" ondblclick="toggleEdit(this);" onblur="tdl('inline');" style="width:100%;">[MAIN CONTENT]</div>
+			<!-- SIDE PANEL -->
+			<div id="cpnl4" ondblclick="toggleEdit(this);" onblur="tdl('inline');" style="width:100%;">[SIDE-BAR]</div>
+
+		</div>
+		<!-- BOTTOM PANEL -->
+		<div id="cpnl5" ondblclick="toggleEdit(this);" onblur="tdl('inline');" style="text-align:center;">[FOOTER]</div>
+
+	<div style="font-size:10px;text-align:right;"><!--|||--><a download="selfsite.html" href="#" id="save_button" onclick="this.style.display='none';" style="color:#777;display:none;">[SAVE]</a><!--|||--> <a id="help_button" href="http://www.warpsite.net/ducttapesolutions/io_doc/index.html" target="_blank" style="color:#777;display:none;">[HTML-HELP]</a> <a href="http://www.warpsite.net/ducttapesolutions/" style="color:#777" target="_blank">[A Duct-Tape Solution]</a>&nbsp;&nbsp;&nbsp;</div>
+
+	<script>
+		/*** LEAVE THIS ALONE! ***/
+		var save_button=document.getElementById('save_button'); // SAVE button ID
+		var quote_char=String.fromCharCode(34);					// dbl-quote char
+		var tag_open_char=String.fromCharCode(60);				// tag open char
+		var tag_close_char=String.fromCharCode(62);				// tag close char
+		var active_flag=0;										// editor active - flag
+
+		// toggle download link
+		function tdl(v){
+			if(location.search=='?admin'){
+				save_button.style.display=v;
+				save_content=document.getElementsByTagName('HTML')[0].innerHTML+'</html>';
+				save_content=save_content.replace(new RegExp('contentEditable="true"','mg'),'');
+				save_content=save_content.split('<!--|||--'+String.fromCharCode('62'));
+				save_button.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html>'+save_content[0]+'<!--|||--'+String.fromCharCode('62')+'<a download="selfsite.html" href="#" id="save_button" onclick="this.style.display=\'none\';" style="color:#777;display:none;">[SAVE]</a><!--|||--'+String.fromCharCode('62')+''+save_content[2]);
+				var this_location=window.location.pathname.substring(window.location.pathname.lastIndexOf("/")+1).replace(/%20/g," ")+'';
+				if(this_location.indexOf('?')>0){this_location=this_location.substr(0,this_location.indexOf('?'));}
+				save_button.setAttribute('download',this_location);
+			}
+			save_button.style.display=v;
+		}
+
+		// start or end HTML editor
+		function toggleEdit(item){
+			if(location.search=='?admin'){
+				if(!active_flag){
+					active_flag=1;
+					item.contentEditable='false';
+					tdl('none');
+					item.innerHTML=tag_open_char+'textarea style='+quote_char+'width:100%;height:100px;background-color:#ddeeff;'+quote_char+' onblur='+quote_char+'this.parentNode.contentEditable=\'true\';this.parentNode.innerHTML=this.value.replace(new RegExp(\'/text_area\',\'mg\'),\'/textarea\');tdl(\'inline\');active_flag=0;'+quote_char+tag_close_char+item.innerHTML.replace(new RegExp('/textarea','mg'),'/text_area')+tag_open_char+'/textarea'+tag_close_char;item.firstChild.focus();
+				}
+			}
+		}
+
+		// measure window and apply responsive panel collapse
+		function redraw(){
+			var winW=1024;
+			if(document.body && document.body.offsetWidth){winW = document.body.offsetWidth;}
+			if(document.compatMode=='CSS1Compat' && document.documentElement && document.documentElement.offsetWidth){winW = document.documentElement.offsetWidth;}
+			if(window.innerWidth){winW = window.innerWidth;}
+			if(winW<collapse_width){
+				document.getElementById('div_content').style.display='block';
+				for(x=0;x<collapsing_panels.length;x++){document.getElementById('cpnl'+collapsing_panels[x]).style.width='initial';}
+			}else{
+				document.getElementById('div_content').style.display='flex';
+				for(x=0;x<collapsing_panels.length;x++){
+					if(collapsing_panels[x]==fixed_panel_number){
+						document.getElementById('cpnl'+collapsing_panels[x]).style.width=fixed_panel_width+'px';
+					}else{
+						document.getElementById('cpnl'+collapsing_panels[x]).style.width='100%';
+					}
+				}
+			}
+		}
+
+		// remove edit options from public site
+		if(location.search=='?admin'){
+			for(x=1;x<=panel_count;x++){document.getElementById('cpnl'+x).contentEditable='true';}
+			document.getElementById('help_button').style.display='inline';
+		}else{
+			for(x=1;x<=panel_count;x++){document.getElementById('cpnl'+x).contentEditable='false';}
+			document.getElementById('help_button').style.display='none';
+		}
+
+		// apply pre-defined styles
+		for(x=1;x<=panel_count;x++){
+			document.getElementById('cpnl'+x).style.padding=panel_padding+'px';
+			document.getElementById('cpnl'+x).style.margin=panel_margin+'px';
+			document.getElementById('cpnl'+x).style.border='#eee solid '+panel_border+'px';
+		}
+
+		// remove visible [save] button
+		save_button.style.display='none';
+	</script>
+	</body>
+</html>
+
+

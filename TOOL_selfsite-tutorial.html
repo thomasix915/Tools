@@ -1,0 +1,112 @@
+<!DOCTYPE html><html><head>
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+		<meta name="viewport" content="width=device-width">
+	</head>
+	<!--
+
+	*** SELF-SITE ***
+	- add '?admin' to URL to edit
+	- type text-changes into panels
+	- double-click on panels to switch to HTML view - DO NOT USE <TEXTAREA> TAGS!!!
+	- use [save]-link on bottom to overwrite/update original or make new pages
+
+	-->
+	<body style="font-family:sans-serif;margin:0;" onresize="redraw();" onload="redraw();" cz-shortcut-listen="true">
+		<script>
+			/*** CONFIGURE THIS! (start) ***/
+			var panel_count=4;
+			var collapse_width=725;
+			var sidepanel_width='400px';
+			/*** CONFIGURE THIS! (end) ***/
+
+			if(window.location.href.indexOf('?')<0){
+				window.location.href+='?'+Date.now();
+			}else{
+				lr=window.location.href;
+				if(lr.substr(lr.indexOf('?')+1)<Date.now()){window.location.href=lr.substr(0,lr.indexOf('?'))+'?'+(Date.now()+60000);}
+			}
+		</script>
+
+		<!-- TOP PANEL -->
+		<div id="cpnl1" ondblclick="toggleEdit(this);" onblur="tdl('inline');" style="text-align:center;padding:15px;" contenteditable="true"><div><span style="font-size:32px;font-weight:bold;font-style:italic;">SELF-SITE</span></div><div><span style="font-size:16px;font-weight:bold;">So simple, it's complicated - ...or is it?</span></div><hr></div>
+
+		<!-- MAIN PANEL -->
+		<div id="div_content" style="display: flex; justify-content: space-evenly;">
+
+			<!-- CONTENT PANEL -->
+			<div id="cpnl2" ondblclick="toggleEdit(this);" onblur="tdl('inline');" style="width: 100%; padding: 15px; border: 1px solid rgb(238, 238, 238); margin: 7px;" contenteditable="true"><div><strong>WHY?</strong></div>
+<ul><li>Individual learning curve<br></li><li>No dependency, not even Internet connection*</li><li>Full self-containment*</li><li>Fully modifiable/adjustable</li><li>Modular, up- and down-scalable</li><li>Capable of almost anything<br><span style="font-size:10px;">* unless dependencies/resource links intentionally invoked</span></li></ul>
+
+<div>&nbsp;</div><div><strong>HOW?</strong></div>
+<ul><li>Add '?admin' to the URL</li><li>Type into panel for text edits - that's all. That's all needed. But...<br><br></li><li>Editor: double-click panel and edit HTML/CSS <em>(-eek!-)</em></li><ul><li>WAIT! Use snippets: create templates with 'self-template' tool and replace or add in source code view (There: de-<em>eek</em>-ed!)<br></li><li>Click somewhere off panel, to turn off editor<br><br></li></ul><li>Messed up? [CTRL]+[Z] = Undo<br></li><li>When done, click [SAVE] on bottom right (visible after changes), and OVERWRITE original.</li><li>If in doubt or if backup needed, save under different name and swap names with original.</li><li>If new page created, save under new page name.<br></li></ul>
+<div>&nbsp;</div><div><strong>AND THEN?</strong></div>
+<ul><li>Find someone with HTML/CSS/JS skills.<br></li><li>Be someone with HTML/CSS/JS skills.</li><li>Ignore all geek-stuff and use as-is/as-you-can. You will get there automatically, no need to fuzz.<br></li><li>Keep on local computer, own phone, some network, or on the Internet - as needed.<br></li></ul>
+<div>&nbsp;</div><div><strong>GET STARTED - REALITY CHECK IN 1...2...3...</strong></div>
+<ul>
+<li><a href="http://warpsite.net/misc/notes/selfsite%20-%20one%20column.html?admin" target="_blank">Selfsite - one column</a></li>
+<li><a href="http://warpsite.net/misc/notes/selfsite%20-%20one%20column%20-%20side%20bar.html?admin" target="_blank">Selfsite - one column - side bar</a></li>
+<li><a href="http://warpsite.net/misc/notes/selfsite%20-%20two%20column%20-%20side%20bar.html?admin" target="_blank">Selfsite - two column - side bar</a></li>
+<li><a href="http://warpsite.net/misc/notes/selfsite%20-%20three%20column.html?admin" target="_blank">Selfsite - three column</a></li>
+</ul>
+
+
+
+
+</div>
+			<!-- SIDE PANEL -->
+			<div id="cpnl3" ondblclick="toggleEdit(this);" onblur="tdl('inline');" style="width: 400px; background-color: rgb(238, 238, 238); padding: 15px; margin: 7px;" contenteditable="true"><div style="background-color:#ccc;padding:15px;"><strong>RESOURCES</strong>
+<ul>
+<li><strong>Related Tools</strong>
+<ul>
+<li><a href="http://warpsite.net/misc/notes/selftemplate.html" target="_blank">Self-Template</a><br>- replace placeholders</li><li><a href="http://warpsite.net/misc/notes/imgresizer.html" target="_blank">Image Resizer+<br></a>- resize, crop, tweak image,<br>- convert image to PDF</li>
+</ul>
+</li>
+<br>
+<li><strong>Look Up&nbsp;Anything You Need</strong><ul>
+<li><a href="https://www.w3schools.org" target="_blank">W3Schools</a></li>
+</ul>
+</li>
+<br>
+<li><strong>Web Hosting</strong>
+<ul>
+<li><a href="https://www.hostingadvice.com/how-to/free-web-hosting/" target="_blank">Hosting Options</a> <br>- free / paid options <br>&nbsp; to place your website<br></li>
+<li><a href="https://sites.google.com" target="_blank">Google Sites</a> <br>- free, but a bit 'forced'<br>&nbsp; (adjust height A LOT<br>&nbsp; for mobile view)<br>- requires Google account<br>- embed as source code<br>- keep local copy for editing<br></li>
+</ul>
+</li>
+</ul></div></div>
+
+		</div>
+		<!-- BOTTOM PANEL -->
+		<div id="cpnl4" ondblclick="toggleEdit(this);" onblur="tdl('inline');" style="clear:both;text-align:center;padding:15px;" contenteditable="true"><hr><div style="padding:10px;background-color:#efe;"><div><span style="font-size:10px; font-weight:bold;">WHO DID THIS TO THE INTERNET? -&nbsp;</span><span style="font-size: 10px; font-style: italic;">Ingo Thomas </span><a href="mailto:ingothomas@gmail.com" style="font-size: 10px; font-style: italic;">(ingothomas@gmail.com)</a>&nbsp;|&nbsp;<span style="font-size: 10px; font-weight: bold;">Great! Can you fix my website? -&nbsp;</span><span style="font-size: 10px; font-style: italic;">No.</span></div></div></div>
+
+	<div style="font-size:10px;text-align:right;"><!--|||--><a download="selfsite.html" href="#" id="save_button" onclick="this.style.display='none';" style="color:#777;display:none;">[SAVE]</a><!--|||--> <a id="help_button" href="http://www.warpsite.net/ducttapesolutions/io_doc/index.html" target="_blank" style="color:#777;display:none;">[HTML-HELP]</a> <a href="http://www.warpsite.net/ducttapesolutions/" style="color:#777" target="_blank">[A Duct-Tape Solution]</a>&nbsp;&nbsp;&nbsp;</div>
+
+	<script>
+		/*** LEAVE THIS ALONE! ***/
+		if(window.location.href.indexOf('?')<0){
+			window.location.href+='?'+Date.now();
+		}else{
+			lr=window.location.href;
+			if(lr.substr(lr.indexOf('?')+1)<Date.now()){window.location.href=lr.substr(0,lr.indexOf('?'))+'?'+(Date.now()+60000);}
+		}
+		var save_button=document.getElementById('save_button');var quote_char=String.fromCharCode(34);var tag_open_char=String.fromCharCode(60);var tag_close_char=String.fromCharCode(62);var cpnl=document.getElementById('cpnl');var active_flag=0;
+		function tdl(v){
+			if(location.search=='?admin'){
+				save_button.style.display=v;
+				save_content=document.getElementsByTagName('HTML')[0].innerHTML+'</html>';
+				save_content=save_content.replace(new RegExp('contentEditable="true"','mg'),'');
+				save_content=save_content.split('<!--|||--'+String.fromCharCode('62'));
+				save_button.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html>'+save_content[0]+'<!--|||--'+String.fromCharCode('62')+'<a download="selfsite.html" href="#" id="save_button" onclick="this.style.display=\'none\';" style="color:#777;display:none;">[SAVE]</a><!--|||--'+String.fromCharCode('62')+''+save_content[2]);
+				var this_location=window.location.pathname.substring(window.location.pathname.lastIndexOf("/")+1).replace(/%20/g," ")+'';
+				if(this_location.indexOf('?')>0){this_location=this_location.substr(0,this_location.indexOf('?'));}
+				save_button.setAttribute('download',this_location);
+			}
+			save_button.style.display=v;
+		}
+		function toggleEdit(item){if(location.search=='?admin'){if(!active_flag){active_flag=1;item.contentEditable='false';tdl('none');item.innerHTML=tag_open_char+'textarea style='+quote_char+'width:100%;height:100px;background-color:#ddeeff;'+quote_char+' onblur='+quote_char+'this.parentNode.contentEditable=\'true\';this.parentNode.innerHTML=this.value.replace(new RegExp(\'/text_area\',\'mg\'),\'/textarea\');tdl(\'inline\');active_flag=0;'+quote_char+tag_close_char+item.innerHTML.replace(new RegExp('/textarea','mg'),'/text_area')+tag_open_char+'/textarea'+tag_close_char;item.firstChild.focus();}}}function redraw(){var winW=1024;if(document.body && document.body.offsetWidth){winW = document.body.offsetWidth;}if(document.compatMode=='CSS1Compat' && document.documentElement && document.documentElement.offsetWidth){winW = document.documentElement.offsetWidth;}if(window.innerWidth){winW = window.innerWidth;}if(winW<collapse_width){document.getElementById('div_content').style.display='block';document.getElementById('cpnl2').style.width='initial';document.getElementById('cpnl3').style.width='initial';}else{document.getElementById('div_content').style.display='flex';document.getElementById('cpnl3').style.width=sidepanel_width;document.getElementById('cpnl2').style.width='100%';}}if(location.search=='?admin'){for(x=1;x<=panel_count;x++){document.getElementById('cpnl'+x).contentEditable='true';}}else{for(x=1;x<=panel_count;x++){document.getElementById('cpnl'+x).contentEditable='false';}}save_button.style.display='none';
+	</script>
+
+
+
+
+</body></html>

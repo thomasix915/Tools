@@ -1,0 +1,513 @@
+<!DOCTYPE html><html lang="en-US"><head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
+		<link href="data:image/png;base64,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" rel="icon" type="image/png">
+		<title>QUICK-NOTE</title>
+		<style type="text/css">
+			body{
+				font-family:monospace;
+				font-size:12px;
+			}
+			.title{
+				font-family:monospace;
+				font-weight:bold;
+				font-size:16px;
+			}
+			textarea{
+				font-family:monospace;
+				font-size:12px;
+				border-radius:5px;
+			}
+			input{
+				font-family:monospace;
+				font-size:12px;
+				border-radius:5px;
+			}
+			#dropper.hover{
+				background-color:#ffffff;
+				color:#000000;
+			}
+		</style>
+		<script type="text/javascript">
+			var local_storage_handle='nanowiki-'+window.location.pathname.substring(window.location.pathname.lastIndexOf("/")+1).replace(/%20/g,' ');
+			if((localStorage.getItem(local_storage_handle)==undefined) || (localStorage.getItem(local_storage_handle)=='')){localStorage.setItem(local_storage_handle,'|');}
+			if(window.location.href.indexOf('?clear')<0){var nanowiki_localcontent=localStorage.getItem(local_storage_handle).split('|');}else{localStorage.setItem(local_storage_handle,'|');window.location.href=window.location.href.replace('?clear','');}
+
+			if(window.location.href.indexOf('?')<0){window.location.href+='?'+Date.now();}else{lr=window.location.href;if(lr.substr(lr.indexOf('?')+1)<Date.now()){window.location.href=lr.substr(0,lr.indexOf('?'))+'?'+(Date.now()+60000);}}
+			var editor_active=false;
+			var visible1=0;
+			var visible2=0;
+			var this_location=window.location.pathname.substring(window.location.pathname.lastIndexOf("/")+1).replace(/%20/g," ")+'';
+			if(this_location.indexOf('?')>0){this_location=this_location.substr(0,this_location.indexOf('?'));}
+			function addCol(ele){for(x=1;x<ele.parentNode.childNodes.length;x++){ele.parentNode.childNodes[x].innerHTML+='<td style="border:#cccccc solid 1px;vertical-align:top;" contenteditable="true"></td>';updateLocalStorage();}}
+			function subCol(ele){if(confirm('DELETE COLUMN?')){if(ele.innerHTML.split('</td>').length>4){for(x=1;x<ele.parentNode.childNodes.length;x++){content=ele.parentNode.childNodes[x].innerHTML.split('</td>');content.pop();content.pop();ele.parentNode.childNodes[x].innerHTML=content.join('</td>');updateLocalStorage();}}}}
+			function addRow(ele1,ele2){cols='';for(x=0;x<ele2.childNodes.length-2;x++){cols+='<td style="border:#cccccc solid 1px;vertical-align:top;" contenteditable="true"></td>';}ele1.innerHTML+='<tr>'+cols+'</tr>';updateLocalStorage();}
+			function subRow(ele){if(confirm('DELETE ROW?')){if(ele.innerHTML.split('</tr>').length>3){content=ele.innerHTML.split('</tr>');content.pop();content.pop();ele.innerHTML=content.join('</tr>');updateLocalStorage();}}}
+
+			function addInstantNotesTable(){
+				if(document.querySelector('#new_content').value=='[content]'){document.querySelector('#new_content').value='';}
+				document.getElementById('new_content').value+='\n\n<table style="width:99%;" border="1"><tbody><tr><td style="width:10px;cursor:pointer;color:#009900;font-weight:bold;" onclick="addRow(this.parentNode.parentNode,this.parentNode.nextElementSibling);">[R]</td><td style="width:10px;cursor:pointer;color:#990000;font-weight:bold;" onclick="subRow(this.parentNode.parentNode);">[R]</td><td style="cursor:not-allowed;background-color:#000000; color:#ffffff" colspan="1000"></td></tr><tr><td rowspan="100" style="width:10px;cursor:pointer;color:#009900;font-weight:bold;" onclick="addCol(this.parentNode);">[C]</td><td rowspan="100" style="width:10px;cursor:pointer;color:#990000;font-weight:bold;" onclick="subCol(this.parentNode);">[C]</td><td style="border:#cccccc solid 1px;vertical-align:top;" contenteditable="true" onkeyup="updateLocalStorage();"></td></tr></tbody></table>';
+			}
+			function addCrypto(){
+				if(document.querySelector('#new_content').value=='[content]'){document.querySelector('#new_content').value='';}
+				document.getElementById('new_content').value+='\n<span><textarea style="width:50%;height:300px;"></textarea></span><br />Password: <input style="width:75px;" type="password"><input value="encrypt" onclick="key=this.previousElementSibling.value;cryptlock=this.previousElementSibling.previousElementSibling.previousElementSibling;org=cryptlock.firstChild.value;cryptlock.innerHTML=\'\';for(x=0;x<org.length;x++){cryptlock.innerHTML+=\'| \'+(org.charCodeAt(x)*1+key.charCodeAt(x%key.length)*1);}" type="button" /><input value="decrypt" onclick="key=this.previousElementSibling.previousElementSibling.value;cryptlock=this.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling;org=cryptlock.innerHTML.substr(1).split(\'| \');cryptlock.innerHTML=\'<textarea style=\'+String.fromCharCode(34)+\'width:50%;height:300px;\'+String.fromCharCode(34)+\'></textarea>\';for(x=0;x<org.length;x++){if(org[x]){cryptlock.firstChild.value+=String.fromCharCode(org[x]-key.charCodeAt(x%key.length));}}" type="button" /></span>';
+			}
+			function addShowHide(){
+				if(document.querySelector('#new_content').value=='[content]'){document.querySelector('#new_content').value='';}
+				document.getElementById('new_content').value+='\n<div style="font-size:10px;text-align:center;background-color:#eeeeee;">[---click to expand/collapse---]</div><div style="height:50px;overflow:hidden;cursor:ns-resize;" onclick="if(this.style.overflow==\'hidden\'){this.style.overflow=\'visible\';this.style.height=\'auto\';}else{this.style.overflow=\'hidden\';this.style.height=\'50px\';}">\n\n</div>';
+			}
+			function addEmailReply(){
+				if(document.querySelector('#new_content').value=='[content]'){document.querySelector('#new_content').value='';}
+				document.getElementById('new_content').value+='\n\n<input value="send message" onclick="window.open(\'mailto:ingothomas@gmail.com?subject=\'+escape(\'NOTE REPLY TO: \'+this.parentNode.previousSibling.innerHTML)+\'&body=SENT%20FROM%3A%20\'+escape(window.location.href)+\'%0A%0A%0A\');" type="button">';
+			}
+			function getUpdateDate(){
+				var d = new Date();
+				return d.toLocaleString();
+			}
+			function updateLocalStorage(){
+				if(document.getElementById('nanowiki_panel_autosave').checked){localStorage.setItem(local_storage_handle,document.getElementById('nanowiki_panel_autosave').checked+'|'+document.getElementById('nanowiki_panel').innerHTML);document.getElementById('localstorage_updated').style.color='#fff';document.getElementById('localstorage_updated').style.backgroundColor='#090';};
+			}
+			function addWiki(title, content){
+				var random_id=Math.floor((Math.random()*9999999999)+1);
+				document.getElementById('nanowiki_panel').innerHTML+='<div id="'+random_id+'" style="border:#cccccc solid 1px; margin:5px; padding:5px; border-radius:5px;"><div class="title" id="title'+random_id+'">'+title+'</div><div id="content'+random_id+'">'+parseTemplates(content).replace(new RegExp('  ','mg'),'&nbsp;&nbsp;').replace(new RegExp(String.fromCharCode(10),'mg'),'<br />')+'</div><div style="clear:both;">&nbsp;</div><hr /><div style="width:65px;float:left;"><span title="Move up" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(0,\''+random_id+'\');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAdUlEQVR42m1NuQ2AMAw8sgNjsADL0FHTeQvkLZiAlJSpEYooMD2KMgQ4QUIgcc3Z99gACFwTlFm80qCTYal0LHSzUm0o0fQGmDcVETuXiOwZUtmKb8EiQdPcJucweIFQT3KmDEvInyj7bhn3OxHXfPDTevCvXjOnKXEFcZQuAAAAAElFTkSuQmCC" />&nbsp;</span><span title="Move down" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(1,\''+random_id+'\');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAZ0lEQVR42mNgYChnmHD7CgOQBlFgZjkTAxgwggVjgawC1cUgsXwVIKENkZmQBlLyHKoUCJBZaS5AKgCsohyoFGhqGpQsRxiPBpgYrNxvb9OD8wO2dWxLA7sBzDXY9t/plnVfwTEQBwBlXiHWjsWwaQAAAABJRU5ErkJggg==" />&nbsp;</span></div><div style="width:45px;float:right;"><span title="REMOVE" style="background-color:#770000;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="if(confirm(\'DELETE?\')){removeWiki(\''+random_id+'\');}">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAnUlEQVR42mNkwA12AbErlH0MiK2xKWLEophYADYUZsB/ICBJNyMjI4SC8mcDcQqJLpgL0gMzwMHd3X3/jh07iNLp4eHBsHPnTkcg8wCGAXFxcQyfP39mWL9+PZj9/v17hs2bNzOEhoYy/PjxA8zGawDUb6BAwckeNWDQGwCSfPXqFcO5c+fwsnEaQG5KlALii0AsQmQ+eAvERkD8CAD5O8gRRpPKTQAAAABJRU5ErkJggg==" style="margin-bottom:-3px;" />&nbsp;</span></div><div style="width:45px;float:right;"><span title="EDIT" style="background-color:#007700;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="editWiki(\''+random_id+'\');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABbElEQVR42rWTO2vCUBTH/7FDhoAEbA0dBEHBRdz9DnXo4mQJwUmnDAHN0EDTJWPmOqibg9BFp3wFN10sGHETHwQE6VBLmnP7oAUfaaEHLtzD5fe759wHhz9EJpO5c8fj5xfA4n4Lx2Ixs9Vq3eq6jqfRSOcCw7UPPARr54egQqGAbreLTqeDeDwORVHQaDSgaZpJFcwjkYiUSCT2wvl8Hu12G4ZhYDAYQBAEVCoV3JRK96v12iCBL4oiPM87WHa9XofruvB9n1VCQlmWWfsnBQRPp1Nst1v0+33UajWYpgme508LCF4sFmx8wtRKsVik/LiA4OVyyeBer8dgy7LYgVL+we4X2LaNZrMJSZLgOM4XTJFMJjGbzY4LcrkchsMhm3+HQwkmkwnS6TSy2SzK5TJUVf3R2kkBLe52O6RSqb23EqqFY/EvgjnHcVI0Gg0l2Gw29CJXwfSCCc6Aq9f3z3QZykAbAtXgAz5S8gbiBb+FSaOmpAAAAABJRU5ErkJggg==" style="margin-bottom:-3px;" />&nbsp;</span></div><hr style="clear:both;position:relative;top:5px;" /></div><!--~-->';
+				document.getElementById('last_update').innerHTML=getUpdateDate();
+				document.getElementById('new_title').value='[title]';
+				document.getElementById('new_content').value='[content]';
+				document.getElementById('tutorial_text').innerHTML='&nbsp;';
+				document.getElementById('new').style.display='none';
+				clearTempImages();
+				updateLocalStorage();
+			}
+			function clearTempImages(){
+				document.getElementById('results').innerHTML='';
+				document.getElementById('media_buffer').innerHTML='';
+				document.querySelector('#b64s').value='';
+				document.querySelector('#b64').innerHTML='';
+				document.querySelector('#b64r').innerHTML='';
+				document.getElementById('image_resizer_org').src='';
+				document.getElementById('image_resizer_resized').innerHTML='';
+			}
+			function parseTemplates(content){
+				var section=[];
+				var end_params;
+				var params;
+				var tail;
+				var pars=[];
+				var width;
+				var result;
+
+				section=content.split('{IMG|');
+				for(x=1;x<section.length;x++){
+					end_params=section[x].indexOf('}');
+					params=section[x].substr(0,end_params);
+					tail=section[x].substr(end_params+1);
+					pars=params.split('|');
+					if(pars.length>1){width=' width:'+pars[1]+';';}else{width='';}
+					result='<img src="images/'+pars[0]+'" style="margin:5px; border:0;'+width+' max-width:99%;';
+					if(pars.length>2){result+=' float:'+pars[2]+';';}
+					section[x]=result+'" />'+tail;
+				}
+				content=section.join('');
+
+				section=content.split('{DOC|');
+				for(x=1;x<section.length;x++){
+					end_params=section[x].indexOf('}');
+					params=section[x].substr(0,end_params);
+					tail=section[x].substr(end_params+1);
+					pars=params.split('|');
+					result='<a href="documents/'+pars[0]+'" target="_blank">';
+					section[x]=result+pars[1]+'</a>'+tail;
+				}
+				content=section.join('');
+
+				section=content.split('{LINK|');
+				for(x=1;x<section.length;x++){
+					end_params=section[x].indexOf('}');
+					params=section[x].substr(0,end_params);
+					tail=section[x].substr(end_params+1);
+					pars=params.split('|');
+					result='<a href="'+pars[0]+'"';
+					if(pars[2].toLowerCase()=='yes'){result+=' target="_blank"';}
+					section[x]=result+'>'+pars[1]+'</a>'+tail;
+				}
+				content=section.join('');
+
+				return content;
+			}
+			function editWiki(random_id){
+				if(!editor_active){
+					editor_active=true;
+					document.getElementById('new').style.display='block';
+					visible1=1;
+					clearTempImages();
+					media_count=0;
+					editor_content=document.getElementById('content'+random_id).innerHTML;
+					// extract image data
+					editor_segments=editor_content.split('<img src="');
+					if(editor_segments.length>1){
+						for(x=1;x<editor_segments.length;x++){
+							media_count++;
+							mediaBufferAdd(editor_segments[x].substr(0,editor_segments[x].indexOf('"')),media_count)
+							editor_segments[x]=editor_segments[x].substr(editor_segments[x].indexOf('"'));
+						}
+					}
+					editor_content=editor_segments.join('<img src="[-MEDIA BUFFER ITEM-]');
+					// extract file data
+					editor_segments=editor_content.split('<a href="data:');
+					if(editor_segments.length>1){
+						for(x=1;x<editor_segments.length;x++){
+							media_count++;
+							mediaBufferAdd(editor_segments[x].substr(0,editor_segments[x].indexOf('"')),media_count)
+							editor_segments[x]=editor_segments[x].substr(editor_segments[x].indexOf('"'));
+						}
+					}
+					editor_content=editor_segments.join('<a href="data:[-MEDIA BUFFER ITEM-]');
+
+					var editor='<input id="edit_title" type="text" class="title" style="width:99%" value="'+document.getElementById('title'+random_id).innerHTML+'" /><textarea id="edit_content" style="width:99%; height:200px;">'+editor_content.replace(new RegExp('/textarea','mg'),'/text_area').replace(new RegExp('&nbsp;&nbsp;','mg'),'  ').replace(new RegExp('<br>','mg'),String.fromCharCode(10))+'</textarea><input type="button" style="width:99%; background-color:#770000; color:#ffffff;" value="-COMMIT CHANGES-" onclick="finishEditWiki('+random_id+');" />';
+					document.getElementById(random_id).innerHTML=editor;
+				}else{
+					alert('EDITOR ACTIVE!\n================\n\nPlease close active editor before opening new one!');
+				}
+			}
+			function finishEditWiki(random_id){
+				editor_content=document.getElementById('edit_content').value;
+				// re-insert media data
+				editor_segments=editor_content.split('[-MEDIA BUFFER ITEM-]');
+				if(editor_segments.length>1){
+				media_items=document.getElementsByClassName('media_lib_item');
+				for(x=1;x<editor_segments.length;x++){
+						editor_segments[x]=media_items[x-1].value+editor_segments[x].substr(editor_segments[x].indexOf('"'));
+					}
+				}
+				editor_content=editor_segments.join('');
+				var final='<div class="title" id="title'+random_id+'">'+document.getElementById('edit_title').value+'</div><div id="content'+random_id+'">'+parseTemplates(editor_content.replace(new RegExp('/text_area','mg'),'/textarea').replace(new RegExp('  ','mg'),'&nbsp;&nbsp;').replace(new RegExp(String.fromCharCode(10),'mg'),'<br />'))+'</div><div style="clear:both;">&nbsp;</div><hr /><div style="width:65px;float:left;"><span title="Move up" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(0,\''+random_id+'\');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAdUlEQVR42m1NuQ2AMAw8sgNjsADL0FHTeQvkLZiAlJSpEYooMD2KMgQ4QUIgcc3Z99gACFwTlFm80qCTYal0LHSzUm0o0fQGmDcVETuXiOwZUtmKb8EiQdPcJucweIFQT3KmDEvInyj7bhn3OxHXfPDTevCvXjOnKXEFcZQuAAAAAElFTkSuQmCC" />&nbsp;</span><span title="Move down" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(1,\''+random_id+'\');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAZ0lEQVR42mNgYChnmHD7CgOQBlFgZjkTAxgwggVjgawC1cUgsXwVIKENkZmQBlLyHKoUCJBZaS5AKgCsohyoFGhqGpQsRxiPBpgYrNxvb9OD8wO2dWxLA7sBzDXY9t/plnVfwTEQBwBlXiHWjsWwaQAAAABJRU5ErkJggg==" />&nbsp;</span></div><div style="width:45px;float:right;"><span title="REMOVE" style="background-color:#770000;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="if(confirm(\'DELETE?\')){removeWiki(\''+random_id+'\');}">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAnUlEQVR42mNkwA12AbErlH0MiK2xKWLEophYADYUZsB/ICBJNyMjI4SC8mcDcQqJLpgL0gMzwMHd3X3/jh07iNLp4eHBsHPnTkcg8wCGAXFxcQyfP39mWL9+PZj9/v17hs2bNzOEhoYy/PjxA8zGawDUb6BAwckeNWDQGwCSfPXqFcO5c+fwsnEaQG5KlALii0AsQmQ+eAvERkD8CAD5O8gRRpPKTQAAAABJRU5ErkJggg==" style="margin-bottom:-3px;" />&nbsp;</span></div><div style="width:45px;float:right;"><span title="EDIT" style="background-color:#007700;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="editWiki(\''+random_id+'\');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABbElEQVR42rWTO2vCUBTH/7FDhoAEbA0dBEHBRdz9DnXo4mQJwUmnDAHN0EDTJWPmOqibg9BFp3wFN10sGHETHwQE6VBLmnP7oAUfaaEHLtzD5fe759wHhz9EJpO5c8fj5xfA4n4Lx2Ixs9Vq3eq6jqfRSOcCw7UPPARr54egQqGAbreLTqeDeDwORVHQaDSgaZpJFcwjkYiUSCT2wvl8Hu12G4ZhYDAYQBAEVCoV3JRK96v12iCBL4oiPM87WHa9XofruvB9n1VCQlmWWfsnBQRPp1Nst1v0+33UajWYpgme508LCF4sFmx8wtRKsVik/LiA4OVyyeBer8dgy7LYgVL+we4X2LaNZrMJSZLgOM4XTJFMJjGbzY4LcrkchsMhm3+HQwkmkwnS6TSy2SzK5TJUVf3R2kkBLe52O6RSqb23EqqFY/EvgjnHcVI0Gg0l2Gw29CJXwfSCCc6Aq9f3z3QZykAbAtXgAz5S8gbiBb+FSaOmpAAAAABJRU5ErkJggg==" style="margin-bottom:-3px;" />&nbsp;</span></div><hr style="clear:both;position:relative;top:5px;" />';
+				document.getElementById(random_id).innerHTML=final;
+				document.getElementById('last_update').innerHTML=getUpdateDate();
+				editor_active=false;
+				document.getElementById('new').style.display='none';
+				visible1=1;
+				clearTempImages();
+				updateLocalStorage();
+			}
+			function mediaBufferAdd(data,count) {
+				var div = document.createElement("div");
+				div.style['width'] = '110px';
+				div.style['margin-right']='10px';
+				div.className = 'media_item';
+				div.style['float']='left';
+
+				var ta = document.createElement("textarea");
+				ta.id='media_lib_'+count;
+				ta.className='media_lib_item';
+				ta.style['width']='100px';
+				ta.style['height']='100px';
+				ta.style['font-size']='10px';
+
+				var view = document.createElement("button");
+				view.style['float']='right';
+				view.title = 'view';
+				view.className = 'view';
+				view.innerHTML = '-OO-';
+				view.onclick = function(){window.open(this.nextSibling.nextSibling.value);};
+				div.appendChild(view);
+
+				var remove = document.createElement("button");
+				remove.style['float']='right';
+				remove.title = 'remove';
+				remove.className = 'remove';
+				remove.innerHTML = 'x';
+				remove.onclick = function(){if(confirm('CAUTION!\nNumber of media items and media item references (\'[-MEDIA BUFFER ITEM-]\') must match after editing!\n\nProceed?')){document.getElementById('media_buffer').removeChild(div);}};
+				div.appendChild(remove);
+
+				if(data.indexOf('data:image/')>-1){
+					var imgDiv = document.createElement("div");
+					var img = document.createElement("img");
+					img.src = data;
+					img.style['max-width']='100px';
+					img.style['height-width']='100px';
+					imgDiv.appendChild(img);
+					div.appendChild(imgDiv);
+				}
+				ta.value=data;
+
+				div.appendChild(ta);
+				document.getElementById("media_buffer").appendChild(div);
+
+			}
+			function removeWiki(random_id){
+				var buffer_all=document.getElementById('nanowiki_panel').innerHTML.split('<!--~-->');
+				for(x=0;x<(buffer_all.length-1);x++){
+					if(buffer_all[x].indexOf('id="'+random_id+'"')>-1){
+						buffer_all.splice(x,1);
+						x=buffer_all.length;
+					}
+				}
+				document.getElementById('nanowiki_panel').innerHTML=buffer_all.join('<!--~-->');
+				updateLocalStorage();
+			}
+			function moveWiki(direction, random_id){
+				var buffer_all=document.getElementById('nanowiki_panel').innerHTML.split('<!--~-->');
+
+				var position;
+				var buffer;
+
+				for(x=0;x<(buffer_all.length-1);x++){
+					if(buffer_all[x].indexOf('id="'+random_id+'"')>-1){
+						position=x;
+						x=buffer_all.length;
+					}
+				}
+
+				if((direction) && (position<(buffer_all.length-2))){
+					buffer=buffer_all[position+1];
+					buffer_all[position+1]=buffer_all[position];
+					buffer_all[position]=buffer;
+				}else if((!direction) && (position>0)){
+					buffer=buffer_all[position-1];
+					buffer_all[position-1]=buffer_all[position];
+					buffer_all[position]=buffer;
+				}
+
+				document.getElementById('nanowiki_panel').innerHTML=buffer_all.join('<!--~-->');
+				updateLocalStorage();
+			}
+			function changeTitle(){
+				document.getElementById('page_title').innerHTML='<input id="page_title_edit" type="text" value="'+document.getElementById('page_title').innerHTML+'" style="width:250px;" onblur="document.getElementById(\'page_title\').innerHTML=this.value;document.title=this.value;document.getElementById(\'page_title\').ondblclick=function(){changeTitle();}" /><input type="button" value="&lt;" />';document.getElementById('page_title_edit').focus();
+				document.getElementById('page_title').ondblclick=function(){}
+			}
+			function tutorial(item){
+				if(item=='image'){
+					document.getElementById('tutorial_text').innerHTML='<strong>IMAGES</strong> (drag image from file system into black box below and copy WHOLE GENERATED TEXT into content area)<hr /><table><tr><td style="vertical-align:top;">SYNTAX:</td><td style="vertical-align:top; color:#555555;">&lt;img src="[lots-of-characters]" style="margin:5px; <span style="color:#ff0000;">width:[display-width]; float: [location-of-image-in-text]</span>" /&gt;</td></tr><tr><td style="vertical-align:top;">EXPLAINED:</td><td style="vertical-align:top; color:#555555;"><span style="color:#ff0000;">WIDTH</span> - forced img width in px or %, remove for full size<br /><span style="color:#ff0000;">FLOAT</span> - "left" or "right", lets text flow around img opposite side <a href="http://www.w3schools.com/cssref/pr_class_float.asp" target="_blank" title="Sample on the Internet">[?]</a>, remove if no text-embedding wanted.</td></tr><tr><td style="vertical-align:top;">EXAMPLES:</td><td style="vertical-align:top; color:#555555;">&lt;img src="data:image/png;base64,iVBORw0..." style="margin:5px; max-width:100%;" /&gt;<br />&lt;img src="data:image/gif;base64,R0lGODlh..." style="margin:5px; max-width:100%; max-width:100%; <span style="color:#ff0000;">width:200px; float:right;</span>" /&gt;<br />&lt;img src="data:image/jpeg;base64,/9j/4AAQSkZJRg..." style="margin:5px; max-width:100%; <span style="color:#ff0000;">width:25%; float:left;</span>" /&gt;</td></tr></table><br />';
+				}else if(item=='doc'){
+					document.getElementById('tutorial_text').innerHTML='<strong>DOCUMENTS/FILES</strong> (drag file from file system into black box below and copy WHOLE GENERATED TEXT into content area)<hr /><table><tr><td style="vertical-align:top;">SYNTAX:</td><td style="vertical-align:top; color:#555555;">&lt;a href="[lots-of-characters]" target="_blank"&gt;<span style="color:#ff0000;">label</span>&lt;/a&gt;</td></tr><tr><td style="vertical-align:top;">EXPLAINED:</td><td style="vertical-align:top; color:#555555;"><span style="color:#ff0000;">LABEL</span> - "clickable" content (text or image) linking the document or file</td></tr><tr><td style="vertical-align:top;">EXAMPLES:</td><td style="vertical-align:top; color:#555555;">&lt;a href="data:application/pdf;base64,JVBERi0..." target="_blank" &gt;<span style="color:#ff0000;">See Document (PDF)</span>&lt;/a&gt;<br />&lt;a href="data:audio/mpeg;base64,SUQzAw..." target="_blank" &gt;<span style="color:#ff0000;">&lt;img src="data:image/png;base64,iVBORw0..." style="margin:5px;" /&gt;</span>&lt;/a&gt;<br /></td></tr><tr><td style="vertical-align:top;">MORE INFO:</td><td style="vertical-align:top; color:#555555;">Keep file-size reasonable. Browser will "freeze" for a while, converting large files, then continue normal. For files &gt;10 MB, copy file into wiki directory and link like a web page, see {LINK}.</td></tr></table><br />';
+				}else if(item=='link'){
+					document.getElementById('tutorial_text').innerHTML='<strong>LINKS</strong> (copy syntax into content area and edit as needed)<hr /><table><tr><td style="vertical-align:top;">SYNTAX:</td><td style="vertical-align:top; color:#555555;">&lt;a href="<span style="color:#ff0000;">[page/URL]</span>" <span style="color:#ff0000;">target="_blank"</span>&gt;<span style="color:#ff0000;">label</span>&lt;/a&gt;</td></tr><tr><td style="vertical-align:top;">EXPLAINED:</td><td style="vertical-align:top; color:#555555;"><span style="color:#ff0000;">PAGE/URL</span> - linked resource: local page name (PAGE), fully qualified web address (URL), or filename (e.g. large document)<br /><span style="color:#ff0000;">TARGET="_BLANK"</span> - opens linked resource in new window, use for external web address or files only, remove for local pages (e.g. cross-references within wiki)<br /><span style="color:#ff0000;">LABEL</span> - "clickable" content (text or image) linking the resource</td></tr><tr><td style="vertical-align:top;">EXAMPLES:</td><td style="vertical-align:top; color:#555555;">&lt;a href="<span style="color:#ff0000;">page2.html</span>"&gt;<span style="color:#ff0000;">Next Page</span>&lt;/a&gt;<br />&lt;a href="<span style="color:#ff0000;">http://www.pbs.org/newshour</span>" <span style="color:#ff0000;">target="_blank"</span>&gt;<span style="color:#ff0000;">Go to PBS News</span>&lt;/a&gt;<br />&lt;a href="<span style="color:#ff0000;">LargeFile.pdf</span>" <span style="color:#ff0000;">target="_blank"</span>&gt;<span style="color:#ff0000;">-Click Here-</span>&lt;/a&gt;<br /></td></tr></table><br />';
+				}else if(item=='crypto'){
+					document.getElementById('tutorial_text').innerHTML='<strong>CRYPTO:</strong><hr /><table><tbody><tr><td style="vertical-align:top;" colspan="2"><input type="button" value=" - CLICK HERE TO ADD CRYPTO TEXT-BLOCK - " onclick="addCrypto();" /></td></tr><tr><td style="vertical-align:top;"><strong>EXPLAINED:</strong></td><td style="vertical-align: top;">Creates WEAKLY(!) encryptable text-block on the page. Encryption CAN be deciphered with some effort. This is protection against visibility and snooping, not serious theft. There is no way to retrieve a lost password. To crack, use trial and error. <table border="0" cellpadding="1" cellspacing="1"><tbody><tr><td style="vertical-align: top;"><strong>ENCRYPTION</strong><br /> - Enter secret content<br /> - Enter password<br /> - Press [encrypt]<br /> - Save page</td><td style="vertical-align: top;"><strong>DECRYPTION/EDITING</strong><br />- Enter password<br style="" />- Press [decrypt]<br /><br /> - Edit content, [encrypt], save page</td></tr></tbody></table></td></tr></tbody></table><br />';
+				}else if(item=='datetime'){
+					document.getElementById('tutorial_text').innerHTML='<strong>CURRENT DATE/TIME</strong> (just copy to where you need it)<hr />&nbsp;'+getUpdateDate()+'<br /><br />';
+				}else if(item=='close'){
+					document.getElementById('tutorial_text').innerHTML='&nbsp;';
+				}
+			}
+
+		</script>
+	</head>
+	<body cz-shortcut-listen="true" style="cursor: auto;">
+		<span style="font-size:24px;font-weight:bold;" id="page_title" ondblclick="changeTitle();">QUICK-NOTE</span>
+		<div style="float:right; width:300px; text-align:right;">
+			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px; color: rgb(255, 255, 255); background-color: rgb(0, 153, 0);" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
+			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
+			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="fhgfhjgf.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC" class="ui-draggable ui-draggable-handle" style="position: relative;">&nbsp;</a></span>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">3/23/2021, 1:46:22 PM</span></div>
+		</div>
+		<div style="clear:both; display:none;" id="help">
+			WHAT IS THIS?<br>
+			=============<br>
+			NanoWiki is a documentation tool with a small footprint, extreme containment, and maximum portability, even when segments are isolated from a comprehensive constellation. Each element is as self-sustained as possible.<br>
+			Unlike most content managers, this documentation tool tries to embed as much content as possible into one file, not link resources, like images and/or supportive documents. Therefore these binary files are converted to text, using base64-conversion, then included into the content via straight HTML. The syntax for images, documents, and links is provided as templates, along with explanations and samples.<br>
+			<br>
+			<br>
+			HOW DOES IT WORK?<br>
+			=================<br>
+			CHANGE THE MAIN TITLE...<br>
+			of the documentation, by double-clicking on it.<br>
+			<br>
+			ADD ARTICLES...<br>
+			as needed, bring them into the right order, and save the whole page through the button in the upper left.<br>
+			<br>
+			EDIT ARTICLES...<br>
+			by double-clicking them. Then edit and save the whole page (again) with the button in the upper left. Get new images and documents posted, using the conversion tool in the [ADD] section.<br>
+			<br>
+			NO FONT-SIZE, BOLD, ITALIC, TABLES - NOTHING???<br>
+			Nope. Enjoy your own HTML-skills, almost everything is supported (but stay away from &lt;/textarea&gt; and JavaScript). This is intended to be as simple and bare-bones as possible.<br>
+			Templates for images and links (to files and pages) are included. Use CAPITALIZATION, +++ additional characters +++, and indentation for emphasis and organization. Worked for decades on a typewriter, works here too.<br>
+			<br>
+			AND NO 'UNDO...'<br>
+			In the text-box, right-click and choose UNDO, or press [CTRL]+[Z] / [CTRL]+[Y] for UNDO / REDO.<br>
+			If you messed up completely, deleted something, open the original you should overwrite after editing in a separate window and get the content from there (open the editor with a double-click).<br>
+			If you broke the system somehow, do not overwrite the previous version, simply re-load the page, and start over. If you overwrote the original already, get a backup.<br>
+			MAKE AND KEEP BACKUPS, they compress nicely and fast. Disciplin, people, this is meant to be small, simple, fast, portable, and independent, not fool or vilain proof.<br>
+			<br>
+			AND NO LOGIN/SECURITY...<br>
+			Not needed, only you (or your people) have write access to the files. You can write anything on a paper copy, doesn't change the original, neither other people's copies.<br>
+			<br>
+			<br>
+			HOW DO I SHARE MY DOCUMENTATION?<br>
+			================================<br>
+			Give others read access e.g. by posting the wiki on a web server or on a file-sharing platform, like Dropbox or Google Drive. Just find out how to "make file publicly accessible".<br>
+			Web servers or fully addressible platforms are (only) required to provide cross-linked multi-topic documentation sites instead of single documentation pages.<br>
+			
+			<br>
+			<br>
+			ENJOY! - or improve...<br>
+			<br>
+		</div>
+		<hr style="clear:both;">
+		<!-- CONTENT PANEL START --><div id="nanowiki_panel"><div id="6146883141" style="border:#cccccc solid 1px; margin:5px; padding:5px; border-radius:5px;"><div class="title" id="title6146883141">Paste screenshots/images and type text</div><div id="content6146883141"><script src="https://code.jquery.com/jquery-1.12.4.js"></script><script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script><script>$(function(){$('img').draggable();});</script><style type="text/css">#image_aggregator img{max-width:100%;vertical-align:middle;}</style><div id="image_aggregator" style="border:#ccc solid 1px;min-height:100px;font-size:20px;font-style:italic;" contenteditable="true" onkeyup="localStorage.setItem(local_storage_handle_note,document.getElementById('image_aggregator').innerHTML);" onclick="localStorage.setItem(local_storage_handle_note,document.getElementById('image_aggregator').innerHTML);"><input type="button" value="Arrow - SE" onclick="if(arrow_index<10){document.getElementById('arrow_rb'+arrow_index).style.top='100px';document.getElementById('arrow_rb'+arrow_index).style.left='100px';arrow_index++;}" title="add arrow pointing to lower right"><input type="button" value="Arrow - SW" onclick="if(arrow_index<10){document.getElementById('arrow_lb'+arrow_index).style.top='100px';document.getElementById('arrow_lb'+arrow_index).style.left='100px';arrow_index++;}" title="add arrow pointing to lower left"><input type="button" value="Arrow - NW" onclick="if(arrow_index<10){document.getElementById('arrow_lt'+arrow_index).style.top='100px';document.getElementById('arrow_lt'+arrow_index).style.left='100px';arrow_index++;}" title="add arrow pointing to upper left"><input type="button" value="Arrow - NE" onclick="if(arrow_index<10){document.getElementById('arrow_rt'+arrow_index).style.top='100px';document.getElementById('arrow_rt'+arrow_index).style.left='100px';arrow_index++;}" title="add arrow pointing to upper right"><input type="button" value="[C]" onclick="if(arrow_index>0){arrow_index--;document.getElementById('arrow_rb'+arrow_index).style.top='-10000px';document.getElementById('arrow_rb'+arrow_index).style.left='-10000px';document.getElementById('arrow_lb'+arrow_index).style.top='-10000px';document.getElementById('arrow_lb'+arrow_index).style.left='-10000px';document.getElementById('arrow_lt'+arrow_index).style.top='-10000px';document.getElementById('arrow_lt'+arrow_index).style.left='-10000px';document.getElementById('arrow_rt'+arrow_index).style.top='-10000px';document.getElementById('arrow_rt'+arrow_index).style.left='-10000px';}" title="clear last arrow"><input type="button" value="[R]" onclick="document.getElementById('image_aggregator').innerHTML=localStorage.getItem(local_storage_handle_note);$(function(){$('img').draggable();});" title="recall last entered content (e.g. after reload or crash)"><hr><div>[-NOTE-]</div></div><script>var local_storage_handle_note='quicknote-'+window.location.pathname.substring(window.location.pathname.lastIndexOf("/")+1).replace(/%20/g," ");if((localStorage.getItem(local_storage_handle_note)==undefined)||(localStorage.getItem(local_storage_handle_note)=='')){localStorage.setItem(local_storage_handle_note,document.getElementById('image_aggregator').innerHTML);}if(navigator.userAgent.indexOf("Firefox")==-1){document.onpaste=function(event){var items=(event.clipboardData || event.originalEvent.clipboardData).items;var blob=null;for(i=0;i<items.length-1;i++){if(items[i].type.indexOf("image")===0){blob=items[i].getAsFile();}}if(blob!==null){var reader=new FileReader();reader.onload = function(event){var img=document.createElement('img');img.src=event.target.result;document.querySelector('#image_aggregator').appendChild(img);};reader.readAsDataURL(blob);}}}var arrow_index=0;for(x=0;x<10;x++){document.getElementById('image_aggregator').innerHTML+='<img style="border-width:0px;position:absolute;top:-10000px;left:-10000px;cursor:move;" id="arrow_rb'+x+'" src="data:image/png;base64,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" /><img style="border-width:0px;position:absolute;top:-10000px;left:-10000px;cursor:move;" id="arrow_lt'+x+'" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAAEH5aXCAAAACXBIWXMAAAsSAAALEgHS3X78AAAQvElEQVR42u1dCVxU1Rq/M4zOxC4Mi6WgooRbgqJSQoLUU1+uZbiRQK78ci1cErP0ialhZln+BFPC3Sw0fYEtioppzwV77ksvcykXRFBkH3jnY74rh+vM5c7MnQVmzu/3/S7D3HO/+7//c77zne98546kurqa0bVIJRKJA5HhRAKIKARVIlJBJILoO0+OX5CKvvVWIrdXTo574QOpGEfkqhBNUA4vGzv2XfafRFsgXyUJ+yDIiRJycCGf7td8Zpgg8t0pPk1MtboUkJNd8VZztWmUcv9BKhbWV1Gq6Ur1VZRqA8tXUVJfiyAnw8MpwIfTkpx/Q1ofJxyN1wVp4uVJl8YaQuQlIkoidkKaj5To+JEcNxAZSyrx4oPm4kRkHak0jEIs4dNQRGQL+49sd/d7RMtTfN0AUGeguojwe/fcq93cbmirVOcpYYvuTf6zn3FweCR59MiDfF/C+1jrVGratFxSXu5KV9LIQ51KdnYqiUrlxFbSSlydSmp89lCJl2kNlaRCWi5U6kHOOqpXW5IgefZEZERKwaaRi6gYEQsocCDyEpFkImuILCJ3Ph4bcVsi9oYqkaC0JDLyWN++vYP37u3/+Fs1da3JXzcJuiq9lcDzJXcLj6oTkVHkac/UcCdB5HCR2yJ1eVxgXirJ4SyR5eSCzZ8wP8TIYX8J5OtoOlsdbFLODIwS2BZrirqfheqCTGj7fVKZun/2FKJMcJvXqkzdOIL5lOnesbQp42kgeg0fApVdINcuNUiJQGU1lt1gJRxlciJNyBUf0AORaErqG2zlRFyJOBJpgnfEiG0gvcD4o5EE16UF0eMspkJQAmaiC5EoInFgv4j8A/8nyJUQoqSQSJ6To2Nzwk78ykGDuoJFZtSeREciCoMbBSIBWzSGKImmv/xlxoyFvVasWKKv9aWVwONoSySaKJmn6aTyDz+c03TOnKV6Py4cau+AOSAat3JPuBkVtUX+7rtfGcIN6+oVEzlH5GfuCc9s3w789CLioa8iVgnMbS4TySzv2PGchkFrhyGKnnACwdZUdup0tsnZs4OqvbwOM7dve1EEQos7TOSuLh4N38jYhBx8flUqj/bIy1MaoohvIgNzyms98/JC/qNU5hny6IQMvzWIjvj47Au5ds1HH0RCJko1iJ6/dq3PUR+fa/ogkgqBSys64u9/SVdFUqEthFX0wqVL/9RVkVSX9k4rygkKOilUkVTXjsUqCsvNjRKqSKqPmaAVHQgNPcBR9AKOQ1KDlNCKwnNyxnIUfUMOz4KPabASrqJ9/frtphQdMPhxaVIUmZU19cTAgd9SikqYqiqpKEooRTeCd++OKZky5dNaCNIq4/ldKSkTmAkTUrgzLXaCyrpAVWxsimkgRYItzQF9Znv0K2CgLEEpR1EhwCpLBChF182TSGcifdGPHI3u3VD0JUPRgW2HTqwSPWe5GP6lWEBgbl2GR3AlfUNdXSf7e3iMJ3+/io5xDDrJcBxBZABaQgDmhoAk5m5aMmxaLTAiAXO9Z0nbGaKpwudDhmydvHMnROouEjlN5BJ6nyWGhEUMBoKdHZwRFyKtsAkFhoeHF+/Pzp4p6CpkGl+5fPk7smnTVpqzaTHYrOAp/03kCkh2drbbqkGDtgu6ikplV3DlSisI65irz7AxqGq0TBAbB8/tAsSkpnz33TUIB9V3kauennc8Vq06hOOthzkAcacMMrRizcDTQHOsImccEXQ1N7d8SX7+BPLX70Ru4WS3XOyAab2OI0YHH2ETg9WnE0RyL+fkPF6ButOp02liISLhpp+4Wn6+G7hc1W5uP6NVMxlDwt2HP/5oLWnT5ipl5dwhwEvmX1/T8686xdW1QFJQMM4UDOm32qMeM2TY9JT1AlKHXWOMCcggh04TIDKf/IqeT5oKkCieqc6A1LHqUWICEtXF1gToF3//Nc9fuuRvbEBGmSvoDEgd4B9uCCCjBps1ATrUpcvHob/9FiQ2IJNEzTUCCgpaHpqb25XHmx2mCyCJKedIxgQkMcdkTxOg7NDQD3rn5PTmATQYHVoA9BADBeYFYiAgWBK+y53/SCxh+q0BUIvs/v3f7p2ZOYhv6sCGaUSLB4kQT6rGpvIApxEnwzMzJxJ0ba9HRW3RNgZZTNMSwBIr1VWzZi2RLFs2E5FLLKKzm9eNt/AiRRphpVeGYldfhpSlRhrBWjRBkWI0sRIjiyqMLFY1BEbkGArywtjWM/g3zNsdIWiHATiZJTPFLrm7Y0wrAIN0HRj1ujLM1b0bAigpNi0nZAKCBV0w2gj+z3NE2msBpbAkQFLqqMBRtRXe/HMIppsGUNAE3TAIITN33JcFACNqKQoU+15OTgMcHRz88aZpUF2RMWiCLZEd6GNmj8jLMMJYhC7yQ7BYOcXFDsSXCYMTTnTseHaeUnkk68ABPzwvH5sigzGwh9RDMKv5VWBnhyUCCGA/t2LkSNX0LVvGcU8+SUAlenruzdq/H8zzGUad6ge+USHXrTbXOOKEnbkzNh8/Mt4P5Kt4s2fPo6tDQt5OWrkSlhceYJTSrEBYE+yF/QGAdKj28oqgU0X4SlVY2KGK9PQR8lat/jInEHYdETpuG2xeXeIGD65Yt2vXWzpeTGqu9UVWsQo7LHT4e0Tur9+1y1tHEK7mNMXsOAJAytACARDI17l/qkePX4Vc5CmFIhINhr25wNALPdBZIUkMdonchv48x9l5h5CLBLRuDZkbPkztmorJwdDuRRU2L1i1gk77+96ffnog5CK558//K7B9+1AcJM0ChgukAvvJTUadWXfmQkzMWqFgUufPf9pcYLhLb3ZowZ5C1wNKZbV6+VlQWTt//ujxCxcCo9exrxXXXMPI1oy79KaiXJb7KIUQk2XPeb5794iNixYN03bBcQsXbjIHM3xbXGpDSGlpY6SxsWnpq1e3iImPB1DeG5KS/KITE3dYCjPCgw+FhS4SV9cibHowo/QOCw4OO3j8+KfaqmxMTJz4RlLSJVOA0WdfgZ0lgtEn5ZDtR2Ddbh06fvzQi8HBU7WdH52UtGZDYqK/sfuMvmmNFgfGkNTJJ8B0DggYzwdm45w5HYwFRowdK3X6TKeAgODTFy6kajt/W0JCwojk5BNi9xkxUkDrMHPmwoXjfMwMT05O3pqQ0E1sZsRKMzU7GNFiUprAtPH1jTUVGFGDa1wwf/z552/1gfl28uRwMcCIHiXUFczQVaveFwOMUcKd5gBjtLitqcEYfcWKO84olcoOd/PyNmk7/99xcZ8OWL8+Q9dxxuiRdC4zeXl55zyUytHazn9l/fqpe+LihurKjEmWBEwBxmRrG8YGY9JFGk1gnBwdR/CB+X706JEIxh1jCXZmB6IJTFFR0UU+MP03bZrwQ1QUbDCAOABsDWmqaZXMLMtmuoJ5efv2MQdHjYpDy9dU032bbf1PVzBhmze/eX7sWAiqwzKIxGKAaAOjkMtf13Z+wJdfxhdMmzaXqdkoZkFANIEpKyu7QsC8pu18l5UrZ6hiY1NNPrLr4QFAh/ZQKBTeJaWlP2qtEBe3nlm37k2LYUQLM3+XlpZednZyaq+1wosvHrSopqUFDKwC3H348OFN/3btXJ44cdmyWUxsbJpFNi1OM6uTdFaDUb1awDBJSYnM3LmLLbaPCCqc3aANF4g55yO2oiMhlNCJQlxjVo1SxfncoPYlNxRCZOjhs5mNMup/EooIELDybLYj+5n9vtpGlDiEQI6THKdeIA5M7ZIuSwq7bl3B1G5ur6COlSgsSTaiDCDECSf1Tjj7ggwhSI5xRGJkeG4lUzdlkJYyJKdMC1HcHsUudVfZSHqSEGfsFS4YpPBg1G9NcMf/2VOkqKgewpLBvhailDrSRJVRdeiexSWrQSR7G7tIOWNDJTVwy7CHOCNJEIiBjEfIM4W1WZjuQL42JNGyqc7dKIHPgfg9vNnsWawL0anmSLgz6oCxyw63GUismRAZksC2eDaB1wFNlhMSJA3w9Oxw/s6ddmxFSAQ+7Od3NrOwsDTrwIHWlElje0EZ1VPgukV47QKU+0xtkvEjynur0hQesTYvi83NAgLc0GR5Y0v2Zs3X8e7dPbsdO9aD74IUUYWEqOZIDEs0kAC5krDtDnK/8pCch0zt23BU1my62PkHS4o9mhEgwAsJaY5/u0WGh//909GjE5nSUt1erGhnpzoTGJh7sn37Y7sLCk7v2LMHCLiNxNCEVNgIqUuKnBrglVQvaY69ptlH48f/LyE1NUEU7YSokpCQI8UDBuy8GhT0TXC/fjesfXCn3w7GTg4VOH40w8G8OWW6gCTXzKFDK/plZAwz2l0Roqp79fpFsmFDNEO96NBavCw2jbyKcmtLqAGYzY/Px0G4qH9GhuKkn9/vxrqpkmnTPpEePBgp8fW9aW1eF/1DDrT7CwMxJBk8wIE4nyIFSHqQ6OOTSecyi1Eux8amkKfvZ//xxx/heAbjGrvTVmJVhFBup4qakT/CXsEScgcH4rtZ+/crVkdHfyHKXSgUpWsWLHjNPy0NfoDEB02kkpqYWg0x2n4ggjueuKA77I5HZ/xOdrxfv5BuWVmviHEz8HsZMzw9Pzl1/vw5qjey85QSaoZvsS+IFJ0QJIUNwTfBB8/GupyoGBd8J5HL5VU3mjVLUd665SXWTZ318Li7eciQxMWpqfk4hlkNMXxvwpZy5ihNmdrIsAy/qzFxW5csaT18zpy9ot+dm1v+2smTp4xfuLDMWogR8gMyLDF2KOzfdUIdDxYsmOb0/vuLNF3nRs+eR6/FxCS/MG9eCrwn0EaMnoRwiKGF6wjUFFWfPj9I9+3rw34u7tLlvzOCgoanpKVVorlz3ZCU5Ba9fLmNGEMIEVyKihwZb+9b1S1a3Pxry5bIFl273qYiAAqMAtQQ895bb3m+8fXXn7W7c8fTRoyxCOE3eXQQ8zExYcHBnZOvXp2v9QWbfMXB4dHG6dPffiMp6V5jIcaU7/+zEWMphNiIsVBCdCEmJCiow4p792ZrfRNtIyXGEt4ryUtMp4CAtqnFxe/pRUzTpuXbpk6dOyI5+WpDIcaS3o9pI4axsFRSGzGWnTZulcRYdLK1EGJa+/r6bpLL52p9yXk9xHw7ceLi1z777IylENMgst+NToydnSojPn7Rq6tWnTY3MQ1qO4I1ENMg94c0ZmIa9IYdIcQolcqnM1q2fIfvVw34iNk5adKHQz///JSpiGkUO6iMTgzz+E0TB41NTKPa0tYYiGmUewwbMjGNetOnEGJcXFy8d3XuPInvd1l0JAZy2Yo5xNRsVBJCjFXswhVCjKOjo9eewMB4fYn5ISoqve/27TsZdfrSfSQGtmBAflsFkqKqjxSr2hZtCmL2DR/+VeS2bVuxx9xHU1ZMmzE+Uqxyn7opiDk+Zkxq9/T0L5gn97/wZvdLGSss+CtSbB5zObZgSJmFdFn4QbLr8DKc8JycD+DtPtkRET/qqiM4PX08aeq5N+LjZ1i9l2WMHiOXy90zIyJiIrKyBuqjozwubt2UJk0mpaSkVNpMluHEPE6lJcQ0+zkycmyv778frJcSeJHR2rXj6B+fsxGiOzGQx8zmltW8YMHe3l5xom/fdwIyMl7XJyTD7N8fwYSFHbIRoh8x9I4A9rUjNWm1Hh4e0osvv7ys2ebN0YIuumLFDGb69E9sJktccjSm1FYkJCyWJSdr3n8Jb/maOfMj26BujjJ79tIaAqDMmrWMWbp0ts3LaqBFansEllX+D4uuE0vG8ABJAAAAAElFTkSuQmCC" /><img style="border-width:0px;position:absolute;top:-10000px;left:-10000px;cursor:move;" id="arrow_rt'+x+'" src="data:image/png;base64,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" /><img style="border-width:0px;position:absolute;top:-10000px;left:-10000px;cursor:move;" id="arrow_lb'+x+'" src="data:image/png;base64,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" />';}</script></div><div style="clear:both;">&nbsp;</div><hr><div style="width:65px;float:left;"><span title="Move up" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(0,'6146883141');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAdUlEQVR42m1NuQ2AMAw8sgNjsADL0FHTeQvkLZiAlJSpEYooMD2KMgQ4QUIgcc3Z99gACFwTlFm80qCTYal0LHSzUm0o0fQGmDcVETuXiOwZUtmKb8EiQdPcJucweIFQT3KmDEvInyj7bhn3OxHXfPDTevCvXjOnKXEFcZQuAAAAAElFTkSuQmCC">&nbsp;</span><span title="Move down" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(1,'6146883141');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAZ0lEQVR42mNgYChnmHD7CgOQBlFgZjkTAxgwggVjgawC1cUgsXwVIKENkZmQBlLyHKoUCJBZaS5AKgCsohyoFGhqGpQsRxiPBpgYrNxvb9OD8wO2dWxLA7sBzDXY9t/plnVfwTEQBwBlXiHWjsWwaQAAAABJRU5ErkJggg==">&nbsp;</span></div><div style="width:45px;float:right;"><span title="REMOVE" style="background-color:#770000;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="if(confirm('DELETE?')){removeWiki('6146883141');}">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAnUlEQVR42mNkwA12AbErlH0MiK2xKWLEophYADYUZsB/ICBJNyMjI4SC8mcDcQqJLpgL0gMzwMHd3X3/jh07iNLp4eHBsHPnTkcg8wCGAXFxcQyfP39mWL9+PZj9/v17hs2bNzOEhoYy/PjxA8zGawDUb6BAwckeNWDQGwCSfPXqFcO5c+fwsnEaQG5KlALii0AsQmQ+eAvERkD8CAD5O8gRRpPKTQAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></div><div style="width:45px;float:right;"><span title="EDIT" style="background-color:#007700;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="editWiki('6146883141');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABbElEQVR42rWTO2vCUBTH/7FDhoAEbA0dBEHBRdz9DnXo4mQJwUmnDAHN0EDTJWPmOqibg9BFp3wFN10sGHETHwQE6VBLmnP7oAUfaaEHLtzD5fe759wHhz9EJpO5c8fj5xfA4n4Lx2Ixs9Vq3eq6jqfRSOcCw7UPPARr54egQqGAbreLTqeDeDwORVHQaDSgaZpJFcwjkYiUSCT2wvl8Hu12G4ZhYDAYQBAEVCoV3JRK96v12iCBL4oiPM87WHa9XofruvB9n1VCQlmWWfsnBQRPp1Nst1v0+33UajWYpgme508LCF4sFmx8wtRKsVik/LiA4OVyyeBer8dgy7LYgVL+we4X2LaNZrMJSZLgOM4XTJFMJjGbzY4LcrkchsMhm3+HQwkmkwnS6TSy2SzK5TJUVf3R2kkBLe52O6RSqb23EqqFY/EvgjnHcVI0Gg0l2Gw29CJXwfSCCc6Aq9f3z3QZykAbAtXgAz5S8gbiBb+FSaOmpAAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></div><hr style="clear:both;position:relative;top:5px;"></div><!--~--></div><!-- CONTENT PANEL END -->
+
+		<hr>
+		<div style="background-color:#cccccc; margin:5px; padding:5px; border-radius:5px;">
+			<div>
+				&nbsp;<span class="title" onclick="if(!visible1){document.getElementById('new').style.display='block';visible1=1;clearTempImages();}else{clearTempImages();document.getElementById('new').style.display='none';visible1=0;}" style="cursor:pointer;">[+]</span><br>
+			</div>
+			<div id="new" style="text-align: center; display: none;">
+				<input id="new_title" class="title" style="width:99%" value="[title]" onfocus="if(this.value=='[title]'){this.value='';}" onblur="if(this.value==''){this.value='[title]';}" type="text">
+				<textarea id="new_content" style="width:99%; height:200px;" onfocus="if(this.value=='[content]'){this.value='';}" onblur="if(this.value==''){this.value='[content]';}">[content]</textarea><br>
+				<span style="cursor:pointer;color:#009900;" onclick="addShowHide();">[^ COLLAPSED SEGMENT]</span><span style="cursor:pointer;color:#009900;" onclick="addEmailReply();">[^ EMAIL-REPLY BUTTON]</span><span style="cursor:pointer;color:#009900;" onclick="addInstantNotesTable();">[^ INSTANT NOTES TABLE]</span><br><span style="font-size:11px; color:#777777;">TEMPLATES (click for info):<br><span onclick="tutorial('image');" style="cursor:pointer;">{IMG}</span> <span onclick="tutorial('doc');" style="cursor:pointer;">{DOC}</span> <span onclick="tutorial('link');" style="cursor:pointer;">{LINK}</span> <span onclick="tutorial('crypto');" style="cursor:pointer;">{CRYPTO BLOCK}</span> <span onclick="tutorial('datetime');" style="cursor:pointer;">{DATE/TIME}</span> <span onclick="tutorial('close');" style="cursor:pointer;">{-close-}</span> </span>
+				<div id="tutorial_text" style="text-align:left; border:#555555 solid 1px; border-radius: 5px; padding:5px; margin:5px;">&nbsp;</div><br>
+				<input style="width:99%; background-color:#007700; color:#ffffff;" value="-ADD-" onclick="addWiki(document.getElementById('new_title').value,document.getElementById('new_content').value);visible1=0;" type="button">
+				<div style="text-align:center;margin-top:5px;">
+					<div style="width:115px;text-align:center;margin:auto;">
+						<div id="dropper" style="width:100px; text-align:center; font-size:10px; padding:10px 0; border-radius:10px; border:#333333 inset 7px; background-color:#333333; color:#ffffff;">DRAG IMAGES AND OTHER FILES HERE</div>
+							<div id="results"></div>
+					</div>
+					<div style="text-align:center;margin-top:5px;">
+						OR: <input id="b64s" onchange="b64FileSelect(this.files[0]);" type="file"><span id="b64"></span>
+					</div>
+					<hr>
+					<div style="font-family:sans-serif; font-size:12px;">RESIZER - Dimension: <input type="number" id="image_resizer_dim" style="width:50px;" value="200" onchange="document.getElementById('image_resizer_dim_slide').value=this.value;imageResizerResize(this.value);">px <input value="200" id="image_resizer_dim_slide" type="range" min="0" max="1000" onchange="document.getElementById('image_resizer_dim').value=this.value;imageResizerResize(document.getElementById('image_resizer_dim').value);"><br>
+						<input type="file" id="file" onchange="var reader=new FileReader();reader.readAsDataURL(this.files[0]);reader.onload=function(){document.querySelector('#image_resizer_org').src=reader.result;setTimeout('imageResizerResize(document.getElementById(\'image_resizer_dim\').value);',100);}"> -
+						<input value="x" onclick="if(document.querySelector('#file').files[0]){document.querySelector('#image_resizer_dim').value='200';document.querySelector('#image_resizer_dim_slide').value='200';document.querySelector('#image_resizer_org').src='';imageResizerResize('200');document.querySelector('#b64r').innerHTML='';document.querySelector('#b64').innerHTML='';document.querySelector('#file').value='';}" type="button"><br>
+						<img id="image_resizer_org" src="" style="position:absolute;top:-10000px;left:-10000px;" class="ui-draggable ui-draggable-handle">
+						<div style="text-align:center;"><canvas id="image_resizer_resized" width="200" height="200" style="border:#000000 solid 1px;"></canvas></div><span id="b64r"></span>
+					</div>
+					<fieldset><legend>[MEDIA BUFFER]</legend>
+					<div id="media_buffer"></div>
+					</fieldset>
+					<br style="clear:both;">
+				</div>
+				<script>
+					function imageResizerResize(side_length){
+						document.querySelector('#b64r').innerHTML='<br /><input type="button" value="+" onclick="if(document.querySelector(\'#new_content\').value==\'[content]\'){document.querySelector(\'#new_content\').value=\'\';}document.querySelector(\'#new_content\').value+=document.querySelector(\'#image_resizer_data\').value;" /><br /><textarea id="image_resizer_data" onmouseover="this.select();" style="width:300px;height:100px;font-size:10px;"></textarea>';
+						var img = document.getElementById('image_resizer_org');
+						var canvas = document.getElementById('image_resizer_resized');
+						if(img.width>1){
+							var ratio=img.width/img.height;
+						}else{
+							var ratio=1;
+						}
+						var ctx = canvas.getContext('2d');
+						if(ratio>1){
+							canvas.width=side_length;
+							canvas.height=side_length/ratio;
+							ctx.drawImage(img, 0, 0, side_length,side_length/ratio);
+						}else{
+							canvas.width=side_length*ratio;
+							canvas.height=side_length;
+							ctx.drawImage(img, 0, 0, side_length*ratio,side_length);
+						}
+						var blobber=canvas.toDataURL('image/jpeg',0.9);
+						if(blobber.indexOf(':image/')){
+							var context='<!-- IMAGE START --><img src="'+blobber+'" border="0" style="margin:5px; max-width:100%; width:'+side_length+'px;" /><!-- IMAGE END -->';
+						}else{
+							var context='<!-- FILE START --><a href="'+blobber+'" target="_blank">[-link-text-or-image-]</a><!-- FILE END -->';
+						}
+						document.getElementById('image_resizer_data').value=context;
+						//img.src='';
+					}
+
+					function b64FileSelect(selected_file){
+						var reader=new FileReader();
+						reader.readAsDataURL(selected_file);
+						document.querySelector('#b64').innerHTML='<br /><span style="color:#990000;">-working, please wait-</span>';
+						reader.onload=function(){
+							if(reader.result.indexOf(':image/')){
+								var context='<!-- IMAGE START --><img src="'+reader.result+'" border="0" style="margin:5px; max-width:100%; width:200px;" /><!-- IMAGE END -->';
+							}else{
+								var context='<!-- FILE START --><a href="'+reader.result+'" target="_blank">[-link-text-or-image-]</a><!-- FILE END -->';
+							}
+							document.querySelector('#b64').innerHTML='<input type="button" value="+" onclick="document.querySelector(\'#new_content\').value+=document.querySelector(\'#b64c2\').value;" /><input type="button" value="x" onclick="document.querySelector(\'#b64s\').value=\'\';this.parentNode.innerHTML=\'\';" /><br /><textarea id="b64c2" onmouseover="this.select();" style="width:200px;height:100px;font-size:10px;">'+context+'</textarea>';
+						};
+					}
+
+					/*
+					=== BASE 64 ENCODER ===
+					based on http://jpillora.com/base64-encoder/
+					*/
+					if(typeof window.FileReader === 'undefined'){document.getElementById('dropper').innerHTML='BROWSER<br />NOT<br />SUPPORTED!';}
+					var dropper = document.getElementById("dropper");
+					var results = document.getElementById("results");
+					dropper.ondragover = function(){dropper.className='hover';return false;};
+					dropper.ondragend = function(){dropper.className='';return false;};
+					dropper.ondrop = function (e){
+						e.preventDefault();
+						var files = [].slice.call(e.dataTransfer.files);
+						files.forEach(function (file){
+							var reader = new FileReader();
+							reader.onload = function(event){
+								fileLoaded(file.name, event.target.result);
+							};
+							reader.readAsDataURL(file);
+						});
+						dropper.className='';
+					return false;
+					};
+
+					function fileLoaded(filename, dataUri) {
+
+						var div = document.createElement("div");
+						div.style['width'] = '110px';
+						div.style['margin-right']='10px';
+						div.className = 'item';
+						div.style['float']='left';
+
+						var remove = document.createElement("button");
+						remove.style['float']='right';
+						remove.className = 'remove';
+						remove.innerHTML = 'x';
+						remove.onclick = function() {results.removeChild(div);};
+						div.appendChild(remove);
+
+
+						var adder = document.createElement("button");
+							adder.style['float']='right';
+							adder.className = 'adder';
+							adder.innerHTML = '+';
+							adder.onclick = function() {
+							if(document.querySelector('#new_content').value=='[content]'){document.querySelector('#new_content').value='';}
+							document.querySelector('#new_content').value+=document.querySelector('#b64c1').value;
+						};
+						div.appendChild(adder);
+
+						var name = document.createElement("div");
+						name.innerHTML = filename.substr(-20);
+						name.style['font-size']='10px';
+						div.appendChild(name);
+
+						var ta = document.createElement("textarea");
+						ta.onmouseover = function(){ta.select();};
+						ta.id='b64c1';
+						ta.style['width']='100px';
+						ta.style['height']='100px';
+						ta.style['font-size']='10px';
+
+						if(/^data:image/.test(dataUri)) {
+							var imgDiv = document.createElement("div");
+							var img = document.createElement("img");
+							img.src = dataUri;
+							img.style['max-width']='100px';
+							img.style['height-width']='100px';
+							imgDiv.appendChild(img);
+							div.appendChild(imgDiv);
+							ta.value = '<!-- IMAGE START --><img src="'+dataUri+'" border="0" style="margin:5px; max-width:100%; width:200px;" /><!-- IMAGE END -->';
+						}else{
+							ta.value = '<!-- FILE START --><a href="'+dataUri+'" target="_blank">[-link-text-or-image-]</a><!-- FILE END -->';
+						}
+
+						div.appendChild(ta);
+
+						results.appendChild(div);
+					}
+				</script>
+			</div>
+		</div>
+		<hr>
+		<div style="text-align:right;"><a href="http://www.warpsite.net/ducttapesolutions/index.html" target="_blank" style="color:#aaaaaa; font-size:10px; font-family:sans-serif;">NanoWiki - A Duct-Tape Solution</a></div>
+		<script>
+			document.getElementById('save').setAttribute('download',this_location);document.title=document.getElementById('page_title').innerHTML;
+			document.getElementById('localstorage_updated').style.color='';document.getElementById('localstorage_updated').style.backgroundColor='';
+			if(nanowiki_localcontent[0]){document.getElementById('nanowiki_panel_autosave').checked=true;}
+			if(document.getElementById('nanowiki_panel').innerHTML==''){document.getElementById('nanowiki_panel').innerHTML=nanowiki_localcontent[1];}
+		</script>
+</body></html>
