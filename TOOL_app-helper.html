@@ -172,10 +172,10 @@
 	<body cz-shortcut-listen="true">
 		<span style="font-size:24px;font-weight:bold;" id="page_title" ondblclick="changeTitle();">App-Helper</span>
 		<div style="float:right; width:300px; text-align:right;">
-			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px; color: rgb(255, 255, 255); background-color: rgb(0, 153, 0);" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
+			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px;" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
 			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
-			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="nanowiki_te.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
-			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">5/5/2023, 5:17:52 PM</span></div>
+			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="TOOL_app-helper.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">6/5/2023, 4:42:39 PM</span></div>
 		</div>
 		<div style="clear:both; display:none;" id="help">
 			WHAT IS THIS?<br>
@@ -221,6 +221,7 @@
 		</div>
 		<hr style="clear:both;">
 		<!-- CONTENT PANEL START --><div id="nanowiki_panel"><div id="714810350" style="border:#cccccc solid 1px; margin:5px; padding:5px; border-radius:5px;"><div class="title" id="title714810350"> </div><div id="content714810350"><script>
+// display status message
 function msg(){
 	for(x=0;x<message.length;x++){
 		message[x].style.backgroundColor='#990000';
@@ -228,67 +229,100 @@ function msg(){
 	}
 	setTimeout('for(x=0;x<message.length;x++){message[x].style.backgroundColor=\'#009900\';message[x].innerHTML=\'-ready-\';}',1000);
 }
+
+// main generator
 function process(){
+	var lb=String.fromCharCode(10);
 	document.getElementById('datatype').value=document.getElementById('datatype').value.trim();
-	var lines_db=document.getElementById('database').value.split(String.fromCharCode(10));
-	var lines_dt=document.getElementById('datatype').value.split(String.fromCharCode(10));
+
+	// database field
+	var lines_db=document.getElementById('database').value.split(lb);
+
+	// database field type
+	var lines_dt=document.getElementById('datatype').value.split(lb);
+
+	// if multi-entry is selected, the maximum of occurences is being measured 
 	var max_count_script='';
+	var update_closure_extension='';
 	for(x=0;x<lines_dt.length;x++){
 		if(lines_dt[x].indexOf(',m')!=-1){
-			max_count_script+='if($field_max_count<count($_POST[\''+lines_db[x]+'\'])){$field_max_count=count($_POST[\''+lines_db[x]+'\'];}'+String.fromCharCode(10);
+			max_count_script+='if($field_max_count<count($_POST[\''+lines_db[x]+'\'])){$field_max_count=count($_POST[\''+lines_db[x]+'\']);}'+lb;
+			update_closure_extension='';
 		}
 	}
-	var function_call_seg1=(document.getElementById('datatype').value.indexOf(',m')!=-1) ? '$field_max_count=0;'+String.fromCharCode(10)+max_count_script+'for($x=0;$x<$field_max_count;$x++){'+String.fromCharCode(10):'';
-	var function_call_seg2='$record_id = create'+document.getElementById('table').value.substr(0,1).toUpperCase()+document.getElementById('table').value.substr(1).toLowerCase()+'('+String.fromCharCode(10);
-	var function_call_seg3=(document.getElementById('datatype').value.indexOf(',m')!=-1) ? String.fromCharCode(10)+'}'+String.fromCharCode(10):'';
-	var function_query_seg1='function create'+document.getElementById('table').value.substr(0,1).toUpperCase()+document.getElementById('table').value.substr(1).toLowerCase()+'('+String.fromCharCode(10);
-	var function_query_seg2='DB::insert(\''+document.getElementById('table').value+'\', ['+String.fromCharCode(10);
+
+	// SEGMENTS DEFINITION
+
+	// -insert function call
+	var function_call_insert_seg1=(document.getElementById('datatype').value.indexOf(',m')!=-1) ? '$field_max_count=0;'+lb+max_count_script+'for($x=0;$x<$field_max_count;$x++){'+lb:'';
+	var function_call_insert_seg2='$record_id = create'+document.getElementById('table').value.substr(0,1).toUpperCase()+document.getElementById('table').value.substr(1).toLowerCase()+'('+lb;
+	var function_call_insert_seg3=(document.getElementById('datatype').value.indexOf(',m')!=-1) ? lb+'}'+lb : '';
+
+	// - update function call
+	var function_call_update_seg1=(document.getElementById('datatype').value.indexOf(',m')!=-1) ? '$field_max_count=0;'+lb+max_count_script+'for($x=0;$x<$field_max_count;$x++){'+lb+lb+'	// check for existing record'+lb+'	$record_check=recordProbe(\''+document.getElementById('table').value.toLowerCase()+'\',\''+document.getElementById('table').value.toLowerCase()+'_id\',$_POST[\''+document.getElementById('table').value.toLowerCase()+'_id\'][$x]);'+lb+'	if(is_array($record_check)){'+lb+lb : '';
+	var function_call_update_seg2='update'+document.getElementById('table').value.substr(0,1).toUpperCase()+document.getElementById('table').value.substr(1).toLowerCase()+'('+lb+'	$'+document.getElementById('table').value.toLowerCase()+'_id, // <= REPLACE WITH VALID REFERENCE KEY COLUMN NAME / VARIABLE'+lb;
+	var function_call_update_seg3=(document.getElementById('datatype').value.indexOf(',m')!=-1) ? lb+lb+'	}else{'+lb+lb+'-copy_update_segment-'+lb+');'+lb+lb+'	}' : '';
+
+	// - function query
+	var function_query_seg1='function create'+document.getElementById('table').value.substr(0,1).toUpperCase()+document.getElementById('table').value.substr(1).toLowerCase()+'('+lb;
+	var function_query_seg2='	DB::insert(\''+document.getElementById('table').value+'\', ['+lb;
+
+	// LINE ASSEMBLY
+
 	for(x=0;x<lines_db.length;x++){
 		if(x<lines_dt.length){
 			switch (lines_dt[x].replace(',m','')){
 				case 'text':
-					function_call_seg2+=(lines_dt[x].indexOf(',m')!=-1) ? '(isset($_POST[\''+lines_db[x]+'\'][$x])) ? stripslashes($_POST[\''+lines_db[x]+'\'][$x]),'+String.fromCharCode(10) : 'stripslashes($_POST[\''+lines_db[x]+'\']),'+String.fromCharCode(10);
-					function_query_seg1+='$'+lines_db[x]+','+String.fromCharCode(10);
-					function_query_seg2+='\''+lines_db[x]+'\' => $'+lines_db[x]+','+String.fromCharCode(10);
+					function_call_insert_seg2+=(lines_dt[x].indexOf(',m')!=-1) ? '	(isset($_POST[\''+lines_db[x]+'\'][$x])) ? stripslashes($_POST[\''+lines_db[x]+'\'][$x]) : \'\','+lb : '	stripslashes($_POST[\''+lines_db[x]+'\']),'+lb;
+					function_call_update_seg2+=(lines_dt[x].indexOf(',m')!=-1) ? '	(isset($_POST[\''+lines_db[x]+'\'][$x])) ? stripslashes($_POST[\''+lines_db[x]+'\'][$x]) : \'\','+lb : '	stripslashes($_POST[\''+lines_db[x]+'\']),'+lb;
 				break;
 				case 'number':
-					function_call_seg2+=(lines_dt[x].indexOf(',m')!=-1) ? '(isset($_POST[\''+lines_db[x]+'\'][$x])) ? stripslashes($_POST[\''+lines_db[x]+'\'][$x]),'+String.fromCharCode(10) : 'stripslashes($_POST[\''+lines_db[x]+'\']),'+String.fromCharCode(10);
-					function_query_seg1+='$'+lines_db[x]+','+String.fromCharCode(10);
-					function_query_seg2+='\''+lines_db[x]+'\' => $'+lines_db[x]+','+String.fromCharCode(10);
+					function_call_insert_seg2+=(lines_dt[x].indexOf(',m')!=-1) ? '	(isset($_POST[\''+lines_db[x]+'\'][$x])) ? $_POST[\''+lines_db[x]+'\'][$x] : \'\','+lb : '	$_POST[\''+lines_db[x]+'\'],'+lb;
+					function_call_update_seg2+=(lines_dt[x].indexOf(',m')!=-1) ? '	(isset($_POST[\''+lines_db[x]+'\'][$x])) ? $_POST[\''+lines_db[x]+'\'][$x] : \'\','+lb : '	$_POST[\''+lines_db[x]+'\'],'+lb;
 				break;
 				case 'date_entered':
-					function_call_seg2+=(lines_dt[x].indexOf(',m')!=-1) ? '(isset($_POST[\''+lines_db[x]+'\'][$x])) ? date(\'Y-m-d\',strtotime($_POST[\''+lines_db[x]+'\'][$x]),'+String.fromCharCode(10) : 'date(\'Y-m-d\',strtotime($_POST[\''+lines_db[x]+'\']),'+String.fromCharCode(10);
-					function_query_seg1+='$'+lines_db[x]+','+String.fromCharCode(10);
-					function_query_seg2+='\''+lines_db[x]+'\' => $'+lines_db[x]+','+String.fromCharCode(10);
+					function_call_insert_seg2+=(lines_dt[x].indexOf(',m')!=-1) ? '	(isset($_POST[\''+lines_db[x]+'\'][$x])) ? date(\'Y-m-d\',strtotime($_POST[\''+lines_db[x]+'\'][$x])) : \'\','+lb : '	date(\'Y-m-d\',strtotime($_POST[\''+lines_db[x]+'\'])),'+lb;
+					function_call_update_seg2+=(lines_dt[x].indexOf(',m')!=-1) ? '	(isset($_POST[\''+lines_db[x]+'\'][$x])) ? date(\'Y-m-d\',strtotime($_POST[\''+lines_db[x]+'\'][$x])) : \'\','+lb : '	date(\'Y-m-d\',strtotime($_POST[\''+lines_db[x]+'\'])),'+lb;
 				break;
 				case 'date_now':
-					function_call_seg2+='date(\'Y-m-d\'),'+String.fromCharCode(10);
-					function_query_seg1+='$'+lines_db[x]+','+String.fromCharCode(10);
-					function_query_seg2+='\''+lines_db[x]+'\' => $'+lines_db[x]+','+String.fromCharCode(10);
+					function_call_insert_seg2+=(lines_dt[x].indexOf(',m')!=-1) ? '	(isset($_POST[\''+lines_db[x]+'\'][$x])) ? date(\'Y-m-d\') : \'\','+lb : '	date(\'Y-m-d\'),'+lb;
+					function_call_update_seg2+=(lines_dt[x].indexOf(',m')!=-1) ? '	(isset($_POST[\''+lines_db[x]+'\'][$x])) ? date(\'Y-m-d\') : \'\','+lb : '	date(\'Y-m-d\'),'+lb;
 				break;
 				case 'checkbox':
-					function_call_seg2+='isset($_POST[\''+lines_db[x]+'\']) ? \'y\':\'\','+String.fromCharCode(10);
-					function_query_seg1+='$'+lines_db[x]+','+String.fromCharCode(10);
-					function_query_seg2+='\''+lines_db[x]+'\' => $'+lines_db[x]+','+String.fromCharCode(10);
+					function_call_insert_seg2+=(lines_dt[x].indexOf(',m')!=-1) ? '	(isset($_POST[\''+lines_db[x]+'\'][$x])) ? \'T\' : \'F\','+lb : '	(isset($_POST[\''+lines_db[x]+'\'])) ? \'T\' : \'F\','+lb;
+					function_call_update_seg2+=(lines_dt[x].indexOf(',m')!=-1) ? '	(isset($_POST[\''+lines_db[x]+'\'][$x])) ? \'T\' : \'F\','+lb : '	(isset($_POST[\''+lines_db[x]+'\'])) ? \'T\' : \'F\','+lb;
 				break;
 				case 'radio_button':
-					function_call_seg2+='isset($_POST[\''+lines_db[x]+'\']) ? stripslashes($_POST[\''+lines_db[x]+'\']) : \'\','+String.fromCharCode(10);
-					function_query_seg1+='$'+lines_db[x]+','+String.fromCharCode(10);
-					function_query_seg2+='\''+lines_db[x]+'\' => $'+lines_db[x]+','+String.fromCharCode(10);
+					function_call_insert_seg2+=(lines_dt[x].indexOf(',m')!=-1) ? '	(isset($_POST[\''+lines_db[x]+'\'][$x])) ? stripslashes($_POST[\''+lines_db[x]+'\'][$x]) : \'\','+lb : '	stripslashes($_POST[\''+lines_db[x]+'\']),'+lb;
+					function_call_update_seg2+=(lines_dt[x].indexOf(',m')!=-1) ? '	(isset($_POST[\''+lines_db[x]+'\'][$x])) ? stripslashes($_POST[\''+lines_db[x]+'\'][$x]) : \'\','+lb : '	stripslashes($_POST[\''+lines_db[x]+'\']),'+lb;
 				break;
 			}
+			function_query_seg1+='	$'+lines_db[x]+','+lb;
+			function_query_seg2+='		\''+lines_db[x]+'\' => $'+lines_db[x]+','+lb;
 		}
 	}
-	document.getElementById('function_call').value=function_call_seg1+function_call_seg2.slice(0, -2)+String.fromCharCode(10)+');'+function_call_seg3;
-	document.getElementById('function_query').value=function_query_seg1.slice(0, -2)+String.fromCharCode(10)+'){'+String.fromCharCode(10)+function_query_seg2.slice(0, -2)+String.fromCharCode(10)+']);'+String.fromCharCode(10)+'return DB::insertId();'+String.fromCharCode(10)+'}';
+
+	// COMPLETE DISPLAY
+
+	// insert
+	document.getElementById('function_call_insert').value=function_call_insert_seg1+function_call_insert_seg2.slice(0, -2)+lb+');'+function_call_insert_seg3;
+	document.getElementById('function_query_insert').value=function_query_seg1.slice(0, -2)+lb+'	){'+lb+function_query_seg2.slice(0, -2)+lb+'	]);'+lb+'	return DB::insertId();'+lb+'}';
+
+	// update
+	document.getElementById('function_call_update').value=function_call_update_seg1+function_call_update_seg2.slice(0, -2)+lb+');'+function_call_update_seg3.replace('-copy_update_segment-',function_call_insert_seg2.slice(0, -2))+lb+'}';
+	document.getElementById('function_query_update').value=function_query_seg1.slice(0, -2).replace('function create','function update')+lb+'	){'+lb+function_query_seg2.slice(0, -2)+lb+'	]], "'+document.getElementById('table').value+'_id=%s", $'+document.getElementById('table').value+'_id);); // <= REPLACE WITH VALID REFERENCE KEY COLUMN NAME / VARIABLE'+lb+'}';
 	
 }
 </script>
-Table Name:<br>
-<input type="text" id="table" style="width:98%;" onkeyup="process();"><br>
-<textarea id="database" style="width: 49%; height:300px;resize: vertical;text-align:right;" onkeyup="process();" placeholder="copy database columns here"></textarea>
-<textarea id="datatype" style="width: 49%; height:300px; resize: vertical;" onkeyup="process();" placeholder="match datatypes here"></textarea>
-<hr><strong>Datatypes:</strong>
+<!--  INPUT LISTS -->
+<strong>Table Name</strong>:<br>
+<input type="text" id="table" style="width:98%;" onkeyup="process();" value=""><br>
+<em>NOTE: EXCLUDE RECORD ID COLUMNS (table PKs -and - FKs)</em><br>
+<textarea id="database" style="width: 49%; height:300px;resize: vertical;text-align:right; font-size:14px;" onkeyup="process();" placeholder="-copy database columns here-"></textarea>
+<textarea id="datatype" style="width: 49%; height:300px; resize: vertical; font-size:14px;" onkeyup="process();" placeholder="-match datatypes here-"></textarea>
+<hr>
+<!--  FIELD TYPE SELECTORS -->
+<strong>Datatypes:</strong>
 <input type="button" value="text" onclick="document.getElementById('datatype').value+=String.fromCharCode(10)+'text';process();">
 <input type="button" value="number" onclick="document.getElementById('datatype').value+=String.fromCharCode(10)+'number';process();">
 <input type="button" value="date - entered" onclick="document.getElementById('datatype').value+=String.fromCharCode(10)+'date_entered';process();">
@@ -297,86 +331,139 @@ Table Name:<br>
 <input type="button" value="radio button" onclick="document.getElementById('datatype').value+=String.fromCharCode(10)+'radio_button';process();">
 <input type="button" value="multiple entries possible" onclick="document.getElementById('datatype').value+=',m';process();">
 <hr>
+<!--  DISPLAY -->
+<strong>INSERT<strong><br>
 <div class="message" style="text-align: center; background-color: rgb(0, 153, 0); color: rgb(255, 255, 255); border-radius: 25px; padding: 5px; margin-bottom: 5px;">-ready-</div>
-<textarea id="function_call" style="width: 49%; height:300px; resize: vertical;" placeholder="function call" ondblclick="this.select();document.execCommand('copy');msg();"></textarea>
-<textarea id="function_query" style="width: 49%; height:300px; resize: vertical;" placeholder="function sql" ondblclick="this.select();document.execCommand('copy');msg();"></textarea>
+<textarea id="function_call_insert" style="width: 49%; height:100px; resize: vertical; font-size:9px;" placeholder="-function call-" ondblclick="this.select();document.execCommand('copy');msg();"></textarea>
+<textarea id="function_query_insert" style="width: 49%; height:100px; resize: vertical; font-size:9px;" placeholder="-function sql-" ondblclick="this.select();document.execCommand('copy');msg();"></textarea>
 <hr>
+<strong>UPDATE<strong><br>
+<div class="message" style="text-align: center; background-color: rgb(0, 153, 0); color: rgb(255, 255, 255); border-radius: 25px; padding: 5px; margin-bottom: 5px;">-ready-</div>
+<textarea id="function_call_update" style="width: 49%; height:100px; resize: vertical; font-size:9px;" placeholder="-function call-" ondblclick="this.select();document.execCommand('copy');msg();"></textarea>
+<textarea id="function_query_update" style="width: 49%; height:100px; resize: vertical; font-size:9px;" placeholder="-function sql-" ondblclick="this.select();document.execCommand('copy');msg();"></textarea>
+<hr>
+<!-- HARDCODED TEMPLATES -->
 More Code Stuff:<br>
-<textarea style="width: 20%; height:300px; resize: vertical;" ondblclick="this.select();document.execCommand('copy');msg();">// SINGLE FILE
-		$filename=basename($_FILES['Photo']['name']);
-		$file_error=false; // validation flag
+<textarea style="width: 30%; height:100px; resize: vertical; font-size:14px;" ondblclick="this.select();document.execCommand('copy');msg();">// GENERAL TABLE DELETE FUNCTION - CALL 'DELETERECORD([TABLE NAME],[PRIMARY KEY COLUMN NAME],[RECORD ID])'
 
-		// validate file type
-		$valid_mimes= array("image/jpeg","image/jpg","image/png"); //allowed mime types
-		if(in_array($_FILES['Photo']['type'],$valid_mimes)=== false){
-			echo "Image  " . $filename ." not allowed, please choose a valid image format (.jpg or .png).&lt;br /&gt;";
-			$file_error=true; 
-		}
-
-		// limit file size to 5MB
-		if($_FILES['Photo']['size'] &gt; 5242880) {
-			echo "Image " . $filename ." must be less than 5 MB&lt;br /&gt;";
-			$file_error=true;
-		}
-
-		// set upload directory, add date stamp to filename, to avoid overwriting
-		$filePath = "uploads/images/";
-		$filePath = $filePath . date('Y-m-d-h-i-s-A') . ' - ' . $filename;
-
-
-		// if no error, copy file from PHP-temp storage to server, create database entry
-		if(!$file_error){
-			if(move_uploaded_file($file_tmp, $filePath)) {
-
-				// *** DATABASE INSERT QUERY FOR FILES HERE ***
-
-			} else {
-				echo "There was an error uploading document " . $filename . "&lt;br /&gt;";
-			}
-		}
+function deleteRecord($table,$index_field,$index_id) {
+	if(($table) &amp;&amp; ($index_id) &amp;&amp; ($index_field)){
+		DB::delete($table, $index_field."=%s", $index_field);
+	}
+}
 </textarea>
-<textarea style="width: 20%; height:300px; resize: vertical;" ondblclick="this.select();document.execCommand('copy');msg();">// MULTI FILE
-		for($x=0;$x&lt;count($_FILES['Document']['name']);$x++){ // loop through all documents uploaded
+<textarea style="width: 30%; height:100px; resize: vertical; font-size:14px;" ondblclick="this.select();document.execCommand('copy');msg();">// GENERAL RECORD-EXISTS PROBE FUNCTION - CALL 'RECORDPROBE([TABLE NAME],[PRIMARY KEY COLUMN NAME],[RECORD ID])', RETURNS ARRAY IF RECORD EXISTS
 
-			$filename=basename($_FILES['Document']['name'][$x]);
-			$file_error=false; // validation flag
-
-			// validate file type
-			$valid_mimes= array("application/pdf","application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/msword","text/plain"); //allowed mime types
-			if(in_array($$_FILES['Document']['type'][$x],$valid_mimes)=== false){
-				echo "Document type on " . $filename . " not allowed, please choose a valid file format (.pdf, .doc, .docx, or .txt).&lt;br /";
-				$file_error=true;
-			}
-
-			// limit file size to 5MB
-			if($_FILES['Document']['size'][$x] &gt; 5242880) {
-				echo "Document " . $filename . " must be less than 5 MB&lt;br /&gt;";
-				$file_error=true;
-			}
-
-			// set upload directory, add date stamp to filename, to avoid overwriting
-			$filePath = "uploads/documents/";
-			$filePath = $filePath . date('Y-m-d-h-i-s-A') . ' - ' . $filename;
-
-			// if no error, copy file from PHP-temp storage to server, create database entry
-			if(!$file_error){
-				if(move_uploaded_file($_FILES['Document']['tmp_name'][$x], $filePath)) {
-
-				// *** DATABASE INSERT QUERY FOR FILES HERE ***
-
-				} else {
-					echo "There was an error uploading document " . $filename . "&lt;br /&gt;";
-				}
-			}
-		}
+function recordProbe($table,$index_field,$index_id){
+	return DB::queryFirstRow("SELECT * FROM ".$table." WHERE ".$index_field."=%s", $index_id);
+}
 </textarea>
-<textarea style="width: 20%; height:300px; resize: vertical;" ondblclick="this.select();document.execCommand('copy');msg();"></textarea>
-<textarea style="width: 20%; height:300px; resize: vertical;" ondblclick="this.select();document.execCommand('copy');msg();"></textarea>
-<textarea style="width: 20%; height:300px; resize: vertical;" ondblclick="this.select();document.execCommand('copy');msg();"></textarea>
-<textarea style="width: 20%; height:300px; resize: vertical;" ondblclick="this.select();document.execCommand('copy');msg();"></textarea>
+
+<textarea style="width: 30%; height:100px; resize: vertical; font-size:14px;" ondblclick="this.select();document.execCommand('copy');msg();">// SINGLE FILE UPLOAD
+$filename=basename($_FILES['Photo']['name']);
+$file_error=false; // validation flag
+
+// validate file type
+$valid_mimes= array("image/jpeg","image/jpg","image/png"); //allowed mime types
+if(in_array($_FILES['Photo']['type'],$valid_mimes)=== false){
+	echo "Image  " . $filename ." not allowed, please choose a valid image format (.jpg or .png).&lt;br /&gt;";
+	$file_error=true; 
+}
+
+// limit file size to 5MB
+if($_FILES['Photo']['size'] &gt; 5242880) {
+	echo "Image " . $filename ." must be less than 5 MB&lt;br /&gt;";
+	$file_error=true;
+}
+
+// set upload directory, add date stamp to filename, to avoid overwriting
+$filePath = "uploads/images/";
+$filePath = $filePath . date('Y-m-d-h-i-s-A') . ' - ' . $filename;
+
+
+// if no error, copy file from PHP-temp storage to server, create database entry
+if(!$file_error){
+	if(move_uploaded_file($file_tmp, $filePath)) {
+
+		// *** DATABASE INSERT QUERY FOR FILES HERE ***
+
+	} else {
+		echo "There was an error uploading document " . $filename . "&lt;br /&gt;";
+	}
+}
+</textarea>
+<textarea style="width: 30%; height:100px; resize: vertical; font-size:14px;" ondblclick="this.select();document.execCommand('copy');msg();">// MULTI FILE UPLOAD
+for($x=0;$x&lt;count($_FILES['Document']['name']);$x++){ // loop through all documents uploaded
+
+	$filename=basename($_FILES['Document']['name'][$x]);
+	$file_error=false; // validation flag
+
+	// validate file type
+	$valid_mimes= array("application/pdf","application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/msword","text/plain"); //allowed mime types
+	if(in_array($_FILES['Document']['type'][$x],$valid_mimes)=== false){
+		echo "Document type on " . $filename . " not allowed, please choose a valid file format (.pdf, .doc, .docx, or .txt).&lt;br /";
+		$file_error=true;
+	}
+
+	// limit file size to 5MB
+	if($_FILES['Document']['size'][$x] &gt; 5242880) {
+		echo "Document " . $filename . " must be less than 5 MB&lt;br /&gt;";
+		$file_error=true;
+	}
+
+	// set upload directory, add date stamp to filename, to avoid overwriting
+	$filePath = "uploads/documents/";
+	$filePath = $filePath . date('Y-m-d-h-i-s-A') . ' - ' . $filename;
+
+	// if no error, copy file from PHP-temp storage to server, create database entry
+	if(!$file_error){
+		if(move_uploaded_file($_FILES['Document']['tmp_name'][$x], $filePath)) {
+
+			// *** DATABASE INSERT QUERY FOR FILES HERE ***
+
+		} else {
+			echo "There was an error uploading document " . $filename . "&lt;br /&gt;";
+		}
+	}
+}
+
+</textarea>
+<textarea style="width: 30%; height:100px; resize: vertical; font-size:14px;" ondblclick="this.select();document.execCommand('copy');msg();">// COMMON PREFILL TEMPLATES - VIEW / EDIT
+
+TEXT LINE:
+&lt;input type="text" name="xxxxx" placeholder="xxxxx" value="&lt;?php echo $data['-table-'][0]['-column-']; ?&gt;"&gt;
+
+TEXT BOX:
+&lt;textarea name="xxxxx""&gt;&lt;?php echo $data['address'][$x]['notes']; ?&gt;[/textarea]
+
+DATE:
+&lt;input type="text" name="xxxxx" placeholder="MM/DD/YYYY" value="&lt;?php echo str_replace('01/01/1970','',date('m/d/Y',strtotime($data['-table-'][0]['-column-']))); ?&gt;"&gt;
+
+DROPDOWN:
+&lt;input type="hidden" name="xxxxx" value="&lt;?php echo $data['-table-'][0]['-column-']; ?&gt;"&gt;
+
+CHECKBOX:
+&lt;input type="checkbox" tabindex="0" class="hidden" name="xxxxx" &lt;?php echo (str_replace('F','',$data['-table-'][0]['-column-'])) ? 'checked="checked"' : '' ; ?&gt;&gt;
+
+MULTI-FIELD SUBMISSION
+
+&lt;?php
+if (count($data['-table-'])){
+	for($x=0;$x&lt;count($data['-table-']);$x++){
+?&gt;
+		&lt;input type="hidden" name="['-table-']_id[]" value="&lt;?php echo $data['-table-'][$x]['-record_id-']; ?&gt;" /&gt;
+		...
+		&lt;input type="text" name="xxxxx[]" value="&lt;?php echo $data['-table-'][$x]['-column-']; ?&gt;"&gt;
+		...
+&lt;?php
+	}
+}
+?&gt;
+</textarea>
+<textarea style="width: 30%; height:100px; resize: vertical; font-size:14px;" ondblclick="this.select();document.execCommand('copy');msg();"></textarea>
 <hr>
 <div class="message" style="text-align: center; background-color: rgb(0, 153, 0); color: rgb(255, 255, 255); border-radius: 25px; padding: 5px; margin-bottom: 5px;">-ready-</div>
-<script>var message=document.getElementsByClassName('message');</script></div><div style="clear:both;">&nbsp;</div><hr><div style="width:65px;float:left;"><span title="Move up" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(0,'714810350');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAdUlEQVR42m1NuQ2AMAw8sgNjsADL0FHTeQvkLZiAlJSpEYooMD2KMgQ4QUIgcc3Z99gACFwTlFm80qCTYal0LHSzUm0o0fQGmDcVETuXiOwZUtmKb8EiQdPcJucweIFQT3KmDEvInyj7bhn3OxHXfPDTevCvXjOnKXEFcZQuAAAAAElFTkSuQmCC">&nbsp;</span><span title="Move down" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(1,'714810350');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAZ0lEQVR42mNgYChnmHD7CgOQBlFgZjkTAxgwggVjgawC1cUgsXwVIKENkZmQBlLyHKoUCJBZaS5AKgCsohyoFGhqGpQsRxiPBpgYrNxvb9OD8wO2dWxLA7sBzDXY9t/plnVfwTEQBwBlXiHWjsWwaQAAAABJRU5ErkJggg==">&nbsp;</span></div><div style="width:45px;float:right;"><span title="REMOVE" style="background-color:#770000;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="if(confirm('DELETE?')){removeWiki('714810350');}">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAnUlEQVR42mNkwA12AbErlH0MiK2xKWLEophYADYUZsB/ICBJNyMjI4SC8mcDcQqJLpgL0gMzwMHd3X3/jh07iNLp4eHBsHPnTkcg8wCGAXFxcQyfP39mWL9+PZj9/v17hs2bNzOEhoYy/PjxA8zGawDUb6BAwckeNWDQGwCSfPXqFcO5c+fwsnEaQG5KlALii0AsQmQ+eAvERkD8CAD5O8gRRpPKTQAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></div><div style="width:45px;float:right;"><span title="EDIT" style="background-color:#007700;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="editWiki('714810350');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABbElEQVR42rWTO2vCUBTH/7FDhoAEbA0dBEHBRdz9DnXo4mQJwUmnDAHN0EDTJWPmOqibg9BFp3wFN10sGHETHwQE6VBLmnP7oAUfaaEHLtzD5fe759wHhz9EJpO5c8fj5xfA4n4Lx2Ixs9Vq3eq6jqfRSOcCw7UPPARr54egQqGAbreLTqeDeDwORVHQaDSgaZpJFcwjkYiUSCT2wvl8Hu12G4ZhYDAYQBAEVCoV3JRK96v12iCBL4oiPM87WHa9XofruvB9n1VCQlmWWfsnBQRPp1Nst1v0+33UajWYpgme508LCF4sFmx8wtRKsVik/LiA4OVyyeBer8dgy7LYgVL+we4X2LaNZrMJSZLgOM4XTJFMJjGbzY4LcrkchsMhm3+HQwkmkwnS6TSy2SzK5TJUVf3R2kkBLe52O6RSqb23EqqFY/EvgjnHcVI0Gg0l2Gw29CJXwfSCCc6Aq9f3z3QZykAbAtXgAz5S8gbiBb+FSaOmpAAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></div><hr style="clear:both;position:relative;top:5px;"></div><!--~--></div><!-- CONTENT PANEL END -->
+<script>var message=document.getElementsByClassName('message');</script></strong></strong></strong></strong></div><div style="clear:both;"><strong><strong><strong>&nbsp;</strong></strong></strong></div><hr><div style="width:65px;float:left;"><strong><strong><strong><span title="Move up" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(0,'714810350');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAdUlEQVR42m1NuQ2AMAw8sgNjsADL0FHTeQvkLZiAlJSpEYooMD2KMgQ4QUIgcc3Z99gACFwTlFm80qCTYal0LHSzUm0o0fQGmDcVETuXiOwZUtmKb8EiQdPcJucweIFQT3KmDEvInyj7bhn3OxHXfPDTevCvXjOnKXEFcZQuAAAAAElFTkSuQmCC">&nbsp;</span><span title="Move down" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(1,'714810350');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAZ0lEQVR42mNgYChnmHD7CgOQBlFgZjkTAxgwggVjgawC1cUgsXwVIKENkZmQBlLyHKoUCJBZaS5AKgCsohyoFGhqGpQsRxiPBpgYrNxvb9OD8wO2dWxLA7sBzDXY9t/plnVfwTEQBwBlXiHWjsWwaQAAAABJRU5ErkJggg==">&nbsp;</span></strong></strong></strong></div><div style="width:45px;float:right;"><strong><strong><strong><span title="REMOVE" style="background-color:#770000;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="if(confirm('DELETE?')){removeWiki('714810350');}">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAnUlEQVR42mNkwA12AbErlH0MiK2xKWLEophYADYUZsB/ICBJNyMjI4SC8mcDcQqJLpgL0gMzwMHd3X3/jh07iNLp4eHBsHPnTkcg8wCGAXFxcQyfP39mWL9+PZj9/v17hs2bNzOEhoYy/PjxA8zGawDUb6BAwckeNWDQGwCSfPXqFcO5c+fwsnEaQG5KlALii0AsQmQ+eAvERkD8CAD5O8gRRpPKTQAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></strong></strong></strong></div><div style="width:45px;float:right;"><strong><strong><strong><span title="EDIT" style="background-color:#007700;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="editWiki('714810350');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABbElEQVR42rWTO2vCUBTH/7FDhoAEbA0dBEHBRdz9DnXo4mQJwUmnDAHN0EDTJWPmOqibg9BFp3wFN10sGHETHwQE6VBLmnP7oAUfaaEHLtzD5fe759wHhz9EJpO5c8fj5xfA4n4Lx2Ixs9Vq3eq6jqfRSOcCw7UPPARr54egQqGAbreLTqeDeDwORVHQaDSgaZpJFcwjkYiUSCT2wvl8Hu12G4ZhYDAYQBAEVCoV3JRK96v12iCBL4oiPM87WHa9XofruvB9n1VCQlmWWfsnBQRPp1Nst1v0+33UajWYpgme508LCF4sFmx8wtRKsVik/LiA4OVyyeBer8dgy7LYgVL+we4X2LaNZrMJSZLgOM4XTJFMJjGbzY4LcrkchsMhm3+HQwkmkwnS6TSy2SzK5TJUVf3R2kkBLe52O6RSqb23EqqFY/EvgjnHcVI0Gg0l2Gw29CJXwfSCCc6Aq9f3z3QZykAbAtXgAz5S8gbiBb+FSaOmpAAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></strong></strong></strong></div><hr style="clear:both;position:relative;top:5px;"></div><!--~--></div><!-- CONTENT PANEL END -->
 
 		<hr>
 		<div style="background-color:#cccccc; margin:5px; padding:5px; border-radius:5px;">
@@ -489,7 +576,7 @@ More Code Stuff:<br>
 			</div>
 		</div>
 		<hr>
-		<div style="text-align:right;"><a href="https://www.warpsite.net/ducttapesolutions/index.html" target="_blank" style="color:#aaaaaa; font-size:10px; font-family:sans-serif;">NanoWiki - A Duct-Tape Solution</a></div>
+		<div style="text-align:right;"><a href="https://www.warpsite.net/ducttapesolutions/index.html" target="_blank" style="color:#aaaaaa; font-size:10px; font-family:sans-serif;">NanoWiki - A Duct-Tape Solution</a>&nbsp;<a href="handler.php" target="_blank" style="color:#aaaaaa; font-size:10px; font-family:sans-serif;">[H]</a></div>
 		<script>
 			document.getElementById('save').setAttribute('download',this_location);document.title=document.getElementById('page_title').innerHTML;
 			document.getElementById('localstorage_updated').style.color='';document.getElementById('localstorage_updated').style.backgroundColor='';
