@@ -175,7 +175,7 @@
 			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px;" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
 			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
 			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="TOOL_text-occurrence-helper.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
-			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">6/7/2023, 4:38:26 PM</span></div>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">6/8/2023, 9:41:59 AM</span></div>
 		</div>
 		<div style="clear:both; display:none;" id="help">
 			WHAT IS THIS?<br>
@@ -223,17 +223,17 @@
 		<!-- CONTENT PANEL START --><div id="nanowiki_panel"><div id="1708604259" style="border:#cccccc solid 1px; margin:5px; padding:5px; border-radius:5px;"><div class="title" id="title1708604259">paste source &gt; add line numbers &gt; highlight occurrence(s) &gt; paste in filter(s) &gt; replace occurrences in source &gt; remove line numbers &gt; double-click source to copy.</div><div id="content1708604259"><div id="message" style="text-align:center;background-color:#009900;color:#ffffff;border-radius:25px; padding:5px; margin:5px 0;">-ready-</div>
 <div style="width:49%; display:inline-block;vertical-align:top;">
 	<input type="button" value="-clear input box-" onclick="document.getElementById('p1').innerHTML='';process();">
-	<div id="p1" style="border:#000 solid 1px; height:575px;width:100%;overflow:auto;resize:vertical;font-family: initial !important; font-size: initial !important;" oninput="process();" onclick="if(this.innerHTML=='-RICH-TEXT/HTML INPUT-'){this.innerHTML='';}" onblur="if(this.innerHTML==''){this.innerHTML='-RICH-TEXT/HTML INPUT-';}" ondblclick="removeLineNumbers();document.getElementById('linenumbers').checked=false;window.getSelection().selectAllChildren(this);document.execCommand('copy');msg();" onselect="document.execCommand('copy');msg();" contenteditable="">-RICH-TEXT/HTML INPUT-</div>
+	<div id="p1" style="border:#000 solid 1px;height:575px;width:100%;overflow:auto;resize:vertical;font-family:initial !important;font-size:initial !important;background:#fff url('data:image/jpeg;base64,/9j/4QDCRXhpZgAASUkqAAgAAAAHABIBAwABAAAAAQAAABoBBQABAAAAYgAAABsBBQABAAAAagAAACgBAwABAAAAAgAAADEBAgAOAAAAcgAAADIBAgAUAAAAgAAAAGmHBAABAAAAlAAAAG9jZXNgAAAAAQAAAGAAAAABAAAAUGhvdG9GaWx0cmUgNwAyMDIzOjA2OjA4IDA4OjE5OjQyAAMAAJAHAAQAAAAwMjEwAqADAAEAAADGAAAAA6ADAAEAAAAPAAAA/9sAQwAGBAUGBQQGBgUGBwcGCAoQCgoJCQoUDg8MEBcUGBgXFBYWGh0lHxobIxwWFiAsICMmJykqKRkfLTAtKDAlKCko/8AACwgADwDGAQERAP/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/aAAgBAQAAPwD6okzsbBKnHUVnwTyMICkplZvvpgfKPXgcVM8jJcy7pG8tE37cD/ClTz5YPNWXDsMhMDaP60wTFLtkmnCrsBAbaOTUlk7SGUmUyKGwp4xj8BRd+aqs6ysoGAAAP6imXPmwpuNwwXcBkheh9eKfHmTeI7pmA43AKcH8BUUTzuPJMjLMrfM20Y2/lT5hMjJ+/cBnC4AXp+VS/vFUIX3MW4YgZxVeK4HlSiW6AkDEDJUEY/CkDTmxE3nNnZu6L1/KnyLOsO5Z2yQMZVev5dKf9oLWgdeJD8uD2PeoY3mZLVjM+ZPvcL/hV+qYMpNz++f5D8vC+mfSkWZ3iZGdkmTBJAHzD15FEjSq8/8ApDAIoYZC4/HilhkkknhJdlV03FMD/DNSMsrTOEmZRxxgcfpTIRK0kn79iEfGCF5H5VbpkiZyy5L4wAWIH5VWjt5UiiK7BNHx1OGHvxT/ACZHndpFTY6BSAxJ/lSwpPFGIh5ZUcB8nOPpj+tCRyrdPIQm1lCj5uePwpIYHzL5uAHbcNjnP9KdcxO0HlxYPTl2P/16S5SWSNAqpkEMcse34UYuNzMEiBI6bycn8qY9vIDHLGE88ffJY4I9OlSXCSv5RRUyrbjlj/hUm1jJuOOBgD3qGGOZIZFZY8sSRhj3/CkEMosPJwm/bt+8cfXpT3SU26qFj3jGcsccfhTPs7CWR1IIYZCk8Anr2piwTqluoWI+V1+c8/pVqPzCWMu0egU5/pUAimBuPlj/AHnT5z6Y9KWW3MiRnIWVO4OQR3FILcvdPJNHEykADPJGPwqSaN/OSWLaSoIKscZH1p0SuGd5Nu5uyngD61HDFIDN5oUBzkbHOf6VOihFwM49yT/Ov//Z') no-repeat left top;" oninput="process();" ondblclick="removeLineNumbers();document.getElementById('linenumbers').checked=false;window.getSelection().selectAllChildren(this);document.execCommand('copy');msg();" contenteditable=""></div>
 </div>
 
 <div style="width:49%; display:inline-block;vertical-align:top;">
 	<div style="height:100px;">
-		<input type="checkbox" id="linenumbers" onclick="if(this.checked){addLineNumbers();}else{removeLineNumbers();}">ADD LINE NUMBERS | <input type="checkbox" id="caseinsensitve" checked="checked" onclick="process();">CaSe InSeNsItIvE<br>
-		<input type="text" id="filter1" style="width:100%" oninput="process();" placeholder="Show only lines containing [...] - 3+ chars highlights"><br>
-		<input type="text" id="filter2" style="width:100%" oninput="process();" placeholder="And containing [...] - (opt.) - 3+ chars highlights"><br>
-		<input type="text" id="filter3" style="width:100%" oninput="process();" placeholder="And containing [...] - (opt.) - 3+ chars highlights"><br>
+		<input type="checkbox" id="linenumbers" onclick="if(this.checked){addLineNumbers();}else{removeLineNumbers();}">ADD BLOCK NUMBERS | <input type="checkbox" id="caseinsensitve" checked="checked" onclick="process();">CaSe InSeNsItIvE | <input type="checkbox" id="either" onclick="process();">EITHER (-OR-), NOT ALL (-AND-) TERMS IN BLOCK<br>
+		<input type="text" id="filter1" style="width:100%" oninput="process();" placeholder="Show only blocks containing [...] - 3+ chars required"><br>
+		<input type="text" id="filter2" style="width:100%" oninput="process();" placeholder="And/Or containing [...] - (opt.) - 3+ chars required"><br>
+		<input type="text" id="filter3" style="width:100%" oninput="process();" placeholder="And/Or containing [...] - (opt.) - 3+ chars required"><br>
 	</div>
-	<div id="p2" style="border:#000 solid 1px; height:500px; width:100%; overflow:auto;font-family: initial !important; font-size: initial !important;" oninput="process();" onclick="if(this.innerHTML=='-occurrence list-'){this.innerHTML='';}" onblur="if(this.innerHTML==''){this.innerHTML='-occurrence list-';}placeholder=" -occurrence="" list-"="">-occurrence list-</div>
+	<div id="p2" style="border:#000 solid 1px;height:500px;width:100%;overflow:auto;font-family:initial !important;font-size:initial !important;background:#fff url('data:image/jpeg;base64,/9j/4QDCRXhpZgAASUkqAAgAAAAHABIBAwABAAAAAQAAABoBBQABAAAAYgAAABsBBQABAAAAagAAACgBAwABAAAAAgAAADEBAgAOAAAAcgAAADIBAgAUAAAAgAAAAGmHBAABAAAAlAAAAAAAAABgAAAAAQAAAGAAAAABAAAAUGhvdG9GaWx0cmUgNwAyMDIzOjA2OjA4IDA4OjIxOjE5AAMAAJAHAAQAAAAwMjEwAqADAAEAAABsAAAAA6ADAAEAAAAQAAAA/9sAQwAGBAUGBQQGBgUGBwcGCAoQCgoJCQoUDg8MEBcUGBgXFBYWGh0lHxobIxwWFiAsICMmJykqKRkfLTAtKDAlKCko/8AACwgAEABsAQERAP/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/aAAgBAQAAPwD6pqBbuFpRGHO4nAJUgE+gPQ0LdwNL5Yf5ueoIBx1wehphv7YByXbCjJ+Runr05HvTpL23j8zzJNuwAtkEcHp9fwpDfW4ZVLtvbouxsn6DFPN1CH2l8H1KkD6Z6ZpsN7bzMojk3bs4ODg49+mfanJdQvJsV/mwTyCAQOpB6H8KWK4jlYqhO4DOCpGR6jPUVCZ2S9nWWRRCsYccY28nvTxdQoke6UtuUEMV6+5wMCi3uknmljVXBjOCSpANWKjeFXk3kyZ9A7AflnFVI7SUJFA5QwxNuVwTuIHQYxx9c05Leb7MbVzH5W0qHBO7HbjH9aJIbia0kgl8pcptDKScn6Y4/WoZrS6lWb/UgyRiPbuJxjvnH9KnMMxuraTbHtjQq3zHPPpx7VHFZNFKxEFs/wAxZZG4cZ59P1zTY7S4WK2RhF+7LbiHPQ+nHvUsdvP9m+zS+X5ewpvUnJ9OMcfmadZWxhOWgtoyBjfEOW/QY/WkkhnN1NIqxlHj2DLkHPPt71AbO4MUIXy0lRQvmJIwI59Mcj2NWIrZxLceYw8uRg2VYq2cAdsY6etWkUIgUZIH94kn8zX/2Q==') no-repeat left top;" oninput="process();"></div>
 </div>
 <script>
 function msg(){document.getElementById('message').style.backgroundColor='#990000';document.getElementById('message').innerHTML='COPIED!';setTimeout('document.getElementById(\'message\').style.backgroundColor=\'#009900\';document.getElementById(\'message\').innerHTML=\'-ready-\';',1000);}
@@ -252,23 +252,51 @@ function removeLineNumbers(){
 	}
 }
 function process(){
-	var old_lines=document.getElementById('p1').innerHTML.split('</p>');
-	var new_lines=[];
-	var added=false;
-	for(x=0;x<old_lines.length;x++){
-		if(document.getElementById('caseinsensitve').checked){
-			if((old_lines[x].toLowerCase().indexOf(document.getElementById('filter1').value.toLowerCase())!=-1) &&  (old_lines[x].toLowerCase().indexOf(document.getElementById('filter2').value.toLowerCase())!=-1) && (old_lines[x].toLowerCase().indexOf(document.getElementById('filter3').value.toLowerCase())!=-1)){new_lines.push(old_lines[x]);added=true;}
-		}else{
-			if((old_lines[x].indexOf(document.getElementById('filter1').value)!=-1) && (old_lines[x].indexOf(document.getElementById('filter2').value)!=-1) && (old_lines[x].indexOf(document.getElementById('filter3').value)!=-1)){new_lines.push(old_lines[x]);added=true;}
+	if((document.getElementById('either').checked) && !(document.getElementById('filter1').value.length+document.getElementById('filter1').value.length+document.getElementById('filter1').value.length)){
+		document.getElementById('p2').innerHTML=document.getElementById('p1').innerHTML
+	}else{
+		if(document.getElementById('either').checked){
+			if(!document.getElementById('filter1').value.length){document.getElementById('filter1').value='!|!|!|!|!|!|!|!|!|!|!|!|!|!|!';}
+			if(!document.getElementById('filter2').value.length){document.getElementById('filter2').value='!|!|!|!|!|!|!|!|!|!|!|!|!|!|!';}
+			if(!document.getElementById('filter3').value.length){document.getElementById('filter3').value='!|!|!|!|!|!|!|!|!|!|!|!|!|!|!';}
 		}
-		if(added){
-			added=false;
-			if(document.getElementById('filter1').value.length>2){new_lines[new_lines.length-1]='<span'+new_lines[new_lines.length-1].split(document.getElementById('filter1').value).join('<span style="background-color:#CEF;">'+document.getElementById('filter1').value+'</span>');}
-			if(document.getElementById('filter2').value.length>2){new_lines[new_lines.length-1]='<span'+new_lines[new_lines.length-1].split(document.getElementById('filter2').value).join('<span style="background-color:#CFC;">'+document.getElementById('filter2').value+'</span>');}
-			if(document.getElementById('filter3').value.length>2){new_lines[new_lines.length-1]='<span'+new_lines[new_lines.length-1].split(document.getElementById('filter3').value).join('<span style="background-color:#FCC;">'+document.getElementById('filter3').value+'</span>');}
+		var old_lines=document.getElementById('p1').innerHTML.replace(/(class="(.*?)")/ig,'').replace(/<span style="background-color:#000;color:#fff;">/ig,'@-@-@-@-@').split('</p>');
+		var new_lines=[];
+		var added=false;
+		for(x=0;x<old_lines.length;x++){
+			if(document.getElementById('caseinsensitve').checked){
+				if(!document.getElementById('either').checked){
+					if((old_lines[x].replace(/(<([^>]+)>)/ig,'').toLowerCase().indexOf(document.getElementById('filter1').value.toLowerCase())!=-1) && (old_lines[x].replace(/(<([^>]+)>)/ig,'').toLowerCase().indexOf(document.getElementById('filter2').value.toLowerCase())!=-1) && (old_lines[x].replace(/(<([^>]+)>)/ig,'').toLowerCase().indexOf(document.getElementById('filter3').value.toLowerCase())!=-1)){new_lines.push(old_lines[x].replace(/(style="(.*?)")/ig,''));added=true;}
+				}else{
+					if((old_lines[x].replace(/(<([^>]+)>)/ig,'').toLowerCase().indexOf(document.getElementById('filter1').value.toLowerCase())!=-1) ||  (old_lines[x].replace(/(<([^>]+)>)/ig,'').toLowerCase().indexOf(document.getElementById('filter2').value.toLowerCase())!=-1) || (old_lines[x].replace(/(<([^>]+)>)/ig,'').toLowerCase().indexOf(document.getElementById('filter3').value.toLowerCase())!=-1)){new_lines.push(old_lines[x].replace(/(style="(.*?)")/ig,''));added=true;}
+				}
+			}else{
+				if(!document.getElementById('either').checked){
+					if((old_lines[x].replace(/(<([^>]+)>)/ig,'').indexOf(document.getElementById('filter1').value)!=-1) && (old_lines[x].indexOf(document.getElementById('filter2').value)!=-1) && (old_lines[x].indexOf(document.getElementById('filter3').value)!=-1)){new_lines.push(old_lines[x].replace(/(style="(.*?)")/ig,''));added=true;}
+				}else{
+					if((old_lines[x].replace(/(<([^>]+)>)/ig,'').indexOf(document.getElementById('filter1').value)!=-1) || (old_lines[x].indexOf(document.getElementById('filter2').value)!=-1) || (old_lines[x].indexOf(document.getElementById('filter3').value)!=-1)){new_lines.push(old_lines[x].replace(/(style="(.*?)")/ig,''));added=true;}
+				}
+			}
+			if(added){
+				added=false;
+				if(document.getElementById('caseinsensitve').checked){
+					if(document.getElementById('filter1').value.length>2){new_lines[new_lines.length-1]='<span >'+new_lines[new_lines.length-1].toLowerCase().split(document.getElementById('filter1').value.toLowerCase()).join('<span style="background-color:#CEF;">'+document.getElementById('filter1').value.toLowerCase()+'</span>');}
+					if(document.getElementById('filter2').value.length>2){new_lines[new_lines.length-1]='<span >'+new_lines[new_lines.length-1].toLowerCase().split(document.getElementById('filter2').value.toLowerCase()).join('<span style="background-color:#CFC;">'+document.getElementById('filter2').value.toLowerCase()+'</span>');}
+					if(document.getElementById('filter3').value.length>2){new_lines[new_lines.length-1]='<span '+new_lines[new_lines.length-1].toLowerCase().split(document.getElementById('filter3').value.toLowerCase()).join('<span style="background-color:#FCC;">'+document.getElementById('filter3').value.toLowerCase()+'</span>');}
+				}else{
+					if(document.getElementById('filter1').value.length>2){new_lines[new_lines.length-1]='<span >'+new_lines[new_lines.length-1].split(document.getElementById('filter1').value).join('<span style="background-color:#CEF;">'+document.getElementById('filter1').value+'</span>');}
+					if(document.getElementById('filter2').value.length>2){new_lines[new_lines.length-1]='<span >'+new_lines[new_lines.length-1].split(document.getElementById('filter2').value).join('<span style="background-color:#CFC;">'+document.getElementById('filter2').value+'</span>');}
+					if(document.getElementById('filter3').value.length>2){new_lines[new_lines.length-1]='<span >'+new_lines[new_lines.length-1].split(document.getElementById('filter3').value).join('<span style="background-color:#FCC;">'+document.getElementById('filter3').value+'</span>');}
+				}
+			}
 		}
+		if(document.getElementById('either').checked){
+			if(document.getElementById('filter1').value=='!|!|!|!|!|!|!|!|!|!|!|!|!|!|!'){document.getElementById('filter1').value='';}
+			if(document.getElementById('filter2').value=='!|!|!|!|!|!|!|!|!|!|!|!|!|!|!'){document.getElementById('filter2').value='';}
+			if(document.getElementById('filter3').value=='!|!|!|!|!|!|!|!|!|!|!|!|!|!|!'){document.getElementById('filter3').value='';}
+		}
+		document.getElementById('p2').innerHTML=new_lines.join('</p>').replace(/@-@-@-@-@/ig,'<span style="background-color:#000;color:#fff;">');
 	}
-	document.getElementById('p2').innerHTML=new_lines.join('</p>');
 }
 </script>
 </div><div style="clear:both;">&nbsp;</div><hr><div style="width:65px;float:left;"><span title="Move up" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(0,'1708604259');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAdUlEQVR42m1NuQ2AMAw8sgNjsADL0FHTeQvkLZiAlJSpEYooMD2KMgQ4QUIgcc3Z99gACFwTlFm80qCTYal0LHSzUm0o0fQGmDcVETuXiOwZUtmKb8EiQdPcJucweIFQT3KmDEvInyj7bhn3OxHXfPDTevCvXjOnKXEFcZQuAAAAAElFTkSuQmCC">&nbsp;</span><span title="Move down" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(1,'1708604259');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAZ0lEQVR42mNgYChnmHD7CgOQBlFgZjkTAxgwggVjgawC1cUgsXwVIKENkZmQBlLyHKoUCJBZaS5AKgCsohyoFGhqGpQsRxiPBpgYrNxvb9OD8wO2dWxLA7sBzDXY9t/plnVfwTEQBwBlXiHWjsWwaQAAAABJRU5ErkJggg==">&nbsp;</span></div><div style="width:45px;float:right;"><span title="REMOVE" style="background-color:#770000;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="if(confirm('DELETE?')){removeWiki('1708604259');}">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAnUlEQVR42mNkwA12AbErlH0MiK2xKWLEophYADYUZsB/ICBJNyMjI4SC8mcDcQqJLpgL0gMzwMHd3X3/jh07iNLp4eHBsHPnTkcg8wCGAXFxcQyfP39mWL9+PZj9/v17hs2bNzOEhoYy/PjxA8zGawDUb6BAwckeNWDQGwCSfPXqFcO5c+fwsnEaQG5KlALii0AsQmQ+eAvERkD8CAD5O8gRRpPKTQAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></div><div style="width:45px;float:right;"><span title="EDIT" style="background-color:#007700;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="editWiki('1708604259');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABbElEQVR42rWTO2vCUBTH/7FDhoAEbA0dBEHBRdz9DnXo4mQJwUmnDAHN0EDTJWPmOqibg9BFp3wFN10sGHETHwQE6VBLmnP7oAUfaaEHLtzD5fe759wHhz9EJpO5c8fj5xfA4n4Lx2Ixs9Vq3eq6jqfRSOcCw7UPPARr54egQqGAbreLTqeDeDwORVHQaDSgaZpJFcwjkYiUSCT2wvl8Hu12G4ZhYDAYQBAEVCoV3JRK96v12iCBL4oiPM87WHa9XofruvB9n1VCQlmWWfsnBQRPp1Nst1v0+33UajWYpgme508LCF4sFmx8wtRKsVik/LiA4OVyyeBer8dgy7LYgVL+we4X2LaNZrMJSZLgOM4XTJFMJjGbzY4LcrkchsMhm3+HQwkmkwnS6TSy2SzK5TJUVf3R2kkBLe52O6RSqb23EqqFY/EvgjnHcVI0Gg0l2Gw29CJXwfSCCc6Aq9f3z3QZykAbAtXgAz5S8gbiBb+FSaOmpAAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></div><hr style="clear:both;position:relative;top:5px;"></div><!--~--></div><!-- CONTENT PANEL END -->
