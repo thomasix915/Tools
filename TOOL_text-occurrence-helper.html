@@ -175,7 +175,7 @@
 			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px;" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
 			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
 			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="TOOL_text-occurrence-helper.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
-			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">6/8/2023, 9:41:59 AM</span></div>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">6/10/2023, 1:34:35 PM</span></div>
 		</div>
 		<div style="clear:both; display:none;" id="help">
 			WHAT IS THIS?<br>
@@ -236,22 +236,30 @@
 	<div id="p2" style="border:#000 solid 1px;height:500px;width:100%;overflow:auto;font-family:initial !important;font-size:initial !important;background:#fff url('data:image/jpeg;base64,/9j/4QDCRXhpZgAASUkqAAgAAAAHABIBAwABAAAAAQAAABoBBQABAAAAYgAAABsBBQABAAAAagAAACgBAwABAAAAAgAAADEBAgAOAAAAcgAAADIBAgAUAAAAgAAAAGmHBAABAAAAlAAAAAAAAABgAAAAAQAAAGAAAAABAAAAUGhvdG9GaWx0cmUgNwAyMDIzOjA2OjA4IDA4OjIxOjE5AAMAAJAHAAQAAAAwMjEwAqADAAEAAABsAAAAA6ADAAEAAAAQAAAA/9sAQwAGBAUGBQQGBgUGBwcGCAoQCgoJCQoUDg8MEBcUGBgXFBYWGh0lHxobIxwWFiAsICMmJykqKRkfLTAtKDAlKCko/8AACwgAEABsAQERAP/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/aAAgBAQAAPwD6pqBbuFpRGHO4nAJUgE+gPQ0LdwNL5Yf5ueoIBx1wehphv7YByXbCjJ+Runr05HvTpL23j8zzJNuwAtkEcHp9fwpDfW4ZVLtvbouxsn6DFPN1CH2l8H1KkD6Z6ZpsN7bzMojk3bs4ODg49+mfanJdQvJsV/mwTyCAQOpB6H8KWK4jlYqhO4DOCpGR6jPUVCZ2S9nWWRRCsYccY28nvTxdQoke6UtuUEMV6+5wMCi3uknmljVXBjOCSpANWKjeFXk3kyZ9A7AflnFVI7SUJFA5QwxNuVwTuIHQYxx9c05Leb7MbVzH5W0qHBO7HbjH9aJIbia0kgl8pcptDKScn6Y4/WoZrS6lWb/UgyRiPbuJxjvnH9KnMMxuraTbHtjQq3zHPPpx7VHFZNFKxEFs/wAxZZG4cZ59P1zTY7S4WK2RhF+7LbiHPQ+nHvUsdvP9m+zS+X5ewpvUnJ9OMcfmadZWxhOWgtoyBjfEOW/QY/WkkhnN1NIqxlHj2DLkHPPt71AbO4MUIXy0lRQvmJIwI59Mcj2NWIrZxLceYw8uRg2VYq2cAdsY6etWkUIgUZIH94kn8zX/2Q==') no-repeat left top;" oninput="process();"></div>
 </div>
 <script>
+function detectCR(){
+	if(document.getElementById('p1').innerHTML.indexOf('</p>')>-1){return '</p>';}
+	if(document.getElementById('p1').innerHTML.indexOf('</div>')>-1){return '</div>';}
+	return String.fromCharCode(10);
+}
 function msg(){document.getElementById('message').style.backgroundColor='#990000';document.getElementById('message').innerHTML='COPIED!';setTimeout('document.getElementById(\'message\').style.backgroundColor=\'#009900\';document.getElementById(\'message\').innerHTML=\'-ready-\';',1000);}
 function addLineNumbers(){
-	var lines=document.getElementById('p1').innerHTML.split('</p>');
+	var lbr=detectCR();
+	var lines=document.getElementById('p1').innerHTML.split(lbr);
 	for(x=0;x<lines.length;x++){lines[x]=String.fromCharCode(10)+'<span style="background-color:#000;color:#fff;">00000'.substr(0,96-(x+1).toString().length)+(x+1)+': </span>'+lines[x];}
-	document.getElementById('p1').innerHTML=lines.join('</p>');
+	document.getElementById('p1').innerHTML=lines.join(lbr);
 	process();
 }
 function removeLineNumbers(){
+	var lbr=detectCR();
 	if(document.getElementById('p1').innerHTML.indexOf('<span style="background-color:#000;color:#fff;">')>-1){
-		var lines=document.getElementById('p1').innerHTML.split('</p>');
+		var lines=document.getElementById('p1').innerHTML.split(lbr);
 		for(x=0;x<lines.length;x++){lines[x]=lines[x].substr(lines[x].indexOf('</span>')+7);}
-		document.getElementById('p1').innerHTML=lines.join('</p>');
+		document.getElementById('p1').innerHTML=lines.join(lbr);
 		process();
 	}
 }
 function process(){
+	var lbr=detectCR();
 	if((document.getElementById('either').checked) && !(document.getElementById('filter1').value.length+document.getElementById('filter1').value.length+document.getElementById('filter1').value.length)){
 		document.getElementById('p2').innerHTML=document.getElementById('p1').innerHTML
 	}else{
@@ -260,7 +268,7 @@ function process(){
 			if(!document.getElementById('filter2').value.length){document.getElementById('filter2').value='!|!|!|!|!|!|!|!|!|!|!|!|!|!|!';}
 			if(!document.getElementById('filter3').value.length){document.getElementById('filter3').value='!|!|!|!|!|!|!|!|!|!|!|!|!|!|!';}
 		}
-		var old_lines=document.getElementById('p1').innerHTML.replace(/(class="(.*?)")/ig,'').replace(/<span style="background-color:#000;color:#fff;">/ig,'@-@-@-@-@').split('</p>');
+		var old_lines=document.getElementById('p1').innerHTML.replace(/(class="(.*?)")/ig,'').replace(/<span style="background-color:#000;color:#fff;">/ig,'@-@-@-@-@').split(lbr);
 		var new_lines=[];
 		var added=false;
 		for(x=0;x<old_lines.length;x++){
@@ -295,7 +303,7 @@ function process(){
 			if(document.getElementById('filter2').value=='!|!|!|!|!|!|!|!|!|!|!|!|!|!|!'){document.getElementById('filter2').value='';}
 			if(document.getElementById('filter3').value=='!|!|!|!|!|!|!|!|!|!|!|!|!|!|!'){document.getElementById('filter3').value='';}
 		}
-		document.getElementById('p2').innerHTML=new_lines.join('</p>').replace(/@-@-@-@-@/ig,'<span style="background-color:#000;color:#fff;">');
+		document.getElementById('p2').innerHTML=new_lines.join(lbr).replace(/@-@-@-@-@/ig,'<span style="background-color:#000;color:#fff;">');
 	}
 }
 </script>
