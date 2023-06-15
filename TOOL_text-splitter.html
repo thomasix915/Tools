@@ -174,8 +174,8 @@
 		<div style="float:right; width:300px; text-align:right;">
 			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px; color: rgb(255, 255, 255); background-color: rgb(0, 153, 0);" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
 			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
-			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="nanowiki_te.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
-			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">6/14/2023, 3:52:26 PM</span></div>
+			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="TOOL_text-splitter.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">6/15/2023, 1:47:27 PM</span></div>
 		</div>
 		<div style="clear:both; display:none;" id="help">
 			WHAT IS THIS?<br>
@@ -222,17 +222,18 @@
 		<hr style="clear:both;">
 		<!-- CONTENT PANEL START --><div id="nanowiki_panel"><div id="49332864" style="border:#cccccc solid 1px; margin:5px; padding:5px; border-radius:5px;"><div class="title" id="title49332864">SOURCE TEXT DIVIDER - highlight text occurrences, split manually or automatically, copy line-by-line</div><div id="content49332864"><div>
 	<div style="text-align:center;">
-		<input type="text" id="filter" style="width:49%" oninput="if(!this.value.length){reInit();}else{process()};" placeholder="[-highlight term-]">&nbsp;
+		<input type="text" id="filter" style="width:30%" oninput="if(!this.value.length){reInit();}else{process()};" placeholder="[-highlight term-]" onmouseover="this.select();" value="">&nbsp;
 		<input type="button" style="background-color:#090;color:#fff;" onclick="addUndo();document.getElementById('p1').innerHTML=document.getElementById('p1').innerHTML.split('<span').join('<br />'+String.fromCharCode(10)+'<span');reInit();process();" value="split before">&nbsp;
 		<input type="button" style="background-color:#090;color:#fff;" onclick="addUndo();document.getElementById('p1').innerHTML=document.getElementById('p1').innerHTML.split('</span>').join('</span><br />'+String.fromCharCode(10));reInit();process();" value="split after">&nbsp;
+		<input type="button" style="background-color:#090;color:#fff;" onclick="addUndo();singleSplit(document.getElementById('nth').value);reInit();process();" value="split instance #"><input type="number" id="nth" style="width:50px;" value="0">&nbsp;
 		<input type="button" style="background-color:#009;color:#fff;" onclick="if(undo.length){document.getElementById('p1').innerHTML=undo.pop();reInit();process();}" value="unsplit last">&nbsp;
 		<input type="button" style="background-color:#900;color:#fff;" onclick="if(confirm('Start Over?')){location.reload();}" value="RESTART/NEW SOURCE">&nbsp;
 	</div>
-	<div style="height:400px;width:100%;"><textarea style="height:400px;width:100%" oninput="txtToRt(this.value);this.parentNode.innerHTML=editor_replace;document.getElementById('p1').innerHTML=text_content;reInit();" placeholder="[PASTE(!) SUBJECT TEXT HERE]"></textarea></div>
+	<div style="height:300px;width:100%;"><textarea style="height:300px;width:100%" oninput="txtToRt(this.value);this.parentNode.innerHTML=editor_replace;document.getElementById('p1').innerHTML=text_content;reInit();" placeholder="[PASTE(!) SUBJECT TEXT HERE]"></textarea></div>
 </div>
 <div id="message" style="text-align:center;background-color:#009900;color:#ffffff;border-radius:25px; padding:5px; margin:5px 0;">-ready-</div>
 <script>
-var editor_replace='<div id="p1" style="border:#000 solid 1px;height:400px;width:100%;overflow:auto;resize:vertical;font-family:initial !important;font-size:initial !important;" oninput="copyToFeed();" ondblclick="window.getSelection().selectAllChildren(this);document.execCommand(\'copy\');msg();" contenteditable></div>';
+var editor_replace='<div id="p1" style="border:#000 solid 1px;height:300px;width:100%;overflow:auto;resize:vertical;font-family:initial !important;font-size:initial !important;" oninput="copyToFeed();" ondblclick="window.getSelection().selectAllChildren(this);document.execCommand(\'copy\');msg();" contenteditable></div>';
 var text_content='';
 var undo=[];
 function msg(){document.getElementById('message').style.backgroundColor='#990000';document.getElementById('message').innerHTML='COPIED!';setTimeout('document.getElementById(\'message\').style.backgroundColor=\'#009900\';document.getElementById(\'message\').innerHTML=\'-ready-\';',1000);}
@@ -248,6 +249,18 @@ function reInit(){
 	text_content=document.getElementById('p1').innerHTML.replace(/(<spa([^>]+)>)/ig,'').replace(/(<([^>]+)span>)/ig,'');
 	document.getElementById('p1').innerHTML=text_content;
 	copyToFeed();
+}
+function singleSplit(item){
+	if(item>0){
+		var lines=document.getElementById('p1').innerHTML.split(String.fromCharCode(10));
+		var instances;
+		for(x=0;x<lines.length;x++){
+			instances=lines[x].split('</span>');
+			if(instances.length>(item*1+1)){instances.splice((item-1),2,instances[item-1].replace(/(<span([^>]+)>)/ig,'')+'<br/ >'+String.fromCharCode(10)+instances[item].replace(/(<span([^>]+)>)/ig,''));}
+			lines[x]=instances.join('</span>');
+		}
+		document.getElementById('p1').innerHTML=lines.join(String.fromCharCode(10));
+	}
 }
 function process(){
 	if(document.getElementById('filter').value.length){
