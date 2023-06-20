@@ -175,7 +175,7 @@
 			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px;" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
 			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
 			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="TOOL_text-occurrence-helper.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
-			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">6/10/2023, 1:34:35 PM</span></div>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">6/20/2023, 11:21:05 AM</span></div>
 		</div>
 		<div style="clear:both; display:none;" id="help">
 			WHAT IS THIS?<br>
@@ -245,7 +245,7 @@ function msg(){document.getElementById('message').style.backgroundColor='#990000
 function addLineNumbers(){
 	var lbr=detectCR();
 	var lines=document.getElementById('p1').innerHTML.split(lbr);
-	for(x=0;x<lines.length;x++){lines[x]=String.fromCharCode(10)+'<span style="background-color:#000;color:#fff;">00000'.substr(0,96-(x+1).toString().length)+(x+1)+': </span>'+lines[x];}
+	for(x=0;x<lines.length;x++){lines[x]=String.fromCharCode(10)+'<a name="'+'00000'.substr(0,96-(x+1).toString().length)+(x+1)+'"><span style="background-color:#000;color:#fff;">00000'.substr(0,96-(x+1).toString().length)+(x+1)+': </span></a>'+lines[x];}
 	document.getElementById('p1').innerHTML=lines.join(lbr);
 	process();
 }
@@ -303,7 +303,7 @@ function process(){
 			if(document.getElementById('filter2').value=='!|!|!|!|!|!|!|!|!|!|!|!|!|!|!'){document.getElementById('filter2').value='';}
 			if(document.getElementById('filter3').value=='!|!|!|!|!|!|!|!|!|!|!|!|!|!|!'){document.getElementById('filter3').value='';}
 		}
-		document.getElementById('p2').innerHTML=new_lines.join(lbr).replace(/@-@-@-@-@/ig,'<span style="background-color:#000;color:#fff;">');
+		document.getElementById('p2').innerHTML=new_lines.join(lbr).replace(/@-@-@-@-@/ig,'<span style="background-color:#000;color:#fff;">').replace(/name="/ig,'href="#');
 	}
 }
 </script>
