@@ -1,4 +1,163 @@
-<!DOCTYPE html><html lang="en-US"><head><style id="ace-monokai">.ace-monokai .ace_gutter {
+<!DOCTYPE html><html lang="en-US"><head><style id="ace-chrome">.ace-chrome .ace_gutter {
+  background: #ebebeb;
+  color: #333;
+  overflow : hidden;
+}
+
+.ace-chrome .ace_print-margin {
+  width: 1px;
+  background: #e8e8e8;
+}
+
+.ace-chrome {
+  background-color: #FFFFFF;
+  color: black;
+}
+
+.ace-chrome .ace_cursor {
+  color: black;
+}
+
+.ace-chrome .ace_invisible {
+  color: rgb(191, 191, 191);
+}
+
+.ace-chrome .ace_constant.ace_buildin {
+  color: rgb(88, 72, 246);
+}
+
+.ace-chrome .ace_constant.ace_language {
+  color: rgb(88, 92, 246);
+}
+
+.ace-chrome .ace_constant.ace_library {
+  color: rgb(6, 150, 14);
+}
+
+.ace-chrome .ace_invalid {
+  background-color: rgb(153, 0, 0);
+  color: white;
+}
+
+.ace-chrome .ace_fold {
+}
+
+.ace-chrome .ace_support.ace_function {
+  color: rgb(60, 76, 114);
+}
+
+.ace-chrome .ace_support.ace_constant {
+  color: rgb(6, 150, 14);
+}
+
+.ace-chrome .ace_support.ace_type,
+.ace-chrome .ace_support.ace_class
+.ace-chrome .ace_support.ace_other {
+  color: rgb(109, 121, 222);
+}
+
+.ace-chrome .ace_variable.ace_parameter {
+  font-style:italic;
+  color:#FD971F;
+}
+.ace-chrome .ace_keyword.ace_operator {
+  color: rgb(104, 118, 135);
+}
+
+.ace-chrome .ace_comment {
+  color: #236e24;
+}
+
+.ace-chrome .ace_comment.ace_doc {
+  color: #236e24;
+}
+
+.ace-chrome .ace_comment.ace_doc.ace_tag {
+  color: #236e24;
+}
+
+.ace-chrome .ace_constant.ace_numeric {
+  color: rgb(0, 0, 205);
+}
+
+.ace-chrome .ace_variable {
+  color: rgb(49, 132, 149);
+}
+
+.ace-chrome .ace_xml-pe {
+  color: rgb(104, 104, 91);
+}
+
+.ace-chrome .ace_entity.ace_name.ace_function {
+  color: #0000A2;
+}
+
+
+.ace-chrome .ace_heading {
+  color: rgb(12, 7, 255);
+}
+
+.ace-chrome .ace_list {
+  color:rgb(185, 6, 144);
+}
+
+.ace-chrome .ace_marker-layer .ace_selection {
+  background: rgb(181, 213, 255);
+}
+
+.ace-chrome .ace_marker-layer .ace_step {
+  background: rgb(252, 255, 0);
+}
+
+.ace-chrome .ace_marker-layer .ace_stack {
+  background: rgb(164, 229, 101);
+}
+
+.ace-chrome .ace_marker-layer .ace_bracket {
+  margin: -1px 0 0 -1px;
+  border: 1px solid rgb(192, 192, 192);
+}
+
+.ace-chrome .ace_marker-layer .ace_active-line {
+  background: rgba(0, 0, 0, 0.07);
+}
+
+.ace-chrome .ace_gutter-active-line {
+    background-color : #dcdcdc;
+}
+
+.ace-chrome .ace_marker-layer .ace_selected-word {
+  background: rgb(250, 250, 255);
+  border: 1px solid rgb(200, 200, 250);
+}
+
+.ace-chrome .ace_storage,
+.ace-chrome .ace_keyword,
+.ace-chrome .ace_meta.ace_tag {
+  color: rgb(147, 15, 128);
+}
+
+.ace-chrome .ace_string.ace_regex {
+  color: rgb(255, 0, 0)
+}
+
+.ace-chrome .ace_string {
+  color: #1A1AA6;
+}
+
+.ace-chrome .ace_entity.ace_other.ace_attribute-name {
+  color: #994409;
+}
+
+.ace-chrome .ace_indent-guide {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y;
+}
+  
+.ace-chrome .ace_indent-guide-active {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAZSURBVHjaYvj///9/hivKyv8BAAAA//8DACLqBhbvk+/eAAAAAElFTkSuQmCC") right repeat-y;
+}
+
+/*# sourceURL=ace/css/ace-chrome */</style><style id="ace-monokai">.ace-monokai .ace_gutter {
   background: #2F3129;
   color: #8F908A
 }
@@ -1169,14 +1328,14 @@
 			}
 
 		</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.0/theme-textmate.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.0/theme-monokai.js"></script></head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.0/theme-textmate.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.0/theme-monokai.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.0/theme-textmate.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.0/theme-chrome.js"></script></head>
 	<body cz-shortcut-listen="true">
 		<span style="font-size:24px;font-weight:bold;" id="page_title" ondblclick="changeTitle();">ACE - JS Code Editor</span>
 		<div style="float:right; width:300px; text-align:right;">
-			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px;" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
+			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px; color: rgb(255, 255, 255); background-color: rgb(0, 153, 0);" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
 			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
 			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="TOOL_ace-code-editor.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
-			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">6/21/2023, 2:56:14 PM</span></div>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">6/22/2023, 12:05:33 PM</span></div>
 		</div>
 		<div style="clear:both; display:none;" id="help">
 			WHAT IS THIS?<br>
@@ -1226,7 +1385,7 @@
 	<style type="text/css" media="screen">#editor{position:absolute;top:150px;right:50px;bottom:150px;left:50px;}</style>
 	<select onchange="editor.session.setMode('ace/mode/'+this.value);">
 		<option value="text">TXT</option>
-		<option value="html">HTML</option>
+		<option value="html" selected="">HTML</option>
 		<option value="javascript">JS</option>
 		<option value="php">PHP</option>
 	</select>
@@ -1237,10 +1396,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.0/ace.js"></script>
 <script>
 	var editor = ace.edit("editor");
-	editor.setTheme("ace/theme/chrome");
+	editor.setTheme("ace/theme/chaos");
+	editor.getSession().setMode("ace/mode/html");
 	editor.session.setUseWrapMode(true);
 	editor.setHighlightActiveLine(true);
-
+	editor.setOptions({fontSize:"20px"});
 	function msg(){document.getElementById('message').style.backgroundColor='#990000';document.getElementById('message').innerHTML='COPIED!';setTimeout('document.getElementById(\'message\').style.backgroundColor=\'#009900\';document.getElementById(\'message\').innerHTML=\'-ready-\';',1000);}
 </script>
 </div><div style="clear:both;">&nbsp;</div><hr><div style="width:65px;float:left;"><span title="Move up" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(0,'4932269182');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAdUlEQVR42m1NuQ2AMAw8sgNjsADL0FHTeQvkLZiAlJSpEYooMD2KMgQ4QUIgcc3Z99gACFwTlFm80qCTYal0LHSzUm0o0fQGmDcVETuXiOwZUtmKb8EiQdPcJucweIFQT3KmDEvInyj7bhn3OxHXfPDTevCvXjOnKXEFcZQuAAAAAElFTkSuQmCC">&nbsp;</span><span title="Move down" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(1,'4932269182');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAZ0lEQVR42mNgYChnmHD7CgOQBlFgZjkTAxgwggVjgawC1cUgsXwVIKENkZmQBlLyHKoUCJBZaS5AKgCsohyoFGhqGpQsRxiPBpgYrNxvb9OD8wO2dWxLA7sBzDXY9t/plnVfwTEQBwBlXiHWjsWwaQAAAABJRU5ErkJggg==">&nbsp;</span></div><div style="width:45px;float:right;"><span title="REMOVE" style="background-color:#770000;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="if(confirm('DELETE?')){removeWiki('4932269182');}">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAnUlEQVR42mNkwA12AbErlH0MiK2xKWLEophYADYUZsB/ICBJNyMjI4SC8mcDcQqJLpgL0gMzwMHd3X3/jh07iNLp4eHBsHPnTkcg8wCGAXFxcQyfP39mWL9+PZj9/v17hs2bNzOEhoYy/PjxA8zGawDUb6BAwckeNWDQGwCSfPXqFcO5c+fwsnEaQG5KlALii0AsQmQ+eAvERkD8CAD5O8gRRpPKTQAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></div><div style="width:45px;float:right;"><span title="EDIT" style="background-color:#007700;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="editWiki('4932269182');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABbElEQVR42rWTO2vCUBTH/7FDhoAEbA0dBEHBRdz9DnXo4mQJwUmnDAHN0EDTJWPmOqibg9BFp3wFN10sGHETHwQE6VBLmnP7oAUfaaEHLtzD5fe759wHhz9EJpO5c8fj5xfA4n4Lx2Ixs9Vq3eq6jqfRSOcCw7UPPARr54egQqGAbreLTqeDeDwORVHQaDSgaZpJFcwjkYiUSCT2wvl8Hu12G4ZhYDAYQBAEVCoV3JRK96v12iCBL4oiPM87WHa9XofruvB9n1VCQlmWWfsnBQRPp1Nst1v0+33UajWYpgme508LCF4sFmx8wtRKsVik/LiA4OVyyeBer8dgy7LYgVL+we4X2LaNZrMJSZLgOM4XTJFMJjGbzY4LcrkchsMhm3+HQwkmkwnS6TSy2SzK5TJUVf3R2kkBLe52O6RSqb23EqqFY/EvgjnHcVI0Gg0l2Gw29CJXwfSCCc6Aq9f3z3QZykAbAtXgAz5S8gbiBb+FSaOmpAAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></div><hr style="clear:both;position:relative;top:5px;"></div><!--~--></div><!-- CONTENT PANEL END -->
