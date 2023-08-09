@@ -175,7 +175,7 @@
 			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px; color: rgb(255, 255, 255); background-color: rgb(0, 153, 0);" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
 			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
 			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="TOOL_PAI-tracker.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
-			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">8/1/2023, 4:11:45 PM</span></div>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">8/7/2023, 2:04:14 PM</span></div>
 		</div>
 		<div style="clear:both; display:none;" id="help">
 			WHAT IS THIS?<br>
@@ -224,12 +224,12 @@
 <div style="font-size:24px;font-weight:bold;color:#fff; background-color:#070;padding:10px;margin:10px;text-align:center;">PAI - <span id="current">0</span></div>
 <div style="padding-left:20px;">
 MO:<input type="number" id="pia1" style="width: 75px;font-size:24px;text-align:right;" value="0" min="1" max="99" oninput="storeData();update();" onfocus="this.select();" onblur="if(!this.value){this.value='0';}"><span id="day1" style="color:#900;">- 0*</span><br>
-TU:<input type="number" id="pia2" style="width: 75px;font-size:24px;text-align:right;" value="0" min="1" max="99" oninput="storeData();update();" onfocus="this.select();" onblur="if(!this.value){this.value='0';}"><span id="day2" style="color:#900;"> &lt;&lt;&lt;</span><br>
+TU:<input type="number" id="pia2" style="width: 75px;font-size:24px;text-align:right;" value="0" min="1" max="99" oninput="storeData();update();" onfocus="this.select();" onblur="if(!this.value){this.value='0';}"><span id="day2" style="color:#900;">- 0*</span><br>
 WE:<input type="number" id="pia3" style="width: 75px;font-size:24px;text-align:right;" value="0" min="1" max="99" oninput="storeData();update();" onfocus="this.select();" onblur="if(!this.value){this.value='0';}"><span id="day3" style="color:#900;">- 0*</span><br>
 TH:<input type="number" id="pia4" style="width: 75px;font-size:24px;text-align:right;" value="0" min="1" max="99" oninput="storeData();update();" onfocus="this.select();" onblur="if(!this.value){this.value='0';}"><span id="day4" style="color:#900;">- 0*</span><br>
 FR:<input type="number" id="pia5" style="width: 75px;font-size:24px;text-align:right;" value="0" min="1" max="99" oninput="storeData();update();" onfocus="this.select();" onblur="if(!this.value){this.value='0';}"><span id="day5" style="color:#900;">- 0*</span><br>
 SA:<input type="number" id="pia6" style="width: 75px;font-size:24px;text-align:right;" value="0" min="1" max="99" oninput="storeData();update();" onfocus="this.select();" onblur="if(!this.value){this.value='0';}"><span id="day6" style="color:#900;">- 0*</span><br>
-SU:<input type="number" id="pia7" style="width: 75px;font-size:24px;text-align:right;" value="0" min="1" max="99" oninput="storeData();update();" onfocus="this.select();" onblur="if(!this.value){this.value='0';}"><span id="day7" style="color:#900;">- 0*</span><br>
+SU:<input type="number" id="pia0" style="width: 75px;font-size:24px;text-align:right;" value="0" min="1" max="99" oninput="storeData();update();" onfocus="this.select();" onblur="if(!this.value){this.value='0';}"><span id="day0" style="color:#900;">- 0*</span><br>
 <div style="color:#900;text-align:right;padding:5px 15px 0 0;">* progn. decline</div>
 <hr>
 See: <a href="https://www.ntnu.edu/cerg/personal-activity-intelligence" target="_blank">www.ntnu.edu &gt;&gt;</a></div></div>
@@ -246,19 +246,19 @@ document.getElementById('pia3').value=pia[3];
 document.getElementById('pia4').value=pia[4];
 document.getElementById('pia5').value=pia[5];
 document.getElementById('pia6').value=pia[6];
-document.getElementById('pia7').value=pia[0];
+document.getElementById('pia0').value=pia[0];
 function storeData(){
-	localStorage.setItem(local_storage_handle_note,document.getElementById('pia7').value+'|'+document.getElementById('pia1').value+'|'+document.getElementById('pia2').value+'|'+document.getElementById('pia3').value+'|'+document.getElementById('pia4').value+'|'+document.getElementById('pia5').value+'|'+document.getElementById('pia6').value);
+	localStorage.setItem(local_storage_handle_note,document.getElementById('pia0').value+'|'+document.getElementById('pia1').value+'|'+document.getElementById('pia2').value+'|'+document.getElementById('pia3').value+'|'+document.getElementById('pia4').value+'|'+document.getElementById('pia5').value+'|'+document.getElementById('pia6').value);
 }
 function update(){
-	var total=Math.floor(document.getElementById('pia1').value*1+document.getElementById('pia2').value*1+document.getElementById('pia3').value*1+document.getElementById('pia4').value*1+document.getElementById('pia5').value*1+document.getElementById('pia6').value*1+document.getElementById('pia7').value*1);
+	var total=Math.floor(document.getElementById('pia1').value*1+document.getElementById('pia2').value*1+document.getElementById('pia3').value*1+document.getElementById('pia4').value*1+document.getElementById('pia5').value*1+document.getElementById('pia6').value*1+document.getElementById('pia0').value*1);
 	document.getElementById('current').innerHTML=total;
-	document.getElementById('day'+(today)).innerHTML=' <<<';
-	for(x=0;x<6;x++){
-		total-=document.getElementById('pia'+((x+today)%7+1)).value;
+	for(x=0;x<7;x++){
+		total-=document.getElementById('pia'+((x+today)%7)).value;
 		if(total<0){total=0;}
-		document.getElementById('day'+((x+today)%7+1)).innerHTML='- '+total+'*';
+		document.getElementById('day'+((x+today)%7)).innerHTML='- '+total+'*';
 	}
+	document.getElementById('day'+(today)).innerHTML=' <<<';
 }
 update();
 </script>
