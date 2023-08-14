@@ -175,7 +175,7 @@
 			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px; color: rgb(255, 255, 255); background-color: rgb(0, 153, 0);" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
 			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
 			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="TOOL_ticket-assignment-search.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
-			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">8/14/2023, 11:51:30 AM</span></div>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">8/14/2023, 2:27:10 PM</span></div>
 		</div>
 		<div style="clear:both; display:none;" id="help">
 			WHAT IS THIS?<br>
@@ -224,43 +224,43 @@
 <script>
 var teams=[
 	// Terms
-	['webpage','website','seamless','seamlessdoc','form','elpasotexas.gov'],
-	// Team	
+	['webpage','website','seamlessdocs','form','elpasotexas.gov'],
+	// Teams	
 	['Web Team'],
 	// Contacts
 	['Troxell, Jeremy W. <TroxellJW@elpasotexas.gov>','Parra, Perla I. <ParraPI@elpasotexas.gov>','Thomas, Ingo <ThomasIX@elpasotexas.gov>'],
 
 	// Terms
 	['app','intranet','my.elpasotexas.gov','data'],
-	// Team	
+	// Teams	
 	['UX Team'],
 	// Contacts
 	['Camacho, Adriana C. <CamachoAC@elpasotexas.gov>','Contreras, Paulina E. <ContrerasEP@elpasotexas.gov>','Contreras, Ricardo <ContrerasR@elpasotexas.gov>','Guerrero, Sergio A. <GuerreroSA@elpasotexas.gov>'],
 
 	// Terms
 	['maps','shape','gis','data'],
-	// Team	
+	// Teams	
 	['GIS'],																
 	// Contacts
 	['Jaime, Javier <JaimeJ@elpasotexas.gov>','Kassin Fuentes, Ari <KassinFuentesA@elpasotexas.gov>','Soto, Mariano <SotoMX@elpasotexas.gov>','Veloz, Rocio <VelozRX@elpasotexas.gov>'],
 
 	// Terms
 	['accela','enterprise'],
-	// Team	
+	// Teams	
 	['Application Support - Acella'],																
 	// Contacts
 	['Chacon, Cesar D. <ChaconCD@elpasotexas.gov>','Holguin, Fabian G. <HolguinFG@elpasotexas.gov>','Mueller, Steven <MuellerSX@elpasotexas.gov>'],
 
 	// Terms
 	['peoplesoft','enterprise','non-enterprise','fce','citepay'],
-	// Team	
+	// Teams	
 	['Application Support - General'],																
 	// Contacts
 	['Pardo, Elizabeth I. <PardoEI@elpasotexas.gov>','Cumplido, Sergio <CumplidoS@elpasotexas.gov>','Guerrero, Sergio A. <GuerreroSA@elpasotexas.gov>','Pelayo, Norberto <PelayoNX@elpasotexas.gov>','Campos, Lizeth <CamposL@elpasotexas.gov>'],
 
 	// Terms
-	['video','cam'],
-	// Team	
+	['video','webcam','zoocam','bridgecam'],
+	// Teams	
 	['Support Services'],																
 	// Contacts
 	['Anguiano, Joel <AnguianoJ@elpasotexas.gov>','Bernal, George <BernalG@elpasotexas.gov>','Douglas, Michael <DouglasMX@elpasotexas.gov>','Esparza, Ricardo <EsparzaR@elpasotexas.gov>','Franco, Jesus A. <FrancoJA@elpasotexas.gov>','Galvan, Jorge A. (IT) <GalvanJA1@elpasotexas.gov>','Goodwin, Ryan S. <GoodwinRS@elpasotexas.gov>','Hernandez, Antonio P. <HernandezAP@elpasotexas.gov>','Hernandez, Jackie R. <HernandezRO@elpasotexas.gov>','Hernandez, Luis Alberto (DoITS) <HernandezLA3@elpasotexas.gov>','Hernandez, Luis Fernando <HernandezLF@elpasotexas.gov>','Hickey, Mary P. <HickeyMP@elpasotexas.gov>','Martinez, Francisco J. <MartinezFJ1@elpasotexas.gov>','Munoz, Bryan M. <MunozBM@elpasotexas.gov>','Orozco, Victor <OrozcoV@elpasotexas.gov>','Perea, Laura I. (DoITS) <PereaLI@elpasotexas.gov>']
@@ -272,11 +272,18 @@ function msg(){
 	setTimeout('document.getElementById(\'message\').style.backgroundColor=\'#009900\';document.getElementById(\'message\').innerHTML=\'-ready-\';',1000);
 }
 function findTerm(term){
-	output='';
+	var output='';
 	if(term.length){
 		for(x=0;x<teams.length;x+=3){
 			if(teams[x].toString().toLowerCase().indexOf(term.toLowerCase())>-1){
-				output+='<hr /><div style="background-color:#008;color:#fff;font-weight:bold;padding:10px;border-radius:10px;">TEAM: '+teams[1+x].toString()+'</div><strong>For questions, please contact via MS Teams or email:</strong><br />(double-click copies)<br />';
+				output+='<hr /><div style="background-color:#008;color:#fff;font-weight:bold;padding:10px;border-radius:10px;">TEAM: '+teams[1+x].toString()+'</div><div style="background-color:#080;color:#fff;font-weight:bold;padding:5px;border-radius:5px;">FOUND: ';
+				terms='';
+				for(y=0;y<teams[x].length;y++){
+					if(teams[x][y].toLowerCase().indexOf(term.toLowerCase())>-1){
+						terms+=teams[x][y]+' | ';
+					}
+				}
+				output+=terms.substr(0,terms.length-3)+'</div><strong>For questions, please contact via MS Teams or email:</strong><br /><small>(double-click copies)</small><br />';
 				for(y=0;y<teams[2+x].length;y++){
 					output+='<input type="text" readonly="readonly" style="width:500px;" value="'+teams[2+x][y]+'" ondblclick="this.select();document.execCommand(\'copy\');msg();"/><br />';
 				}
