@@ -1,0 +1,617 @@
+<!DOCTYPE html><html lang="en-US"><head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
+		<link href="data:image/png;base64,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" rel="icon" type="image/png">
+		<title>PHP Secure Login</title>
+		<style type="text/css">
+			body{
+				font-family:monospace;
+				font-size:12px;
+			}
+			.title{
+				font-family:monospace;
+				font-weight:bold;
+				font-size:16px;
+			}
+			textarea{
+				font-family:monospace;
+				font-size:12px;
+				border-radius:5px;
+			}
+			input{
+				font-family:monospace;
+				font-size:12px;
+				border-radius:5px;
+			}
+			#dropper.hover{
+				background-color:#ffffff;
+				color:#000000;
+			}
+		</style>
+		<script type="text/javascript">
+			if(location.protocol==='http:'){location.protocol='https:';}
+			var local_storage_handle='nanowiki-'+window.location.pathname.substring(window.location.pathname.lastIndexOf("/")+1).replace(/%20/g,' ');
+			if((localStorage.getItem(local_storage_handle)==undefined) || (localStorage.getItem(local_storage_handle)=='')){localStorage.setItem(local_storage_handle,'|');}
+			if(window.location.href.indexOf('?clear')<0){var nanowiki_localcontent=localStorage.getItem(local_storage_handle).split('|');}else{localStorage.setItem(local_storage_handle,'|');window.location.href=window.location.href.replace('?clear','');}
+
+			if(window.location.href.indexOf('?')<0){window.location.href+='?'+Date.now();}else{lr=window.location.href;if(lr.substr(lr.indexOf('?')+1)<Date.now()){window.location.href=lr.substr(0,lr.indexOf('?'))+'?'+(Date.now()+60000);}}
+			var editor_active=false;
+			var visible1=0;
+			var visible2=0;
+			var this_location=window.location.pathname.substring(window.location.pathname.lastIndexOf("/")+1).replace(/%20/g," ")+'';
+			if(this_location.indexOf('?')>0){this_location=this_location.substr(0,this_location.indexOf('?'));}
+			function getUpdateDate(){
+				var d = new Date();
+				return d.toLocaleString();
+			}
+			function updateLocalStorage(){
+				if(document.getElementById('nanowiki_panel_autosave').checked){localStorage.setItem(local_storage_handle,document.getElementById('nanowiki_panel_autosave').checked+'|'+document.getElementById('nanowiki_panel').innerHTML);document.getElementById('localstorage_updated').style.color='#fff';document.getElementById('localstorage_updated').style.backgroundColor='#090';};
+			}
+			function addWiki(title, content){
+				var random_id=Math.floor((Math.random()*9999999999)+1);
+				document.getElementById('nanowiki_panel').innerHTML+='<div id="'+random_id+'" style="border:#cccccc solid 1px; margin:5px; padding:5px; border-radius:5px;"><div class="title" id="title'+random_id+'">'+title+'</div><div id="content'+random_id+'">'+parseTemplates(content)+'</div><div style="clear:both;">&nbsp;</div><hr /><div style="width:65px;float:left;"><span title="Move up" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(0,\''+random_id+'\');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAdUlEQVR42m1NuQ2AMAw8sgNjsADL0FHTeQvkLZiAlJSpEYooMD2KMgQ4QUIgcc3Z99gACFwTlFm80qCTYal0LHSzUm0o0fQGmDcVETuXiOwZUtmKb8EiQdPcJucweIFQT3KmDEvInyj7bhn3OxHXfPDTevCvXjOnKXEFcZQuAAAAAElFTkSuQmCC" />&nbsp;</span><span title="Move down" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(1,\''+random_id+'\');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAZ0lEQVR42mNgYChnmHD7CgOQBlFgZjkTAxgwggVjgawC1cUgsXwVIKENkZmQBlLyHKoUCJBZaS5AKgCsohyoFGhqGpQsRxiPBpgYrNxvb9OD8wO2dWxLA7sBzDXY9t/plnVfwTEQBwBlXiHWjsWwaQAAAABJRU5ErkJggg==" />&nbsp;</span></div><div style="width:45px;float:right;"><span title="REMOVE" style="background-color:#770000;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="if(confirm(\'DELETE?\')){removeWiki(\''+random_id+'\');}">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAnUlEQVR42mNkwA12AbErlH0MiK2xKWLEophYADYUZsB/ICBJNyMjI4SC8mcDcQqJLpgL0gMzwMHd3X3/jh07iNLp4eHBsHPnTkcg8wCGAXFxcQyfP39mWL9+PZj9/v17hs2bNzOEhoYy/PjxA8zGawDUb6BAwckeNWDQGwCSfPXqFcO5c+fwsnEaQG5KlALii0AsQmQ+eAvERkD8CAD5O8gRRpPKTQAAAABJRU5ErkJggg==" style="margin-bottom:-3px;" />&nbsp;</span></div><div style="width:45px;float:right;"><span title="EDIT" style="background-color:#007700;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="editWiki(\''+random_id+'\');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABbElEQVR42rWTO2vCUBTH/7FDhoAEbA0dBEHBRdz9DnXo4mQJwUmnDAHN0EDTJWPmOqibg9BFp3wFN10sGHETHwQE6VBLmnP7oAUfaaEHLtzD5fe759wHhz9EJpO5c8fj5xfA4n4Lx2Ixs9Vq3eq6jqfRSOcCw7UPPARr54egQqGAbreLTqeDeDwORVHQaDSgaZpJFcwjkYiUSCT2wvl8Hu12G4ZhYDAYQBAEVCoV3JRK96v12iCBL4oiPM87WHa9XofruvB9n1VCQlmWWfsnBQRPp1Nst1v0+33UajWYpgme508LCF4sFmx8wtRKsVik/LiA4OVyyeBer8dgy7LYgVL+we4X2LaNZrMJSZLgOM4XTJFMJjGbzY4LcrkchsMhm3+HQwkmkwnS6TSy2SzK5TJUVf3R2kkBLe52O6RSqb23EqqFY/EvgjnHcVI0Gg0l2Gw29CJXwfSCCc6Aq9f3z3QZykAbAtXgAz5S8gbiBb+FSaOmpAAAAABJRU5ErkJggg==" style="margin-bottom:-3px;" />&nbsp;</span></div><hr style="clear:both;position:relative;top:5px;" /></div><!--~-->';
+				document.getElementById('last_update').innerHTML=getUpdateDate();
+				document.getElementById('new_title').value='[title]';
+				document.getElementById('new_content').value='[content]';
+				document.getElementById('new').style.display='none';
+				updateLocalStorage();
+			}
+			function parseTemplates(content){
+				var section=[];
+				var end_params;
+				var params;
+				var tail;
+				var pars=[];
+				var width;
+				var result;
+
+				section=content.split('{IMG|');
+				for(x=1;x<section.length;x++){
+					end_params=section[x].indexOf('}');
+					params=section[x].substr(0,end_params);
+					tail=section[x].substr(end_params+1);
+					pars=params.split('|');
+					if(pars.length>1){width=' width:'+pars[1]+';';}else{width='';}
+					result='<img src="images/'+pars[0]+'" style="margin:5px; border:0;'+width+' max-width:99%;';
+					if(pars.length>2){result+=' float:'+pars[2]+';';}
+					section[x]=result+'" />'+tail;
+				}
+				content=section.join('');
+
+				section=content.split('{DOC|');
+				for(x=1;x<section.length;x++){
+					end_params=section[x].indexOf('}');
+					params=section[x].substr(0,end_params);
+					tail=section[x].substr(end_params+1);
+					pars=params.split('|');
+					result='<a href="documents/'+pars[0]+'" target="_blank">';
+					section[x]=result+pars[1]+'</a>'+tail;
+				}
+				content=section.join('');
+
+				section=content.split('{LINK|');
+				for(x=1;x<section.length;x++){
+					end_params=section[x].indexOf('}');
+					params=section[x].substr(0,end_params);
+					tail=section[x].substr(end_params+1);
+					pars=params.split('|');
+					result='<a href="'+pars[0]+'"';
+					if(pars[2].toLowerCase()=='yes'){result+=' target="_blank"';}
+					section[x]=result+'>'+pars[1]+'</a>'+tail;
+				}
+				content=section.join('');
+
+				return content;
+			}
+			function editWiki(random_id){
+				if(!editor_active){
+					editor_active=true;
+					document.getElementById('new').style.display='block';
+					visible1=1;
+
+					var editor='<input id="edit_title" type="text" class="title" style="width:99%" value="'+document.getElementById('title'+random_id).innerHTML+'" /><textarea id="edit_content" style="width:99%; height:200px; resize:vertical;">'+document.getElementById('content'+random_id).innerHTML.replace(new RegExp('/textarea','mg'),'/text_area')+'</textarea><input type="button" style="width:99%; background-color:#770000; color:#ffffff;" value="-COMMIT CHANGES-" onclick="finishEditWiki('+random_id+');" />';
+					document.getElementById(random_id).innerHTML=editor;
+				}else{
+					alert('EDITOR ACTIVE!\n================\n\nPlease close active editor before opening new one!');
+				}
+			}
+			function finishEditWiki(random_id){
+				editor_content=document.getElementById('edit_content').value;
+				var final='<div class="title" id="title'+random_id+'">'+document.getElementById('edit_title').value+'</div><div id="content'+random_id+'">'+parseTemplates(editor_content.replace(new RegExp('/text_area','mg'),'/textarea'))+'</div><div style="clear:both;">&nbsp;</div><hr /><div style="width:65px;float:left;"><span title="Move up" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(0,\''+random_id+'\');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAdUlEQVR42m1NuQ2AMAw8sgNjsADL0FHTeQvkLZiAlJSpEYooMD2KMgQ4QUIgcc3Z99gACFwTlFm80qCTYal0LHSzUm0o0fQGmDcVETuXiOwZUtmKb8EiQdPcJucweIFQT3KmDEvInyj7bhn3OxHXfPDTevCvXjOnKXEFcZQuAAAAAElFTkSuQmCC" />&nbsp;</span><span title="Move down" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(1,\''+random_id+'\');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAZ0lEQVR42mNgYChnmHD7CgOQBlFgZjkTAxgwggVjgawC1cUgsXwVIKENkZmQBlLyHKoUCJBZaS5AKgCsohyoFGhqGpQsRxiPBpgYrNxvb9OD8wO2dWxLA7sBzDXY9t/plnVfwTEQBwBlXiHWjsWwaQAAAABJRU5ErkJggg==" />&nbsp;</span></div><div style="width:45px;float:right;"><span title="REMOVE" style="background-color:#770000;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="if(confirm(\'DELETE?\')){removeWiki(\''+random_id+'\');}">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAnUlEQVR42mNkwA12AbErlH0MiK2xKWLEophYADYUZsB/ICBJNyMjI4SC8mcDcQqJLpgL0gMzwMHd3X3/jh07iNLp4eHBsHPnTkcg8wCGAXFxcQyfP39mWL9+PZj9/v17hs2bNzOEhoYy/PjxA8zGawDUb6BAwckeNWDQGwCSfPXqFcO5c+fwsnEaQG5KlALii0AsQmQ+eAvERkD8CAD5O8gRRpPKTQAAAABJRU5ErkJggg==" style="margin-bottom:-3px;" />&nbsp;</span></div><div style="width:45px;float:right;"><span title="EDIT" style="background-color:#007700;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="editWiki(\''+random_id+'\');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABbElEQVR42rWTO2vCUBTH/7FDhoAEbA0dBEHBRdz9DnXo4mQJwUmnDAHN0EDTJWPmOqibg9BFp3wFN10sGHETHwQE6VBLmnP7oAUfaaEHLtzD5fe759wHhz9EJpO5c8fj5xfA4n4Lx2Ixs9Vq3eq6jqfRSOcCw7UPPARr54egQqGAbreLTqeDeDwORVHQaDSgaZpJFcwjkYiUSCT2wvl8Hu12G4ZhYDAYQBAEVCoV3JRK96v12iCBL4oiPM87WHa9XofruvB9n1VCQlmWWfsnBQRPp1Nst1v0+33UajWYpgme508LCF4sFmx8wtRKsVik/LiA4OVyyeBer8dgy7LYgVL+we4X2LaNZrMJSZLgOM4XTJFMJjGbzY4LcrkchsMhm3+HQwkmkwnS6TSy2SzK5TJUVf3R2kkBLe52O6RSqb23EqqFY/EvgjnHcVI0Gg0l2Gw29CJXwfSCCc6Aq9f3z3QZykAbAtXgAz5S8gbiBb+FSaOmpAAAAABJRU5ErkJggg==" style="margin-bottom:-3px;" />&nbsp;</span></div><hr style="clear:both;position:relative;top:5px;" />';
+				document.getElementById(random_id).innerHTML=final;
+				document.getElementById('last_update').innerHTML=getUpdateDate();
+				editor_active=false;
+				document.getElementById('new').style.display='none';
+				visible1=1;
+				updateLocalStorage();
+			}
+			function removeWiki(random_id){
+				var buffer_all=document.getElementById('nanowiki_panel').innerHTML.split('<!--~-->');
+				for(x=0;x<(buffer_all.length-1);x++){
+					if(buffer_all[x].indexOf('id="'+random_id+'"')>-1){
+						buffer_all.splice(x,1);
+						x=buffer_all.length;
+					}
+				}
+				document.getElementById('nanowiki_panel').innerHTML=buffer_all.join('<!--~-->');
+				updateLocalStorage();
+			}
+			function moveWiki(direction, random_id){
+				var buffer_all=document.getElementById('nanowiki_panel').innerHTML.split('<!--~-->');
+
+				var position;
+				var buffer;
+
+				for(x=0;x<(buffer_all.length-1);x++){
+					if(buffer_all[x].indexOf('id="'+random_id+'"')>-1){
+						position=x;
+						x=buffer_all.length;
+					}
+				}
+
+				if((direction) && (position<(buffer_all.length-2))){
+					buffer=buffer_all[position+1];
+					buffer_all[position+1]=buffer_all[position];
+					buffer_all[position]=buffer;
+				}else if((!direction) && (position>0)){
+					buffer=buffer_all[position-1];
+					buffer_all[position-1]=buffer_all[position];
+					buffer_all[position]=buffer;
+				}
+
+				document.getElementById('nanowiki_panel').innerHTML=buffer_all.join('<!--~-->');
+				updateLocalStorage();
+			}
+			function changeTitle(){
+				document.getElementById('page_title').innerHTML='<input id="page_title_edit" type="text" value="'+document.getElementById('page_title').innerHTML+'" style="width:250px;" onblur="document.getElementById(\'page_title\').innerHTML=this.value;document.title=this.value;document.getElementById(\'page_title\').ondblclick=function(){changeTitle();}" /><input type="button" value="&lt;" />';document.getElementById('page_title_edit').focus();
+				document.getElementById('page_title').ondblclick=function(){}
+			}
+
+		</script>
+	</head>
+	<body cz-shortcut-listen="true">
+		<span style="font-size:24px;font-weight:bold;" id="page_title" ondblclick="changeTitle();">PHP Secure Login</span>
+		<div style="float:right; width:300px; text-align:right;">
+			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px; color: rgb(255, 255, 255); background-color: rgb(0, 153, 0);" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
+			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
+			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="CODE_code-note-blank.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">8/21/2023, 4:14:46 PM</span></div>
+		</div>
+		<div style="clear:both; display:none;" id="help">
+			WHAT IS THIS?<br>
+			=============<br>
+			NanoWiki is a documentation tool with a small footprint, extreme containment, and maximum portability, even when segments are isolated from a comprehensive constellation. Each element is as self-sustained as possible.<br>
+			Unlike most content managers, this documentation tool tries to embed as much content as possible into one file, not link resources, like images and/or supportive documents. Therefore these binary files are converted to text, using base64-conversion, then included into the content via straight HTML. The syntax for images, documents, and links is provided as templates, along with explanations and samples.<br>
+			<br>
+			<br>
+			HOW DOES IT WORK?<br>
+			=================<br>
+			CHANGE THE MAIN TITLE...<br>
+			of the documentation, by double-clicking on it.<br>
+			<br>
+			ADD ARTICLES...<br>
+			as needed, bring them into the right order, and save the whole page through the button in the upper left.<br>
+			<br>
+			EDIT ARTICLES...<br>
+			by double-clicking them. Then edit and save the whole page (again) with the button in the upper left. Get new images and documents posted, using the conversion tool in the [ADD] section.<br>
+			<br>
+			NO FONT-SIZE, BOLD, ITALIC, TABLES - NOTHING???<br>
+			Nope. Enjoy your own HTML-skills, almost everything is supported (but stay away from &lt;/textarea&gt; and JavaScript). This is intended to be as simple and bare-bones as possible.<br>
+			Templates for images and links (to files and pages) are included. Use CAPITALIZATION, +++ additional characters +++, and indentation for emphasis and organization. Worked for decades on a typewriter, works here too.<br>
+			<br>
+			AND NO 'UNDO...'<br>
+			In the text-box, right-click and choose UNDO, or press [CTRL]+[Z] / [CTRL]+[Y] for UNDO / REDO.<br>
+			If you messed up completely, deleted something, open the original you should overwrite after editing in a separate window and get the content from there (open the editor with a double-click).<br>
+			If you broke the system somehow, do not overwrite the previous version, simply re-load the page, and start over. If you overwrote the original already, get a backup.<br>
+			MAKE AND KEEP BACKUPS, they compress nicely and fast. Disciplin, people, this is meant to be small, simple, fast, portable, and independent, not fool or vilain proof.<br>
+			<br>
+			AND NO LOGIN/SECURITY...<br>
+			Not needed, only you (or your people) have write access to the files. You can write anything on a paper copy, doesn't change the original, neither other people's copies.<br>
+			<br>
+			<br>
+			HOW DO I SHARE MY DOCUMENTATION?<br>
+			================================<br>
+			Give others read access e.g. by posting the wiki on a web server or on a file-sharing platform, like Dropbox or Google Drive. Just find out how to "make file publicly accessible".<br>
+			Web servers or fully addressible platforms are (only) required to provide cross-linked multi-topic documentation sites instead of single documentation pages.<br>
+			Here is a handy <a href="https://www.warpsite.net/ducttapesolutions/nanowiki/handler.zip">notes file handler</a>, extract directly into directory with documentation notes on a PHP-enabled web server.<br>
+			<br>
+			<br>
+			ENJOY! - or improve...<br>
+			<br>
+		</div>
+		<hr style="clear:both;">
+		<!-- CONTENT PANEL START --><div id="nanowiki_panel"><div id="6741665439" style="border:#cccccc solid 1px; margin:5px; padding:5px; border-radius:5px;"><div class="title" id="title6741665439">PHP-script, secure (pre-encrypted) password submission over unsecured connection</div><div id="content6741665439"><hr>
+<img style="max-width:100%;height:auto;" src="data:image/jpeg;base64,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">
+<br>
+NOTE: password cannot be sent by hitting keyboard [ENTER]/[RETURN], the button needs to be pushed.
+<hr>
+<script>
+function msg(){document.getElementById('message').style.backgroundColor='#990000';document.getElementById('message').innerHTML='COPIED!';setTimeout('document.getElementById(\'message\').style.backgroundColor=\'#009900\';document.getElementById(\'message\').innerHTML=\'-ready-\';',1000);}
+</script>
+<div id="message" style="text-align:center;background-color:#009900;color:#ffffff;border-radius:25px; padding:5px; margin-bottom:5px;">-ready-</div>
+<em>-double-click copies code sample-</em><br>
+<textarea style="width:100%;height:150px;" ondblclick="this.select();document.execCommand('copy');msg();">&lt;?php
+/***************
+* Secure Login *
+***************/
+
+session_start();
+
+// create password salt
+if(!isset($_SESSION['salt'])){
+    $_SESSION['salt']=md5(rand(10000,99999));
+}
+
+// static access list
+$access=array(
+                'admin'=&gt; array('[password]',1,2,3),
+                '[user1]'=&gt; array('[password1]',1),
+                '[user2]'=&gt; array('[password2]',2),
+                '[user3]'=&gt; array('[password3]',3)
+
+);
+
+// use session salt on passwords
+$access['admin'][0]=md5($access['admin'][0].$_SESSION['salt']);
+$access['user1'][0]=md5($access['user1'][0].$_SESSION['salt']);
+$access['user2'][0]=md5($access['user2'][0].$_SESSION['salt']);
+$access['user3'][0]=md5($access['user3'][0].$_SESSION['salt']);
+
+// logging in
+if(($_POST['password']) &amp;&amp; ($_POST['user'])){
+    $_SESSION['user']=$_POST['user'];
+    $_SESSION['passwd']=$_POST['password'];
+}
+
+// logging out
+if(isset($_POST['exit'])){
+    $_SESSION['passwd']='';
+    $_SESSION['salt']=md5(rand(10000,99999));
+}
+
+// log in validator
+if((!isset($_SESSION['passwd'])) || (!$_SESSION['user']) || ($_SESSION['passwd']!=$access[$_SESSION['user']][0])){
+
+    // log in form
+    echo'
+        &lt;script&gt;
+        /**
+        *
+        *  MD5 (Message-Digest Algorithm)
+        *  http://www.webtoolkit.info/
+        *
+        **/
+
+        var MD5 = function (string) {
+
+            function RotateLeft(lValue, iShiftBits) {
+                return (lValue&lt;&lt;iShiftBits) | (lValue&gt;&gt;&gt;(32-iShiftBits));
+            }
+
+            function AddUnsigned(lX,lY) {
+                var lX4,lY4,lX8,lY8,lResult;
+                lX8 = (lX &amp; 0x80000000);
+                lY8 = (lY &amp; 0x80000000);
+                lX4 = (lX &amp; 0x40000000);
+                lY4 = (lY &amp; 0x40000000);
+                lResult = (lX &amp; 0x3FFFFFFF)+(lY &amp; 0x3FFFFFFF);
+                if (lX4 &amp; lY4) {
+                    return (lResult ^ 0x80000000 ^ lX8 ^ lY8);
+                }
+                if (lX4 | lY4) {
+                    if (lResult &amp; 0x40000000) {
+                        return (lResult ^ 0xC0000000 ^ lX8 ^ lY8);
+                    } else {
+                        return (lResult ^ 0x40000000 ^ lX8 ^ lY8);
+                    }
+                } else {
+                    return (lResult ^ lX8 ^ lY8);
+                }
+            }
+
+            function F(x,y,z) { return (x &amp; y) | ((~x) &amp; z); }
+            function G(x,y,z) { return (x &amp; z) | (y &amp; (~z)); }
+            function H(x,y,z) { return (x ^ y ^ z); }
+            function I(x,y,z) { return (y ^ (x | (~z))); }
+
+            function FF(a,b,c,d,x,s,ac) {
+                a = AddUnsigned(a, AddUnsigned(AddUnsigned(F(b, c, d), x), ac));
+                return AddUnsigned(RotateLeft(a, s), b);
+            };
+
+            function GG(a,b,c,d,x,s,ac) {
+                a = AddUnsigned(a, AddUnsigned(AddUnsigned(G(b, c, d), x), ac));
+                return AddUnsigned(RotateLeft(a, s), b);
+            };
+
+            function HH(a,b,c,d,x,s,ac) {
+                a = AddUnsigned(a, AddUnsigned(AddUnsigned(H(b, c, d), x), ac));
+                return AddUnsigned(RotateLeft(a, s), b);
+            };
+
+            function II(a,b,c,d,x,s,ac) {
+                a = AddUnsigned(a, AddUnsigned(AddUnsigned(I(b, c, d), x), ac));
+                return AddUnsigned(RotateLeft(a, s), b);
+            };
+
+            function ConvertToWordArray(string) {
+                var lWordCount;
+                var lMessageLength = string.length;
+                var lNumberOfWords_temp1=lMessageLength + 8;
+                var lNumberOfWords_temp2=(lNumberOfWords_temp1-(lNumberOfWords_temp1 % 64))/64;
+                var lNumberOfWords = (lNumberOfWords_temp2+1)*16;
+                var lWordArray=Array(lNumberOfWords-1);
+                var lBytePosition = 0;
+                var lByteCount = 0;
+                while ( lByteCount &lt; lMessageLength ) {
+                    lWordCount = (lByteCount-(lByteCount % 4))/4;
+                    lBytePosition = (lByteCount % 4)*8;
+                    lWordArray[lWordCount] = (lWordArray[lWordCount] | (string.charCodeAt(lByteCount)&lt;&lt;lBytePosition));
+                    lByteCount++;
+                }
+                lWordCount = (lByteCount-(lByteCount % 4))/4;
+                lBytePosition = (lByteCount % 4)*8;
+                lWordArray[lWordCount] = lWordArray[lWordCount] | (0x80&lt;&lt;lBytePosition);
+                lWordArray[lNumberOfWords-2] = lMessageLength&lt;&lt;3;
+                lWordArray[lNumberOfWords-1] = lMessageLength&gt;&gt;&gt;29;
+                return lWordArray;
+            };
+
+            function WordToHex(lValue) {
+                var WordToHexValue="",WordToHexValue_temp="",lByte,lCount;
+                for (lCount = 0;lCount&lt;=3;lCount++) {
+                    lByte = (lValue&gt;&gt;&gt;(lCount*8)) &amp; 255;
+                    WordToHexValue_temp = "0" + lByte.toString(16);
+                    WordToHexValue = WordToHexValue + WordToHexValue_temp.substr(WordToHexValue_temp.length-2,2);
+                }
+                return WordToHexValue;
+            };
+
+            function Utf8Encode(string) {
+                string = string.replace(/\r\n/g,"\n");
+                var utftext = "";
+
+                for (var n = 0; n &lt; string.length; n++) {
+
+                    var c = string.charCodeAt(n);
+
+                    if (c &lt; 128) {
+                        utftext += String.fromCharCode(c);
+                    }
+                    else if((c &gt; 127) &amp;&amp; (c &lt; 2048)) {
+                        utftext += String.fromCharCode((c &gt;&gt; 6) | 192);
+                        utftext += String.fromCharCode((c &amp; 63) | 128);
+                    }
+                    else {
+                        utftext += String.fromCharCode((c &gt;&gt; 12) | 224);
+                        utftext += String.fromCharCode(((c &gt;&gt; 6) &amp; 63) | 128);
+                        utftext += String.fromCharCode((c &amp; 63) | 128);
+                    }
+
+                }
+
+                return utftext;
+            };
+
+            var x=Array();
+            var k,AA,BB,CC,DD,a,b,c,d;
+            var S11=7, S12=12, S13=17, S14=22;
+            var S21=5, S22=9 , S23=14, S24=20;
+            var S31=4, S32=11, S33=16, S34=23;
+            var S41=6, S42=10, S43=15, S44=21;
+
+            string = Utf8Encode(string);
+
+            x = ConvertToWordArray(string);
+
+            a = 0x67452301; b = 0xEFCDAB89; c = 0x98BADCFE; d = 0x10325476;
+
+            for (k=0;k&lt;x.length;k+=16) {
+                AA=a; BB=b; CC=c; DD=d;
+                a=FF(a,b,c,d,x[k+0], S11,0xD76AA478);
+                d=FF(d,a,b,c,x[k+1], S12,0xE8C7B756);
+                c=FF(c,d,a,b,x[k+2], S13,0x242070DB);
+                b=FF(b,c,d,a,x[k+3], S14,0xC1BDCEEE);
+                a=FF(a,b,c,d,x[k+4], S11,0xF57C0FAF);
+                d=FF(d,a,b,c,x[k+5], S12,0x4787C62A);
+                c=FF(c,d,a,b,x[k+6], S13,0xA8304613);
+                b=FF(b,c,d,a,x[k+7], S14,0xFD469501);
+                a=FF(a,b,c,d,x[k+8], S11,0x698098D8);
+                d=FF(d,a,b,c,x[k+9], S12,0x8B44F7AF);
+                c=FF(c,d,a,b,x[k+10],S13,0xFFFF5BB1);
+                b=FF(b,c,d,a,x[k+11],S14,0x895CD7BE);
+                a=FF(a,b,c,d,x[k+12],S11,0x6B901122);
+                d=FF(d,a,b,c,x[k+13],S12,0xFD987193);
+                c=FF(c,d,a,b,x[k+14],S13,0xA679438E);
+                b=FF(b,c,d,a,x[k+15],S14,0x49B40821);
+                a=GG(a,b,c,d,x[k+1], S21,0xF61E2562);
+                d=GG(d,a,b,c,x[k+6], S22,0xC040B340);
+                c=GG(c,d,a,b,x[k+11],S23,0x265E5A51);
+                b=GG(b,c,d,a,x[k+0], S24,0xE9B6C7AA);
+                a=GG(a,b,c,d,x[k+5], S21,0xD62F105D);
+                d=GG(d,a,b,c,x[k+10],S22,0x2441453);
+                c=GG(c,d,a,b,x[k+15],S23,0xD8A1E681);
+                b=GG(b,c,d,a,x[k+4], S24,0xE7D3FBC8);
+                a=GG(a,b,c,d,x[k+9], S21,0x21E1CDE6);
+                d=GG(d,a,b,c,x[k+14],S22,0xC33707D6);
+                c=GG(c,d,a,b,x[k+3], S23,0xF4D50D87);
+                b=GG(b,c,d,a,x[k+8], S24,0x455A14ED);
+                a=GG(a,b,c,d,x[k+13],S21,0xA9E3E905);
+                d=GG(d,a,b,c,x[k+2], S22,0xFCEFA3F8);
+                c=GG(c,d,a,b,x[k+7], S23,0x676F02D9);
+                b=GG(b,c,d,a,x[k+12],S24,0x8D2A4C8A);
+                a=HH(a,b,c,d,x[k+5], S31,0xFFFA3942);
+                d=HH(d,a,b,c,x[k+8], S32,0x8771F681);
+                c=HH(c,d,a,b,x[k+11],S33,0x6D9D6122);
+                b=HH(b,c,d,a,x[k+14],S34,0xFDE5380C);
+                a=HH(a,b,c,d,x[k+1], S31,0xA4BEEA44);
+                d=HH(d,a,b,c,x[k+4], S32,0x4BDECFA9);
+                c=HH(c,d,a,b,x[k+7], S33,0xF6BB4B60);
+                b=HH(b,c,d,a,x[k+10],S34,0xBEBFBC70);
+                a=HH(a,b,c,d,x[k+13],S31,0x289B7EC6);
+                d=HH(d,a,b,c,x[k+0], S32,0xEAA127FA);
+                c=HH(c,d,a,b,x[k+3], S33,0xD4EF3085);
+                b=HH(b,c,d,a,x[k+6], S34,0x4881D05);
+                a=HH(a,b,c,d,x[k+9], S31,0xD9D4D039);
+                d=HH(d,a,b,c,x[k+12],S32,0xE6DB99E5);
+                c=HH(c,d,a,b,x[k+15],S33,0x1FA27CF8);
+                b=HH(b,c,d,a,x[k+2], S34,0xC4AC5665);
+                a=II(a,b,c,d,x[k+0], S41,0xF4292244);
+                d=II(d,a,b,c,x[k+7], S42,0x432AFF97);
+                c=II(c,d,a,b,x[k+14],S43,0xAB9423A7);
+                b=II(b,c,d,a,x[k+5], S44,0xFC93A039);
+                a=II(a,b,c,d,x[k+12],S41,0x655B59C3);
+                d=II(d,a,b,c,x[k+3], S42,0x8F0CCC92);
+                c=II(c,d,a,b,x[k+10],S43,0xFFEFF47D);
+                b=II(b,c,d,a,x[k+1], S44,0x85845DD1);
+                a=II(a,b,c,d,x[k+8], S41,0x6FA87E4F);
+                d=II(d,a,b,c,x[k+15],S42,0xFE2CE6E0);
+                c=II(c,d,a,b,x[k+6], S43,0xA3014314);
+                b=II(b,c,d,a,x[k+13],S44,0x4E0811A1);
+                a=II(a,b,c,d,x[k+4], S41,0xF7537E82);
+                d=II(d,a,b,c,x[k+11],S42,0xBD3AF235);
+                c=II(c,d,a,b,x[k+2], S43,0x2AD7D2BB);
+                b=II(b,c,d,a,x[k+9], S44,0xEB86D391);
+                a=AddUnsigned(a,AA);
+                b=AddUnsigned(b,BB);
+                c=AddUnsigned(c,CC);
+                d=AddUnsigned(d,DD);
+            }
+
+            var temp = WordToHex(a)+WordToHex(b)+WordToHex(c)+WordToHex(d);
+
+            return temp.toLowerCase();
+        }
+        &lt;/script&gt;
+        &lt;form method="post" id="login"&gt;
+            USER:&lt;input type="text" size="10" name="user" /&gt; | PASSWD:&lt;input type="password" size="7" name="password" onfocus="this.value=\'\';" onblur="if(this.value){this.value=MD5(this.value+\''.$_SESSION['salt'].'\');}" /&gt;
+            &lt;input type="button" value="Enter!" onclick="document.getElementById(\'login\').submit();" /&gt;
+        &lt;/form&gt;
+    ';
+
+}else{
+
+//*** PROGRAM ***
+
+}
+?&gt;</textarea></div><div style="clear:both;">&nbsp;</div><hr><div style="width:65px;float:left;"><span title="Move up" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(0,'6741665439');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAdUlEQVR42m1NuQ2AMAw8sgNjsADL0FHTeQvkLZiAlJSpEYooMD2KMgQ4QUIgcc3Z99gACFwTlFm80qCTYal0LHSzUm0o0fQGmDcVETuXiOwZUtmKb8EiQdPcJucweIFQT3KmDEvInyj7bhn3OxHXfPDTevCvXjOnKXEFcZQuAAAAAElFTkSuQmCC">&nbsp;</span><span title="Move down" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(1,'6741665439');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAZ0lEQVR42mNgYChnmHD7CgOQBlFgZjkTAxgwggVjgawC1cUgsXwVIKENkZmQBlLyHKoUCJBZaS5AKgCsohyoFGhqGpQsRxiPBpgYrNxvb9OD8wO2dWxLA7sBzDXY9t/plnVfwTEQBwBlXiHWjsWwaQAAAABJRU5ErkJggg==">&nbsp;</span></div><div style="width:45px;float:right;"><span title="REMOVE" style="background-color:#770000;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="if(confirm('DELETE?')){removeWiki('6741665439');}">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAnUlEQVR42mNkwA12AbErlH0MiK2xKWLEophYADYUZsB/ICBJNyMjI4SC8mcDcQqJLpgL0gMzwMHd3X3/jh07iNLp4eHBsHPnTkcg8wCGAXFxcQyfP39mWL9+PZj9/v17hs2bNzOEhoYy/PjxA8zGawDUb6BAwckeNWDQGwCSfPXqFcO5c+fwsnEaQG5KlALii0AsQmQ+eAvERkD8CAD5O8gRRpPKTQAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></div><div style="width:45px;float:right;"><span title="EDIT" style="background-color:#007700;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="editWiki('6741665439');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABbElEQVR42rWTO2vCUBTH/7FDhoAEbA0dBEHBRdz9DnXo4mQJwUmnDAHN0EDTJWPmOqibg9BFp3wFN10sGHETHwQE6VBLmnP7oAUfaaEHLtzD5fe759wHhz9EJpO5c8fj5xfA4n4Lx2Ixs9Vq3eq6jqfRSOcCw7UPPARr54egQqGAbreLTqeDeDwORVHQaDSgaZpJFcwjkYiUSCT2wvl8Hu12G4ZhYDAYQBAEVCoV3JRK96v12iCBL4oiPM87WHa9XofruvB9n1VCQlmWWfsnBQRPp1Nst1v0+33UajWYpgme508LCF4sFmx8wtRKsVik/LiA4OVyyeBer8dgy7LYgVL+we4X2LaNZrMJSZLgOM4XTJFMJjGbzY4LcrkchsMhm3+HQwkmkwnS6TSy2SzK5TJUVf3R2kkBLe52O6RSqb23EqqFY/EvgjnHcVI0Gg0l2Gw29CJXwfSCCc6Aq9f3z3QZykAbAtXgAz5S8gbiBb+FSaOmpAAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></div><hr style="clear:both;position:relative;top:5px;"></div><!--~--></div><!-- CONTENT PANEL END -->
+
+		<hr>
+		<div style="background-color:#cccccc; margin:5px; padding:5px; border-radius:5px;">
+			<div>
+				&nbsp;<span class="title" onclick="if(!visible1){document.getElementById('new').style.display='block';visible1=1;}else{document.getElementById('new').style.display='none';visible1=0;}" style="cursor:pointer;">[+]</span><br>
+			</div>
+			<div id="new" style="text-align: center; display: none;">
+				<input id="new_title" class="title" style="width:99%" value="[title]" onfocus="if(this.value=='[title]'){this.value='';}" onblur="if(this.value==''){this.value='[title]';}" type="text">
+				<textarea id="new_content" style="width:99%; height:200px; resize:vertical;" onfocus="if(this.value=='[content]'){this.value='';}" onblur="if(this.value==''){this.value='[content]';}">[content]</textarea><br>
+				<input style="width:99%; background-color:#000077; color:#ffffff;" value="-ADD-" onclick="addWiki(document.getElementById('new_title').value,document.getElementById('new_content').value);visible1=0;" type="button">
+				<div style="text-align:center;margin-top:5px;">
+					<div style="width:115px;text-align:center;margin:auto;">
+						<div id="dropper" style="width:100px; text-align:center; font-size:10px; padding:10px 0; border-radius:10px; border:#333333 inset 7px; background-color:#333333; color:#ffffff;">DRAG IMAGES AND OTHER FILES HERE</div>
+							<div id="results"></div>
+					</div>
+					<div style="text-align:center;margin-top:5px;">
+						<div style="clear:both;">OR: <input id="b64s" onchange="b64FileSelect(this.files[0]);" type="file"><span id="b64"></span></div>
+					</div>
+					<br style="clear:both;">
+				</div>
+				<script>
+					function b64FileSelect(selected_file){
+						var reader=new FileReader();
+						reader.readAsDataURL(selected_file);
+						document.querySelector('#b64').innerHTML='<br /><span style="color:#990000;">-working, please wait-</span>';
+						reader.onload=function(){
+							document.querySelector('#b64').innerHTML='<input type="button" value="+" onclick="document.querySelector(\'#new_content\').value+=document.querySelector(\'#b64c2\').value;" /><input type="button" value="x" onclick="document.querySelector(\'#b64s\').value=\'\';this.parentNode.innerHTML=\'\';" /><br /><textarea id="b64c2" onmouseover="this.select();" style="width:200px;height:100px;font-size:10px;">'+reader.result+'</textarea>';
+						};
+					}
+
+					/*
+					=== BASE 64 ENCODER ===
+					based on http://jpillora.com/base64-encoder/
+					*/
+					if(typeof window.FileReader === 'undefined'){document.getElementById('dropper').innerHTML='BROWSER<br />NOT<br />SUPPORTED!';}
+					var dropper = document.getElementById("dropper");
+					var results = document.getElementById("results");
+					dropper.ondragover = function(){dropper.className='hover';return false;};
+					dropper.ondragend = function(){dropper.className='';return false;};
+					dropper.ondrop = function (e){
+						e.preventDefault();
+						var files = [].slice.call(e.dataTransfer.files);
+						files.forEach(function (file){
+							var reader = new FileReader();
+							reader.onload = function(event){
+								fileLoaded(file.name, event.target.result);
+							};
+							reader.readAsDataURL(file);
+						});
+						dropper.className='';
+					return false;
+					};
+
+					function fileLoaded(filename, dataUri) {
+
+						var div = document.createElement("div");
+						div.style['width'] = '110px';
+						div.style['margin-right']='10px';
+						div.className = 'item';
+						div.style['float']='left';
+
+						var remove = document.createElement("button");
+						remove.style['float']='right';
+						remove.className = 'remove';
+						remove.innerHTML = 'x';
+						remove.onclick = function() {results.removeChild(div);};
+						div.appendChild(remove);
+
+
+						var adder = document.createElement("button");
+							adder.style['float']='right';
+							adder.className = 'adder';
+							adder.innerHTML = '+';
+							adder.onclick = function() {
+							if(document.querySelector('#new_content').value=='[content]'){document.querySelector('#new_content').value='';}
+							document.querySelector('#new_content').value+=document.querySelector('#b64c1').value;
+						};
+						div.appendChild(adder);
+
+						var name = document.createElement("div");
+						name.innerHTML = filename.substr(-20);
+						name.style['font-size']='10px';
+						div.appendChild(name);
+
+						var ta = document.createElement("textarea");
+						ta.onmouseover = function(){ta.select();};
+						ta.id='b64c1';
+						ta.style['width']='100px';
+						ta.style['height']='100px';
+						ta.style['font-size']='10px';
+
+						if(/^data:image/.test(dataUri)) {
+							var imgDiv = document.createElement("div");
+							var img = document.createElement("img");
+							img.src = dataUri;
+							img.style['max-width']='100px';
+							img.style['height-width']='100px';
+							imgDiv.appendChild(img);
+							div.appendChild(imgDiv);
+							ta.value = '<!-- IMAGE START --><img src="'+dataUri+'" border="0" style="margin:5px; max-width:100%; width:200px;" /><!-- IMAGE END -->';
+						}else{
+							ta.value = '<!-- FILE START --><a href="'+dataUri+'" target="_blank">[-link-text-or-image-]</a><!-- FILE END -->';
+						}
+
+						div.appendChild(ta);
+
+						results.appendChild(div);
+					}
+				</script>
+			</div>
+		</div>
+		<hr>
+		<div style="text-align:right;"><a href="https://www.warpsite.net/ducttapesolutions/index.html" target="_blank" style="color:#aaaaaa; font-size:10px; font-family:sans-serif;">NanoWiki - A Duct-Tape Solution</a>&nbsp;<a href="handler.php" target="_blank" style="color:#aaaaaa; font-size:10px; font-family:sans-serif;">[H]</a></div>
+		<script>
+			document.getElementById('save').setAttribute('download',this_location);document.title=document.getElementById('page_title').innerHTML;
+			document.getElementById('localstorage_updated').style.color='';document.getElementById('localstorage_updated').style.backgroundColor='';
+			if(nanowiki_localcontent[0]){document.getElementById('nanowiki_panel_autosave').checked=true;}
+			if(document.getElementById('nanowiki_panel').innerHTML==''){document.getElementById('nanowiki_panel').innerHTML=nanowiki_localcontent[1];}
+		</script>
+</body></html>
