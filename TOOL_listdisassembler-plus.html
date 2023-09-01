@@ -172,10 +172,10 @@
 	<body cz-shortcut-listen="true">
 		<span style="font-size:24px;font-weight:bold;" id="page_title" ondblclick="changeTitle();">List Disassembler+</span>
 		<div style="float:right; width:300px; text-align:right;">
-			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px; color: rgb(255, 255, 255); background-color: rgb(0, 153, 0);" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
+			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px;" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
 			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
-			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="nanowiki_te.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
-			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">9/1/2023, 4:05:19 PM</span></div>
+			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="TOOL_listdisassembler-plus.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">9/1/2023, 4:21:01 PM</span></div>
 		</div>
 		<div style="clear:both; display:none;" id="help">
 			WHAT IS THIS?<br>
@@ -285,7 +285,7 @@ function form_calendar(datefield_id,timefield_id,calendarfield_id,new_date){
 		var prev_date=prev_month+'/1/'+prev_year;
 		var next_date=next_month+'/1/'+next_year;
 		content=content+'<table width="145" cellpadding="0" cellspacing="3" border="0" style="font-family: \'lucida console\',\'Bitstream Vera Sans Mono\',monospaced;font-size:12px;">';
-		content=content+'<tr><td style="cursor:pointer;" onclick="form_calendar(\''+datefield_id+'\',\''+timefield_id+'\',\''+calendarfield_id+'\',\''+prev_date+'\')"><</td><td colspan="5" align="center">'+mnth_name[cmonth]+' '+cyear+'</td><td align="right" style="cursor:pointer;" onclick="form_calendar(\''+datefield_id+'\',\''+timefield_id+'\',\''+calendarfield_id+'\',\''+next_date+'\')">></td></tr>';
+		content=content+'<tr><td style="cursor:pointer;" onclick="form_calendar(\''+datefield_id+'\',\''+timefield_id+'\',\''+calendarfield_id+'\',\''+prev_date+'\')">&lt;</td><td colspan="5" align="center">'+mnth_name[cmonth]+' '+cyear+'</td><td align="right" style="cursor:pointer;" onclick="form_calendar(\''+datefield_id+'\',\''+timefield_id+'\',\''+calendarfield_id+'\',\''+next_date+'\')">&gt;</td></tr>';
 		content=content+'<tr><td style="color:#ff0000;">Su</td><td>Mo</td><td>Tu</td><td>We</td><td>Th</td><td>Fr</td><td>Sa</td></tr>';
 		start=sdt.getDay();
 		for(x=0;x<(mnth_days[cmonth]+wkday);x++){
@@ -328,11 +328,11 @@ function form_calendar(datefield_id,timefield_id,calendarfield_id,new_date){
 			content=content+'" onClick="document.getElementById(\''+timefield_id+'\').value=\''+((y-13*Math.floor(x/13)+Math.floor(x/13))+':00 '+apm[Math.floor(x/12)]).padStart(8,'0')+'\';splitDateTime();">'+(y-13*Math.floor(x/13)+Math.floor(x/13))+'</td>';
 			if(!((x+1)%6)){
 				if(x==5){
-					content=content+'<td style="cursor:not-allowed;border-left: 1px solid #000000;" rowspan="2"> AM</td>';
+					content=content+'<td style="cursor:not-allowed;border-left: 1px solid #000000;" rowspan="2">-AM</td>';
 				}else if(x==23){
 					content=content+'</tr><tr><td colspan="7"><hr /></td>';
 				}else if(x==17){
-					content=content+'<td style="cursor:not-allowed;border-left: 1px solid #000000;" rowspan="2"> PM</td>';
+					content=content+'<td style="cursor:not-allowed;border-left: 1px solid #000000;" rowspan="2">-PM</td>';
 				}
 				content=content+'</tr><tr>';
 			}
