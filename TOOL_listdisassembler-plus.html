@@ -175,7 +175,7 @@
 			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px;" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
 			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
 			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="TOOL_listdisassembler-plus.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
-			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">9/5/2023, 8:51:40 AM</span></div>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">9/6/2023, 9:08:46 AM</span></div>
 		</div>
 		<div style="clear:both; display:none;" id="help">
 			WHAT IS THIS?<br>
@@ -403,6 +403,23 @@ function removeUsed(){
 	if(document.getElementById('enumerate').checked){addLineNumbers();}
 	distributeLines();
 }
+function clickMode(t_area){
+	var cpos=t_area.selectionStart;
+	if(document.getElementById('sub_cr').checked){t_area.value=t_area.value.substr(0,t_area.selectionStart)+t_area.value.substr(cpos).replace(String.fromCharCode(10),'');}
+	if(document.getElementById('add_cr').checked){t_area.value=t_area.value.substr(0,cpos)+String.fromCharCode(10)+t_area.value.substr(cpos);}
+	if(document.getElementById('add_this').checked){t_area.value=t_area.value.substr(0,cpos)+document.getElementById('add_this_txt').value+t_area.value.substr(cpos);}
+	t_area.selectionStart=cpos+document.getElementById('add_this_txt').value.length;
+	t_area.selectionEnd=cpos+document.getElementById('add_this_txt').value.length;
+}
+function updateCMode(){
+	if((document.getElementById('sub_cr').checked) || (document.getElementById('add_cr').checked) || (document.getElementById('add_this').checked)){
+		document.getElementById('click_mode_status').style.color='#fff';
+		document.getElementById('click_mode_status').style.backgroundColor='#c00';
+	}else{
+		document.getElementById('click_mode_status').style.color='#000';
+		document.getElementById('click_mode_status').style.backgroundColor='#fff';
+	}
+}
 </script>
 <hr>
 <div id="message" style="text-align:center;background-color:#009900;color:#ffffff;border-radius:25px; padding:5px; margin-bottom:5px;">-ready-</div>
@@ -424,8 +441,13 @@ function removeUsed(){
 		</div>
 	</div>
 	<div>
-		<strong>TEXT SOURCE</strong> - <input type="checkbox" id="enumerate" onclick="if(this.checked){addLineNumbers();}else{removeLineNumbers();}">enumerate lines<br><br>
-		<textarea id="input2" style="width:500px;height:300px;resize: both;" oninput="if(document.getElementById('enumerate').checked){document.getElementById('enumerate').checked=false;removeLineNumbers();}buffer_txt=this.value;distributeLines();" ondblclick="this.select();document.execCommand('copy');msg('-COPIED!-');" placeholder="[-info input-]"></textarea><br>
+		<strong>TEXT SOURCE</strong> - <input type="checkbox" id="enumerate" onclick="if(this.checked){addLineNumbers();}else{removeLineNumbers();}">enumerate lines<br>
+		<span id="click_mode_status"><strong>CLICK MODE</strong></span> - 
+		<input type="checkbox" id="sub_cr" title="click removes next line-break" onclick="document.getElementById('add_cr').checked=false;document.getElementById('add_this').checked=false;updateCMode();">remove CR | 
+		<input type="checkbox" id="add_cr" title="click inserts line-break at click position" onclick="document.getElementById('sub_cr').checked=false;document.getElementById('add_this').checked=false;updateCMode();">add CR | 
+		<input type="checkbox" id="add_this" title="click inserts text at click position" onclick="document.getElementById('sub_cr').checked=false;document.getElementById('add_cr').checked=false;updateCMode();"> add this: 
+		<input type="text" id="add_this_txt" style="width:100px;" placeholder="...at click-pos" onmouseover="this.select();" ondblclick="this.value+=String.fromCharCode(9);" title="text to be inserted at click position; dbl-click adds [TAB]" oninput="if(this.value.length){document.getElementById('add_this').checked=true;document.getElementById('sub_cr').checked=false;document.getElementById('add_cr').checked=false;updateCMode();}else{document.getElementById('add_this').checked=false;updateCMode();}"><br><br>
+		<textarea id="input2" style="width:500px;height:300px;resize: both;" oninput="if(document.getElementById('enumerate').checked){document.getElementById('enumerate').checked=false;removeLineNumbers();}buffer_txt=this.value;distributeLines();" ondblclick="this.select();document.execCommand('copy');msg('-COPIED!-');" onclick="clickMode(this);" placeholder="[-info input-]"></textarea><br>
 		<input type="text" id="remove" style="width:250px;" placeholder="-remove this-" onmouseover="this.select();">
 		<input type="button" value="REMOVE" onclick="if(document.getElementById('enumerate').checked){document.getElementById('enumerate').checked=false;removeLineNumbers();}document.getElementById('input2').value=document.getElementById('input2').value.split(document.getElementById('remove').value).join('');"> <input type="button" onclick="document.getElementById('input2').value=buffer_txt;if(document.getElementById('enumerate').checked){document.getElementById('enumerate').checked=false;removeLineNumbers();}" value="...nah, put it back">
 		<hr>
@@ -478,7 +500,6 @@ function removeUsed(){
 		<div id="rtcp3" contenteditable="true" style="width:300px;height:30px;border:1px solid rgb(0, 0, 0);overflow:auto;resize:vertical;" onclick="if(this.innerHTML=='[-html template 3-]'){this.innerHTML='';}" onblur="if(this.innerHTML.replace('<br>','')==''){this.innerHTML='[-html template 3-]';}" ondblclick="window.getSelection().selectAllChildren(this);document.execCommand('copy');msg('-COPIED!-');" onkeyup="storeContent();"><a class="btn" data-cke-saved-href="https://www.eventbrite.com/e/mvpn-peer-support-group-the-other-side-tickets-359600403487" href="https://www.eventbrite.com/e/mvpn-peer-support-group-the-other-side-tickets-359600403487" rel="noopener" target="_blank">Register here</a></div>
 	</div>
 </div>
-<hr>
 <script>
 if(lda.length>1){
 	document.getElementById('lines1').value=lda[0];
