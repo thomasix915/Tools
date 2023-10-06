@@ -174,8 +174,8 @@
 		<div style="float:right; width:300px; text-align:right;">
 			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px; color: rgb(255, 255, 255); background-color: rgb(0, 153, 0);" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
 			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
-			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="nanowiki_te.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
-			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">8/25/2023, 4:52:48 PM</span></div>
+			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="TOOL_cleanup.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">10/6/2023, 4:18:12 PM</span></div>
 		</div>
 		<div style="clear:both; display:none;" id="help">
 			WHAT IS THIS?<br>
@@ -220,9 +220,12 @@
 			<br>
 		</div>
 		<hr style="clear:both;">
-		<!-- CONTENT PANEL START --><div id="nanowiki_panel"><div id="5186980029" style="border:#cccccc solid 1px; margin:5px; padding:5px; border-radius:5px;"><div class="title" id="title5186980029">Clean up Copy &amp; Paste from Rich-Text Sources</div><div id="content5186980029"><div id="visual" contenteditable="true" style="width:45%;height:300px;border:#000 solid 1px; display:inline-block; overflow:auto;" onkeyup="document.getElementById('source').value=this.innerHTML.replace(/>/g, '>\n');">
-</div><textarea id="source" style="width:45%;height:300px;" onkeyup="document.getElementById('visual').innerHTML=this.value;"></textarea>
+		<!-- CONTENT PANEL START --><div id="nanowiki_panel"><div id="5186980029" style="border:#cccccc solid 1px; margin:5px; padding:5px; border-radius:5px;"><div class="title" id="title5186980029">Clean up Copy &amp; Paste from Rich-Text Sources - double-click copies</div><div id="content5186980029"><hr><div id="message" style="text-align:center;background-color:#009900;color:#ffffff;border-radius:25px; padding:5px; margin-bottom:5px;">-ready-</div>
+<div id="visual" contenteditable="true" style="width:45%;height:300px;border:#000 solid 1px; display:inline-block; overflow:auto;" onkeyup="document.getElementById('source').value=this.innerHTML.replace(/>/g, '>\n');" ondblclick="window.getSelection().selectAllChildren(this);document.execCommand('copy');msg('-COPIED!-');">
+</div><textarea id="source" style="width:45%;height:300px;" onkeyup="document.getElementById('visual').innerHTML=this.value;" ondblclick="this.select();document.execCommand('copy');msg('-COPIED!-');"></textarea>
 <script>
+function msg(msg_text){
+		document.getElementById('message').style.backgroundColor='#990000'; document.getElementById('message').innerHTML=msg_text; setTimeout('document.getElementById(\'message\').style.backgroundColor=\'#009900\';document.getElementById(\'message\').innerHTML=\'-ready-\';',1000);}
 function cleanUp(){
 	content=document.getElementById('visual').innerHTML;
 	content=content.replace(/(<p([^>]+)>)/ig,'<p>');
@@ -420,10 +423,10 @@ function openReplace(){
 <hr>
 <div id="message" style="text-align:center;background-color:#009900;color:#ffffff;border-radius:25px; paddingL:5px; margin-bottom:5px;"> </div>
 <br>
-PASTE (instant-copy): <input type="text" style="width: 20%; font-size: 12px;" oninput="this.value=this.value.toUpperCase();this.select(); document.execCommand('copy'); document.getElementById('message').innerHTML='COPIED!'; setTimeout('document.getElementById(\'message\').innerHTML=\' \'',1000);" placeholder="[TO UPPERCASE]"> 
-<input type="text" style="width: 20%; font-size: 12px;" oninput="this.value=this.value.toLowerCase(); this.select(); document.execCommand('copy'); document.getElementById('message').innerHTML='COPIED!'; setTimeout('document.getElementById(\'message\').innerHTML=\' \'',1000);" placeholder="[to lowercase]"> 
+PASTE (instant-copy): <input type="text" style="width: 20%; font-size: 12px;" oninput="this.value=this.value.toUpperCase();this.select(); document.execCommand('copy'); msg('-COPIED!-');" placeholder="[TO UPPERCASE]"> 
+<input type="text" style="width: 20%; font-size: 12px;" oninput="this.value=this.value.toLowerCase(); this.select(); document.execCommand('copy'); msg('-COPIED!-');" placeholder="[to lowercase]"> 
 <input type="text" style="width: 20%; font-size: 12px;" oninput="el=this.value.split(' ');for(x=0;x<el.length;x++){el[x]=el[x].charAt(0).toUpperCase()+el[x].substr(1).toLowerCase();}this.value=el.join(' ');this.select(); document.execCommand('copy');
-document.getElementById('message').innerHTML='COPIED!'; setTimeout('document.getElementById(\'message\').innerHTML=\' \'',1000);" placeholder="[to Title Case]"><hr><div style="width:300px;display:inline-block; ">
+msg('-COPIED!-');" placeholder="[to Title Case]"><hr><div style="width:300px;display:inline-block; ">
 Replace: <textarea style="width:275px; height:100px; " id="find_replace_find" ondblclick="this.value+=String.fromCharCode(9); "></textarea></div>
 <div style="width:300px;display:inline-block;"> With:<textarea style="width:275px; height:100px;" id="find_replace_replace" ondblclick="this.value+=String.fromCharCode(9);"></textarea>
 </div>
