@@ -174,8 +174,8 @@
 		<div style="float:right; width:300px; text-align:right;">
 			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px; color: rgb(255, 255, 255); background-color: rgb(0, 153, 0);" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
 			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
-			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="nanowiki_te.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
-			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">9/29/2023, 5:02:07 PM</span></div>
+			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="TOOL_image_resizer.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">10/26/2023, 10:33:11 AM</span></div>
 		</div>
 		<div style="clear:both; display:none;" id="help">
 			WHAT IS THIS?<br>
@@ -220,7 +220,8 @@
 			<br>
 		</div>
 		<hr style="clear:both;">
-		<!-- CONTENT PANEL START --><div id="nanowiki_panel"><div id="6826706718" style="border:#cccccc solid 1px; margin:5px; padding:5px; border-radius:5px;"><div class="title" id="title6826706718">Quick resizer, cropper - instant square with '...?dim=[size]'</div><div id="content6826706718"><div id="message" style="text-align:center;background-color:#090;color:#ffffff;border-radius:25px; padding:5px; margin-bottom:5px;">-ready-</div>
+		<!-- CONTENT PANEL START --><div id="nanowiki_panel"><div id="6826706718" style="border:#cccccc solid 1px; margin:5px; padding:5px; border-radius:5px;"><div class="title" id="title6826706718">Quick resizer, cropper - instant square with '...?dim=[size]'</div><div id="content6826706718"><hr>
+<div id="message" style="text-align:center;background-color:#090;color:#ffffff;border-radius:25px; padding:5px; margin-bottom:5px;">-ready-</div>
 
 <script>
 var org_width=34;
@@ -339,7 +340,7 @@ function imageResizerResize2(){
 		ctx.drawImage(img,offset_x,offset_y,side_height*ratio,side_height);
 		if(document.getElementById('crop').checked){ctx.restore;}
 		if(document.getElementById('jpg').checked){
-			document.getElementById('image_output').src=canvas.toDataURL('image/jpeg',0.9);
+			document.getElementById('image_output').src=canvas.toDataURL('image/jpeg');
 		}else{
 			document.getElementById('image_output').src=canvas.toDataURL('image/png');
 		}
@@ -394,6 +395,12 @@ function b64x(){
 	document.getElementById('b64plain').value=document.getElementById('image_output').src;
 	document.getElementById('b64link').value='<a href='+String.fromCharCode(34)+document.getElementById('image_output').src+String.fromCharCode(34)+' target='+String.fromCharCode(34)+'_blank'+String.fromCharCode(34)+'>[link-label]</a>';
 	document.getElementById('b64image').value='<img style='+String.fromCharCode(34)+'max-width:100%;height:auto;'+String.fromCharCode(34)+' src='+String.fromCharCode(34)+document.getElementById('image_output').src+String.fromCharCode(34)+' />';
+	document.getElementById('image_link').href=document.getElementById('image_output').src;
+	if(document.getElementById('jpg').checked){
+		document.getElementById('image_link').setAttribute('download','resized_image.jpg');
+	}else{
+		document.getElementById('image_link').setAttribute('download','resized_image.png');
+	}
 }
 </script>
 <div style="text-align:center;">
@@ -440,18 +447,19 @@ function b64x(){
 	<img id="image_resizer_org" src="" style="position:absolute;top:-10000px;left:-10000px;">
 	<div style="text-align:center;">
 		<canvas id="image_resizer_resized" style="position:absolute;top:-10000px;left:-10000px;" width="648" height="496"></canvas>
-		<img src="data:image/jpeg;base64,/9j/4QDCRXhpZgAASUkqAAgAAAAHABIBAwABAAAAAQAAABoBBQABAAAAYgAAABsBBQABAAAAagAAACgBAwABAAAAAgAAADEBAgAOAAAAcgAAADIBAgAUAAAAgAAAAGmHBAABAAAAlAAAAAAAEABIAAAAAQAAAEgAAAABAAAAUGhvdG9GaWx0cmUgNwAyMDE5OjAyOjA4IDA5OjEyOjA2AAMAAJAHAAQAAAAwMjEwAqADAAEAAAAgAAAAA6ADAAEAAAAgAAAA/9sAQwACAQEBAQECAQEBAgICAgIEAwICAgIFBAQDBAYFBgYGBQYGBgcJCAYHCQcGBggLCAkKCgoKCgYICwwLCgwJCgoK/9sAQwECAgICAgIFAwMFCgcGBwoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK/8IAEQgAIAAgAwEiAAIRAQMRAf/EABkAAQACAwAAAAAAAAAAAAAAAAcDCAEFBv/EABQBAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhADEAAAAejyDWAIEXfiAHNi6flI31cgP//EAB0QAAICAgMBAAAAAAAAAAAAAAUHBAYAAwIIFwH/2gAIAQEAAQUCj9hGwa+e9NvPem3icfei7cgA+EVhEaSDiuoop0AEk9h1tRKZBp5UbyKvXs2Rqd8a7XONG4WFozGiqmuj+dmm7Ew792zxR15IQDcO7P/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8BH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8BH//EADMQAAAFAgIHBgUFAAAAAAAAAAECAwQFBhEAEgcTISIxQVEUMjRSltMkM0JhcnGBkdHw/9oACAEBAAY/An0tD0/TDWNayZ2ZFpaT1Nzhty3MoW426Y7+j31Kl72O/o99Spe9h9F1rIQjCQbv+ztk2r8Mrn8LmHPt5hxxExkk2Ks3caUTprJH4HKJUgEMN6Da6AI9SCURAykr2U/kuJs98oAA7uUdv8hhmzlqRh26r9fUs01QsKp7d0P9064px9S1LNWKytSIJqKIEsIlsYbYhIQHpO1hpP14t/q1Y6oAN+lwEMNKdodZNVOLXzS/MFzc0L8rBxHzfjgamcmO3SR3Y5sRTw5A+/m5iP8AQYplzLk+PjatbNnivJYchhKp+4cfviNqPR0jERMuwkgdndKMwDXGDaGYSl3toX24Msq/oQxjDcxjU+ncR6/Jx4ug/Tyfs4YMZ6o6ZQj2smm8UTi43UiJi7L7qZbjYR44/8QAHxABAQACAgIDAQAAAAAAAAAAAREhMQBRYYEQQXGR/9oACAEBAAE/IQtc3YdCWjh3182bJ95dMtxiIKlE8ghj6tr8Izlp6oUqhbbBSb4bSw8mY3Lj+o2BTNQTJjnVB9cYFmbh7lfsHDBnVmn2IRhkR2rOlFmZSCZPks+gF+YpaWOkMOimEBpMXWBElBQEa+0BveFNUuavxfI8KevwElCvvn//2gAMAwEAAgADAAAAECCGFP/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8QH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8QH//EABsQAQEBAQEBAQEAAAAAAAAAAAERIQAxEEFR/9oACAEBAAE/EAkHuPGt6MT8GvtWqj67MUfVhh/m84mRZYfERVkXx4ZFnmBZYiAxBLiiPufCi4R/NXiJ2nMZiKFed6eYk5DccJII21zieXfLp4hnKDEur0QiKPsHCAxE6GBShCCAxQZE4chlTRlF0hVRFHj0j9plQoKrqqvxj+VVsxhhGExud//Z" style="border:#000000 solid 1px;margin:15px;" id="image_output">
+		<a id="image_link" href="#" download="resized_image.jpg"><img src="data:image/jpeg;base64,/9j/4QDCRXhpZgAASUkqAAgAAAAHABIBAwABAAAAAQAAABoBBQABAAAAYgAAABsBBQABAAAAagAAACgBAwABAAAAAgAAADEBAgAOAAAAcgAAADIBAgAUAAAAgAAAAGmHBAABAAAAlAAAAAAAEABIAAAAAQAAAEgAAAABAAAAUGhvdG9GaWx0cmUgNwAyMDE5OjAyOjA4IDA5OjEyOjA2AAMAAJAHAAQAAAAwMjEwAqADAAEAAAAgAAAAA6ADAAEAAAAgAAAA/9sAQwACAQEBAQECAQEBAgICAgIEAwICAgIFBAQDBAYFBgYGBQYGBgcJCAYHCQcGBggLCAkKCgoKCgYICwwLCgwJCgoK/9sAQwECAgICAgIFAwMFCgcGBwoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK/8IAEQgAIAAgAwEiAAIRAQMRAf/EABkAAQACAwAAAAAAAAAAAAAAAAcDCAEFBv/EABQBAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhADEAAAAejyDWAIEXfiAHNi6flI31cgP//EAB0QAAICAgMBAAAAAAAAAAAAAAUHBAYAAwIIFwH/2gAIAQEAAQUCj9hGwa+e9NvPem3icfei7cgA+EVhEaSDiuoop0AEk9h1tRKZBp5UbyKvXs2Rqd8a7XONG4WFozGiqmuj+dmm7Ew792zxR15IQDcO7P/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8BH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8BH//EADMQAAAFAgIHBgUFAAAAAAAAAAECAwQFBhEAEgcTISIxQVEUMjRSltMkM0JhcnGBkdHw/9oACAEBAAY/An0tD0/TDWNayZ2ZFpaT1Nzhty3MoW426Y7+j31Kl72O/o99Spe9h9F1rIQjCQbv+ztk2r8Mrn8LmHPt5hxxExkk2Ks3caUTprJH4HKJUgEMN6Da6AI9SCURAykr2U/kuJs98oAA7uUdv8hhmzlqRh26r9fUs01QsKp7d0P9064px9S1LNWKytSIJqKIEsIlsYbYhIQHpO1hpP14t/q1Y6oAN+lwEMNKdodZNVOLXzS/MFzc0L8rBxHzfjgamcmO3SR3Y5sRTw5A+/m5iP8AQYplzLk+PjatbNnivJYchhKp+4cfviNqPR0jERMuwkgdndKMwDXGDaGYSl3toX24Msq/oQxjDcxjU+ncR6/Jx4ug/Tyfs4YMZ6o6ZQj2smm8UTi43UiJi7L7qZbjYR44/8QAHxABAQACAgIDAQAAAAAAAAAAAREhMQBRYYEQQXGR/9oACAEBAAE/IQtc3YdCWjh3182bJ95dMtxiIKlE8ghj6tr8Izlp6oUqhbbBSb4bSw8mY3Lj+o2BTNQTJjnVB9cYFmbh7lfsHDBnVmn2IRhkR2rOlFmZSCZPks+gF+YpaWOkMOimEBpMXWBElBQEa+0BveFNUuavxfI8KevwElCvvn//2gAMAwEAAgADAAAAECCGFP/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8QH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8QH//EABsQAQEBAQEBAQEAAAAAAAAAAAERIQAxEEFR/9oACAEBAAE/EAkHuPGt6MT8GvtWqj67MUfVhh/m84mRZYfERVkXx4ZFnmBZYiAxBLiiPufCi4R/NXiJ2nMZiKFed6eYk5DccJII21zieXfLp4hnKDEur0QiKPsHCAxE6GBShCCAxQZE4chlTRlF0hVRFHj0j9plQoKrqqvxj+VVsxhhGExud//Z" style="border:#000000 solid 1px;margin:15px;" id="image_output"></a>
 	</div>
-	<div>
-		^(when done, right-click and [save])
-		<input type="button" value="DOWNLOAD AS MS_WINDOWS.ICO (Firefox Only)" onclick="downloadIcon();">
+	<div style="font-size:10px;">
+		^ click to save<hr>
 	</div>
 </div>
 <div style="text-align:center;">
 	<textarea ondblclick="this.select();document.execCommand('copy');msg();" readonly="" style="resize:none;border-radius:5px;width:175px;height:75px;font-size:9px;font-family:monospace;vertical-align:middle;" id="b64plain" title="base64 - plain" placeholder="[base64 - plain]"></textarea>
 	<textarea ondblclick="this.select();document.execCommand('copy');msg();" readonly="" style="resize:none;border-radius:5px;width:175px;height:75px;font-size:9px;font-family:monospace;vertical-align:middle;" id="b64link" title="base64 - link" placeholder="[base64 - link]"></textarea>
-	<textarea ondblclick="this.select();document.execCommand('copy');msg();" readonly="" style="resize:none;border-radius:5px;width:175px;height:75px;font-size:9px;font-family:monospace;vertical-align:middle;" id="b64image" title="base64 - image" placeholder="[base64 - image]"></textarea>
+	<textarea ondblclick="this.select();document.execCommand('copy');msg();" readonly="" style="resize:none;border-radius:5px;width:175px;height:75px;font-size:9px;font-family:monospace;vertical-align:middle;" id="b64image" title="base64 - image" placeholder="[base64 - image]"></textarea><br>
+	<input type="button" style="font-size:9px;" value="DOWNLOAD AS MS_WINDOWS.ICO (Firefox Only)" onclick="downloadIcon();">
 </div>
+<hr>
 <div style="text-align:center;">
 <strong>SCREENSHOT ONLY</strong><br>
 Border-Width: <input type="number" id="border_width" style="width:60px;" value="1" oninput="imageResizerResize1();">
