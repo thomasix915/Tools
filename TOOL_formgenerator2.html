@@ -1,0 +1,476 @@
+<!DOCTYPE html><html lang="en-US"><head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
+		<link href="data:image/png;base64,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" rel="icon" type="image/png">
+		<title>Form Generator II - Form as Background Image</title>
+		<style type="text/css">
+			body{
+				font-family:monospace;
+				font-size:12px;
+			}
+			.title{
+				font-family:monospace;
+				font-weight:bold;
+				font-size:16px;
+			}
+			textarea{
+				font-family:monospace;
+				font-size:12px;
+				border-radius:5px;
+			}
+			input{
+				font-family:monospace;
+				font-size:12px;
+				border-radius:5px;
+			}
+			#dropper.hover{
+				background-color:#ffffff;
+				color:#000000;
+			}
+		</style>
+		<script type="text/javascript">
+			if(location.protocol==='http:'){location.protocol='https:';}
+			var local_storage_handle='nanowiki-'+window.location.pathname.substring(window.location.pathname.lastIndexOf("/")+1).replace(/%20/g,' ');
+			if((localStorage.getItem(local_storage_handle)==undefined) || (localStorage.getItem(local_storage_handle)=='')){localStorage.setItem(local_storage_handle,'|');}
+			if(window.location.href.indexOf('?clear')<0){var nanowiki_localcontent=localStorage.getItem(local_storage_handle).split('|');}else{localStorage.setItem(local_storage_handle,'|');window.location.href=window.location.href.replace('?clear','');}
+
+			if(window.location.href.indexOf('?')<0){window.location.href+='?'+Date.now();}else{lr=window.location.href;if(lr.substr(lr.indexOf('?')+1)<Date.now()){window.location.href=lr.substr(0,lr.indexOf('?'))+'?'+(Date.now()+60000);}}
+			var editor_active=false;
+			var visible1=0;
+			var visible2=0;
+			var this_location=window.location.pathname.substring(window.location.pathname.lastIndexOf("/")+1).replace(/%20/g," ")+'';
+			if(this_location.indexOf('?')>0){this_location=this_location.substr(0,this_location.indexOf('?'));}
+			function getUpdateDate(){
+				var d = new Date();
+				return d.toLocaleString();
+			}
+			function updateLocalStorage(){
+				if(document.getElementById('nanowiki_panel_autosave').checked){localStorage.setItem(local_storage_handle,document.getElementById('nanowiki_panel_autosave').checked+'|'+document.getElementById('nanowiki_panel').innerHTML);document.getElementById('localstorage_updated').style.color='#fff';document.getElementById('localstorage_updated').style.backgroundColor='#090';};
+			}
+			function addWiki(title, content){
+				var random_id=Math.floor((Math.random()*9999999999)+1);
+				document.getElementById('nanowiki_panel').innerHTML+='<div id="'+random_id+'" style="border:#cccccc solid 1px; margin:5px; padding:5px; border-radius:5px;"><div class="title" id="title'+random_id+'">'+title+'</div><div id="content'+random_id+'">'+parseTemplates(content)+'</div><div style="clear:both;">&nbsp;</div><hr /><div style="width:65px;float:left;"><span title="Move up" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(0,\''+random_id+'\');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAdUlEQVR42m1NuQ2AMAw8sgNjsADL0FHTeQvkLZiAlJSpEYooMD2KMgQ4QUIgcc3Z99gACFwTlFm80qCTYal0LHSzUm0o0fQGmDcVETuXiOwZUtmKb8EiQdPcJucweIFQT3KmDEvInyj7bhn3OxHXfPDTevCvXjOnKXEFcZQuAAAAAElFTkSuQmCC" />&nbsp;</span><span title="Move down" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(1,\''+random_id+'\');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAZ0lEQVR42mNgYChnmHD7CgOQBlFgZjkTAxgwggVjgawC1cUgsXwVIKENkZmQBlLyHKoUCJBZaS5AKgCsohyoFGhqGpQsRxiPBpgYrNxvb9OD8wO2dWxLA7sBzDXY9t/plnVfwTEQBwBlXiHWjsWwaQAAAABJRU5ErkJggg==" />&nbsp;</span></div><div style="width:45px;float:right;"><span title="REMOVE" style="background-color:#770000;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="if(confirm(\'DELETE?\')){removeWiki(\''+random_id+'\');}">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAnUlEQVR42mNkwA12AbErlH0MiK2xKWLEophYADYUZsB/ICBJNyMjI4SC8mcDcQqJLpgL0gMzwMHd3X3/jh07iNLp4eHBsHPnTkcg8wCGAXFxcQyfP39mWL9+PZj9/v17hs2bNzOEhoYy/PjxA8zGawDUb6BAwckeNWDQGwCSfPXqFcO5c+fwsnEaQG5KlALii0AsQmQ+eAvERkD8CAD5O8gRRpPKTQAAAABJRU5ErkJggg==" style="margin-bottom:-3px;" />&nbsp;</span></div><div style="width:45px;float:right;"><span title="EDIT" style="background-color:#007700;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="editWiki(\''+random_id+'\');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABbElEQVR42rWTO2vCUBTH/7FDhoAEbA0dBEHBRdz9DnXo4mQJwUmnDAHN0EDTJWPmOqibg9BFp3wFN10sGHETHwQE6VBLmnP7oAUfaaEHLtzD5fe759wHhz9EJpO5c8fj5xfA4n4Lx2Ixs9Vq3eq6jqfRSOcCw7UPPARr54egQqGAbreLTqeDeDwORVHQaDSgaZpJFcwjkYiUSCT2wvl8Hu12G4ZhYDAYQBAEVCoV3JRK96v12iCBL4oiPM87WHa9XofruvB9n1VCQlmWWfsnBQRPp1Nst1v0+33UajWYpgme508LCF4sFmx8wtRKsVik/LiA4OVyyeBer8dgy7LYgVL+we4X2LaNZrMJSZLgOM4XTJFMJjGbzY4LcrkchsMhm3+HQwkmkwnS6TSy2SzK5TJUVf3R2kkBLe52O6RSqb23EqqFY/EvgjnHcVI0Gg0l2Gw29CJXwfSCCc6Aq9f3z3QZykAbAtXgAz5S8gbiBb+FSaOmpAAAAABJRU5ErkJggg==" style="margin-bottom:-3px;" />&nbsp;</span></div><hr style="clear:both;position:relative;top:5px;" /></div><!--~-->';
+				document.getElementById('last_update').innerHTML=getUpdateDate();
+				document.getElementById('new_title').value='[title]';
+				document.getElementById('new_content').value='[content]';
+				document.getElementById('new').style.display='none';
+				updateLocalStorage();
+			}
+			function parseTemplates(content){
+				var section=[];
+				var end_params;
+				var params;
+				var tail;
+				var pars=[];
+				var width;
+				var result;
+
+				section=content.split('{IMG|');
+				for(x=1;x<section.length;x++){
+					end_params=section[x].indexOf('}');
+					params=section[x].substr(0,end_params);
+					tail=section[x].substr(end_params+1);
+					pars=params.split('|');
+					if(pars.length>1){width=' width:'+pars[1]+';';}else{width='';}
+					result='<img src="images/'+pars[0]+'" style="margin:5px; border:0;'+width+' max-width:99%;';
+					if(pars.length>2){result+=' float:'+pars[2]+';';}
+					section[x]=result+'" />'+tail;
+				}
+				content=section.join('');
+
+				section=content.split('{DOC|');
+				for(x=1;x<section.length;x++){
+					end_params=section[x].indexOf('}');
+					params=section[x].substr(0,end_params);
+					tail=section[x].substr(end_params+1);
+					pars=params.split('|');
+					result='<a href="documents/'+pars[0]+'" target="_blank">';
+					section[x]=result+pars[1]+'</a>'+tail;
+				}
+				content=section.join('');
+
+				section=content.split('{LINK|');
+				for(x=1;x<section.length;x++){
+					end_params=section[x].indexOf('}');
+					params=section[x].substr(0,end_params);
+					tail=section[x].substr(end_params+1);
+					pars=params.split('|');
+					result='<a href="'+pars[0]+'"';
+					if(pars[2].toLowerCase()=='yes'){result+=' target="_blank"';}
+					section[x]=result+'>'+pars[1]+'</a>'+tail;
+				}
+				content=section.join('');
+
+				return content;
+			}
+			function editWiki(random_id){
+				if(!editor_active){
+					editor_active=true;
+					document.getElementById('new').style.display='block';
+					visible1=1;
+
+					var editor='<input id="edit_title" type="text" class="title" style="width:99%" value="'+document.getElementById('title'+random_id).innerHTML+'" /><textarea id="edit_content" style="width:99%; height:200px; resize:vertical;">'+document.getElementById('content'+random_id).innerHTML.replace(new RegExp('/textarea','mg'),'/text_area')+'</textarea><input type="button" style="width:99%; background-color:#770000; color:#ffffff;" value="-COMMIT CHANGES-" onclick="finishEditWiki('+random_id+');" />';
+					document.getElementById(random_id).innerHTML=editor;
+				}else{
+					alert('EDITOR ACTIVE!\n================\n\nPlease close active editor before opening new one!');
+				}
+			}
+			function finishEditWiki(random_id){
+				editor_content=document.getElementById('edit_content').value;
+				var final='<div class="title" id="title'+random_id+'">'+document.getElementById('edit_title').value+'</div><div id="content'+random_id+'">'+parseTemplates(editor_content.replace(new RegExp('/text_area','mg'),'/textarea'))+'</div><div style="clear:both;">&nbsp;</div><hr /><div style="width:65px;float:left;"><span title="Move up" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(0,\''+random_id+'\');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAdUlEQVR42m1NuQ2AMAw8sgNjsADL0FHTeQvkLZiAlJSpEYooMD2KMgQ4QUIgcc3Z99gACFwTlFm80qCTYal0LHSzUm0o0fQGmDcVETuXiOwZUtmKb8EiQdPcJucweIFQT3KmDEvInyj7bhn3OxHXfPDTevCvXjOnKXEFcZQuAAAAAElFTkSuQmCC" />&nbsp;</span><span title="Move down" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(1,\''+random_id+'\');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAZ0lEQVR42mNgYChnmHD7CgOQBlFgZjkTAxgwggVjgawC1cUgsXwVIKENkZmQBlLyHKoUCJBZaS5AKgCsohyoFGhqGpQsRxiPBpgYrNxvb9OD8wO2dWxLA7sBzDXY9t/plnVfwTEQBwBlXiHWjsWwaQAAAABJRU5ErkJggg==" />&nbsp;</span></div><div style="width:45px;float:right;"><span title="REMOVE" style="background-color:#770000;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="if(confirm(\'DELETE?\')){removeWiki(\''+random_id+'\');}">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAnUlEQVR42mNkwA12AbErlH0MiK2xKWLEophYADYUZsB/ICBJNyMjI4SC8mcDcQqJLpgL0gMzwMHd3X3/jh07iNLp4eHBsHPnTkcg8wCGAXFxcQyfP39mWL9+PZj9/v17hs2bNzOEhoYy/PjxA8zGawDUb6BAwckeNWDQGwCSfPXqFcO5c+fwsnEaQG5KlALii0AsQmQ+eAvERkD8CAD5O8gRRpPKTQAAAABJRU5ErkJggg==" style="margin-bottom:-3px;" />&nbsp;</span></div><div style="width:45px;float:right;"><span title="EDIT" style="background-color:#007700;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="editWiki(\''+random_id+'\');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABbElEQVR42rWTO2vCUBTH/7FDhoAEbA0dBEHBRdz9DnXo4mQJwUmnDAHN0EDTJWPmOqibg9BFp3wFN10sGHETHwQE6VBLmnP7oAUfaaEHLtzD5fe759wHhz9EJpO5c8fj5xfA4n4Lx2Ixs9Vq3eq6jqfRSOcCw7UPPARr54egQqGAbreLTqeDeDwORVHQaDSgaZpJFcwjkYiUSCT2wvl8Hu12G4ZhYDAYQBAEVCoV3JRK96v12iCBL4oiPM87WHa9XofruvB9n1VCQlmWWfsnBQRPp1Nst1v0+33UajWYpgme508LCF4sFmx8wtRKsVik/LiA4OVyyeBer8dgy7LYgVL+we4X2LaNZrMJSZLgOM4XTJFMJjGbzY4LcrkchsMhm3+HQwkmkwnS6TSy2SzK5TJUVf3R2kkBLe52O6RSqb23EqqFY/EvgjnHcVI0Gg0l2Gw29CJXwfSCCc6Aq9f3z3QZykAbAtXgAz5S8gbiBb+FSaOmpAAAAABJRU5ErkJggg==" style="margin-bottom:-3px;" />&nbsp;</span></div><hr style="clear:both;position:relative;top:5px;" />';
+				document.getElementById(random_id).innerHTML=final;
+				document.getElementById('last_update').innerHTML=getUpdateDate();
+				editor_active=false;
+				document.getElementById('new').style.display='none';
+				visible1=1;
+				updateLocalStorage();
+			}
+			function removeWiki(random_id){
+				var buffer_all=document.getElementById('nanowiki_panel').innerHTML.split('<!--~-->');
+				for(x=0;x<(buffer_all.length-1);x++){
+					if(buffer_all[x].indexOf('id="'+random_id+'"')>-1){
+						buffer_all.splice(x,1);
+						x=buffer_all.length;
+					}
+				}
+				document.getElementById('nanowiki_panel').innerHTML=buffer_all.join('<!--~-->');
+				updateLocalStorage();
+			}
+			function moveWiki(direction, random_id){
+				var buffer_all=document.getElementById('nanowiki_panel').innerHTML.split('<!--~-->');
+
+				var position;
+				var buffer;
+
+				for(x=0;x<(buffer_all.length-1);x++){
+					if(buffer_all[x].indexOf('id="'+random_id+'"')>-1){
+						position=x;
+						x=buffer_all.length;
+					}
+				}
+
+				if((direction) && (position<(buffer_all.length-2))){
+					buffer=buffer_all[position+1];
+					buffer_all[position+1]=buffer_all[position];
+					buffer_all[position]=buffer;
+				}else if((!direction) && (position>0)){
+					buffer=buffer_all[position-1];
+					buffer_all[position-1]=buffer_all[position];
+					buffer_all[position]=buffer;
+				}
+
+				document.getElementById('nanowiki_panel').innerHTML=buffer_all.join('<!--~-->');
+				updateLocalStorage();
+			}
+			function changeTitle(){
+				document.getElementById('page_title').innerHTML='<input id="page_title_edit" type="text" value="'+document.getElementById('page_title').innerHTML+'" style="width:250px;" onblur="document.getElementById(\'page_title\').innerHTML=this.value;document.title=this.value;document.getElementById(\'page_title\').ondblclick=function(){changeTitle();}" /><input type="button" value="&lt;" />';document.getElementById('page_title_edit').focus();
+				document.getElementById('page_title').ondblclick=function(){}
+			}
+
+		</script>
+	</head>
+	<body cz-shortcut-listen="true">
+		<span style="font-size:24px;font-weight:bold;" id="page_title" ondblclick="changeTitle();">Form Generator II - Form as Background Image</span>
+		<div style="float:right; width:300px; text-align:right;">
+			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px; color: rgb(255, 255, 255); background-color: rgb(0, 153, 0);" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
+			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
+			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="TOOL_formgenerator2.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">10/30/2023, 2:04:25 PM</span></div>
+		</div>
+		<div style="clear:both; display:none;" id="help">
+			WHAT IS THIS?<br>
+			=============<br>
+			NanoWiki is a documentation tool with a small footprint, extreme containment, and maximum portability, even when segments are isolated from a comprehensive constellation. Each element is as self-sustained as possible.<br>
+			Unlike most content managers, this documentation tool tries to embed as much content as possible into one file, not link resources, like images and/or supportive documents. Therefore these binary files are converted to text, using base64-conversion, then included into the content via straight HTML. The syntax for images, documents, and links is provided as templates, along with explanations and samples.<br>
+			<br>
+			<br>
+			HOW DOES IT WORK?<br>
+			=================<br>
+			CHANGE THE MAIN TITLE...<br>
+			of the documentation, by double-clicking on it.<br>
+			<br>
+			ADD ARTICLES...<br>
+			as needed, bring them into the right order, and save the whole page through the button in the upper left.<br>
+			<br>
+			EDIT ARTICLES...<br>
+			by double-clicking them. Then edit and save the whole page (again) with the button in the upper left. Get new images and documents posted, using the conversion tool in the [ADD] section.<br>
+			<br>
+			NO FONT-SIZE, BOLD, ITALIC, TABLES - NOTHING???<br>
+			Nope. Enjoy your own HTML-skills, almost everything is supported (but stay away from &lt;/textarea&gt; and JavaScript). This is intended to be as simple and bare-bones as possible.<br>
+			Templates for images and links (to files and pages) are included. Use CAPITALIZATION, +++ additional characters +++, and indentation for emphasis and organization. Worked for decades on a typewriter, works here too.<br>
+			<br>
+			AND NO 'UNDO...'<br>
+			In the text-box, right-click and choose UNDO, or press [CTRL]+[Z] / [CTRL]+[Y] for UNDO / REDO.<br>
+			If you messed up completely, deleted something, open the original you should overwrite after editing in a separate window and get the content from there (open the editor with a double-click).<br>
+			If you broke the system somehow, do not overwrite the previous version, simply re-load the page, and start over. If you overwrote the original already, get a backup.<br>
+			MAKE AND KEEP BACKUPS, they compress nicely and fast. Disciplin, people, this is meant to be small, simple, fast, portable, and independent, not fool or vilain proof.<br>
+			<br>
+			AND NO LOGIN/SECURITY...<br>
+			Not needed, only you (or your people) have write access to the files. You can write anything on a paper copy, doesn't change the original, neither other people's copies.<br>
+			<br>
+			<br>
+			HOW DO I SHARE MY DOCUMENTATION?<br>
+			================================<br>
+			Give others read access e.g. by posting the wiki on a web server or on a file-sharing platform, like Dropbox or Google Drive. Just find out how to "make file publicly accessible".<br>
+			Web servers or fully addressible platforms are (only) required to provide cross-linked multi-topic documentation sites instead of single documentation pages.<br>
+			Here is a handy <a href="https://www.warpsite.net/ducttapesolutions/nanowiki/handler.zip">notes file handler</a>, extract directly into directory with documentation notes on a PHP-enabled web server.<br>
+			<br>
+			<br>
+			ENJOY! - or improve...<br>
+			<br>
+		</div>
+		<hr style="clear:both;">
+		<!-- CONTENT PANEL START --><div id="nanowiki_panel"><div id="7340318887" style="border:#cccccc solid 1px; margin:5px; padding:5px; border-radius:5px;"><div class="title" id="title7340318887">Use your own form as background image, place and edit fields, and save page for use. Call editor with ?admin</div><div id="content7340318887"><hr>
+<div id="mode" style="text-align: center; background-color: rgb(0, 153, 0); color: rgb(255, 255, 255); border-radius: 25px; padding: 5px; margin-bottom: 5px;">MODE: Using Form</div>
+<hr>
+<div id="edit_buttons" style="min-width: 1000px; visibility: hidden;">
+	<strong>FORM-IMAGE:</strong> <input type="file" id="file" onchange="var reader = new FileReader();reader.readAsDataURL(this.files[0]);reader.onload = function(){document.getElementById('form_img').src=reader.result;}">
+	<input type="button" value="+ TEXT" onclick="addText();makeDraggable();" style="background-color:#009;color:#fff;border-radius:10px;">
+	<input type="number" value="250" id="dim_x" style="width:65px;text-align:right;border-radius:10px;" oninput="if(document.getElementById('mode').innerHTML!='MODE: Moving / Editing Fields'){makeDraggable();}updateDim();">x<input type="number" value="30" id="dim_y" oninput="old_val=this.value;if(document.getElementById('mode').innerHTML=='MODE: Moving / Editing Fields'){updateDim();}else{alert('NOTICE: EDIT FIELDS NOT ACTIVE!');this.value=old_val;}" style="width:65px;text-align:right;border-radius:10px;">px
+	<input type="button" value="+ BOX" onclick="addCheck();makeDraggable();" style="background-color:#009;color:#fff;border-radius:10px;">
+	<input type="button" value="x LAST" onclick="removeField();" style="background-color:#000;color:#fff;border-radius:10px;">
+	<input type="button" value="EDIT" title="double-click edits field name (for emailing)" onclick="makeDraggable();" style="background-color:#900;color:#fff;border-radius:10px;">
+	<input type="button" value="FRED" title="[FR]ee [ED]itor" onclick="makeDraggable();showFred();" style="background-color:#099;color:#fff;border-radius:10px;"> - 
+	<input type="button" value="- USE -" onclick="makeNotDraggable();" style="background-color:#090;color:#fff;border-radius:10px;">
+</div>
+<hr>
+<div style="border:#ccc solid 1px;">
+	<div id="fields"><textarea name="" class="draggable" style="position: absolute; top: 399px; left: 70px; width: 250px; height: 30px; cursor: initial;" ondblclick="editLabel(this);"></textarea>
+<input type="checkbox" name="" checked="checked" class="draggable" style="position: absolute; top: 703px; left: 47px; width: 20px; height: 20px; cursor: initial;" ondblclick="editLabel(this);">
+<input type="checkbox" name="" class="draggable" style="position: absolute; top: 743px; left: 47px; width: 20px; height: 20px; cursor: initial;" ondblclick="editLabel(this);"></div>
+	<img id="form_img" style="border-width:0px;" src="data:image/jpeg;base64,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UUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAVL//AFcf+/8A0NU6uX/+rj/3/wChqnVIxqbip/rE/wB9f5itaslP9Yn++v8AMVrUmVT2CiiikaGdHomnRaTJpQtlNjIrq0LEsCHJLDJJPJJ/OqsvhXR5reyge0ZUsYhDbmOeRGSMADaWVgxUgDIJIOOc1t0UgMmx8PaVpqWy2dosK2plMCq7YTzDl8DOME9u3bFOk0DTJrK/s5LbNvqDM9ynmMPMZgATnORkAdMVp0U/MDK1Dw7pmqXC3F1A/nKnl+ZDNJEzJnO1ijAsuexyOvHNaEEEVtBHBDGscMahURBgKAMAAdqmooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigCpf/wCrj/3/AOhqnVy//wBXH/v/ANDVOqRjU3FT/WJ/vr/MVrVkp/rE/wB9f5itakyqewUUUUjQKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigCpf/6uP/f/AKGqdXL/AP1cf+//AENU6pGNTcVP9Yn++v8AMVrVkp/rE/31/mK1qTKp7BRRRSNAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAKl/wD6uP8A3/6GqdXL/wD1cf8Av/0NU6pGNTcVP9Yn++v8xWtWSn+sT/fX+YrWpMqnsFFFFI0CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAqX/wDq4/8Af/oap1cv/wDVx/7/APQ1TqkY1NxU/wBYn++v8xWtWSn+sT/fX+YrWpMqnsFIQCMEZB7GlopGhH5EX/PJP++RR5EX/PJP++RUlFAEfkRf88k/75FHkRf88k/75FSUUAR+RF/zyT/vkUeRF/zyT/vkVJRQBH5EX/PJP++RR5EX/PJP++RUlFAEfkRf88k/75FHkRf88k/75FSUUAR+RF/zyT/vkUeRF/zyT/vkVJRQBH5EX/PJP++RR5EX/PJP++RUlFAEfkRf88k/75FHkRf88k/75FSUUAR+RF/zyT/vkUeRF/zyT/vkVJRQBH5EX/PJP++RR5EX/PJP++RUlFAEfkRf88k/75FHkRf88k/75FSUUAR+RF/zyT/vkUeRF/zyT/vkVJRQBH5EX/PJP++RR5EX/PJP++RUlFAEfkRf88k/75FHkRf88k/75FSUUAR+RF/zyT/vkUeRF/zyT/vkVJRQBH5EX/PJP++RR5EX/PJP++RUlFAEfkRf88k/75FHkRf88k/75FSUUAR+RF/zyT/vkUeRF/zyT/vkVJRQBGsUakERoD6hQKkoooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAKl//AKuP/f8A6GqdXL//AFcf+/8A0NU6pGNTcVP9Yn++v8xWtWQDtZWx90g49cHNaqsHUMpBB6EUmVT2HUUUUjQKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigCpf/wCrj/3/AOhqnVq9cEqg6g7j7cEf1qrVIxqbhQCVztZlz1wSM/lRQAWztVmx1wCc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zXpFFH9fl/kM808Q3djqg1i80R45rSLQbmK7ngx5ZYgGJCRwWAEhx1AODjNbkdnbWuv+Fvs8EcQFnPGNihfl2occds84rrzRQv6/r5gxaKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAKl//q4/9/8Aoap1cv8A/Vx/7/8AQ1TqkY1NxU/1if76/wAxWtWSn+sT/fX+YrWpMqnsFFFFI0CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAqX/APq4/wDf/oap1cv/APVx/wC//Q1TqkY1NxU/1if76/zFa1ZKf6xP99f5itakyqewUUUUjQKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigCpf/AOrj/wB/+hqnVy//ANXH/v8A9DVOqRjU3FT/AFif76/zFa1ZKf6xP99f5itakyqewUUUUjQKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigCpf/wCrj/3/AOhqnVy//wBXH/v/ANDVOqRjU3FT/WJ/vr/MVrVkp/rE/wB9f5itakyqewUhOASBkjtS0UjQj8x/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">
+</div>
+<hr>
+<div id="user_buttons" style="min-width:1000px;">
+	<input type="button" value="- SEND BY EMAIL CLIENT -" onclick="sendEmail();" style="background-color:#555;color:#fff;border-radius:10px;">
+	<input type="button" value="- CREATE CONTENT TO COPY -" onclick="showMessage();" style="background-color:#555;color:#fff;border-radius:10px;">
+</div>
+<script>
+var moved_flag=false;
+function addText(){
+	document.getElementById('fields').innerHTML+=String.fromCharCode(10)+'<textarea name="" class="draggable" style="position:absolute;top:250px;left:100px;width:'+document.getElementById('dim_x').value+'px;height:'+document.getElementById('dim_y').value+'px;" ondblclick="editLabel(this);"></textarea>';
+}
+function addCheck(){
+	document.getElementById('fields').innerHTML+=String.fromCharCode(10)+'<input name="" type="checkbox" checked="checked" class="draggable" style="position:absolute;top:200px;left:100px;width:20px;height:20px;" ondblclick="editLabel(this);">';
+}
+function removeField(){
+	if(confirm('Remove field LAST ADDED?')){
+		fields=document.getElementById('fields').innerHTML.trim().split(String.fromCharCode(10));
+		fields.pop();
+		document.getElementById('fields').innerHTML=fields.join(String.fromCharCode(10));
+	}
+}
+function updateDim(){
+	fields=document.getElementsByClassName('draggable');
+	if(fields[fields.length-1].type!='checkbox'){
+		fields[fields.length-1].style.width=document.getElementById('dim_x').value+'px';
+		fields[fields.length-1].style.height=document.getElementById('dim_y').value+'px';
+	}
+}
+
+function buildMessage(){
+	var message='';
+	fields=document.getElementById('fields').innerHTML.trim().split(String.fromCharCode(10));
+	for(x=0;x<fields.length;x++){
+		fieldname=fields[x].split('name="')[1];
+		fieldname=fieldname.substr(0,fieldname.indexOf('"'));
+		if(document.getElementsByClassName('draggable')[x].nodeName=='INPUT'){
+			entry=document.getElementsByClassName('draggable')[x].checked ? '-SELECTED-' : '-NOT SELECTED-';
+		}else{
+			entry=document.getElementsByClassName('draggable')[x].value;
+		}
+		message+=fieldname.toUpperCase()+String.fromCharCode(10)+entry+String.fromCharCode(10)+String.fromCharCode(10)+'------------------------------'+String.fromCharCode(10)+String.fromCharCode(10);
+	}
+	return message;
+}
+
+function sendEmail(){
+	window.open('mailto:YourAddress@YourEmailService.com?subject=Form-Submission&body='+escape(buildMessage()));
+}
+function msg(msg_text){
+	document.getElementById('message').style.backgroundColor='#990000'; document.getElementById('message').innerHTML=msg_text; setTimeout('document.getElementById(\'message\').style.backgroundColor=\'#009900\';document.getElementById(\'message\').innerHTML=\'-ready-\';',1000);
+}
+function showMessage(){
+	document.getElementById('mode').innerHTML='-ready to copy-';
+	bak=document.getElementById('fields').innerHTML;
+	document.getElementById('edit_buttons').style.visibility='hidden';
+	document.getElementById('fields').innerHTML='+++ DOUBLE-CLICK TO COPY +++ - <input type="button" value="EXIT" onclick="document.getElementById(\'form_img\').style.display=\'inline\';document.getElementById(\'edit_buttons\').style.visibility=\'visible\';	document.getElementById(\'fields\').innerHTML=bak;document.getElementById(\'mode\').innerHTML=\'MODE: Using Form\';document.getElementById(\'mode\').style.backgroundColor=\'#090\';" style="vertical-align:middle;background-color:#090;color:#fff;border-radius:10px;" /><br /><textarea id="copy_message" style="width:99%;height:500px;" ondblclick="this.select();document.execCommand(\'copy\');document.getElementById(\'mode\').innerHTML=\'-COPIED-\';document.getElementById(\'mode\').style.backgroundColor=\'#900\';">'+buildMessage()+'</textarea>';
+	document.getElementById('form_img').style.display='none';
+}
+
+function editLabel(element){
+	if(moved_flag==false && document.getElementById('mode').innerHTML=='MODE: Moving / Editing Fields'){element.setAttribute('name',prompt('Enter/Edit Field Label:',element.getAttribute('name')));}
+}
+function showFred(){
+	document.getElementById('edit_buttons').style.visibility='hidden';
+	document.getElementById('fields').innerHTML='+++ [FR]ee [ED]itor - +++ - <input type="button" value="EXIT" onclick="document.getElementById(\'form_img\').style.display=\'inline\';document.getElementById(\'edit_buttons\').style.visibility=\'visible\';document.getElementById(\'fields\').innerHTML=document.getElementById(\'fred\').value.replaceAll(\'</text-area>\',\'</textarea>\');makeNotDraggable();" style="vertical-align:middle;background-color:#090;color:#fff;border-radius:10px;" /><br /><textarea id="fred" style="width:99%;height:500px;">'+document.getElementById('fields').innerHTML.replaceAll('</textarea>','</text-area>')+'</textarea>';
+	document.getElementById('form_img').style.display='none';
+}
+
+function makeDraggable(){
+	draggables=document.getElementsByClassName('draggable');
+	for(x=0;x<draggables.length;x++){
+		document.getElementsByClassName('draggable')[x].style.cursor='move';
+		document.getElementsByClassName('draggable')[x].checked=true;
+		if(document.getElementsByClassName('draggable')[x].type=='checkbox'){
+			dragElement(1,document.getElementsByClassName('draggable')[x]);
+		}else{
+			dragElement(0,document.getElementsByClassName('draggable')[x]);
+		}
+	}
+	document.getElementById('mode').innerHTML='MODE: Moving / Editing Fields';
+	document.getElementById('mode').style.backgroundColor='#900';
+}
+function makeNotDraggable(){
+	if(document.getElementById('fields').innerHTML.indexOf('+++ [FR]ee [ED]itor - DOUBLE-CLICK EXITS +++')!=-1){
+		document.getElementById('form_img').style.display='inline';
+		document.getElementById('fields').innerHTML=document.getElementById('fred').value.replaceAll('</text-area>','</textarea>');
+	}
+	draggables=document.getElementsByClassName('draggable');
+	for(x=0;x<draggables.length;x++){
+		document.getElementsByClassName('draggable')[x].style.cursor='initial';
+		document.getElementsByClassName('draggable')[x].checked=false;
+		document.getElementsByClassName('draggable')[x].onmousedown = null;
+	}
+	document.getElementById('mode').innerHTML='MODE: Using Form';
+	document.getElementById('mode').style.backgroundColor='#090';
+}
+
+function dragElement(type,elmnt){
+	if(type==0){
+		var pos1=0,pos2=0,pos3=0,pos4=0;
+		elmnt.onmousedown=dragMouseDown;
+		function dragMouseDown(e){e=e || window.event;e.preventDefault();pos3=e.clientX;pos4=e.clientY;document.onmouseup=closeDragElement;document.onmousemove=elementDrag;}
+		function elementDrag(e){e=e || window.event;e.preventDefault();pos1=pos3-e.clientX;pos2=pos4-e.clientY;pos3=e.clientX;pos4=e.clientY;elmnt.style.top=(elmnt.offsetTop-pos2)+'px';elmnt.style.left=(elmnt.offsetLeft-pos1)+'px';}
+		function closeDragElement(){moved_flag=false;document.onmouseup=null;document.onmousemove=null;}
+	}else{
+		elmnt.onmousedown=dragMouseDown;
+		function dragMouseDown(e){e=e || window.event;e.preventDefault();document.onmouseup=closeDragElement;document.onmousemove=elementDrag;}
+		function elementDrag(e){e=e || window.event;e.preventDefault();elmnt.style.top=(e.clientY-20+window.scrollY)+'px';elmnt.style.left=(e.clientX-20+window.scrollX)+'px';}
+		function closeDragElement(){elmnt.checked=false;moved_flag=false;document.onmouseup=null;document.onmousemove=null;}
+	}
+}
+if(location.search!='?admin'){
+	document.getElementById('edit_buttons').style.visibility='hidden';
+}
+</script></div><div style="clear:both;">&nbsp;</div><hr><div style="width:65px;float:left;"><span title="Move up" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(0,'7340318887');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAdUlEQVR42m1NuQ2AMAw8sgNjsADL0FHTeQvkLZiAlJSpEYooMD2KMgQ4QUIgcc3Z99gACFwTlFm80qCTYal0LHSzUm0o0fQGmDcVETuXiOwZUtmKb8EiQdPcJucweIFQT3KmDEvInyj7bhn3OxHXfPDTevCvXjOnKXEFcZQuAAAAAElFTkSuQmCC">&nbsp;</span><span title="Move down" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(1,'7340318887');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAZ0lEQVR42mNgYChnmHD7CgOQBlFgZjkTAxgwggVjgawC1cUgsXwVIKENkZmQBlLyHKoUCJBZaS5AKgCsohyoFGhqGpQsRxiPBpgYrNxvb9OD8wO2dWxLA7sBzDXY9t/plnVfwTEQBwBlXiHWjsWwaQAAAABJRU5ErkJggg==">&nbsp;</span></div><div style="width:45px;float:right;"><span title="REMOVE" style="background-color:#770000;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="if(confirm('DELETE?')){removeWiki('7340318887');}">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAnUlEQVR42mNkwA12AbErlH0MiK2xKWLEophYADYUZsB/ICBJNyMjI4SC8mcDcQqJLpgL0gMzwMHd3X3/jh07iNLp4eHBsHPnTkcg8wCGAXFxcQyfP39mWL9+PZj9/v17hs2bNzOEhoYy/PjxA8zGawDUb6BAwckeNWDQGwCSfPXqFcO5c+fwsnEaQG5KlALii0AsQmQ+eAvERkD8CAD5O8gRRpPKTQAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></div><div style="width:45px;float:right;"><span title="EDIT" style="background-color:#007700;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="editWiki('7340318887');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABbElEQVR42rWTO2vCUBTH/7FDhoAEbA0dBEHBRdz9DnXo4mQJwUmnDAHN0EDTJWPmOqibg9BFp3wFN10sGHETHwQE6VBLmnP7oAUfaaEHLtzD5fe759wHhz9EJpO5c8fj5xfA4n4Lx2Ixs9Vq3eq6jqfRSOcCw7UPPARr54egQqGAbreLTqeDeDwORVHQaDSgaZpJFcwjkYiUSCT2wvl8Hu12G4ZhYDAYQBAEVCoV3JRK96v12iCBL4oiPM87WHa9XofruvB9n1VCQlmWWfsnBQRPp1Nst1v0+33UajWYpgme508LCF4sFmx8wtRKsVik/LiA4OVyyeBer8dgy7LYgVL+we4X2LaNZrMJSZLgOM4XTJFMJjGbzY4LcrkchsMhm3+HQwkmkwnS6TSy2SzK5TJUVf3R2kkBLe52O6RSqb23EqqFY/EvgjnHcVI0Gg0l2Gw29CJXwfSCCc6Aq9f3z3QZykAbAtXgAz5S8gbiBb+FSaOmpAAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></div><hr style="clear:both;position:relative;top:5px;"></div><!--~--></div><!-- CONTENT PANEL END -->
+
+		<hr>
+		<div style="background-color:#cccccc; margin:5px; padding:5px; border-radius:5px;">
+			<div>
+				&nbsp;<span class="title" onclick="if(!visible1){document.getElementById('new').style.display='block';visible1=1;}else{document.getElementById('new').style.display='none';visible1=0;}" style="cursor:pointer;">[+]</span><br>
+			</div>
+			<div id="new" style="text-align: center; display: none;">
+				<input id="new_title" class="title" style="width:99%" value="[title]" onfocus="if(this.value=='[title]'){this.value='';}" onblur="if(this.value==''){this.value='[title]';}" type="text">
+				<textarea id="new_content" style="width:99%; height:200px; resize:vertical;" onfocus="if(this.value=='[content]'){this.value='';}" onblur="if(this.value==''){this.value='[content]';}">[content]</textarea><br>
+				<input style="width:99%; background-color:#000077; color:#ffffff;" value="-ADD-" onclick="addWiki(document.getElementById('new_title').value,document.getElementById('new_content').value);visible1=0;" type="button">
+				<div style="text-align:center;margin-top:5px;">
+					<div style="width:115px;text-align:center;margin:auto;">
+						<div id="dropper" style="width:100px; text-align:center; font-size:10px; padding:10px 0; border-radius:10px; border:#333333 inset 7px; background-color:#333333; color:#ffffff;">DRAG IMAGES AND OTHER FILES HERE</div>
+							<div id="results"></div>
+					</div>
+					<div style="text-align:center;margin-top:5px;">
+						<div style="clear:both;">OR: <input id="b64s" onchange="b64FileSelect(this.files[0]);" type="file"><span id="b64"></span></div>
+					</div>
+					<br style="clear:both;">
+				</div>
+				<script>
+					function b64FileSelect(selected_file){
+						var reader=new FileReader();
+						reader.readAsDataURL(selected_file);
+						document.querySelector('#b64').innerHTML='<br /><span style="color:#990000;">-working, please wait-</span>';
+						reader.onload=function(){
+							document.querySelector('#b64').innerHTML='<input type="button" value="+" onclick="document.querySelector(\'#new_content\').value+=document.querySelector(\'#b64c2\').value;" /><input type="button" value="x" onclick="document.querySelector(\'#b64s\').value=\'\';this.parentNode.innerHTML=\'\';" /><br /><textarea id="b64c2" onmouseover="this.select();" style="width:200px;height:100px;font-size:10px;">'+reader.result+'</textarea>';
+						};
+					}
+
+					/*
+					=== BASE 64 ENCODER ===
+					based on http://jpillora.com/base64-encoder/
+					*/
+					if(typeof window.FileReader === 'undefined'){document.getElementById('dropper').innerHTML='BROWSER<br />NOT<br />SUPPORTED!';}
+					var dropper = document.getElementById("dropper");
+					var results = document.getElementById("results");
+					dropper.ondragover = function(){dropper.className='hover';return false;};
+					dropper.ondragend = function(){dropper.className='';return false;};
+					dropper.ondrop = function (e){
+						e.preventDefault();
+						var files = [].slice.call(e.dataTransfer.files);
+						files.forEach(function (file){
+							var reader = new FileReader();
+							reader.onload = function(event){
+								fileLoaded(file.name, event.target.result);
+							};
+							reader.readAsDataURL(file);
+						});
+						dropper.className='';
+					return false;
+					};
+
+					function fileLoaded(filename, dataUri) {
+
+						var div = document.createElement("div");
+						div.style['width'] = '110px';
+						div.style['margin-right']='10px';
+						div.className = 'item';
+						div.style['float']='left';
+
+						var remove = document.createElement("button");
+						remove.style['float']='right';
+						remove.className = 'remove';
+						remove.innerHTML = 'x';
+						remove.onclick = function() {results.removeChild(div);};
+						div.appendChild(remove);
+
+
+						var adder = document.createElement("button");
+							adder.style['float']='right';
+							adder.className = 'adder';
+							adder.innerHTML = '+';
+							adder.onclick = function() {
+							if(document.querySelector('#new_content').value=='[content]'){document.querySelector('#new_content').value='';}
+							document.querySelector('#new_content').value+=document.querySelector('#b64c1').value;
+						};
+						div.appendChild(adder);
+
+						var name = document.createElement("div");
+						name.innerHTML = filename.substr(-20);
+						name.style['font-size']='10px';
+						div.appendChild(name);
+
+						var ta = document.createElement("textarea");
+						ta.onmouseover = function(){ta.select();};
+						ta.id='b64c1';
+						ta.style['width']='100px';
+						ta.style['height']='100px';
+						ta.style['font-size']='10px';
+
+						if(/^data:image/.test(dataUri)) {
+							var imgDiv = document.createElement("div");
+							var img = document.createElement("img");
+							img.src = dataUri;
+							img.style['max-width']='100px';
+							img.style['height-width']='100px';
+							imgDiv.appendChild(img);
+							div.appendChild(imgDiv);
+							ta.value = '<!-- IMAGE START --><img src="'+dataUri+'" border="0" style="margin:5px; max-width:100%; width:200px;" /><!-- IMAGE END -->';
+						}else{
+							ta.value = '<!-- FILE START --><a href="'+dataUri+'" target="_blank">[-link-text-or-image-]</a><!-- FILE END -->';
+						}
+
+						div.appendChild(ta);
+
+						results.appendChild(div);
+					}
+				</script>
+			</div>
+		</div>
+		<hr>
+		<div style="text-align:right;"><a href="https://www.warpsite.net/ducttapesolutions/index.html" target="_blank" style="color:#aaaaaa; font-size:10px; font-family:sans-serif;">NanoWiki - A Duct-Tape Solution</a>&nbsp;<a href="handler.php" target="_blank" style="color:#aaaaaa; font-size:10px; font-family:sans-serif;">[H]</a></div>
+		<script>
+			document.getElementById('save').setAttribute('download',this_location);document.title=document.getElementById('page_title').innerHTML;
+			document.getElementById('localstorage_updated').style.color='';document.getElementById('localstorage_updated').style.backgroundColor='';
+			if(nanowiki_localcontent[0]){document.getElementById('nanowiki_panel_autosave').checked=true;}
+			if(document.getElementById('nanowiki_panel').innerHTML==''){document.getElementById('nanowiki_panel').innerHTML=nanowiki_localcontent[1];}
+		</script>
+</body></html>
