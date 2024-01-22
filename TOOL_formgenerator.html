@@ -172,10 +172,10 @@
 	<body cz-shortcut-listen="true">
 		<span style="font-size:24px;font-weight:bold;" id="page_title" ondblclick="changeTitle();">FORM GENERATOR</span>
 		<div style="float:right; width:300px; text-align:right;">
-			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px;" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
+			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px; color: rgb(255, 255, 255); background-color: rgb(0, 153, 0);" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
 			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
-			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="TOOL_formgenerator.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
-			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">1/25/2023, 10:39:26 AM</span></div>
+			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="nanowiki_te.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">1/22/2024, 3:33:04 PM</span></div>
 		</div>
 		<div style="clear:both; display:none;" id="help">
 			WHAT IS THIS?<br>
@@ -220,25 +220,243 @@
 			<br>
 		</div>
 		<hr style="clear:both;">
-		<!-- CONTENT PANEL START --><div id="nanowiki_panel"><div id="205877794" style="border:#cccccc solid 1px; margin:5px; padding:5px; border-radius:5px;"><div class="title" id="title205877794">Build Serverless E-Mail And Request Forms</div><div id="content205877794"><script>function msg(){document.getElementById('message').style.backgroundColor='#990000';document.getElementById('message').innerHTML='COPIED!';setTimeout('document.getElementById(\'message\').style.backgroundColor=\'#009900\';document.getElementById(\'message\').innerHTML=\'-ready-\';',1000);}var fields=1;function sendByClient(sequence,template){var ids=sequence.split(',');for(x=0;x<ids.length-1;x++){template=template.replace('%7E%7E%7Efg'+ids[x]+'%7E%7E%7E',escape(document.querySelector('#fg'+ids[x]).value));}window.open('mailto:'+escape(document.querySelector('#recipient_g').value)+'?subject='+escape(document.querySelector('#subject_g').value)+'&body='+template);}function generateText(sequence,template){var ids=sequence.split(',');for(x=0;x<ids.length-1;x++){template=template.replace('%7E%7E%7Efg'+ids[x]+'%7E%7E%7E',document.querySelector('#fg'+ids[x]).value);}document.querySelector('#text_template_container').style.display='block';document.querySelector('#text_template').value='SEND TO:\n'+document.querySelector('#recipient_g').value+'\n\nWITH SUBJECT:\n'+document.querySelector('#subject_g').value+'\n\n=== COPY MESSAGE BELOW ====\n\n'+unescape(template);}function buildForm(){var html='<input type="hidden" id="recipient_g" value="'+document.querySelector('#recipient').value+'" /><input type="hidden" id="subject_g" value="'+document.querySelector('#subject').value+'" /><div style="font-family:sans-serif;font-size:12px;">';var template='';var sequence='';for(x=1;x<=fields;x++){switch(document.querySelector('#f'+x+'-x').value){case 'Textline':html+='<strong>'+document.querySelector('#f'+x+'-t').value+'</strong><br /><input type="text" id="fg'+x+'" style="width:99%;font-size:12px;" /><hr />';template+=document.querySelector('#f'+x+'-t').value.toUpperCase()+'\n~~~fg'+x+'~~~\n\n';sequence+=x+',';break;case 'Textbox':html+='<strong>'+document.querySelector('#f'+x+'-t').value+'</strong><br /><textarea id="fg'+x+'" style="width:99%;height:100px;font-family:sans-serif;font-size:12px;"></textarea><hr />';template+=document.querySelector('#f'+x+'-t').value.toUpperCase()+'\n~~~fg'+x+'~~~\n\n';sequence+=x+',';break;case 'Date':html+='<strong>'+document.querySelector('#f'+x+'-t').value+'</strong><br /><input type="date" id="fg'+x+'" style="font-size:12px;" /><hr />';template+=document.querySelector('#f'+x+'-t').value.toUpperCase()+'\n~~~fg'+x+'~~~\n\n';sequence+=x+',';break;case 'Datetime':html+='<strong>'+document.querySelector('#f'+x+'-t').value+'</strong><br /><input type="datetime-local" id="fg'+x+'" style="font-size:12px;" /><hr />';template+=document.querySelector('#f'+x+'-t').value.toUpperCase()+'\n~~~fg'+x+'~~~\n\n';sequence+=x+',';break;case 'Color':html+='<strong>'+document.querySelector('#f'+x+'-t').value+'</strong><br /><input type="color" id="fg'+x+'" /><hr />';template+=document.querySelector('#f'+x+'-t').value.toUpperCase()+'\n~~~fg'+x+'~~~\n\n';sequence+=x+',';break;case 'Checkbox':html+='<input type="checkbox" style="vertical-align:middle;margin-top:-1px;" onclick="if(this.checked){document.querySelector(\'#fg'+x+'\').value=\'-YES-\';}else{document.querySelector(\'#fg'+x+'\').value=\'-NO-\';}" /><input type="hidden" id="fg'+x+'" value="-NO-" /><strong>'+document.querySelector('#f'+x+'-t').value+'</strong><hr />';template+=document.querySelector('#f'+x+'-t').value.toUpperCase()+'\n~~~fg'+x+'~~~\n\n';sequence+=x+',';break;case 'Options':html+='<strong>'+document.querySelector('#f'+x+'-t').value+'</strong><br />';options=document.querySelector('#f'+x+'-c').value.split('\n');for(y=0;y<options.length;y++){html+='<input type="radio" name="fg'+x+'" value="'+options[y]+'" style="vertical-align:middle;margin-top:-1px;" onclick="document.querySelector(\'#fg'+x+'\').value=this.value;" />'+options[y]+'<br />';}html+='<input type="text" id="fg'+x+'" style="width:50%;margin-top:5px;font-size:12px;" /><em> - Other/Modified</em><hr />';template+=document.querySelector('#f'+x+'-t').value.toUpperCase()+'\n~~~fg'+x+'~~~\n\n';sequence+=x+',';break;case 'Dropdown':html+='<strong>'+document.querySelector('#f'+x+'-t').value+'</strong><br /><select onchange="if(this.value.length)document.querySelector(\'#fg'+x+'\').value=this.value;" style="font-size:12px;"><option value="">Please select...</option><option value="">==========</option>';options=document.querySelector('#f'+x+'-c').value.split('\n');for(y=0;y<options.length;y++){html+='<option value="'+options[y]+'">'+options[y]+'</option>';}html+='</select><br /><input type="text" id="fg'+x+'" style="width:50%;margin-top:5px;font-size:12px;" /><em> - Other/Modified</em><hr />';template+=document.querySelector('#f'+x+'-t').value.toUpperCase()+'\n~~~fg'+x+'~~~\n\n';sequence+=x+',';break;case 'Text-only':html+='<div style="margin:5px 0; width:99%; text-align:center;"><strong>'+document.querySelector('#f'+x+'-t').value+'</strong></div><hr />';template+='-------------------------\n'+document.querySelector('#f'+x+'-t').value.toUpperCase()+'\n-------------------------\n\n';break;case 'Divider':html+='<hr style="width:75%;margin:25px auto;" />';template+='\n=====================================\n\n';break;}}document.querySelector('#viewer').innerHTML=html+'</div><div style="text-align:right;"><input type="button" value="Send by E-Mail Client" onclick="sendByClient(\''+sequence+'\',\''+escape(template)+'\');" style="width:175px;" /><br/><input type="button" value="Generate E-Mail Text" onclick="generateText(\''+sequence+'\',\''+escape(template)+'\');" style="width:175px;" /><div id="text_template_container" style="display:none;text-align:center;"><br /><textarea id="text_template" style="width:99%;font-family:sans-serif;height:150px;font-size:10px;"></textarea><br /><input type="button" value="close" onclick="document.querySelector(\'#text_template_container\').style.display=\'none\';" /><div></div>';createBackup(0);document.querySelector('#generated').value='<script>function sendByClient(sequence,template){var ids=sequence.split(\',\');for(x=0;x<ids.length-1;x++){template=template.replace(\'%7E%7E%7Efg\'+ids[x]+\'%7E%7E%7E\',escape(document.querySelector(\'#fg\'+ids[x]).value));}window.open(\'mailto:\'+escape(document.querySelector(\'#recipient_g\').value)+\'?subject=\'+escape(document.querySelector(\'#subject_g\').value)+\'&body=\'+template);} function generateText(sequence,template){var ids=sequence.split(\',\');for(x=0;x<ids.length-1;x++){template=template.replace(\'%7E%7E%7Efg\'+ids[x]+\'%7E%7E%7E\',document.querySelector(\'#fg\'+ids[x]).value);}document.querySelector(\'#text_template_container\').style.display=\'block\';document.querySelector(\'#text_template\').value=\'SEND TO:\'+String.fromCharCode(10)+document.querySelector(\'#recipient_g\').value+String.fromCharCode(10)+String.fromCharCode(10)+\'WITH SUBJECT:\'+String.fromCharCode(10)+document.querySelector(\'#subject_g\').value+String.fromCharCode(10)+String.fromCharCode(10)+\'=== COPY MESSAGE BELOW ====\'+String.fromCharCode(10)+String.fromCharCode(10)+unescape(template);}'+String.fromCharCode(60)+'/script>'+document.querySelector('#viewer').innerHTML;}function addField(){createBackup(0);fields++;document.querySelector('#fields').innerHTML+='<tr><td style="vertical-align:top;border-top:#000 solid 1px;"><strong>Field-Label:</strong><br /><input type="text" id="f'+fields+'-t" style="width:99%;" oninput="buildForm();" /><br /><strong>Field-Type:</strong><br /><input type="radio" name="f'+fields+'-i" id="f'+fields+'-i1" value="Textline" onclick="document.querySelector(\'#f'+fields+'-x\').value=this.value;buildForm();" />Text - Single Line<br /><input type="radio" name="f'+fields+'-i" id="f'+fields+'-i2" value="Textbox" onclick="document.querySelector(\'#f'+fields+'-x\').value=this.value;buildForm();" />Text - Multi-Line<br /><input type="radio" name="f'+fields+'-i" id="f'+fields+'-i3" value="Date" onclick="document.querySelector(\'#f'+fields+'-x\').value=this.value;buildForm();" />Date<br /><input type="radio" name="f'+fields+'-i" id="f'+fields+'-i4" value="Datetime" onclick="document.querySelector(\'#f'+fields+'-x\').value=this.value;buildForm();" />Date-Time<br /><input type="radio" name="f'+fields+'-i" id="f'+fields+'-i5" value="Color" onclick="document.querySelector(\'#f'+fields+'-x\').value=this.value;buildForm();" />Color<br /><input type="radio" name="f'+fields+'-i" id="f'+fields+'-i6" value="Checkbox" onclick="document.querySelector(\'#f'+fields+'-x\').value=this.value;buildForm();" />Checkbox<br /><input type="radio" name="f'+fields+'-i" id="f'+fields+'-i7" value="Options" onclick="document.querySelector(\'#f'+fields+'-x\').value=this.value;buildForm();" />Options*<br /><input type="radio" name="f'+fields+'-i" id="f'+fields+'-i8" value="Dropdown" onclick="document.querySelector(\'#f'+fields+'-x\').value=this.value;buildForm();" />Dropdown*<br /><input type="radio" name="f'+fields+'-i" id="f'+fields+'-i9" value="Text-only" onclick="document.querySelector(\'#f'+fields+'-x\').value=this.value;buildForm();" />Text-only<br /><input type="radio" name="f'+fields+'-i" id="f'+fields+'-i10" value="Divider" onclick="document.querySelector(\'#f'+fields+'-x\').value=this.value;buildForm();" />Divider<br /><input type="hidden" id="f'+fields+'-x" /></td><td style="vertical-align:top;padding-left:10px;padding-bottom:3px;border-top:#000 solid 1px;"><strong>*Options & Dropdown Choices</strong><br /><textarea id="f'+fields+'-c" oninput="buildForm();" style="width:99%;font-family:sans-serif;height:150px;font-size:10px;margin-bottom:3px;"></textarea><div style="text-align:right;"><span title="Move down" style="background-color:#000077;color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="fieldDown('+fields+');">-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAZ0lEQVR42mNgYChnmHD7CgOQBlFgZjkTAxgwggVjgawC1cUgsXwVIKENkZmQBlLyHKoUCJBZaS5AKgCsohyoFGhqGpQsRxiPBpgYrNxvb9OD8wO2dWxLA7sBzDXY9t/plnVfwTEQBwBlXiHWjsWwaQAAAABJRU5ErkJggg==">-</span><span title="Move up" style="background-color:#000077;color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="fieldUp('+fields+');">-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAdUlEQVR42m1NuQ2AMAw8sgNjsADL0FHTeQvkLZiAlJSpEYooMD2KMgQ4QUIgcc3Z99gACFwTlFm80qCTYal0LHSzUm0o0fQGmDcVETuXiOwZUtmKb8EiQdPcJucweIFQT3KmDEvInyj7bhn3OxHXfPDTevCvXjOnKXEFcZQuAAAAAElFTkSuQmCC">-</span></div></td></tr>';restoreContent();}function removeField(){if(fields>1){createBackup(-1);var all=document.querySelector('#fields').innerHTML.split('</tr>');all.splice(all.length-2,1);document.querySelector('#fields').innerHTML=all.join('</tr>');restoreContent();fields--;createBackup(0);buildForm();}}function createBackup(change){document.querySelector('#backup').value=document.querySelector('#fields').innerHTML+'~|~';document.querySelector('#backup').value+=document.querySelector('#recipient').value+'~|~';document.querySelector('#backup').value+=document.querySelector('#subject').value+'~|~';for(x=1;x<=fields+change;x++){document.querySelector('#backup').value+=document.querySelector('#f'+x+'-t').value+'|||';document.querySelector('#backup').value+=document.querySelector('#f'+x+'-x').value+'|||';document.querySelector('#backup').value+=document.querySelector('#f'+x+'-c').value+'|||';}}function restoreForm(){document.querySelector('#fields').innerHTML=document.querySelector('#backup').value.split('~|~')[0];restoreContent();fields=Math.floor(document.querySelector('#backup').value.split('~|~')[3].split('|||').length/3);buildForm();}function restoreContent(){document.querySelector('#recipient').value=document.querySelector('#backup').value.split('~|~')[1];document.querySelector('#subject').value=document.querySelector('#backup').value.split('~|~')[2];var content=document.querySelector('#backup').value.split('~|~')[3];var cb=content.split('|||');var index=0;var typelist=['Textline','Textbox','Checkbox','Options','Dropdown','Text-only','Divider'];var content_length=Math.floor((cb.length-1)/3);for(x=1;x<=content_length;x++){document.querySelector('#f'+x+'-t').value=cb[index];index++;document.querySelector('#f'+x+'-x').value=cb[index];if(typelist.indexOf(cb[index])>-1){document.querySelector('#f'+x+'-i'+(typelist.indexOf(cb[index])+1)).checked=true;}index++;document.querySelector('#f'+x+'-c').value=cb[index];index++;}}function fieldUp(field_index){if(field_index>1){var content=document.querySelector('#backup').value.split('~|~');var cb=content[3].split('|||');var mover=cb.splice((field_index-1)*3,3);cb.splice((field_index-2)*3,0,mover[0],mover[1],mover[2]);content[3]=cb.join('|||');document.querySelector('#backup').value=content.join('~|~');restoreForm();}}function fieldDown(field_index){var content=document.querySelector('#backup').value.split('~|~');var cb=content[3].split('|||');if(field_index<(cb.length/3)-1){var mover=cb.splice((field_index-1)*3,3);cb.splice((field_index)*3,0,mover[0],mover[1],mover[2]);content[3]=cb.join('|||');document.querySelector('#backup').value=content.join('~|~');restoreForm();}}</script><div style="width:350px;font-family:sans-serif;font-size:12px;float:left;"><strong>FORM RECIPIENT:</strong><br>
-<input type="text" id="recipient" value="" oninput="buildForm();" onmouseover="this.select();" style="width:97%; font-size:11px;"><br>
-<strong>FORM SUBMSSION SUBJECT:</strong><br>
-<input type="text" id="subject" value="" oninput="buildForm();" onmouseover="this.select();" style="width:97%; font-size:11px;"><hr style="width:97%;"><strong>FIELDS</strong>   <input type="button" value="[+]" onclick="addField();" title="add field to form bottom"><input type="button" value="[-]" onclick="if(confirm('Remove last/bottom form field?')){removeField();}" title="remove field from form bottom"><br>
-<div style="height:500px;overflow:auto;"><table style="width:99%;font-size:12px;"><tbody id="fields"><tr><td style="vertical-align:top;" colspan="2"></td></tr><tr><td style="vertical-align:top;border-top:#000 solid 1px;"><strong>Field-Label:</strong>
-<input type="text" id="f1-t" style="width:99%;" oninput="buildForm();"><br>
-<strong>Field-Type:</strong><br>
-<input type="radio" name="f1-i" id="f1-i1" value="Textline" onclick="document.querySelector('#f1-x').value=this.value;buildForm();">Textline<br>
-<input type="radio" name="f1-i" id="f1-i2" value="Textbox" onclick="document.querySelector('#f1-x').value=this.value;buildForm();">Textbox<br>
-<input type="radio" name="f1-i" id="f1-i3" value="Date" onclick="document.querySelector('#f1-x').value=this.value;buildForm();">Date<br>
-<input type="radio" name="f1-i" id="f1-i4" value="Datetime" onclick="document.querySelector('#f1-x').value=this.value;buildForm();">Datetime<br>
-<input type="radio" name="f1-i" id="f1-i5" value="Color" onclick="document.querySelector('#f1-x').value=this.value;buildForm();">Color<br>
-<input type="radio" name="f1-i" id="f1-i6" value="Checkbox" onclick="document.querySelector('#f1-x').value=this.value;buildForm();">Checkbox<br>
-<input type="radio" name="f1-i" id="f1-i7" value="Options" onclick="document.querySelector('#f1-x').value=this.value;buildForm();">Options*<br>
-<input type="radio" name="f1-i" id="f1-i8" value="Dropdown" onclick="document.querySelector('#f1-x').value=this.value;buildForm();">Dropdown*<br>
-<input type="radio" name="f1-i" id="f1-i9" value="Text-only" onclick="document.querySelector('#f1-x').value=this.value;buildForm();">Text-only<br>
-<input type="radio" name="f1-i" id="f1-i10" value="Divider" onclick="document.querySelector('#f1-x').value=this.value;buildForm();">Divider<br>
-<input type="hidden" id="f1-x"></td><td style="vertical-align:top;padding-left:10px;padding-bottom:3px;border-top:#000 solid 1px;"><strong>*Options &amp; Dropdown Choices</strong><div style="text-align:right;"><textarea id="f1-c" oninput="buildForm();" style="width:99%;font-family:sans-serif;height:150px;font-size:10px;margin-bottom:3px;"></textarea><span title="Move down" style="background-color:#000077;color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="fieldDown(1);">-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAZ0lEQVR42mNgYChnmHD7CgOQBlFgZjkTAxgwggVjgawC1cUgsXwVIKENkZmQBlLyHKoUCJBZaS5AKgCsohyoFGhqGpQsRxiPBpgYrNxvb9OD8wO2dWxLA7sBzDXY9t/plnVfwTEQBwBlXiHWjsWwaQAAAABJRU5ErkJggg==">-</span><span title="Move up" style="background-color:#000077;color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="fieldUp(1);">-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAdUlEQVR42m1NuQ2AMAw8sgNjsADL0FHTeQvkLZiAlJSpEYooMD2KMgQ4QUIgcc3Z99gACFwTlFm80qCTYal0LHSzUm0o0fQGmDcVETuXiOwZUtmKb8EiQdPcJucweIFQT3KmDEvInyj7bhn3OxHXfPDTevCvXjOnKXEFcZQuAAAAAElFTkSuQmCC">-</span></div></td></tr></tbody></table></div></div><div style="float:left;width:500px;font-family:sans-serif;font-size:12px;margin-left:5px;"><strong>PREVIEW</strong><div style="border:#000 solid 1px;padding:15px;min-height:500px;background-color:#ccc;" id="viewer"></div></div><div style="font-family:sans-serif;font-size:12px;width:200px;margin-left:5px;float:left;font-weight:bold;"><br><div id="message" style="text-align: center; background-color: rgb(0, 153, 0); color: rgb(255, 255, 255); border-radius: 25px; padding: 5px; margin-bottom: 5px;">-ready-</div><hr>BACKUP - <input type="button" value="C" title="copy generated form backup" onclick="document.getElementById('generated').select();document.execCommand('copy');msg();"><input onclick="document.getElementById('backup').select();document.execCommand('copy');msg();document.location.href='mailto:target-email-address@service.com?subject='+escape('Form Backup')+String.fromCharCode(38)+'body=NOTES%20OR%20INSTRUCTIONS%20(if%20applicable)%3A%0A%0A%0A%0A-----------------------------------------------------%0A%5BPASTE%20HERE%5D';" title="Send Backup by Email" type="button" value="@"><textarea id="backup" oninput="restoreForm();" style="width:99%;height:150px;font-family:sans-serif;font-size:7px;color:#ccc;" onmouseover="this.select();"></textarea><hr>GENERATED FORM - <input type="button" value="C" title="copy generated form code for posting" onclick="document.getElementById('generated').select();document.execCommand('copy');msg();"><input onclick="document.getElementById('generated').select();document.execCommand('copy');msg();document.location.href='mailto:target-email-address@service.com?subject='+escape('Form Posting')+String.fromCharCode(38)+'body=NOTES%20OR%20INSTRUCTIONS%20(if%20applicable)%3A%0A%0A%0A%0A-----------------------------------------------------%0A%5BPASTE%20HERE%5D';" title="Send Posting Request by Email" type="button" value="@">
-<textarea id="generated" style="width:99%;height:150px;font-family:sans-serif;font-size:7px;color:#090;"></textarea></div><script>if(document.querySelector('#subject').value.indexOf('FORM SUBMISSION FROM ')==-1){document.querySelector('#subject').value='FORM SUBMISSION FROM '+window.location.href;}if(document.querySelector('#recipient').value.indexOf('YourAddress@YourEmailService.com')==-1){document.querySelector('#recipient').value='YourAddress@YourEmailService.com';}</script></div><div style="clear:both;">&nbsp;</div><hr><div style="width:65px;float:left;"><span title="Move up" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(0,'205877794');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAdUlEQVR42m1NuQ2AMAw8sgNjsADL0FHTeQvkLZiAlJSpEYooMD2KMgQ4QUIgcc3Z99gACFwTlFm80qCTYal0LHSzUm0o0fQGmDcVETuXiOwZUtmKb8EiQdPcJucweIFQT3KmDEvInyj7bhn3OxHXfPDTevCvXjOnKXEFcZQuAAAAAElFTkSuQmCC">&nbsp;</span><span title="Move down" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(1,'205877794');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAZ0lEQVR42mNgYChnmHD7CgOQBlFgZjkTAxgwggVjgawC1cUgsXwVIKENkZmQBlLyHKoUCJBZaS5AKgCsohyoFGhqGpQsRxiPBpgYrNxvb9OD8wO2dWxLA7sBzDXY9t/plnVfwTEQBwBlXiHWjsWwaQAAAABJRU5ErkJggg==">&nbsp;</span></div><div style="width:45px;float:right;"><span title="REMOVE" style="background-color:#770000;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="if(confirm('DELETE?')){removeWiki('205877794');}">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAnUlEQVR42mNkwA12AbErlH0MiK2xKWLEophYADYUZsB/ICBJNyMjI4SC8mcDcQqJLpgL0gMzwMHd3X3/jh07iNLp4eHBsHPnTkcg8wCGAXFxcQyfP39mWL9+PZj9/v17hs2bNzOEhoYy/PjxA8zGawDUb6BAwckeNWDQGwCSfPXqFcO5c+fwsnEaQG5KlALii0AsQmQ+eAvERkD8CAD5O8gRRpPKTQAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></div><div style="width:45px;float:right;"><span title="EDIT" style="background-color:#007700;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="editWiki('205877794');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABbElEQVR42rWTO2vCUBTH/7FDhoAEbA0dBEHBRdz9DnXo4mQJwUmnDAHN0EDTJWPmOqibg9BFp3wFN10sGHETHwQE6VBLmnP7oAUfaaEHLtzD5fe759wHhz9EJpO5c8fj5xfA4n4Lx2Ixs9Vq3eq6jqfRSOcCw7UPPARr54egQqGAbreLTqeDeDwORVHQaDSgaZpJFcwjkYiUSCT2wvl8Hu12G4ZhYDAYQBAEVCoV3JRK96v12iCBL4oiPM87WHa9XofruvB9n1VCQlmWWfsnBQRPp1Nst1v0+33UajWYpgme508LCF4sFmx8wtRKsVik/LiA4OVyyeBer8dgy7LYgVL+we4X2LaNZrMJSZLgOM4XTJFMJjGbzY4LcrkchsMhm3+HQwkmkwnS6TSy2SzK5TJUVf3R2kkBLe52O6RSqb23EqqFY/EvgjnHcVI0Gg0l2Gw29CJXwfSCCc6Aq9f3z3QZykAbAtXgAz5S8gbiBb+FSaOmpAAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></div><hr style="clear:both;position:relative;top:5px;"></div><!--~--></div><!-- CONTENT PANEL END -->
+		<!-- CONTENT PANEL START --><div id="nanowiki_panel"><div id="1114057241" style="border:#cccccc solid 1px; margin:5px; padding:5px; border-radius:5px;"><div class="title" id="title1114057241">Build Serverless E-Mail And Request Forms</div><div id="content1114057241"><script>
+function msg(){
+	document.getElementById('message').style.backgroundColor='#990000';
+	document.getElementById('message').innerHTML='COPIED!';
+	setTimeout('document.getElementById(\'message\').style.backgroundColor=\'#009900\';document.getElementById(\'message\').innerHTML=\'-ready-\';',1000);
+}
+
+var fields=1;
+
+function sendByClient(sequence,template){
+	var ids=sequence.split(',');
+	for(x=0;x<ids.length-1;x++){template=template.replace('%7E%7E%7Efg'+ids[x]+'%7E%7E%7E',escape(document.querySelector('#fg'+ids[x]).value));}
+	window.open('mailto:'+escape(document.querySelector('#recipient_g').value)+'?subject='+escape(document.querySelector('#subject_g').value)+'&body='+template);
+}
+
+function generateText(sequence,template){
+	var ids=sequence.split(',');
+	for(x=0;x<ids.length-1;x++){template=template.replace('%7E%7E%7Efg'+ids[x]+'%7E%7E%7E',document.querySelector('#fg'+ids[x]).value);}
+	document.querySelector('#text_template_container').style.display='block';
+	document.querySelector('#text_template').value='SEND TO:\n'+document.querySelector('#recipient_g').value+'\n\nWITH SUBJECT:\n'+document.querySelector('#subject_g').value+'\n\n=== COPY MESSAGE BELOW ====\n\n'+unescape(template);
+}
+
+function buildForm(){
+	var html='<input type="hidden" id="recipient_g" value="'+document.querySelector('#recipient').value+'" /><input type="hidden" id="subject_g" value="'+document.querySelector('#subject').value+'" /><div style="font-family:sans-serif;font-size:12px;">';
+	var template='';
+	var sequence='';
+	for(x=1;x<=fields;x++){
+		switch(document.querySelector('#f'+x+'-x').value){
+			case 'Textline':
+				html+='<strong>'+document.querySelector('#f'+x+'-t').value+'</strong><br /><input type="text" id="fg'+x+'" style="width:99%;font-size:12px;" /><hr />';
+				template+=document.querySelector('#f'+x+'-t').value.toUpperCase()+'\n~~~fg'+x+'~~~\n\n';
+				sequence+=x+',';
+			break;
+			case 'Textbox':
+				html+='<strong>'+document.querySelector('#f'+x+'-t').value+'</strong><br /><textarea id="fg'+x+'" style="width:99%;height:100px;font-family:sans-serif;font-size:12px;"></textarea><hr />';
+				template+=document.querySelector('#f'+x+'-t').value.toUpperCase()+'\n~~~fg'+x+'~~~\n\n';
+				sequence+=x+',';
+			break;
+			case 'Date':
+				html+='<strong>'+document.querySelector('#f'+x+'-t').value+'</strong><br /><input type="date" id="fg'+x+'" style="font-size:12px;" /><hr />';
+				template+=document.querySelector('#f'+x+'-t').value.toUpperCase()+'\n~~~fg'+x+'~~~\n\n';
+				sequence+=x+',';
+			break;
+			case 'Datetime':
+				html+='<strong>'+document.querySelector('#f'+x+'-t').value+'</strong><br /><input type="datetime-local" id="fg'+x+'" style="font-size:12px;" /><hr />';
+				template+=document.querySelector('#f'+x+'-t').value.toUpperCase()+'\n~~~fg'+x+'~~~\n\n';
+				sequence+=x+',';
+			break;
+				case 'Color':
+				html+='<strong>'+document.querySelector('#f'+x+'-t').value+'</strong><br /><input type="color" id="fg'+x+'" /><hr />';
+				template+=document.querySelector('#f'+x+'-t').value.toUpperCase()+'\n~~~fg'+x+'~~~\n\n';
+				sequence+=x+',';
+			break;
+			case 'Checkbox':
+				html+='<input type="checkbox" style="vertical-align:middle;margin-top:-1px;" onclick="if(this.checked){document.querySelector(\'#fg'+x+'\').value=\'-YES-\';}else{	document.querySelector(\'#fg'+x+'\').value=\'-NO-\';}" /><input type="hidden" id="fg'+x+'" value="-NO-" /><strong>'+document.querySelector('#f'+x+'-t').value+'</strong><hr />';
+				template+=document.querySelector('#f'+x+'-t').value.toUpperCase()+'\n~~~fg'+x+'~~~\n\n';
+				sequence+=x+',';
+			break;
+			case 'Options':
+				html+='<strong>'+document.querySelector('#f'+x+'-t').value+'</strong><br />';
+				options=document.querySelector('#f'+x+'-c').value.split('\n');
+				for(y=0;y<options.length;y++){
+					html+='<input type="radio" name="fg'+x+'" value="'+options[y]+'" style="vertical-align:middle;margin-top:-1px;" onclick="document.querySelector(\'#fg'+x+'\').value=this.value;" />'+options[y]+'<br />';
+				}
+				html+='<input type="text" id="fg'+x+'" style="width:50%;margin-top:5px;font-size:12px;" /><em> - Other/Modified</em><hr />';
+				template+=document.querySelector('#f'+x+'-t').value.toUpperCase()+'\n~~~fg'+x+'~~~\n\n';
+				sequence+=x+',';
+			break;
+			case 'Dropdown':
+				html+='<strong>'+document.querySelector('#f'+x+'-t').value+'</strong><br /><select onchange="if(this.value.length)document.querySelector(\'#fg'+x+'\').value=this.value;" style="font-size:12px;"><option value="">Please select...</option><option value="">==========</option>';
+				options=document.querySelector('#f'+x+'-c').value.split('\n');
+				for(y=0;y<options.length;y++){html+='<option value="'+options[y]+'">'+options[y]+'</option>';}
+				html+='</select><br /><input type="text" id="fg'+x+'" style="width:50%;margin-top:5px;font-size:12px;" /><em> - Other/Modified</em><hr />';
+				template+=document.querySelector('#f'+x+'-t').value.toUpperCase()+'\n~~~fg'+x+'~~~\n\n';
+				sequence+=x+',';
+			break;
+			case 'Text-only':html+='<div style="margin:5px 0;width:99%;text-align:center;"><strong>'+document.querySelector('#f'+x+'-t').value+'</strong></div><hr />';
+				template+='-------------------------\n'+document.querySelector('#f'+x+'-t').value.toUpperCase()+'\n-------------------------\n\n';
+				break;
+				case 'Divider':html+='<hr style="width:75%;margin:25px auto;" />';
+				template+='\n=====================================\n\n';
+			break;
+		}
+	}
+	document.querySelector('#viewer').innerHTML=html+'</div><div style="text-align:right;"><input type="button" value="Send by E-Mail Client" onclick="sendByClient(\''+sequence+'\',\''+escape(template)+'\');" style="width:175px;" /><br/><input type="button" value="Generate E-Mail Text" onclick="generateText(\''+sequence+'\',\''+escape(template)+'\');" style="width:175px;" /><div id="text_template_container" style="display:none;text-align:center;"><br /><textarea id="text_template" style="width:99%;font-family:sans-serif;height:150px;font-size:10px;"></textarea><br /><input type="button" value="close" onclick="document.querySelector(\'#text_template_container\').style.display=\'none\';" /><div></div>';
+	createBackup(0);
+
+	document.querySelector('#generated').value='<script>function sendByClient(sequence,template){var ids=sequence.split(\',\');for(x=0;x<ids.length-1;x++){template=template.replace(\'%7E%7E%7Efg\'+ids[x]+\'%7E%7E%7E\',escape(document.querySelector(\'#fg\'+ids[x]).value));}window.open(\'mailto:\'+escape(document.querySelector(\'#recipient_g\').value)+\'?subject=\'+escape(document.querySelector(\'#subject_g\').value)+\'&body=\'+template);} function generateText(sequence,template){var ids=sequence.split(\',\');for(x=0;x<ids.length-1;x++){template=template.replace(\'%7E%7E%7Efg\'+ids[x]+\'%7E%7E%7E\',document.querySelector(\'#fg\'+ids[x]).value);}document.querySelector(\'#text_template_container\').style.display=\'block\';document.querySelector(\'#text_template\').value=\'SEND TO:\'+String.fromCharCode(10)+document.querySelector(\'#recipient_g\').value+String.fromCharCode(10)+String.fromCharCode(10)+\'WITH SUBJECT:\'+String.fromCharCode(10)+document.querySelector(\'#subject_g\').value+String.fromCharCode(10)+String.fromCharCode(10)+\'=== COPY MESSAGE BELOW ====\'+String.fromCharCode(10)+String.fromCharCode(10)+unescape(template);}'+String.fromCharCode(60)+'/script>'+document.querySelector('#viewer').innerHTML;
+
+}
+
+function addField(){
+	createBackup(0);
+	fields++;
+	document.querySelector('#fields').innerHTML+='<tr><td style="vertical-align:top;border-top:#000 solid 1px;"><strong>Field-Label:</strong><br /><input type="text" id="f'+fields+'-t" style="width:99%;" oninput="buildForm();" /><br /><strong>Field-Type:</strong><br /><input type="radio" name="f'+fields+'-i" id="f'+fields+'-i1" value="Textline" onclick="document.querySelector(\'#f'+fields+'-x\').value=this.value;buildForm();" />Text - Single Line<br /><input type="radio" name="f'+fields+'-i" id="f'+fields+'-i2" value="Textbox" onclick="document.querySelector(\'#f'+fields+'-x\').value=this.value;buildForm();" />Text - Multi-Line<br /><input type="radio" name="f'+fields+'-i" id="f'+fields+'-i3" value="Date" onclick="document.querySelector(\'#f'+fields+'-x\').value=this.value;buildForm();" />Date<br /><input type="radio" name="f'+fields+'-i" id="f'+fields+'-i4" value="Datetime" onclick="document.querySelector(\'#f'+fields+'-x\').value=this.value;buildForm();" />Date-Time<br /><input type="radio" name="f'+fields+'-i" id="f'+fields+'-i5" value="Color" onclick="document.querySelector(\'#f'+fields+'-x\').value=this.value;buildForm();" />Color<br /><input type="radio" name="f'+fields+'-i" id="f'+fields+'-i6" value="Checkbox" onclick="document.querySelector(\'#f'+fields+'-x\').value=this.value;buildForm();" />Checkbox<br /><input type="radio" name="f'+fields+'-i" id="f'+fields+'-i7" value="Options" onclick="document.querySelector(\'#f'+fields+'-x\').value=this.value;buildForm();" />Options*<br /><input type="radio" name="f'+fields+'-i" id="f'+fields+'-i8" value="Dropdown" onclick="document.querySelector(\'#f'+fields+'-x\').value=this.value;buildForm();" />Dropdown*<br /><input type="radio" name="f'+fields+'-i" id="f'+fields+'-i9" value="Text-only" onclick="document.querySelector(\'#f'+fields+'-x\').value=this.value;buildForm();" />Text-only<br /><input type="radio" name="f'+fields+'-i" id="f'+fields+'-i10" value="Divider" onclick="document.querySelector(\'#f'+fields+'-x\').value=this.value;buildForm();" />Divider<br /><input type="hidden" id="f'+fields+'-x" /></td><td style="vertical-align:top;padding-left:10px;padding-bottom:3px;border-top:#000 solid 1px;"><strong>*Options & Dropdown Choices</strong><br /><textarea id="f'+fields+'-c" oninput="buildForm();" style="width:99%;font-family:sans-serif;height:150px;font-size:10px;margin-bottom:3px;"></textarea><div style="text-align:right;"><span title="Move down" style="background-color:#000077;color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="fieldDown('+fields+');">-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAZ0lEQVR42mNgYChnmHD7CgOQBlFgZjkTAxgwggVjgawC1cUgsXwVIKENkZmQBlLyHKoUCJBZaS5AKgCsohyoFGhqGpQsRxiPBpgYrNxvb9OD8wO2dWxLA7sBzDXY9t/plnVfwTEQBwBlXiHWjsWwaQAAAABJRU5ErkJggg==">-</span><span title="Move up" style="background-color:#000077;color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="fieldUp('+fields+');">-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAdUlEQVR42m1NuQ2AMAw8sgNjsADL0FHTeQvkLZiAlJSpEYooMD2KMgQ4QUIgcc3Z99gACFwTlFm80qCTYal0LHSzUm0o0fQGmDcVETuXiOwZUtmKb8EiQdPcJucweIFQT3KmDEvInyj7bhn3OxHXfPDTevCvXjOnKXEFcZQuAAAAAElFTkSuQmCC">-</span></div></td></tr>';
+	restoreContent();
+}
+
+function removeField(){
+	if(fields>1){
+		createBackup(-1);
+		var all=document.querySelector('#fields').innerHTML.split('</tr>');
+		all.splice(all.length-2,1);
+		document.querySelector('#fields').innerHTML=all.join('</tr>');
+		restoreContent();
+		fields--;
+		createBackup(0);
+		buildForm();
+	}
+}
+
+function createBackup(change){
+	document.querySelector('#backup').value=document.querySelector('#fields').innerHTML+'~|~';
+	document.querySelector('#backup').value+=document.querySelector('#recipient').value+'~|~';
+	document.querySelector('#backup').value+=document.querySelector('#subject').value+'~|~';
+	for(x=1;x<=fields+change;x++){
+		document.querySelector('#backup').value+=document.querySelector('#f'+x+'-t').value+'|||';
+		document.querySelector('#backup').value+=document.querySelector('#f'+x+'-x').value+'|||';
+		document.querySelector('#backup').value+=document.querySelector('#f'+x+'-c').value+'|||';
+	}
+}
+
+function restoreForm(){
+	document.querySelector('#fields').innerHTML=document.querySelector('#backup').value.split('~|~')[0];
+	restoreContent();
+	fields=Math.floor(document.querySelector('#backup').value.split('~|~')[3].split('|||').length/3);
+	buildForm();
+}
+
+function restoreContent(){
+	document.querySelector('#recipient').value=document.querySelector('#backup').value.split('~|~')[1];
+	document.querySelector('#subject').value=document.querySelector('#backup').value.split('~|~')[2];
+	var content=document.querySelector('#backup').value.split('~|~')[3];
+	var cb=content.split('|||');
+	var index=0;
+	var typelist=['Textline','Textbox','Date','Datetime','Color','Checkbox','Options','Dropdown','Text-only','Divider'];
+	var content_length=Math.floor((cb.length-1)/3);
+	for(x=1;x<=content_length;x++){
+		document.querySelector('#f'+x+'-t').value=cb[index];
+		index++;
+		document.querySelector('#f'+x+'-x').value=cb[index];
+		if(typelist.indexOf(cb[index])>-1){document.querySelector('#f'+x+'-i'+(typelist.indexOf(cb[index])+1)).checked=true;}
+		index++;
+		document.querySelector('#f'+x+'-c').value=cb[index];
+		index++;
+	}
+}
+
+function fieldUp(field_index){
+	if(field_index>1){
+		var content=document.querySelector('#backup').value.split('~|~');
+		var cb=content[3].split('|||');
+		var mover=cb.splice((field_index-1)*3,3);
+		cb.splice((field_index-2)*3,0,mover[0],mover[1],mover[2]);
+		content[3]=cb.join('|||');
+		document.querySelector('#backup').value=content.join('~|~');
+		restoreForm();
+	}
+}
+
+function fieldDown(field_index){
+	var content=document.querySelector('#backup').value.split('~|~');
+	var cb=content[3].split('|||');
+	if(field_index<(cb.length/3)-1){
+		var mover=cb.splice((field_index-1)*3,3);
+		cb.splice((field_index)*3,0,mover[0],mover[1],mover[2]);
+		content[3]=cb.join('|||');
+		document.querySelector('#backup').value=content.join('~|~');
+		restoreForm();
+	}
+}
+</script>
+<div style="width:350px;font-family:sans-serif;font-size:12px;float:left;"><strong>FORM RECIPIENT:</strong>
+	<br>
+	<input id="recipient" oninput="buildForm();" onmouseover="this.select();" style="width:97%;font-size:11px;" type="text" value=""><br>
+	<strong>FORM SUBMSSION SUBJECT:</strong><br>
+	<input id="subject" oninput="buildForm();" onmouseover="this.select();" style="width:97%;font-size:11px;" type="text" value="">
+	<hr style="width:97%;"> <strong>FIELDS</strong> <input onclick="addField();" title="add field to form bottom" type="button" value="[+]">
+	<input onclick="if(confirm('Remove last/bottom form field?')){removeField();}" title="remove field from form bottom" type="button" value="[-]">
+	<div style="height:500px;overflow:auto;">
+		<table style="width:99%;font-size:12px;">
+			<tbody id="fields">
+				<tr>
+					<td colspan="2" style="vertical-align:top;">
+						&nbsp;
+					</td>
+				</tr>
+				<tr>
+					<td style="vertical-align:top;border-top:#000 solid 1px;">
+						<strong>Field-Label:</strong> <input id="f1-t" oninput="buildForm();" style="width:99%;" type="text"><br>
+						<strong>Field-Type:</strong><br>
+						<input id="f1-i1" name="f1-i" onclick="document.querySelector('#f1-x').value=this.value;buildForm();" type="radio" value="Textline">Textline<br>
+						<input id="f1-i2" name="f1-i" onclick="document.querySelector('#f1-x').value=this.value;buildForm();" type="radio" value="Textbox">Textbox<br>
+						<input id="f1-i3" name="f1-i" onclick="document.querySelector('#f1-x').value=this.value;buildForm();" type="radio" value="Date">Date<br>
+						<input id="f1-i4" name="f1-i" onclick="document.querySelector('#f1-x').value=this.value;buildForm();" type="radio" value="Datetime">Datetime<br>
+						<input id="f1-i5" name="f1-i" onclick="document.querySelector('#f1-x').value=this.value;buildForm();" type="radio" value="Color">Color<br>
+						<input id="f1-i6" name="f1-i" onclick="document.querySelector('#f1-x').value=this.value;buildForm();" type="radio" value="Checkbox">Checkbox<br>
+						<input id="f1-i7" name="f1-i" onclick="document.querySelector('#f1-x').value=this.value;buildForm();" type="radio" value="Options">Options*<br>
+						<input id="f1-i8" name="f1-i" onclick="document.querySelector('#f1-x').value=this.value;buildForm();" type="radio" value="Dropdown">Dropdown*<br>
+						<input id="f1-i9" name="f1-i" onclick="document.querySelector('#f1-x').value=this.value;buildForm();" type="radio" value="Text-only">Text-only<br>
+						<input id="f1-i10" name="f1-i" onclick="document.querySelector('#f1-x').value=this.value;buildForm();" type="radio" value="Divider">Divider<br>
+						<input id="f1-x" type="hidden">
+					</td>
+					<td style="vertical-align:top;padding-left:10px;padding-bottom:3px;border-top:#000 solid 1px;"><strong>*Options &amp; Dropdown Choices</strong>
+						<div style="text-align:right;">
+							<textarea id="f1-c" oninput="buildForm();" style="width:99%;font-family:sans-serif;height:150px;font-size:10px;margin-bottom:3px;"></textarea>
+							<span onclick="fieldDown(1);" style="background-color:#000077;color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" title="Move down">
+								-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAZ0lEQVR42mNgYChnmHD7CgOQBlFgZjkTAxgwggVjgawC1cUgsXwVIKENkZmQBlLyHKoUCJBZaS5AKgCsohyoFGhqGpQsRxiPBpgYrNxvb9OD8wO2dWxLA7sBzDXY9t/plnVfwTEQBwBlXiHWjsWwaQAAAABJRU5ErkJggg==">-
+							</span>
+							<span onclick="fieldUp(1);" style="background-color:#000077;color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" title="Move up">
+								-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAdUlEQVR42m1NuQ2AMAw8sgNjsADL0FHTeQvkLZiAlJSpEYooMD2KMgQ4QUIgcc3Z99gACFwTlFm80qCTYal0LHSzUm0o0fQGmDcVETuXiOwZUtmKb8EiQdPcJucweIFQT3KmDEvInyj7bhn3OxHXfPDTevCvXjOnKXEFcZQuAAAAAElFTkSuQmCC">-
+							</span>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div style="float:left;width:500px;font-family:sans-serif;font-size:12px;margin-left:5px;">
+	<strong>PREVIEW</strong>
+	<div id="viewer" style="border:#000 solid 1px;padding:15px;min-height:500px;background-color:#ccc;">&nbsp;</div>
+</div>
+<div style="font-family:sans-serif;font-size:12px;width:200px;margin-left:5px;float:left;font-weight:bold;">
+	&nbsp;
+	<div id="message" style="text-align: center;background-color: rgb(0, 153, 0);color: rgb(255, 255, 255);border-radius: 25px;padding: 5px;margin-bottom: 5px;">-ready-</div>
+	<hr>
+	BACKUP - <input onclick="document.getElementById('backup').select();document.execCommand('copy');msg();" title="copy generated form backup" type="button" value="C">
+	<input onclick="document.getElementById('backup').select();document.execCommand('copy');msg();document.location.href='mailto:target-email-address@service.com?subject='+escape('Form Backup')+String.fromCharCode(38)+'body=NOTES%20OR%20INSTRUCTIONS%20(if%20applicable)%3A%0A%0A%0A%0A-----------------------------------------------------%0A%5BPASTE%20HERE%5D';" title="Send Backup by Email" type="button" value="@"><textarea id="backup" oninput="restoreForm();" onmouseover="this.select();" style="width:99%;height:150px;font-family:sans-serif;font-size:7px;color:#ccc;"></textarea>
+	<hr>
+	GENERATED FORM - <input onclick="document.getElementById('generated').select();document.execCommand('copy');msg();" title="copy generated form code for posting" type="button" value="C">
+	<input onclick="document.getElementById('generated').select();document.execCommand('copy');msg();document.location.href='mailto:target-email-address@service.com?subject='+escape('Form Posting')+String.fromCharCode(38)+'body=NOTES%20OR%20INSTRUCTIONS%20(if%20applicable)%3A%0A%0A%0A%0A-----------------------------------------------------%0A%5BPASTE%20HERE%5D';" title="Send Posting Request by Email" type="button" value="@"><textarea id="generated" style="width:99%;height:150px;font-family:sans-serif;font-size:7px;color:#090;"></textarea>
+</div>
+<script>
+if(document.querySelector('#subject').value.indexOf('FORM SUBMISSION FROM ')==-1){document.querySelector('#subject').value='FORM SUBMISSION FROM '+window.location.href;}
+if(document.querySelector('#recipient').value.indexOf('YourAddress@YourEmailService.com')==-1){document.querySelector('#recipient').value='YourAddress@YourEmailService.com';}
+</script></div><div style="clear:both;">&nbsp;</div><hr><div style="width:65px;float:left;"><span title="Move up" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(0,'1114057241');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAdUlEQVR42m1NuQ2AMAw8sgNjsADL0FHTeQvkLZiAlJSpEYooMD2KMgQ4QUIgcc3Z99gACFwTlFm80qCTYal0LHSzUm0o0fQGmDcVETuXiOwZUtmKb8EiQdPcJucweIFQT3KmDEvInyj7bhn3OxHXfPDTevCvXjOnKXEFcZQuAAAAAElFTkSuQmCC">&nbsp;</span><span title="Move down" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(1,'1114057241');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAZ0lEQVR42mNgYChnmHD7CgOQBlFgZjkTAxgwggVjgawC1cUgsXwVIKENkZmQBlLyHKoUCJBZaS5AKgCsohyoFGhqGpQsRxiPBpgYrNxvb9OD8wO2dWxLA7sBzDXY9t/plnVfwTEQBwBlXiHWjsWwaQAAAABJRU5ErkJggg==">&nbsp;</span></div><div style="width:45px;float:right;"><span title="REMOVE" style="background-color:#770000;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="if(confirm('DELETE?')){removeWiki('1114057241');}">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAnUlEQVR42mNkwA12AbErlH0MiK2xKWLEophYADYUZsB/ICBJNyMjI4SC8mcDcQqJLpgL0gMzwMHd3X3/jh07iNLp4eHBsHPnTkcg8wCGAXFxcQyfP39mWL9+PZj9/v17hs2bNzOEhoYy/PjxA8zGawDUb6BAwckeNWDQGwCSfPXqFcO5c+fwsnEaQG5KlALii0AsQmQ+eAvERkD8CAD5O8gRRpPKTQAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></div><div style="width:45px;float:right;"><span title="EDIT" style="background-color:#007700;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="editWiki('1114057241');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABbElEQVR42rWTO2vCUBTH/7FDhoAEbA0dBEHBRdz9DnXo4mQJwUmnDAHN0EDTJWPmOqibg9BFp3wFN10sGHETHwQE6VBLmnP7oAUfaaEHLtzD5fe759wHhz9EJpO5c8fj5xfA4n4Lx2Ixs9Vq3eq6jqfRSOcCw7UPPARr54egQqGAbreLTqeDeDwORVHQaDSgaZpJFcwjkYiUSCT2wvl8Hu12G4ZhYDAYQBAEVCoV3JRK96v12iCBL4oiPM87WHa9XofruvB9n1VCQlmWWfsnBQRPp1Nst1v0+33UajWYpgme508LCF4sFmx8wtRKsVik/LiA4OVyyeBer8dgy7LYgVL+we4X2LaNZrMJSZLgOM4XTJFMJjGbzY4LcrkchsMhm3+HQwkmkwnS6TSy2SzK5TJUVf3R2kkBLe52O6RSqb23EqqFY/EvgjnHcVI0Gg0l2Gw29CJXwfSCCc6Aq9f3z3QZykAbAtXgAz5S8gbiBb+FSaOmpAAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></div><hr style="clear:both;position:relative;top:5px;"></div><!--~--></div><!-- CONTENT PANEL END -->
 
 		<hr>
 		<div style="background-color:#cccccc; margin:5px; padding:5px; border-radius:5px;">
@@ -351,7 +569,7 @@
 			</div>
 		</div>
 		<hr>
-		<div style="text-align:right;"><a href="https://www.warpsite.net/ducttapesolutions/index.html" target="_blank" style="color:#aaaaaa; font-size:10px; font-family:sans-serif;">NanoWiki - A Duct-Tape Solution</a></div>
+		<div style="text-align:right;"><a href="https://www.warpsite.net/ducttapesolutions/index.html" target="_blank" style="color:#aaaaaa; font-size:10px; font-family:sans-serif;">NanoWiki - A Duct-Tape Solution</a>&nbsp;<a href="handler.php" target="_blank" style="color:#aaaaaa; font-size:10px; font-family:sans-serif;">[H]</a></div>
 		<script>
 			document.getElementById('save').setAttribute('download',this_location);document.title=document.getElementById('page_title').innerHTML;
 			document.getElementById('localstorage_updated').style.color='';document.getElementById('localstorage_updated').style.backgroundColor='';
