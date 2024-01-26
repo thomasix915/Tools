@@ -174,8 +174,8 @@
 		<div style="float:right; width:300px; text-align:right;">
 			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px;" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
 			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
-			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="CODE_code-note-blank.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
-			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">8/18/2023, 4:08:47 PM</span></div>
+			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="CODE_event-calendar.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">1/26/2024, 12:23:33 PM</span></div>
 		</div>
 		<div style="clear:both; display:none;" id="help">
 			WHAT IS THIS?<br>
@@ -222,6 +222,19 @@
 		<hr style="clear:both;">
 		<!-- CONTENT PANEL START --><div id="nanowiki_panel"><div id="6741665439" style="border:#cccccc solid 1px; margin:5px; padding:5px; border-radius:5px;"><div class="title" id="title6741665439">simple event calendar grid with postings</div><div id="content6741665439"><hr>
 <style>
+	.event_calendar_search_container{
+		text-align:center;
+	}
+	.event_calendar_search{
+		width:84%;
+		font-size:12px;
+	}
+	.event_calendar_count{
+		width:10%;
+		text-align:right;
+		font-size:12px;
+		font-weight:bold;
+	}
 	.event_calendar{
 		width:95%;
 		table-layout: fixed;
@@ -275,10 +288,14 @@
 		background-color:#fff;
 	}
 </style>
+<div class="event_calendar_search_container">
+	<input type="text" class="event_calendar_search" id="cal_search" placeholder="[search]" oninput="buildEventCalendar('event_calendar',this.value);">
+	<input type="text" class="event_calendar_count" id="cal_found" placeholder="[#]" readonly="">
+</div>
 <table class="event_calendar">
 	<tbody>
 		<tr>
-			<td class="event_calendar_title" colspan="7"><span id="event_calendar_prev" style="cursor:pointer;" onclick="current_month--;buildEventCalendar('event_calendar');">&lt;</span>&nbsp;<span id="event_calendar_title">&nbsp;</span>&nbsp;<span id="event_calendar_next" style="display:inline;cursor:pointer;" onclick="current_month++;buildEventCalendar('event_calendar');">&gt;</span></td>
+			<td class="event_calendar_title" colspan="7"><span id="event_calendar_prev" style="cursor:pointer;" onclick="current_month--;buildEventCalendar('event_calendar',document.getElementById('cal_search').value);">&lt;</span>&nbsp;<span id="event_calendar_title">&nbsp;</span>&nbsp;<span id="event_calendar_next" style="display:inline;cursor:pointer;" onclick="current_month++;buildEventCalendar('event_calendar',document.getElementById('cal_search').value);">&gt;</span></td>
 		</tr>
 		<tr>
 			<th><strong>Su</strong>
@@ -357,7 +374,7 @@ requires:
 - calendar grid, or list, or 'container constellation'
 - container fields with ID attribute value "[instance name]_0" to "[instance name]_41"
 - custom styling
-- calendar call "buildEventCalendar('[instance name]');"
+- calendar call "buildEventCalendar('[instance name]','[search]');"
 
 ***************************************************************************************/
 
@@ -366,11 +383,11 @@ var index_d=0;var index_m=0;var cal_entry=[[],[],[],[],[],[],[],[],[],[],[],[]];
 /*********************
 --- CONFIGURATION ---
 **********************/
-var cal_title=['October 2019','November 2019','December 2019'];				// month titles
-var cal_offset=[3,5,1]; 								// first day of months (0-6)
-var cal_days=[31,30,31]; 								// days of months (28-31)
+var year_start=2019;
+var month_start=10;
+var month_count=5;
 
-// EVENTS BY DATE
+// EVENTS BY DATE - MUST MATCH MONTH COUNT!
 // - multi-day entries need to be copied - <<<< YES, YOU WILL APPRECIATE THAT!
 // - all entries need to be done in one line
 // - any HTML allowed
@@ -380,7 +397,7 @@ var cal_days=[31,30,31]; 								// days of months (28-31)
 
 // --- CURRENT MONTH ---
 
-// - DATE/DAY REFERENCE - adjust and use this slider:
+// - DATE/WEEKDAY REFERENCE HELPER - adjust and use this slider:
 // [PUSH] >>> 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
 //            SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO
 
@@ -419,7 +436,7 @@ index_m++;index_d=0;
 
 // --- NEXT MONTH ---
 
-// - DATE/DAY REFERENCE - adjust and use this slider:
+// - DATE/WEEKDAY REFERENCE HELPER - adjust and use this slider:
 // [PUSH] >>> 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
 //            SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO
 
@@ -458,7 +475,85 @@ index_m++;index_d=0;
 
 // --- MONTH AFTER NEXT MONTH ---
 
-// - DATE/DAY REFERENCE - adjust and use this slider:
+// - DATE/WEEKDAY REFERENCE HELPER - adjust and use this slider:
+// [PUSH] >>> 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+//            SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO
+
+/* 01 */ index_d++;cal_entry[index_m][index_d]='';
+/* 02 */ index_d++;cal_entry[index_m][index_d]='';
+/* 03 */ index_d++;cal_entry[index_m][index_d]='';
+/* 04 */ index_d++;cal_entry[index_m][index_d]='';
+/* 05 */ index_d++;cal_entry[index_m][index_d]='test3';
+/* 06 */ index_d++;cal_entry[index_m][index_d]='';
+/* 07 */ index_d++;cal_entry[index_m][index_d]='';
+/* 08 */ index_d++;cal_entry[index_m][index_d]='';
+/* 09 */ index_d++;cal_entry[index_m][index_d]='';
+/* 10 */ index_d++;cal_entry[index_m][index_d]='';
+/* 11 */ index_d++;cal_entry[index_m][index_d]='';
+/* 12 */ index_d++;cal_entry[index_m][index_d]='';
+/* 13 */ index_d++;cal_entry[index_m][index_d]='';
+/* 14 */ index_d++;cal_entry[index_m][index_d]='testing a||third test';
+/* 15 */ index_d++;cal_entry[index_m][index_d]='';
+/* 16 */ index_d++;cal_entry[index_m][index_d]='';
+/* 17 */ index_d++;cal_entry[index_m][index_d]='';
+/* 18 */ index_d++;cal_entry[index_m][index_d]='';
+/* 19 */ index_d++;cal_entry[index_m][index_d]='';
+/* 20 */ index_d++;cal_entry[index_m][index_d]='';
+/* 21 */ index_d++;cal_entry[index_m][index_d]='';
+/* 22 */ index_d++;cal_entry[index_m][index_d]='<h3>HTML test 3</h3><p>some more testing</p><p>...and more testing</p><p>...and more testing</p><p>...and more testing</p><p>...and more testing</p><p>...and more testing</p>';
+/* 23 */ index_d++;cal_entry[index_m][index_d]='';
+/* 24 */ index_d++;cal_entry[index_m][index_d]='';
+/* 25 */ index_d++;cal_entry[index_m][index_d]='';
+/* 26 */ index_d++;cal_entry[index_m][index_d]='';
+/* 27 */ index_d++;cal_entry[index_m][index_d]='';
+/* 28 */ index_d++;cal_entry[index_m][index_d]='';
+/* 29 */ index_d++;cal_entry[index_m][index_d]='';
+/* 30 */ index_d++;cal_entry[index_m][index_d]='';
+/* 31 */ index_d++;cal_entry[index_m][index_d]='';
+index_m++;index_d=0;
+
+// --- MONTH AFTER NEXT MONTH ---
+
+// - DATE/WEEKDAY REFERENCE HELPER - adjust and use this slider:
+// [PUSH] >>> 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+//            SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO
+
+/* 01 */ index_d++;cal_entry[index_m][index_d]='';
+/* 02 */ index_d++;cal_entry[index_m][index_d]='';
+/* 03 */ index_d++;cal_entry[index_m][index_d]='';
+/* 04 */ index_d++;cal_entry[index_m][index_d]='';
+/* 05 */ index_d++;cal_entry[index_m][index_d]='test3';
+/* 06 */ index_d++;cal_entry[index_m][index_d]='';
+/* 07 */ index_d++;cal_entry[index_m][index_d]='';
+/* 08 */ index_d++;cal_entry[index_m][index_d]='';
+/* 09 */ index_d++;cal_entry[index_m][index_d]='';
+/* 10 */ index_d++;cal_entry[index_m][index_d]='';
+/* 11 */ index_d++;cal_entry[index_m][index_d]='';
+/* 12 */ index_d++;cal_entry[index_m][index_d]='';
+/* 13 */ index_d++;cal_entry[index_m][index_d]='';
+/* 14 */ index_d++;cal_entry[index_m][index_d]='testing a||third test';
+/* 15 */ index_d++;cal_entry[index_m][index_d]='';
+/* 16 */ index_d++;cal_entry[index_m][index_d]='';
+/* 17 */ index_d++;cal_entry[index_m][index_d]='';
+/* 18 */ index_d++;cal_entry[index_m][index_d]='';
+/* 19 */ index_d++;cal_entry[index_m][index_d]='';
+/* 20 */ index_d++;cal_entry[index_m][index_d]='';
+/* 21 */ index_d++;cal_entry[index_m][index_d]='';
+/* 22 */ index_d++;cal_entry[index_m][index_d]='<h3>HTML test 3</h3><p>some more testing</p><p>...and more testing</p><p>...and more testing</p><p>...and more testing</p><p>...and more testing</p><p>...and more testing</p>';
+/* 23 */ index_d++;cal_entry[index_m][index_d]='';
+/* 24 */ index_d++;cal_entry[index_m][index_d]='';
+/* 25 */ index_d++;cal_entry[index_m][index_d]='';
+/* 26 */ index_d++;cal_entry[index_m][index_d]='';
+/* 27 */ index_d++;cal_entry[index_m][index_d]='';
+/* 28 */ index_d++;cal_entry[index_m][index_d]='';
+/* 29 */ index_d++;cal_entry[index_m][index_d]='';
+/* 30 */ index_d++;cal_entry[index_m][index_d]='';
+/* 31 */ index_d++;cal_entry[index_m][index_d]='';
+index_m++;index_d=0;
+
+// --- MONTH AFTER NEXT MONTH ---
+
+// - DATE/WEEKDAY REFERENCE HELPER - adjust and use this slider:
 // [PUSH] >>> 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
 //            SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO
 
@@ -496,27 +591,75 @@ index_m++;index_d=0;
 index_m++;index_d=0;
 
 
-
 /****************** END CONFIG ******************/
 
-function buildEventCalendar(instance_name){
+var month_label=['','January','February','March','April','May','June','July','August','September','October','November','December'];
+var cal_title=[];
+var cal_offset=[];
+var cal_days=[];
+
+var cur_month=month_start-1;
+var cur_year=year_start;
+for(x=0;x<month_count;x++){
+	cur_month++;
+	if(cur_month>12){
+		cur_month=1;
+		cur_year++;
+	}
+	cal_days.push(new Date(cur_year, cur_month, 0).getDate());
+	cal_offset.push(new Date(cur_year+'-'+cur_month+'-1').getDay());
+	cal_title.push(month_label[cur_month]+' '+cur_year);
+}
+
+function buildEventCalendar(instance_name,term){
+	var found_count=0;
+	var cal_occurrence;
 	if(cal_title.length+cal_offset.length+cal_days.length!=index_m*3){
 		alert('CALENDAR CANNOT BE BUILT!\n\nConfiguration error, please make sure\nyou have the same number of\nmonth titles('+cal_title.length+'), startday-offsets('+cal_offset.length+'),\nlengths('+cal_days.length+'), and events('+index_m+')!\n\nPLEASE CHECK CONFIGURATION!');
 	}else{
+		if(term.length){
+			for(x=1;x<index_m;x++){
+				for(y=1;y<cal_days[x];y++){
+					if(cal_entry[x][y].replace(/<[^>]*>?/gm, '').toLowerCase().indexOf(document.getElementById('cal_search').value.toLowerCase())>-1){
+						found_count++;
+					}
+				}
+			}
+		}
 		for(x=0;x<42;x++){document.getElementById(instance_name+'_'+x).innerHTML='';}
 		if(current_month<0){current_month=0;}else if(current_month>(index_m-1)){current_month=index_m-1;}
 		document.getElementById(instance_name+'_title').innerHTML=cal_title[current_month];
 		for(x=1;x<=cal_days[current_month];x++){
 			document.getElementById(instance_name+'_'+(x+cal_offset[current_month]-1)).innerHTML='<div class="day_number">'+(x)+'</div>';
-			if(cal_entry[current_month][x].length){
-				document.getElementById(instance_name+'_'+(x+cal_offset[current_month]-1)).innerHTML+='<div class="event_info">'+cal_entry[current_month][x].replace(/\|\|/g, '<br />');+'</div>';
+				if(cal_entry[current_month][x].length){
+				cal_occurrence='';
+				if(term.length){
+					if(cal_entry[current_month][x].replace(/<[^>]*>?/gm, '').toLowerCase().indexOf(document.getElementById('cal_search').value.toLowerCase())>-1){
+						cal_occurrence='style="background-color:#7f7";';
+					}
+				}
+				document.getElementById(instance_name+'_'+(x+cal_offset[current_month]-1)).innerHTML+='<div class="event_info" '+cal_occurrence+'>'+cal_entry[current_month][x].replace(/\|\|/g, '<br />');+'</div>';
 			}else{
-				document.getElementById(instance_name+'_'+(x+cal_offset[current_month]-1)).innerHTML+='<div class="event_info">&nbsp;</div>';
+				document.getElementById(instance_name+'_'+(x+cal_offset[current_month]-1)).innerHTML+='<div class="event_info"></div>';
 			}
 		}
 	}
+	if(term.length){
+		if(found_count){
+			document.getElementById('cal_search').style.backgroundColor='#7f7';
+			document.getElementById('cal_found').style.backgroundColor='#7f7';
+		}else{
+			document.getElementById('cal_search').style.backgroundColor='#f77';
+			document.getElementById('cal_found').style.backgroundColor='#f77';
+		}
+		document.getElementById('cal_found').value='['+found_count+']';
+	}else{
+		document.getElementById('cal_search').style.backgroundColor='#fff';
+		document.getElementById('cal_found').style.backgroundColor='#fff';
+		document.getElementById('cal_found').value='';
+	}
 }
-buildEventCalendar('event_calendar');
+buildEventCalendar('event_calendar','');
 </script>
 <hr>
 <script>
@@ -525,6 +668,19 @@ function msg(){document.getElementById('message').style.backgroundColor='#990000
 <div id="message" style="text-align:center;background-color:#009900;color:#ffffff;border-radius:25px; padding:5px; margin-bottom:5px;">-ready-</div>
 <em>-double-click copies code sample-</em><br>
 <textarea style="width:100%;height:150px;" ondblclick="this.select();document.execCommand('copy');msg();">&lt;style&gt;
+	.event_calendar_search_container{
+		text-align:center;
+	}
+	.event_calendar_search{
+		width:84%;
+		font-size:12px;
+	}
+	.event_calendar_count{
+		width:10%;
+		text-align:right;
+		font-size:12px;
+		font-weight:bold;
+	}
 	.event_calendar{
 		width:95%;
 		table-layout: fixed;
@@ -578,10 +734,14 @@ function msg(){document.getElementById('message').style.backgroundColor='#990000
 		background-color:#fff;
 	}
 &lt;/style&gt;
+&lt;div class="event_calendar_search_container"&gt;
+	&lt;input type="text" class="event_calendar_search" id="cal_search" placeholder="[search]" oninput="buildEventCalendar('event_calendar',this.value);" /&gt;
+	&lt;input type="text" class="event_calendar_count" id="cal_found" placeholder="[#]" readonly /&gt;
+&lt;/div&gt;
 &lt;table class="event_calendar"&gt;
 	&lt;tbody&gt;
 		&lt;tr&gt;
-			&lt;td class="event_calendar_title" colspan="7"&gt;&lt;span id="event_calendar_prev" style="cursor:pointer;" onclick="current_month--;buildEventCalendar('event_calendar');"&gt;&lt;&lt;/span&gt;&nbsp;&lt;span id="event_calendar_title"&gt;&nbsp;&lt;/span&gt;&nbsp;&lt;span id="event_calendar_next" style="display:inline;cursor:pointer;" onclick="current_month++;buildEventCalendar('event_calendar');"&gt;&gt;&lt;/span&gt;&lt;/td&gt;
+			&lt;td class="event_calendar_title" colspan="7"&gt;&lt;span id="event_calendar_prev" style="cursor:pointer;" onclick="current_month--;buildEventCalendar('event_calendar',document.getElementById('cal_search').value);"&gt;&lt;&lt;/span&gt;&nbsp;&lt;span id="event_calendar_title"&gt;&nbsp;&lt;/span&gt;&nbsp;&lt;span id="event_calendar_next" style="display:inline;cursor:pointer;" onclick="current_month++;buildEventCalendar('event_calendar',document.getElementById('cal_search').value);"&gt;&gt;&lt;/span&gt;&lt;/td&gt;
 		&lt;/tr&gt;
 		&lt;tr&gt;
 			&lt;th&gt;&lt;strong&gt;Su&lt;/strong&gt;&lt;/td&gt;
@@ -660,7 +820,7 @@ requires:
 - calendar grid, or list, or 'container constellation'
 - container fields with ID attribute value "[instance name]_0" to "[instance name]_41"
 - custom styling
-- calendar call "buildEventCalendar('[instance name]');"
+- calendar call "buildEventCalendar('[instance name]','[search]');"
 
 ***************************************************************************************/
 
@@ -669,11 +829,11 @@ var index_d=0;var index_m=0;var cal_entry=[[],[],[],[],[],[],[],[],[],[],[],[]];
 /*********************
 --- CONFIGURATION ---
 **********************/
-var cal_title=['October 2019','November 2019','December 2019'];				// month titles
-var cal_offset=[3,5,1]; 													// first day of months (0-6)
-var cal_days=[31,30,31]; 													// days of months (28-31)
+var year_start=2019;
+var month_start=10;
+var month_count=5;
 
-// EVENTS BY DATE
+// EVENTS BY DATE - MUST MATCH MONTH COUNT!
 // - multi-day entries need to be copied - &lt;&lt;&lt;&lt; YES, YOU WILL APPRECIATE THAT!
 // - all entries need to be done in one line
 // - any HTML allowed
@@ -683,7 +843,7 @@ var cal_days=[31,30,31]; 													// days of months (28-31)
 
 // --- CURRENT MONTH ---
 
-// - DATE/DAY REFERENCE - adjust and use this slider:
+// - DATE/WEEKDAY REFERENCE HELPER - adjust and use this slider:
 // [PUSH] &gt;&gt;&gt; 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
 //            SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO
 
@@ -722,7 +882,7 @@ index_m++;index_d=0;
 
 // --- NEXT MONTH ---
 
-// - DATE/DAY REFERENCE - adjust and use this slider:
+// - DATE/WEEKDAY REFERENCE HELPER - adjust and use this slider:
 // [PUSH] &gt;&gt;&gt; 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
 //            SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO
 
@@ -761,7 +921,85 @@ index_m++;index_d=0;
 
 // --- MONTH AFTER NEXT MONTH ---
 
-// - DATE/DAY REFERENCE - adjust and use this slider:
+// - DATE/WEEKDAY REFERENCE HELPER - adjust and use this slider:
+// [PUSH] &gt;&gt;&gt; 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+//            SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO
+
+/* 01 */ index_d++;cal_entry[index_m][index_d]='';
+/* 02 */ index_d++;cal_entry[index_m][index_d]='';
+/* 03 */ index_d++;cal_entry[index_m][index_d]='';
+/* 04 */ index_d++;cal_entry[index_m][index_d]='';
+/* 05 */ index_d++;cal_entry[index_m][index_d]='test3';
+/* 06 */ index_d++;cal_entry[index_m][index_d]='';
+/* 07 */ index_d++;cal_entry[index_m][index_d]='';
+/* 08 */ index_d++;cal_entry[index_m][index_d]='';
+/* 09 */ index_d++;cal_entry[index_m][index_d]='';
+/* 10 */ index_d++;cal_entry[index_m][index_d]='';
+/* 11 */ index_d++;cal_entry[index_m][index_d]='';
+/* 12 */ index_d++;cal_entry[index_m][index_d]='';
+/* 13 */ index_d++;cal_entry[index_m][index_d]='';
+/* 14 */ index_d++;cal_entry[index_m][index_d]='testing a||third test';
+/* 15 */ index_d++;cal_entry[index_m][index_d]='';
+/* 16 */ index_d++;cal_entry[index_m][index_d]='';
+/* 17 */ index_d++;cal_entry[index_m][index_d]='';
+/* 18 */ index_d++;cal_entry[index_m][index_d]='';
+/* 19 */ index_d++;cal_entry[index_m][index_d]='';
+/* 20 */ index_d++;cal_entry[index_m][index_d]='';
+/* 21 */ index_d++;cal_entry[index_m][index_d]='';
+/* 22 */ index_d++;cal_entry[index_m][index_d]='&lt;h3&gt;HTML test 3&lt;/h3&gt;&lt;p&gt;some more testing&lt;/p&gt;&lt;p&gt;...and more testing&lt;/p&gt;&lt;p&gt;...and more testing&lt;/p&gt;&lt;p&gt;...and more testing&lt;/p&gt;&lt;p&gt;...and more testing&lt;/p&gt;&lt;p&gt;...and more testing&lt;/p&gt;';
+/* 23 */ index_d++;cal_entry[index_m][index_d]='';
+/* 24 */ index_d++;cal_entry[index_m][index_d]='';
+/* 25 */ index_d++;cal_entry[index_m][index_d]='';
+/* 26 */ index_d++;cal_entry[index_m][index_d]='';
+/* 27 */ index_d++;cal_entry[index_m][index_d]='';
+/* 28 */ index_d++;cal_entry[index_m][index_d]='';
+/* 29 */ index_d++;cal_entry[index_m][index_d]='';
+/* 30 */ index_d++;cal_entry[index_m][index_d]='';
+/* 31 */ index_d++;cal_entry[index_m][index_d]='';
+index_m++;index_d=0;
+
+// --- MONTH AFTER NEXT MONTH ---
+
+// - DATE/WEEKDAY REFERENCE HELPER - adjust and use this slider:
+// [PUSH] &gt;&gt;&gt; 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+//            SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO
+
+/* 01 */ index_d++;cal_entry[index_m][index_d]='';
+/* 02 */ index_d++;cal_entry[index_m][index_d]='';
+/* 03 */ index_d++;cal_entry[index_m][index_d]='';
+/* 04 */ index_d++;cal_entry[index_m][index_d]='';
+/* 05 */ index_d++;cal_entry[index_m][index_d]='test3';
+/* 06 */ index_d++;cal_entry[index_m][index_d]='';
+/* 07 */ index_d++;cal_entry[index_m][index_d]='';
+/* 08 */ index_d++;cal_entry[index_m][index_d]='';
+/* 09 */ index_d++;cal_entry[index_m][index_d]='';
+/* 10 */ index_d++;cal_entry[index_m][index_d]='';
+/* 11 */ index_d++;cal_entry[index_m][index_d]='';
+/* 12 */ index_d++;cal_entry[index_m][index_d]='';
+/* 13 */ index_d++;cal_entry[index_m][index_d]='';
+/* 14 */ index_d++;cal_entry[index_m][index_d]='testing a||third test';
+/* 15 */ index_d++;cal_entry[index_m][index_d]='';
+/* 16 */ index_d++;cal_entry[index_m][index_d]='';
+/* 17 */ index_d++;cal_entry[index_m][index_d]='';
+/* 18 */ index_d++;cal_entry[index_m][index_d]='';
+/* 19 */ index_d++;cal_entry[index_m][index_d]='';
+/* 20 */ index_d++;cal_entry[index_m][index_d]='';
+/* 21 */ index_d++;cal_entry[index_m][index_d]='';
+/* 22 */ index_d++;cal_entry[index_m][index_d]='&lt;h3&gt;HTML test 3&lt;/h3&gt;&lt;p&gt;some more testing&lt;/p&gt;&lt;p&gt;...and more testing&lt;/p&gt;&lt;p&gt;...and more testing&lt;/p&gt;&lt;p&gt;...and more testing&lt;/p&gt;&lt;p&gt;...and more testing&lt;/p&gt;&lt;p&gt;...and more testing&lt;/p&gt;';
+/* 23 */ index_d++;cal_entry[index_m][index_d]='';
+/* 24 */ index_d++;cal_entry[index_m][index_d]='';
+/* 25 */ index_d++;cal_entry[index_m][index_d]='';
+/* 26 */ index_d++;cal_entry[index_m][index_d]='';
+/* 27 */ index_d++;cal_entry[index_m][index_d]='';
+/* 28 */ index_d++;cal_entry[index_m][index_d]='';
+/* 29 */ index_d++;cal_entry[index_m][index_d]='';
+/* 30 */ index_d++;cal_entry[index_m][index_d]='';
+/* 31 */ index_d++;cal_entry[index_m][index_d]='';
+index_m++;index_d=0;
+
+// --- MONTH AFTER NEXT MONTH ---
+
+// - DATE/WEEKDAY REFERENCE HELPER - adjust and use this slider:
 // [PUSH] &gt;&gt;&gt; 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
 //            SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO
 
@@ -799,27 +1037,75 @@ index_m++;index_d=0;
 index_m++;index_d=0;
 
 
-
 /****************** END CONFIG ******************/
 
-function buildEventCalendar(instance_name){
+var month_label=['','January','February','March','April','May','June','July','August','September','October','November','December'];
+var cal_title=[];
+var cal_offset=[];
+var cal_days=[];
+
+var cur_month=month_start-1;
+var cur_year=year_start;
+for(x=0;x&lt;month_count;x++){
+	cur_month++;
+	if(cur_month&gt;12){
+		cur_month=1;
+		cur_year++;
+	}
+	cal_days.push(new Date(cur_year, cur_month, 0).getDate());
+	cal_offset.push(new Date(cur_year+'-'+cur_month+'-1').getDay());
+	cal_title.push(month_label[cur_month]+' '+cur_year);
+}
+
+function buildEventCalendar(instance_name,term){
+	var found_count=0;
+	var cal_occurrence;
 	if(cal_title.length+cal_offset.length+cal_days.length!=index_m*3){
 		alert('CALENDAR CANNOT BE BUILT!\n\nConfiguration error, please make sure\nyou have the same number of\nmonth titles('+cal_title.length+'), startday-offsets('+cal_offset.length+'),\nlengths('+cal_days.length+'), and events('+index_m+')!\n\nPLEASE CHECK CONFIGURATION!');
 	}else{
+		if(term.length){
+			for(x=1;x&lt;index_m;x++){
+				for(y=1;y&lt;cal_days[x];y++){
+					if(cal_entry[x][y].replace(/&lt;[^&gt;]*&gt;?/gm, '').toLowerCase().indexOf(document.getElementById('cal_search').value.toLowerCase())&gt;-1){
+						found_count++;
+					}
+				}
+			}
+		}
 		for(x=0;x&lt;42;x++){document.getElementById(instance_name+'_'+x).innerHTML='';}
 		if(current_month&lt;0){current_month=0;}else if(current_month&gt;(index_m-1)){current_month=index_m-1;}
 		document.getElementById(instance_name+'_title').innerHTML=cal_title[current_month];
 		for(x=1;x&lt;=cal_days[current_month];x++){
 			document.getElementById(instance_name+'_'+(x+cal_offset[current_month]-1)).innerHTML='&lt;div class="day_number"&gt;'+(x)+'&lt;/div&gt;';
-			if(cal_entry[current_month][x].length){
-				document.getElementById(instance_name+'_'+(x+cal_offset[current_month]-1)).innerHTML+='&lt;div class="event_info"&gt;'+cal_entry[current_month][x].replace(/\|\|/g, '&lt;br /&gt;');+'&lt;/div&gt;';
+				if(cal_entry[current_month][x].length){
+				cal_occurrence='';
+				if(term.length){
+					if(cal_entry[current_month][x].replace(/&lt;[^&gt;]*&gt;?/gm, '').toLowerCase().indexOf(document.getElementById('cal_search').value.toLowerCase())&gt;-1){
+						cal_occurrence='style="background-color:#7f7";';
+					}
+				}
+				document.getElementById(instance_name+'_'+(x+cal_offset[current_month]-1)).innerHTML+='&lt;div class="event_info" '+cal_occurrence+'&gt;'+cal_entry[current_month][x].replace(/\|\|/g, '&lt;br /&gt;');+'&lt;/div&gt;';
 			}else{
-				document.getElementById(instance_name+'_'+(x+cal_offset[current_month]-1)).innerHTML+='&lt;div class="event_info"&gt;&nbsp;&lt;/div&gt;';
+				document.getElementById(instance_name+'_'+(x+cal_offset[current_month]-1)).innerHTML+='&lt;div class="event_info"&gt;&lt;/div&gt;';
 			}
 		}
 	}
+	if(term.length){
+		if(found_count){
+			document.getElementById('cal_search').style.backgroundColor='#7f7';
+			document.getElementById('cal_found').style.backgroundColor='#7f7';
+		}else{
+			document.getElementById('cal_search').style.backgroundColor='#f77';
+			document.getElementById('cal_found').style.backgroundColor='#f77';
+		}
+		document.getElementById('cal_found').value='['+found_count+']';
+	}else{
+		document.getElementById('cal_search').style.backgroundColor='#fff';
+		document.getElementById('cal_found').style.backgroundColor='#fff';
+		document.getElementById('cal_found').value='';
+	}
 }
-buildEventCalendar('event_calendar');
+buildEventCalendar('event_calendar','');
 &lt;/script&gt;</textarea></div><div style="clear:both;">&nbsp;</div><hr><div style="width:65px;float:left;"><span title="Move up" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(0,'6741665439');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAdUlEQVR42m1NuQ2AMAw8sgNjsADL0FHTeQvkLZiAlJSpEYooMD2KMgQ4QUIgcc3Z99gACFwTlFm80qCTYal0LHSzUm0o0fQGmDcVETuXiOwZUtmKb8EiQdPcJucweIFQT3KmDEvInyj7bhn3OxHXfPDTevCvXjOnKXEFcZQuAAAAAElFTkSuQmCC">&nbsp;</span><span title="Move down" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(1,'6741665439');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAZ0lEQVR42mNgYChnmHD7CgOQBlFgZjkTAxgwggVjgawC1cUgsXwVIKENkZmQBlLyHKoUCJBZaS5AKgCsohyoFGhqGpQsRxiPBpgYrNxvb9OD8wO2dWxLA7sBzDXY9t/plnVfwTEQBwBlXiHWjsWwaQAAAABJRU5ErkJggg==">&nbsp;</span></div><div style="width:45px;float:right;"><span title="REMOVE" style="background-color:#770000;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="if(confirm('DELETE?')){removeWiki('6741665439');}">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAnUlEQVR42mNkwA12AbErlH0MiK2xKWLEophYADYUZsB/ICBJNyMjI4SC8mcDcQqJLpgL0gMzwMHd3X3/jh07iNLp4eHBsHPnTkcg8wCGAXFxcQyfP39mWL9+PZj9/v17hs2bNzOEhoYy/PjxA8zGawDUb6BAwckeNWDQGwCSfPXqFcO5c+fwsnEaQG5KlALii0AsQmQ+eAvERkD8CAD5O8gRRpPKTQAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></div><div style="width:45px;float:right;"><span title="EDIT" style="background-color:#007700;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="editWiki('6741665439');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABbElEQVR42rWTO2vCUBTH/7FDhoAEbA0dBEHBRdz9DnXo4mQJwUmnDAHN0EDTJWPmOqibg9BFp3wFN10sGHETHwQE6VBLmnP7oAUfaaEHLtzD5fe759wHhz9EJpO5c8fj5xfA4n4Lx2Ixs9Vq3eq6jqfRSOcCw7UPPARr54egQqGAbreLTqeDeDwORVHQaDSgaZpJFcwjkYiUSCT2wvl8Hu12G4ZhYDAYQBAEVCoV3JRK96v12iCBL4oiPM87WHa9XofruvB9n1VCQlmWWfsnBQRPp1Nst1v0+33UajWYpgme508LCF4sFmx8wtRKsVik/LiA4OVyyeBer8dgy7LYgVL+we4X2LaNZrMJSZLgOM4XTJFMJjGbzY4LcrkchsMhm3+HQwkmkwnS6TSy2SzK5TJUVf3R2kkBLe52O6RSqb23EqqFY/EvgjnHcVI0Gg0l2Gw29CJXwfSCCc6Aq9f3z3QZykAbAtXgAz5S8gbiBb+FSaOmpAAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></div><hr style="clear:both;position:relative;top:5px;"></div><!--~--></div><!-- CONTENT PANEL END -->
 
 		<hr>
