@@ -172,10 +172,10 @@
 	<body cz-shortcut-listen="true">
 		<span style="font-size:24px;font-weight:bold;" id="page_title" ondblclick="changeTitle();">App-Helper - UI</span>
 		<div style="float:right; width:300px; text-align:right;">
-			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px; color: rgb(255, 255, 255); background-color: rgb(0, 153, 0);" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
+			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px;" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
 			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
 			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="Tool_app-helper-UI.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
-			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">3/18/2024, 3:25:09 PM</span></div>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">3/15/2024, 3:04:29 PM</span></div>
 		</div>
 		<div style="clear:both; display:none;" id="help">
 			WHAT IS THIS?<br>
@@ -265,17 +265,10 @@ modals=document.getElementsByClassName('modal');for(x=0;x<modals.length;x++){mod
 	var now = new Date();
 	var localDate=now.toLocaleDateString();
 	
-	var code_header_add='<?php|include \'./includes/header.php\';|require_once \'db_functions.php\';|?>||<div class="content">|<?php|//[-PROCESSING FUNCTIONS-]|?>||<div class="pageTitle content">|<h2>Add [xxx]</h2>|<div class="breadcrumb">|<span><a href="./index.php">Home</a></span><span>Add [...]</span>|</div>|</div>||<div class="content">||<?php include \'./includes/subnav.php\'; ?>||<form class="ui form" method="POST" action="add-profile.php?submitted" enctype="multipart/form-data">||'.replaceAll('|',String.fromCharCode(10));
+	var code_header_add='<?php|include \'./includes/header.php\';|require_once \'db_functions.php\';|?>||<div class="content">|<?php|\\[-PROCESSING FUNCTIONS-]|?>||<div class="pageTitle content">|<h2>Add [xxx]</h2>|<div class="breadcrumb">|<span><a href="./index.php">Home</a></span><span>Add [...]</span>|</div>|</div>||<div class="content">||<?php include \'./includes/subnav.php\'; ?>||<form class="ui form" method="POST" action="add-profile.php?submitted" enctype="multipart/form-data">||'.replaceAll('|',String.fromCharCode(10));
 	// ?> - reset php tag for editor
 
-	var code_footer_add='<hr />|<button class="ui button floatSubmit" type="submit"><span class="material-symbols-outlined">save</span>&nbsp;&nbsp; Save</button>|</form>||</div>||<?php|include \'./includes/footer.php\';|?>|'.replaceAll('|',String.fromCharCode(10));
-	// ?> - reset php tag for editor
-
-	var code_header_edit='<?php| include \'./includes/header.php\';|require_once \'db_functions.php\';|?>||<div class="pageTitle content">|<h2>Edit [xxx]</h2>|<div class="breadcrumb">|<span><a href="./index.php">Home</a></span><span>Edit [xxx]</span>|</div>||<div class="content">|<?php||if(isset($_GET[\'submitted\'])) {|echo \'<div class="alert green rounded">|<p><span class="material-symbols-outlined">task_alt</span> Changes have been saved.</p>|</div>\';|}|elseif(isset($_GET[\'error\'])) {|echo \'<div class="alert red rounded">|<p><span class="material-symbols-outlined">error</span> An error has occured, please try again.</p>|</div>\';|}|else {|}||// check if submission performed|if(isset($_REQUEST[\'id\'])){|$user_id=$_REQUEST[\'id\'];||//[-PROCESSING FUNCTIONS-]||}|}?>||'.replaceAll('|',String.fromCharCode(10));
-	// ?> - reset php tag for editor
-
-	var code_footer_edit='<hr />||<button class="ui button floatSubmit" type="submit"><span class="material-symbols-outlined">save</span>&nbsp;&nbsp; Save</button>|</form>||</div>||<?php|include \'./includes/footer.php\';|?>||'.replaceAll('|',String.fromCharCode(10));
-	// ?> - reset php tag for editor
+	var code_footer_add='<hr />|<button class="ui button floatSubmit" type="submit"><span class="material-symbols-outlined">save</span>&nbsp;&nbsp; Save</button>|</form>'.replaceAll('|',String.fromCharCode(10));
 
 	var element_selected='line';
 	
@@ -484,12 +477,11 @@ modals=document.getElementsByClassName('modal');for(x=0;x<modals.length;x++){mod
 
 	<div style="width:49%">
 		<strong>V I E W / S R C</strong> - displayed linearized<hr>
-		<div id="preview" style="height:34vh;border:#ccc solid 1px;padding:10px;overflow:auto;" contenteditable="">&nbsp;</div>
+		<div id="preview" style="height:35vh;border:#ccc solid 1px;padding:10px;overflow:auto;" contenteditable="">&nbsp;</div>
 		<div style="height:35vh;border:#ccc solid 1px;padding:10px;">
 			<textarea id="src_add" style="width:100%;max-width:48%;height:35vh;resize:none;font-size:11px;" onselect="document.execCommand('copy');msg('-COPIED!-');" ondblclick="this.select();document.execCommand('copy');msg('-COPIED!-');" oninput="document.getElementById('preview').innerHTML=this.value;" placeholder="[-generated source - ADD-]"></textarea>
 			<textarea id="src_edit" style="width:100%;max-width:48%;height:35vh;resize:none;font-size:11px;" onselect="document.execCommand('copy');msg('-COPIED!-');" ondblclick="this.select();document.execCommand('copy');msg('-COPIED!-');" placeholder="[-generated source - EDIT-]"></textarea>
 		</div>
-		<input type="button" style="background-color:#000;color:#fff;width:99%" onclick="document.getElementById('src_add').value=code_header_add+document.getElementById('src_add').value+code_footer_add;document.getElementById('src_edit').value=code_header_edit+document.getElementById('src_edit').value+code_footer_edit;" value=" ^ FINALIZE ^ ">
 	</div>
 </div>
 
