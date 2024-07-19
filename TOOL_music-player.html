@@ -172,11 +172,11 @@
 	<body cz-shortcut-listen="true">
 		<span style="font-size:24px;font-weight:bold;" id="page_title" ondblclick="changeTitle();">Music Player</span>
 		<div style="float:right; width:500px; text-align:right;">
-			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px;" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
+			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px; color: rgb(255, 255, 255); background-color: rgb(0, 153, 0);" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
 			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
 			<span title="EXPORT TOOL ONLY" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'><head><meta charset='+String.fromCharCode(34)+'UTF-8'+String.fromCharCode(34)+'><meta name='+String.fromCharCode(34)+'viewport'+String.fromCharCode(34)+' content='+String.fromCharCode(34)+'width=device-width'+String.fromCharCode(34)+'></head><body>'+document.getElementById('nanowiki_panel').firstElementChild.firstElementChild.nextElementSibling.innerHTML+'</body></html>');" onmouseout="this.href='#';" download="TOOL_music-player.html">&nbsp;=&gt;&nbsp;[T]&nbsp;</a></span>
 			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="nanowiki_te.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
-			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">7/9/2024, 2:50:23 PM</span></div>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">7/12/2024, 8:58:28 AM</span></div>
 		</div>
 		<div style="clear:both; display:none;" id="help">
 			WHAT IS THIS?<br>
@@ -234,6 +234,7 @@
 	var dq=String.fromCharCode(34);
 	var filelist=[];
 	var index=0;
+	var sorted=0;
 
 	function process(){
 		player.pause();
@@ -277,10 +278,18 @@
 			filelist[j]=temp;
 		}
 		build(filelist.join('|'));
+		sorted=0;
 	}
 
 	function sort(){
-		build(filelist.sort().join('|'));
+		filelist.sort();
+		if(sorted){
+			sorted=0;
+			filelist.reverse();
+		}else{
+			sorted=1;
+		}
+		build(filelist.join('|'));
 	}
 
 	function playSingle(single_song){
@@ -292,6 +301,7 @@
 			player.loop=false;
 		}
 		song.src=document.getElementById('sub_dir').value+single_song;
+		document.getElementById('playing').innerHTML=filelist[index];
 		player.load();
 		player.play();
 	}
@@ -318,6 +328,7 @@
 		if(index<filelist.length){
 			if(document.getElementsByClassName('song_selection')[index].checked){
 				song.src=document.getElementById('sub_dir').value+filelist[index];
+				document.getElementById('playing').innerHTML=filelist[index];
 				player.load();
 				player.play();
 			}else{
@@ -362,26 +373,27 @@
 	
 </script>
 <div style="font-family:sans-serif;font-size:16px;width:100%;padding:15px;margin:auto;text-align:center;line-height:1.5em;width:97%;">
+	<input type="button" style="border-radius:50px;padding:5px;font-size:36px;height:75px;width:75px;font-weight:bold;" onclick="toggleAll();" value="[v]">&nbsp;
+	<input type="button" style="border-radius:50px;padding:5px;font-size:36px;height:75px;width:75px;font-weight:bold;" onclick="sort();" value="^^">&nbsp;
+	<input type="button" style="border-radius:50px;padding:5px;font-size:36px;height:75px;width:75px;font-weight:bold;" onclick="shuffle();" value="~"><br>
+	<input type="button" style="border-radius:50px;padding:5px;font-size:36px;height:75px;width:75px;font-weight:bold;" onclick="index--;playNext();" value="<<">&nbsp;
+	<input type="button" style="border-radius:50px;padding:5px;font-size:36px;height:75px;width:75px;font-weight:bold;" onclick="index++;playNext();" value=">>">&nbsp;
+	<input type="button" style="border-radius:50px;padding:5px;font-size:36px;height:75px;width:75px;font-weight:bold;" onclick="playAll();" value=">">&nbsp;
+	<br>
+	<input type="checkbox" style="width:25px;height:25px;vertical-align:middle;" id="repeat" onclick="if(!this.checked){player.loop=false;}"> Loop<br>
+	<hr>
+	<strong><em>Playing: <span id="playing">-nothing-</span></em></strong><br>
+	<audio id="player" controls="" data-ss1720795397="1"><source id="song" src="" type="audio/mpeg"></audio>
+	<hr>
 	PICK MUSIC DIRECTORY: <input type="file" webkitdirectory="" onchange="reading='';[].slice.call(this.files).forEach(function(v){reading+='|'+v.name;});reading=reading.substr(1);process();">
 	<input type="button" id="export_button" onclick="document.getElementById('list_import').select();document.execCommand('copy');window.open('mailto:youremailaddress@service.com?subject=Music%20Player%20Export&amp;body=%5B-paste%20here-%5D');" value="Export Songs">&nbsp;
 	<br>
 	<strong><em>-OR-</em></strong><br>
-	<textarea onblur="importFileList();process();" id="list_import" style="width:95%;height:50px;font-size:14px;font-family:'ArchivoNarrow'" placeholder="-song filename-list import-"></textarea><br>
-	SUB-DIR: <input oninput="process();" id="sub_dir" type="text" style="width:300px;font-size:16px;font-family:'ArchivoNarrow'" placeholder="-subdirectory of player dir (with '/')-"><br>
+	<textarea onblur="importFileList();process();" id="list_import" style="width:150px;height:27px;font-size:10px;font-family:'ArchivoNarrow';vertical-align:middle;" placeholder="-song filename-list import-"></textarea>
+	SUB-DIR: <input oninput="process();" id="sub_dir" type="text" style="width:200px;font-size:14px;font-family:'ArchivoNarrow';vertical-align:middle;" placeholder="-subdirectory of player dir (with '/')-"><br>
 	<hr>
-	<a name="top"></a>FILTER: <input id="filter" type="text" style="width:200px;font-size:16px;font-family:'ArchivoNarrow'" placeholder="-show only files containing [...]-" oninput="process();"><br><br>
-	<input type="button" style="border-radius:15px;padding:5px;font-size:12px;height:50px;" onclick="toggleAll();" value="Toggle">&nbsp;
-	<input type="button" style="border-radius:15px;padding:5px;font-size:12px;height:50px;" onclick="shuffle();" value="Shuffle">&nbsp;
-	<input type="button" style="border-radius:15px;padding:5px;font-size:12px;height:50px;" onclick="sort();" value="Sort">&nbsp;
-	<input type="button" style="border-radius:15px;padding:5px;font-size:12px;height:50px;" onclick="index--;playNext();" value=" < ">&nbsp;
-	<input type="button" style="border-radius:15px;padding:5px;font-size:12px;height:50px;" onclick="index++;playNext();" value=" > ">&nbsp;
-	<input type="button" style="border-radius:15px;padding:5px;font-size:12px;height:50px;" onclick="playAll();" value="Play">&nbsp;
-	<br>
-	<input type="checkbox" style="width:25px;height:25px;vertical-align:middle;" id="repeat" onclick="if(!this.checked){player.loop=false;}">Loop<br>
-	<hr>
-	<audio id="player" controls="" data-ss1720558195="1"><source id="song" src="" type="audio/mpeg"></audio>
-	<hr>
-	<div id="list">-noth'n here, load or enter something-</div>
+	<a name="top"></a>FILTER: <input id="filter" type="text" style="width:200px;font-size:16px;font-family:'ArchivoNarrow'" placeholder="-show only files containing [...]-" oninput="process();">
+	<div id="list"><input type="checkbox" style="width:25px;height:25px;vertical-align:middle;" checked="" class="song_selection"> - <input type="text" style="width:75%;font-size:10px;font-family:ArchivoNarrow" value="" ondblclick="index=0;playSingle(this.value);" readonly=""><br></div>
 	<hr>
 	<input type="button" style="border-radius:15px;padding:5px;font-size:16px;" onclick="document.location.href='#top';" value=" ^ top ">&nbsp;
 </div>
@@ -393,6 +405,7 @@
 		document.getElementById('sub_dir').value=localStorage.getItem(local_storage_handle_note).split('!~!')[1];
 	}
 	process();
+	shuffle();
 </script>
 </div><div style="clear:both;">&nbsp;</div><hr><div style="width:65px;float:left;"><span title="Move up" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(0,'4051731538');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAdUlEQVR42m1NuQ2AMAw8sgNjsADL0FHTeQvkLZiAlJSpEYooMD2KMgQ4QUIgcc3Z99gACFwTlFm80qCTYal0LHSzUm0o0fQGmDcVETuXiOwZUtmKb8EiQdPcJucweIFQT3KmDEvInyj7bhn3OxHXfPDTevCvXjOnKXEFcZQuAAAAAElFTkSuQmCC">&nbsp;</span><span title="Move down" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(1,'4051731538');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAZ0lEQVR42mNgYChnmHD7CgOQBlFgZjkTAxgwggVjgawC1cUgsXwVIKENkZmQBlLyHKoUCJBZaS5AKgCsohyoFGhqGpQsRxiPBpgYrNxvb9OD8wO2dWxLA7sBzDXY9t/plnVfwTEQBwBlXiHWjsWwaQAAAABJRU5ErkJggg==">&nbsp;</span></div><div style="width:45px;float:right;"><span title="REMOVE" style="background-color:#770000;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="if(confirm('DELETE?')){removeWiki('4051731538');}">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAnUlEQVR42mNkwA12AbErlH0MiK2xKWLEophYADYUZsB/ICBJNyMjI4SC8mcDcQqJLpgL0gMzwMHd3X3/jh07iNLp4eHBsHPnTkcg8wCGAXFxcQyfP39mWL9+PZj9/v17hs2bNzOEhoYy/PjxA8zGawDUb6BAwckeNWDQGwCSfPXqFcO5c+fwsnEaQG5KlALii0AsQmQ+eAvERkD8CAD5O8gRRpPKTQAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></div><div style="width:45px;float:right;"><span title="EDIT" style="background-color:#007700;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="editWiki('4051731538');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABbElEQVR42rWTO2vCUBTH/7FDhoAEbA0dBEHBRdz9DnXo4mQJwUmnDAHN0EDTJWPmOqibg9BFp3wFN10sGHETHwQE6VBLmnP7oAUfaaEHLtzD5fe759wHhz9EJpO5c8fj5xfA4n4Lx2Ixs9Vq3eq6jqfRSOcCw7UPPARr54egQqGAbreLTqeDeDwORVHQaDSgaZpJFcwjkYiUSCT2wvl8Hu12G4ZhYDAYQBAEVCoV3JRK96v12iCBL4oiPM87WHa9XofruvB9n1VCQlmWWfsnBQRPp1Nst1v0+33UajWYpgme508LCF4sFmx8wtRKsVik/LiA4OVyyeBer8dgy7LYgVL+we4X2LaNZrMJSZLgOM4XTJFMJjGbzY4LcrkchsMhm3+HQwkmkwnS6TSy2SzK5TJUVf3R2kkBLe52O6RSqb23EqqFY/EvgjnHcVI0Gg0l2Gw29CJXwfSCCc6Aq9f3z3QZykAbAtXgAz5S8gbiBb+FSaOmpAAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></div><hr style="clear:both;position:relative;top:5px;"></div><!--~--></div><!-- CONTENT PANEL END -->
 
