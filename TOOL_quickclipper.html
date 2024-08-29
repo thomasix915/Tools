@@ -172,11 +172,11 @@
 	<body cz-shortcut-listen="true">
 		<span style="font-size:24px;font-weight:bold;" id="page_title" ondblclick="changeTitle();">QUICK-CLIPPER</span>
 		<div style="float:right; width:500px; text-align:right;">
-			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px; color: rgb(255, 255, 255); background-color: rgb(0, 153, 0);" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
+			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px;" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
 			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
-			<span title="EXPORT TOOL ONLY" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'><head><meta charset='+String.fromCharCode(34)+'UTF-8'+String.fromCharCode(34)+'><meta name='+String.fromCharCode(34)+'viewport'+String.fromCharCode(34)+' content='+String.fromCharCode(34)+'width=device-width'+String.fromCharCode(34)+'></head><body>'+document.getElementById('nanowiki_panel').firstElementChild.firstElementChild.nextElementSibling.innerHTML+'</body></html>');" onmouseout="this.href='#';" download="nanowiki_te.html">&nbsp;=&gt;&nbsp;[T]&nbsp;</a></span>
+			<span title="EXPORT TOOL ONLY" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'><head><meta charset='+String.fromCharCode(34)+'UTF-8'+String.fromCharCode(34)+'><meta name='+String.fromCharCode(34)+'viewport'+String.fromCharCode(34)+' content='+String.fromCharCode(34)+'width=device-width'+String.fromCharCode(34)+'></head><body>'+document.getElementById('nanowiki_panel').firstElementChild.firstElementChild.nextElementSibling.innerHTML+'</body></html>');" onmouseout="this.href='#';" download="TOOL_quickclipper.html">&nbsp;=&gt;&nbsp;[T]&nbsp;</a></span>
 			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="nanowiki_te.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
-			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">8/14/2024, 2:00:01 PM</span></div>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">8/27/2024, 10:21:01 AM</span></div>
 		</div>
 		<div style="clear:both; display:none;" id="help">
 			WHAT IS THIS?<br>
@@ -225,7 +225,7 @@
 <script>
 	var local_storage_handle_note='quickclipper-'+window.location.pathname.substring(window.location.pathname.lastIndexOf("/")+1).replace(/%20/g," ");
 	if((localStorage.getItem(local_storage_handle_note)==undefined) || (localStorage.getItem(local_storage_handle_note)=='')){localStorage.setItem(local_storage_handle_note,'');}
-	var quickclipper = localStorage.getItem(local_storage_handle_note).split('|');quickclipper.unshift('');
+	var quickclipper = localStorage.getItem(local_storage_handle_note).split('|');
 	var now = new Date();var localDate=now.toLocaleDateString();
 	var slot_count=200;
 	function msg(){
@@ -239,12 +239,22 @@
 		}
 		localStorage.setItem(local_storage_handle_note,all.slice(0, -1));
 	}
+	function srch(term){
+		for(x=0;x<slot_count;x++){
+			if(term.length && document.getElementById('clip'+x).value.toLowerCase().indexOf(term.toLowerCase())==-1){
+				document.getElementById('clip'+x).style.display='none';
+			}else{
+				document.getElementById('clip'+x).style.display='initial';
+			}
+		}
+	}
 </script>
 <div id="message" style="text-align: center; background-color: rgb(0, 153, 0); color: rgb(255, 255, 255); border-radius: 25px; padding: 5px; margin-bottom: 5px;">-ready-</div>
 SELF COUNTER: <input type="number" id="count" style="width:50px;font-size:32px;border-color:#eee;" value="0">
 <input type="button" value="+" onclick="document.getElementById('count').value++;" style="font-size:32px;">
 <input type="button" value="-" onclick="document.getElementById('count').value--;" style="font-size:32px;"> |
 <input type="button" value="CLEAR ALL" onclick="if(confirm('CLEAR ALL?')){for(x=0;x<slot_count;x++){document.getElementById('clip'+x).value='';}storeNote();}" style="font-size:32px;">
+<input type="text" id="srch" style="width:250px;font-size:32px;border-color:#eee;" placeholder="[-search-]" oninput="srch(this.value);">
 <hr>
 <div id="slot_panel"></div>
 
