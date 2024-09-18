@@ -175,7 +175,7 @@
 			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px; color: rgb(255, 255, 255); background-color: rgb(0, 153, 0);" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
 			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
 			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="TOOL_image_resizer.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
-			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">9/18/2024, 10:10:28 AM</span></div>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">9/18/2024, 10:20:58 AM</span></div>
 		</div>
 		<div style="clear:both; display:none;" id="help">
 			WHAT IS THIS?<br>
@@ -243,25 +243,17 @@ function imageResizerResize1(){
 		var ratio=1;
 	}
 	var ctx=canvas.getContext('2d');
-	if(document.getElementById('crop').checked){
-		canvas.width=document.getElementById('image_resizer_can1').value;
-		canvas.height=document.getElementById('image_resizer_can2').value;
-		var offset_x=document.getElementById('image_resizer_off1').value;
-		var offset_y=document.getElementById('image_resizer_off2').value;
-	}else{
-		canvas.width=side_length;
-		canvas.height=side_length/ratio;
-		var offset_x=0;var offset_y=0;
-	}
+	canvas.width=document.getElementById('image_resizer_can1').value;
+	canvas.height=document.getElementById('image_resizer_can2').value;
+	var offset_x=document.getElementById('image_resizer_off1').value;
+	var offset_y=document.getElementById('image_resizer_off2').value;
 	if(ratio>1){
-		if(document.getElementById('crop').checked){
-			ctx.save();
-			ctx.translate(side_length/2,side_length/ratio/2);
-			ctx.rotate(document.getElementById('image_resizer_rot').value*0.0174533);
-			ctx.translate(side_length/-2,side_length/ratio/-2);
-		}
+		ctx.save();
+		ctx.translate(side_length/2,side_length/ratio/2);
+		ctx.rotate(document.getElementById('image_resizer_rot').value*0.0174533);
+		ctx.translate(side_length/-2,side_length/ratio/-2);
 		ctx.drawImage(img,offset_x,offset_y,side_length,side_length/ratio);
-		if(document.getElementById('crop').checked){ctx.restore;}
+		ctx.restore;
 		if(document.getElementById('jpg').checked){
 			document.getElementById('image_output').src=canvas.toDataURL('image/jpeg',0.9);
 		}else{
@@ -270,14 +262,12 @@ function imageResizerResize1(){
 		document.getElementById('image_resizer_dim2').value=Math.round(side_length/ratio);
 		document.getElementById('image_resizer_dim_slide2').value=Math.round(side_length/ratio);
 	}else{
-		if(document.getElementById('crop').checked){
-			ctx.save();
-			ctx.translate(side_length/2,side_length/ratio/2);
-			ctx.rotate(document.getElementById('image_resizer_rot').value*0.0174533);
-			ctx.translate(side_length/-2,side_length/ratio/-2);
-		}
+		ctx.save();
+		ctx.translate(side_length/2,side_length/ratio/2);
+		ctx.rotate(document.getElementById('image_resizer_rot').value*0.0174533);
+		ctx.translate(side_length/-2,side_length/ratio/-2);
 		ctx.drawImage(img,offset_x,offset_y,side_length,side_length/ratio);
-		if(document.getElementById('crop').checked){ctx.restore;}
+		ctx.restore;
 		if(document.getElementById('jpg').checked){
 			document.getElementById('image_output').src=canvas.toDataURL('image/jpeg',0.9);
 		}else{
@@ -304,25 +294,17 @@ function imageResizerResize2(){
 		var ratio=1;
 	}
 	var ctx=canvas.getContext('2d');
-	if(document.getElementById('crop').checked){
-		canvas.width=document.getElementById('image_resizer_can1').value;
-		canvas.height=document.getElementById('image_resizer_can2').value;
-		var offset_x=document.getElementById('image_resizer_off1').value;
-		var offset_y=document.getElementById('image_resizer_off2').value;
-	}else{
-		canvas.width=side_height*ratio;
-		canvas.height=side_height;
-		var offset_x=0;var offset_y=0;
-	}
+	canvas.width=document.getElementById('image_resizer_can1').value;
+	canvas.height=document.getElementById('image_resizer_can2').value;
+	var offset_x=document.getElementById('image_resizer_off1').value;
+	var offset_y=document.getElementById('image_resizer_off2').value;
 	if(ratio>1){
-		if(document.getElementById('crop').checked){
-			ctx.save();
-			ctx.translate(side_height*ratio/2,side_height/2);
-			ctx.rotate(document.getElementById('image_resizer_rot').value*0.0174533);
-			ctx.translate(side_height*ratio/-2,side_height/-2);
-		}
+		ctx.save();
+		ctx.translate(side_height*ratio/2,side_height/2);
+		ctx.rotate(document.getElementById('image_resizer_rot').value*0.0174533);
+		ctx.translate(side_height*ratio/-2,side_height/-2);
 		ctx.drawImage(img,offset_x,offset_y,side_height*ratio,side_height);
-		if(document.getElementById('crop').checked){ctx.restore;}
+		ctx.restore;
 		if(document.getElementById('jpg').checked){
 			document.getElementById('image_output').src=canvas.toDataURL('image/jpeg',0.9);
 		}else{
@@ -331,14 +313,12 @@ function imageResizerResize2(){
 		document.getElementById('image_resizer_dim1').value=Math.round(side_height*ratio);
 		document.getElementById('image_resizer_dim_slide1').value=Math.round(side_height*ratio);
 	}else{
-		if(document.getElementById('crop').checked){
-			ctx.save();
-			ctx.translate(side_height*ratio/2,side_height/2);
-			ctx.rotate(document.getElementById('image_resizer_rot').value*0.0174533);
-			ctx.translate(side_height*ratio/-2,side_height/-2);
-		}
+		ctx.save();
+		ctx.translate(side_height*ratio/2,side_height/2);
+		ctx.rotate(document.getElementById('image_resizer_rot').value*0.0174533);
+		ctx.translate(side_height*ratio/-2,side_height/-2);
 		ctx.drawImage(img,offset_x,offset_y,side_height*ratio,side_height);
-		if(document.getElementById('crop').checked){ctx.restore;}
+		ctx.restore;
 		if(document.getElementById('jpg').checked){
 			document.getElementById('image_output').src=canvas.toDataURL('image/jpeg');
 		}else{
@@ -350,12 +330,11 @@ function imageResizerResize2(){
 	b64x();
 }
 function valueTransfer(){
-	if(!document.getElementById('crop').checked){
-	document.getElementById('image_resizer_can1').value=document.getElementById('image_resizer_dim1').value;
-	document.getElementById('image_resizer_can2').value=document.getElementById('image_resizer_dim2').value;
-	document.getElementById('image_resizer_can_slide1').value=document.getElementById('image_resizer_dim1').value;
-	document.getElementById('image_resizer_can_slide2').value=document.getElementById('image_resizer_dim2').value;
-	document.getElementById('image_resizer_off1').value=0;document.getElementById('image_resizer_off_slide1').value=0;document.getElementById('image_resizer_off2').value=0;document.getElementById('image_resizer_off_slide2').value=0;}
+document.getElementById('image_resizer_can1').value=document.getElementById('image_resizer_dim1').value;
+document.getElementById('image_resizer_can2').value=document.getElementById('image_resizer_dim2').value;
+document.getElementById('image_resizer_can_slide1').value=document.getElementById('image_resizer_dim1').value;
+document.getElementById('image_resizer_can_slide2').value=document.getElementById('image_resizer_dim2').value;
+document.getElementById('image_resizer_off1').value=0;document.getElementById('image_resizer_off_slide1').value=0;document.getElementById('image_resizer_off2').value=0;document.getElementById('image_resizer_off_slide2').value=0;
 }
 function getDims(){
 	org_width=document.getElementById('image_resizer_org').width;
@@ -433,9 +412,7 @@ function b64x(){
 	<tr>
 		<td colspan="2" style="text-align:center;">
 			<input type="button" value="RESET TO ORIGINAL" onclick="setDims();">
-			<input type="checkbox" id="retain"> RETAIN SETTINGS ON IMG LOAD | 
-			<input type="checkbox" id="crop" onclick="if(this.checked){document.getElementById('cropper').style.display='block';valueTransfer();imageResizerResize1();}else{document.getElementById('cropper').style.display='none';imageResizerResize1();}">
-			CROP/ROTATE IMAGE | OUTPUT: <input type="radio" name="image_type" id="jpg" checked="checked" onclick="imageResizerResize1();">JPG <input type="radio" name="image_type" id="png" onclick="imageResizerResize1();">PNG
+			<input type="checkbox" id="retain"> RETAIN SETTINGS ON IMG LOAD | OUTPUT: <input type="radio" name="image_type" id="jpg" checked="checked" onclick="imageResizerResize1();">JPG <input type="radio" name="image_type" id="png" onclick="imageResizerResize1();">PNG
 		</td>
 	</tr>
 	<tr>
@@ -509,9 +486,7 @@ Border-Color: <input type="color" id="border_color" value="#fff" oninput="imageR
 if(location.search.indexOf('dim=')>0){
 	var dim=location.search.substr(5).split('x');
 	if(dim.length==1){dim.push(dim[0]);}
-	document.getElementById('cropper').style.display='block';
 	document.getElementById('retain').checked=true;
-	document.getElementById('crop').checked=true;
 	document.getElementById('image_resizer_dim1').value=dim[0];
 	document.getElementById('image_resizer_dim2').value=dim[1];
 	document.getElementById('image_resizer_dim_slide1').value=dim[0];
