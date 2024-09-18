@@ -175,7 +175,7 @@
 			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px; color: rgb(255, 255, 255); background-color: rgb(0, 153, 0);" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
 			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
 			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="TOOL_image_resizer.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
-			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">6/7/2024, 9:49:34 AM</span></div>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">9/18/2024, 10:10:28 AM</span></div>
 		</div>
 		<div style="clear:both; display:none;" id="help">
 			WHAT IS THIS?<br>
@@ -403,46 +403,85 @@ function b64x(){
 	}
 }
 </script>
+<table style="width:100%">
+	<tbody><tr>
+		<td colspan="2" style="text-align:center;">
+			PASTE ([CTRL]+[V]) or LOAD IMAGE: <input type="file" id="file" onchange="var reader=new FileReader();reader.readAsDataURL(this.files[0]);reader.onload=function(){document.querySelector('#image_resizer_org').src=reader.result;setTimeout('getDims();imageResizerResize1();reDim()',100);}"><br>
+		</td>
+	</tr>
+	<tr>
+		<td style="width:200px">
+			Image-Width: <input type="number" id="image_resizer_dim1" style="width:50px;vertical-align:middle;" value="32" oninput="document.getElementById('image_resizer_dim_slide1').value=this.value;valueTransfer();imageResizerResize1();">px
+		</td>
+		<td>
+			<input style="width:100%;vertical-align:middle;" value="32" id="image_resizer_dim_slide1" type="range" min="0" max="2000" oninput="document.getElementById('image_resizer_dim1').value=this.value;valueTransfer();imageResizerResize1();"><br>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Image-Height: <input type="number" id="image_resizer_dim2" style="width:50px;vertical-align:middle;" value="32" oninput="document.getElementById('image_resizer_dim_slide2').value=this.value;valueTransfer();imageResizerResize2();">px 
+		</td>
+		<td>
+			<input style="width:100%;vertical-align:middle;" value="32" id="image_resizer_dim_slide2" type="range" min="0" max="2000" oninput="document.getElementById('image_resizer_dim2').value=this.value;valueTransfer();imageResizerResize2();">
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<hr>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" style="text-align:center;">
+			<input type="button" value="RESET TO ORIGINAL" onclick="setDims();">
+			<input type="checkbox" id="retain"> RETAIN SETTINGS ON IMG LOAD | 
+			<input type="checkbox" id="crop" onclick="if(this.checked){document.getElementById('cropper').style.display='block';valueTransfer();imageResizerResize1();}else{document.getElementById('cropper').style.display='none';imageResizerResize1();}">
+			CROP/ROTATE IMAGE | OUTPUT: <input type="radio" name="image_type" id="jpg" checked="checked" onclick="imageResizerResize1();">JPG <input type="radio" name="image_type" id="png" onclick="imageResizerResize1();">PNG
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Frame-Width: <input type="number" id="image_resizer_can1" style="width:60px;vertical-align:middle;" value="32" oninput="document.getElementById('image_resizer_can_slide1').value=this.value;valueTransfer();imageResizerResize1();">px 
+		</td>
+		<td>
+			<input style="width:100%;vertical-align:middle;" value="32" id="image_resizer_can_slide1" type="range" min="0" max="2000" oninput="document.getElementById('image_resizer_can1').value=this.value;valueTransfer();imageResizerResize1();"><br>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Frame-Height: <input type="number" id="image_resizer_can2" style="width:60px;vertical-align:middle;" value="32" oninput="document.getElementById('image_resizer_can_slide2').value=this.value;valueTransfer();
+			imageResizerResize2();">px 
+		</td>
+		<td>
+			<input style="width:100%;
+			vertical-align:middle;" value="32" id="image_resizer_can_slide2" type="range" min="0" max="2000" oninput="document.getElementById('image_resizer_can2').value=this.value;valueTransfer();imageResizerResize2();"><br>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Image-Offset X: <input type="number" id="image_resizer_off1" style="width:60px;vertical-align:middle;" value="0" oninput="document.getElementById('image_resizer_off_slide1').value=this.value;valueTransfer();imageResizerResize1();">px 
+		</td>
+		<td>
+			<input style="width:100%;vertical-align:middle;" value="0" id="image_resizer_off_slide1" type="range" min="-2000" max="2000" oninput="document.getElementById('image_resizer_off1').value=this.value;valueTransfer();imageResizerResize1();"><br>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Image-Offset Y: <input type="number" id="image_resizer_off2" style="width:60px;vertical-align:middle;" value="0" oninput="document.getElementById('image_resizer_off_slide2').value=this.value;valueTransfer();imageResizerResize2();">px 
+		</td>
+		<td>
+			<input style="width:100%;vertical-align:middle;" value="0" id="image_resizer_off_slide2" type="range" min="-2000" max="2000" oninput="document.getElementById('image_resizer_off2').value=this.value;valueTransfer();imageResizerResize2();"><br>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Image-Angle: <input type="number" id="image_resizer_rot" style="width:60px;vertical-align:middle;" value="0" oninput="document.getElementById('image_resizer_rot_slide').value=this.value;valueTransfer();imageResizerResize2();">deg 
+		</td>
+		<td>
+			<input style="width:100%;vertical-align:middle;" value="0" id="image_resizer_rot_slide" type="range" min="0" max="360" step="0.1" oninput="document.getElementById('image_resizer_rot').value=this.value;valueTransfer();imageResizerResize2();"><br>
+		</td>
+	</tr>
+</tbody></table>
 <div style="text-align:center;">
-	PASTE ([CTRL]+[V]) or LOAD IMAGE: <input type="file" id="file" onchange="var reader=new FileReader();reader.readAsDataURL(this.files[0]);reader.onload=function(){document.querySelector('#image_resizer_org').src=reader.result;setTimeout('getDims();imageResizerResize1();reDim()',100);}"><br>
-	Image-Width: <input type="number" id="image_resizer_dim1" style="width:50px;vertical-align:middle;" value="32" oninput="document.getElementById('image_resizer_dim_slide1').value=this.value;valueTransfer();
-	imageResizerResize1();">px 
-	<input style="width:80%;vertical-align:middle;" value="32" id="image_resizer_dim_slide1" type="range" min="0" max="2000" oninput="document.getElementById('image_resizer_dim1').value=this.value;valueTransfer();imageResizerResize1();"><br>
-	Image-Height: <input type="number" id="image_resizer_dim2" style="width:50px;vertical-align:middle;" value="32" oninput="document.getElementById('image_resizer_dim_slide2').value=this.value;valueTransfer();imageResizerResize2();">px 
-	<input style="width:80%;vertical-align:middle;" value="32" id="image_resizer_dim_slide2" type="range" min="0" max="2000" oninput="document.getElementById('image_resizer_dim2').value=this.value;valueTransfer();imageResizerResize2();">
-	<hr>
-	<input type="button" value="RESET TO ORIGINAL" onclick="setDims();">
-	<input type="checkbox" id="retain"> RETAIN SETTINGS ON IMG LOAD | 
-	<input type="checkbox" id="crop" onclick="if(this.checked){document.getElementById('cropper').style.display='block';valueTransfer();imageResizerResize1();}else{document.getElementById('cropper').style.display='none';imageResizerResize1();}">
-	CROP/ROTATE IMAGE | OUTPUT:
-	<input type="radio" name="image_type" id="jpg" checked="checked" onclick="imageResizerResize1();">JPG <input type="radio" name="image_type" id="png" onclick="imageResizerResize1();">PNG
-	<div id="cropper" style="display: block;">
-		Frame-Width: <input type="number" id="image_resizer_can1" style="width:60px;
-		vertical-align:middle;" value="32" oninput="document.getElementById('image_resizer_can_slide1').value=this.value;valueTransfer();imageResizerResize1();">px 
-		<input style="width:80%;vertical-align:middle;" value="32" id="image_resizer_can_slide1" type="range" min="0" max="2000" oninput="document.getElementById('image_resizer_can1').value=this.value;valueTransfer();imageResizerResize1();"><br>
-		Frame-Height: <input type="number" id="image_resizer_can2" style="width:60px;vertical-align:middle;" value="32" oninput="document.getElementById('image_resizer_can_slide2').value=this.value;valueTransfer();
-		imageResizerResize2();">px 
-		<input style="width:80%;
-		vertical-align:middle;" value="32" id="image_resizer_can_slide2" type="range" min="0" max="2000" oninput="document.getElementById('image_resizer_can2').value=this.value;valueTransfer();imageResizerResize2();"><br>
-		Image-Offset X: <input type="number" id="image_resizer_off1" style="width:60px;
-		vertical-align:middle;" value="0" oninput="document.getElementById('image_resizer_off_slide1').value=this.value;
-		valueTransfer();
-		imageResizerResize1();">px 
-		<input style="width:80%;
-		vertical-align:middle;" value="0" id="image_resizer_off_slide1" type="range" min="-2000" max="2000" oninput="document.getElementById('image_resizer_off1').value=this.value;valueTransfer();imageResizerResize1();"><br>
-		Image-Offset Y: <input type="number" id="image_resizer_off2" style="width:60px;
-		vertical-align:middle;" value="0" oninput="document.getElementById('image_resizer_off_slide2').value=this.value;
-		valueTransfer();
-		imageResizerResize2();">px 
-		<input style="width:80%;
-		vertical-align:middle;" value="0" id="image_resizer_off_slide2" type="range" min="-2000" max="2000" oninput="document.getElementById('image_resizer_off2').value=this.value;valueTransfer();imageResizerResize2();"><br>
-		Image-Angle: <input type="number" id="image_resizer_rot" style="width:60px;
-		vertical-align:middle;" value="0" oninput="document.getElementById('image_resizer_rot_slide').value=this.value;
-		valueTransfer();
-		imageResizerResize2();">deg 
-		<input style="width:80%;
-		vertical-align:middle;" value="0" id="image_resizer_rot_slide" type="range" min="0" max="360" step="0.1" oninput="document.getElementById('image_resizer_rot').value=this.value;valueTransfer();imageResizerResize2();"><br>
-	</div>
 	<hr>
 	<img id="image_resizer_org" src="" style="position:absolute;top:-10000px;left:-10000px;">
 	<div style="text-align:center;">
