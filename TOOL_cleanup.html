@@ -175,7 +175,7 @@
 			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px; color: rgb(255, 255, 255); background-color: rgb(0, 153, 0);" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
 			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
 			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="TOOL_cleanup.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
-			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">10/6/2023, 4:18:12 PM</span></div>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">2/21/2025, 12:12:51 PM</span></div>
 		</div>
 		<div style="clear:both; display:none;" id="help">
 			WHAT IS THIS?<br>
@@ -221,7 +221,9 @@
 		</div>
 		<hr style="clear:both;">
 		<!-- CONTENT PANEL START --><div id="nanowiki_panel"><div id="5186980029" style="border:#cccccc solid 1px; margin:5px; padding:5px; border-radius:5px;"><div class="title" id="title5186980029">Clean up Copy &amp; Paste from Rich-Text Sources - double-click copies</div><div id="content5186980029"><hr><div id="message" style="text-align:center;background-color:#009900;color:#ffffff;border-radius:25px; padding:5px; margin-bottom:5px;">-ready-</div>
-<div id="visual" contenteditable="true" style="width:45%;height:300px;border:#000 solid 1px; display:inline-block; overflow:auto;" onkeyup="document.getElementById('source').value=this.innerHTML.replace(/>/g, '>\n');" ondblclick="window.getSelection().selectAllChildren(this);document.execCommand('copy');msg('-COPIED!-');">
+<strong>FORCE VISUAL DISPLAY</strong>: <input type="checkbox" id="font_face" oninput="if(document.getElementById('font_face').checked){document.getElementById('visual').style.fontFamily='sans-serif';}else{document.getElementById('visual').style.fontFamily='initial';}">sans-serif
+<hr> 
+<div id="visual" contenteditable="true" style="width:45%;height:300px;border:#000 solid 1px; display:inline-block; overflow:auto;font-size:initial;font-family:initial;" onkeyup="document.getElementById('source').value=this.innerHTML.replace(/>/g, '>\n');" ondblclick="window.getSelection().selectAllChildren(this);document.execCommand('copy');msg('-COPIED!-');">
 </div><textarea id="source" style="width:45%;height:300px;" onkeyup="document.getElementById('visual').innerHTML=this.value;" ondblclick="this.select();document.execCommand('copy');msg('-COPIED!-');"></textarea>
 <script>
 function msg(msg_text){
@@ -252,11 +254,17 @@ function cleanUp(){
 	content=content.replace(/(<\/sub><sub>)/ig,'');
 	content=content.replace(/(<\/sup><sup>)/ig,'');
 	content=content.replace(/(<small([^>]+)>)/ig,'<br />');
+	content=content.replace(/(<li><br>)/ig,'<li>');
 	document.getElementById('visual').innerHTML=content;
 	document.getElementById('source').value=document.getElementById('visual').innerHTML;
 	removeSmall();
 	removeSpan();
 	removeU();
+}
+function removeStyle(){
+	content=document.getElementById('visual').innerHTML;
+	content=content.replace(/(style="(.*?)")/ig,'');
+	document.getElementById('visual').innerHTML=content;document.getElementById('source').value=document.getElementById('visual').innerHTML;
 }
 function removeSmall(){
 	content=document.getElementById('visual').innerHTML;
@@ -402,11 +410,13 @@ function openReplace(){
 	document.getElementById('visual').innerHTML=content;
 	document.getElementById('source').value=document.getElementById('visual').innerHTML;
 }
+document.getElementById('font_resize').value=parseInt(window.getComputedStyle(document.getElementById('visual'), null).getPropertyValue('font-size'));
 </script>
 <hr>
 <input type="button" onclick="cleanUp();" value="CLEAN UP">
 <input type="button" onclick="removeComments();" value="[x] all comments">
 <input type="button" onclick="removeSmall();" value="[x] [small]">
+<input type="button" onclick="removeStyle();" value="[x] -style-">
 <input type="button" onclick="removeSpan();" value="[x] [span]">
 <input type="button" onclick="removeU();" value="[x] [u]">
 <input type="button" onclick="removeAnchor();" value="[x] [a]">
