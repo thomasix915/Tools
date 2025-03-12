@@ -172,10 +172,10 @@
 	<body cz-shortcut-listen="true">
 		<span style="font-size:24px;font-weight:bold;" id="page_title" ondblclick="changeTitle();">IMAGE RESIZER</span>
 		<div style="float:right; width:300px; text-align:right;">
-			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px; color: rgb(255, 255, 255); background-color: rgb(0, 153, 0);" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
+			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px;" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
 			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
-			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="TOOL_image_resizer.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
-			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">3/11/2025, 4:06:29 PM</span></div>
+			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="TOOL_image_resizer (1).html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">3/12/2025, 9:54:23 AM</span></div>
 		</div>
 		<div style="clear:both; display:none;" id="help">
 			WHAT IS THIS?<br>
@@ -255,39 +255,11 @@ function imageResizerResize1(){
 		ctx.drawImage(img,offset_x,offset_y,side_length,side_length/ratio);
 
 		if(document.getElementById('sharpen').checked){
-			ctx.putImageData(unsharpMask(ctx.getImageData(0, 0, canvas.width, canvas.height), document.getElementById('sharp_r').value, document.getElementById('sharp_a').value, 0), 0, 0);
-/*
-			strength=1;
-			const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-			const data = imageData.data;
-			const newImageData = ctx.createImageData(canvas.width, canvas.height);
-			const newData = newImageData.data;
-			const kernel = [
-			0, -1, 0,
-			-1, 5, -1,
-			0, -1, 0
-			];
-			for (let y = 1; y < canvas.height - 1; y++) {
-			for (let x = 1; x < canvas.width - 1; x++) {
-			let r = 0, g = 0, b = 0;
-			for (let ky = -1; ky <= 1; ky++) {
-			for (let kx = -1; kx <= 1; kx++) {
-			const pixelIndex = ((x + kx) + (y + ky) * canvas.width) * 4;
-			const kernelValue = kernel[(kx + 1) + (ky + 1) * 3];
-			r += data[pixelIndex] * kernelValue;
-			g += data[pixelIndex + 1] * kernelValue;
-			b += data[pixelIndex + 2] * kernelValue;
+			if(document.getElementById('quick_sharpen2').checked){
+				ctx.putImageData(unsharpMask(ctx.getImageData(0, 0, canvas.width, canvas.height), document.getElementById('sharp_r').value, document.getElementById('sharp_a').value, 0), 0, 0);
+			}else{
+				quickSharpen(ctx);
 			}
-			}
-			const newPixelIndex = (x + y * canvas.width) * 4;
-			newData[newPixelIndex] = Math.max(0, Math.min(255, r * strength));
-			newData[newPixelIndex + 1] = Math.max(0, Math.min(255, g * strength));
-			newData[newPixelIndex + 2] = Math.max(0, Math.min(255, b * strength));
-			newData[newPixelIndex + 3] = 255; // Alpha
-			}
-			}
-			ctx.putImageData(newImageData, 0, 0);
-*/
 		}
 
 		ctx.restore;
@@ -306,39 +278,11 @@ function imageResizerResize1(){
 		ctx.drawImage(img,offset_x,offset_y,side_length,side_length/ratio);
 
 		if(document.getElementById('sharpen').checked){
-			ctx.putImageData(unsharpMask(ctx.getImageData(0, 0, canvas.width, canvas.height), document.getElementById('sharp_r').value, document.getElementById('sharp_a').value, 0), 0, 0);
-/*
-			strength=1;
-			const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-			const data = imageData.data;
-			const newImageData = ctx.createImageData(canvas.width, canvas.height);
-			const newData = newImageData.data;
-			const kernel = [
-			0, -1, 0,
-			-1, 5, -1,
-			0, -1, 0
-			];
-			for (let y = 1; y < canvas.height - 1; y++) {
-			for (let x = 1; x < canvas.width - 1; x++) {
-			let r = 0, g = 0, b = 0;
-			for (let ky = -1; ky <= 1; ky++) {
-			for (let kx = -1; kx <= 1; kx++) {
-			const pixelIndex = ((x + kx) + (y + ky) * canvas.width) * 4;
-			const kernelValue = kernel[(kx + 1) + (ky + 1) * 3];
-			r += data[pixelIndex] * kernelValue;
-			g += data[pixelIndex + 1] * kernelValue;
-			b += data[pixelIndex + 2] * kernelValue;
+			if(document.getElementById('quick_sharpen2').checked){
+				ctx.putImageData(unsharpMask(ctx.getImageData(0, 0, canvas.width, canvas.height), document.getElementById('sharp_r').value, document.getElementById('sharp_a').value, 0), 0, 0);
+			}else{
+				quickSharpen(ctx);
 			}
-			}
-			const newPixelIndex = (x + y * canvas.width) * 4;
-			newData[newPixelIndex] = Math.max(0, Math.min(255, r * strength));
-			newData[newPixelIndex + 1] = Math.max(0, Math.min(255, g * strength));
-			newData[newPixelIndex + 2] = Math.max(0, Math.min(255, b * strength));
-			newData[newPixelIndex + 3] = 255; // Alpha
-			}
-			}
-			ctx.putImageData(newImageData, 0, 0);
-*/
 		}
 
 		ctx.restore;
@@ -380,40 +324,11 @@ function imageResizerResize2(){
 		ctx.drawImage(img,offset_x,offset_y,side_height*ratio,side_height);
 
 		if(document.getElementById('sharpen').checked){
-			ctx.putImageData(unsharpMask(ctx.getImageData(0, 0, canvas.width, canvas.height), document.getElementById('sharp_r').value, document.getElementById('sharp_a').value, 0), 0, 0);
-
-/*
-			strength=1;
-			const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-			const data = imageData.data;
-			const newImageData = ctx.createImageData(canvas.width, canvas.height);
-			const newData = newImageData.data;
-			const kernel = [
-			0, -1, 0,
-			-1, 5, -1,
-			0, -1, 0
-			];
-			for (let y = 1; y < canvas.height - 1; y++) {
-			for (let x = 1; x < canvas.width - 1; x++) {
-			let r = 0, g = 0, b = 0;
-			for (let ky = -1; ky <= 1; ky++) {
-			for (let kx = -1; kx <= 1; kx++) {
-			const pixelIndex = ((x + kx) + (y + ky) * canvas.width) * 4;
-			const kernelValue = kernel[(kx + 1) + (ky + 1) * 3];
-			r += data[pixelIndex] * kernelValue;
-			g += data[pixelIndex + 1] * kernelValue;
-			b += data[pixelIndex + 2] * kernelValue;
+			if(document.getElementById('quick_sharpen2').checked){
+				ctx.putImageData(unsharpMask(ctx.getImageData(0, 0, canvas.width, canvas.height), document.getElementById('sharp_r').value, document.getElementById('sharp_a').value, 0), 0, 0);
+			}else{
+				quickSharpen(ctx);
 			}
-			}
-			const newPixelIndex = (x + y * canvas.width) * 4;
-			newData[newPixelIndex] = Math.max(0, Math.min(255, r * strength));
-			newData[newPixelIndex + 1] = Math.max(0, Math.min(255, g * strength));
-			newData[newPixelIndex + 2] = Math.max(0, Math.min(255, b * strength));
-			newData[newPixelIndex + 3] = 255; // Alpha
-			}
-			}
-			ctx.putImageData(newImageData, 0, 0);
-*/
 		}
 
 		ctx.restore;
@@ -432,39 +347,11 @@ function imageResizerResize2(){
 		ctx.drawImage(img,offset_x,offset_y,side_height*ratio,side_height);
 
 		if(document.getElementById('sharpen').checked){
-			ctx.putImageData(unsharpMask(ctx.getImageData(0, 0, canvas.width, canvas.height), document.getElementById('sharp_r').value, document.getElementById('sharp_a').value, 0), 0, 0);
-/*
-			strength=1;
-			const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-			const data = imageData.data;
-			const newImageData = ctx.createImageData(canvas.width, canvas.height);
-			const newData = newImageData.data;
-			const kernel = [
-			0, -1, 0,
-			-1, 5, -1,
-			0, -1, 0
-			];
-			for (let y = 1; y < canvas.height - 1; y++) {
-			for (let x = 1; x < canvas.width - 1; x++) {
-			let r = 0, g = 0, b = 0;
-			for (let ky = -1; ky <= 1; ky++) {
-			for (let kx = -1; kx <= 1; kx++) {
-			const pixelIndex = ((x + kx) + (y + ky) * canvas.width) * 4;
-			const kernelValue = kernel[(kx + 1) + (ky + 1) * 3];
-			r += data[pixelIndex] * kernelValue;
-			g += data[pixelIndex + 1] * kernelValue;
-			b += data[pixelIndex + 2] * kernelValue;
+			if(document.getElementById('quick_sharpen2').checked){
+				ctx.putImageData(unsharpMask(ctx.getImageData(0, 0, canvas.width, canvas.height), document.getElementById('sharp_r').value, document.getElementById('sharp_a').value, 0), 0, 0);
+			}else{
+				quickSharpen(ctx);
 			}
-			}
-			const newPixelIndex = (x + y * canvas.width) * 4;
-			newData[newPixelIndex] = Math.max(0, Math.min(255, r * strength));
-			newData[newPixelIndex + 1] = Math.max(0, Math.min(255, g * strength));
-			newData[newPixelIndex + 2] = Math.max(0, Math.min(255, b * strength));
-			newData[newPixelIndex + 3] = 255; // Alpha
-			}
-			}
-			ctx.putImageData(newImageData, 0, 0);
-*/
 		}
 
 		ctx.restore;
@@ -484,8 +371,6 @@ function unsharpMask(imageData, radius, amount, threshold) {
   const height = imageData.height;
   const data = imageData.data;
   const blurredData = new Uint8ClampedArray(data.length);
-
-  // Apply Gaussian blur (simplified for example)
   for (let y = 0; y < height; y++) {
     for (let x = 0; x < width; x++) {
       let r = 0, g = 0, b = 0, count = 0;
@@ -509,8 +394,6 @@ function unsharpMask(imageData, radius, amount, threshold) {
       blurredData[i + 3] = data[i + 3]; // Alpha
     }
   }
-
-  // Apply unsharp mask
   for (let i = 0; i < data.length; i += 4) {
     let diffR = data[i] - blurredData[i];
     let diffG = data[i + 1] - blurredData[i + 1];
@@ -521,6 +404,47 @@ function unsharpMask(imageData, radius, amount, threshold) {
   }
 
   return imageData;
+}
+
+
+function quickSharpen(ctx) {
+  const strength = 1;
+  const canvasWidth = ctx.canvas.width;
+  const canvasHeight = ctx.canvas.height;
+  const imageData = ctx.getImageData(0, 0, canvasWidth, canvasHeight);
+  const data = imageData.data;
+  const newImageData = ctx.createImageData(canvasWidth, canvasHeight);
+  const newData = newImageData.data;
+  const kernel = [
+    0, -1, 0,
+    -1, 5, -1,
+    0, -1, 0,
+  ];
+
+  for (let y = 1; y < canvasHeight - 1; y++) {
+    for (let x = 1; x < canvasWidth - 1; x++) {
+      const pixelIndex = (x + y * canvasWidth) * 4;
+      let r = 0, g = 0, b = 0;
+
+      for (let ky = -1; ky <= 1; ky++) {
+        for (let kx = -1; kx <= 1; kx++) {
+          const kernelValue = kernel[(kx + 1) + (ky + 1) * 3];
+          const neighborPixelIndex = ((x + kx) + (y + ky) * canvasWidth) * 4;
+
+          r += data[neighborPixelIndex] * kernelValue;
+          g += data[neighborPixelIndex + 1] * kernelValue;
+          b += data[neighborPixelIndex + 2] * kernelValue;
+        }
+      }
+
+      newData[pixelIndex] = Math.max(0, Math.min(255, r * strength));
+      newData[pixelIndex + 1] = Math.max(0, Math.min(255, g * strength));
+      newData[pixelIndex + 2] = Math.max(0, Math.min(255, b * strength));
+      newData[pixelIndex + 3] = 255; // Alpha
+    }
+  }
+
+  ctx.putImageData(newImageData, 0, 0);
 }
 
 function getDims(){
@@ -575,15 +499,15 @@ function b64x(){
 	}
 }
 </script>
-<table style="width:100%">
+<table style="width:100%" id="controls_container">
 	<tbody><tr>
 		<td colspan="2" style="text-align:center;">
-			PASTE ([CTRL]+[V]) or LOAD IMAGE: <input type="file" id="file" onchange="var reader=new FileReader();reader.readAsDataURL(this.files[0]);reader.onload=function(){document.querySelector('#image_resizer_org').src=reader.result;setTimeout('getDims();imageResizerResize1();reDim()',100);}"><br>
+			PASTE ([CTRL]+[V]) or LOAD IMAGE: <input type="file" id="file" onchange="var reader=new FileReader();reader.readAsDataURL(this.files[0]);reader.onload=function(){document.querySelector('#image_resizer_org').src=reader.result;setTimeout('getDims();imageResizerResize1();reDim()',100);}"> | <input type="checkbox" id="oversize" onclick="resizeControls(this.checked);"> OVERSIZE CONTROLS (for zooming out)<br>
 		</td>
 	</tr>
 	<tr>
 		<td style="width:200px">
-			Image-Width: <input type="number" id="image_resizer_dim1" style="width:50px;vertical-align:middle;" value="32" oninput="document.getElementById('image_resizer_dim_slide1').value=this.value;imageResizerResize1();">px
+			Image-Width: <input type="number" id="image_resizer_dim1" style="width:60px;vertical-align:middle;" value="32" oninput="document.getElementById('image_resizer_dim_slide1').value=this.value;imageResizerResize1();">px
 		</td>
 		<td>
 			<input style="width:100%;vertical-align:middle;" value="32" id="image_resizer_dim_slide1" type="range" min="0" max="2000" oninput="document.getElementById('image_resizer_dim1').value=this.value;imageResizerResize1();"><br>
@@ -591,7 +515,7 @@ function b64x(){
 	</tr>
 	<tr>
 		<td>
-			Image-Height: <input type="number" id="image_resizer_dim2" style="width:50px;vertical-align:middle;" value="32" oninput="document.getElementById('image_resizer_dim_slide2').value=this.value;imageResizerResize2();">px 
+			Image-Height: <input type="number" id="image_resizer_dim2" style="width:60px;vertical-align:middle;" value="32" oninput="document.getElementById('image_resizer_dim_slide2').value=this.value;imageResizerResize2();">px
 		</td>
 		<td>
 			<input style="width:100%;vertical-align:middle;" value="32" id="image_resizer_dim_slide2" type="range" min="0" max="2000" oninput="document.getElementById('image_resizer_dim2').value=this.value;imageResizerResize2();">
@@ -604,17 +528,17 @@ function b64x(){
 	</tr>
 	<tr>
 		<td colspan="2" style="text-align:center;">
-			<input type="button" value="RESET TO ORIGINAL" onclick="setDims();"><input type="button" value="IMAGE SIZE TO FRAME SIZE" onclick="imgToFrame();imageResizerResize1();">
-			<input type="checkbox" id="retain"> RETAIN SETTINGS ON IMG LOAD | 
-			<input type="checkbox" id="sharpen" onclick="imageResizerResize1();"> SHARPEN 
-			R: <input title="radius" type="number" id="sharp_r" step="1" style="width:30px;vertical-align:middle;text-align:right;" value="3" oninput="imageResizerResize1();">
-			A: <input title="amount" type="number" id="sharp_a" step="0.1" style="width:50px;vertical-align:middle;text-align:right;" value="0.5" oninput="imageResizerResize1();">
+			<input type="button" value="RESET DIMS" onclick="setDims();"> <input type="button" value="DIMS TO FRAME" onclick="imgToFrame();imageResizerResize1();">
+			<input type="checkbox" id="retain"> RETAIN DIMS | 
+			<input type="checkbox" id="sharpen" onclick="imageResizerResize1();"> SHARPEN - <input type="radio" id="quick_sharpen1" name="quick_sharpen" onclick="imageResizerResize1();" checked="">Quick <input type="radio" id="quick_sharpen2" name="quick_sharpen" onclick="imageResizerResize1();">Unsharp-Mask 
+			R:<input title="radius" type="number" id="sharp_r" step="1" style="width:30px;vertical-align:middle;text-align:right;" value="3" oninput="imageResizerResize1();">
+			A:<input title="amount" type="number" id="sharp_a" step="0.1" style="width:50px;vertical-align:middle;text-align:right;" value="0.5" oninput="imageResizerResize1();">
 			| OUTPUT: <input type="radio" name="image_type" id="jpg" checked="checked" onclick="imageResizerResize1();">JPG <input type="radio" name="image_type" id="png" onclick="imageResizerResize1();">PNG
 		</td>
 	</tr>
 	<tr>
 		<td>
-			Frame-Width: <input type="number" id="image_resizer_can1" style="width:60px;vertical-align:middle;" value="32" oninput="document.getElementById('image_resizer_can_slide1').value=this.value;imageResizerResize1();">px 
+			Frame-Width: <input type="number" id="image_resizer_can1" style="width:60px;vertical-align:middle;" value="32" oninput="document.getElementById('image_resizer_can_slide1').value=this.value;imageResizerResize1();">px
 		</td>
 		<td>
 			<input style="width:100%;vertical-align:middle;" value="32" id="image_resizer_can_slide1" type="range" min="0" max="2000" oninput="document.getElementById('image_resizer_can1').value=this.value;imageResizerResize1();"><br>
@@ -623,7 +547,7 @@ function b64x(){
 	<tr>
 		<td>
 			Frame-Height: <input type="number" id="image_resizer_can2" style="width:60px;vertical-align:middle;" value="32" oninput="document.getElementById('image_resizer_can_slide2').value=this.value;
-			imageResizerResize2();">px 
+			imageResizerResize2();">px
 		</td>
 		<td>
 			<input style="width:100%;
@@ -632,7 +556,7 @@ function b64x(){
 	</tr>
 	<tr>
 		<td>
-			Image-Offset X: <input type="number" id="image_resizer_off1" style="width:60px;vertical-align:middle;" value="0" oninput="document.getElementById('image_resizer_off_slide1').value=this.value;imageResizerResize1();">px 
+			Image-Offset X: <input type="number" id="image_resizer_off1" style="width:60px;vertical-align:middle;" value="0" oninput="document.getElementById('image_resizer_off_slide1').value=this.value;imageResizerResize1();">px
 		</td>
 		<td>
 			<input style="width:100%;vertical-align:middle;" value="0" id="image_resizer_off_slide1" type="range" min="-2000" max="2000" oninput="document.getElementById('image_resizer_off1').value=this.value;imageResizerResize1();"><br>
@@ -640,7 +564,7 @@ function b64x(){
 	</tr>
 	<tr>
 		<td>
-			Image-Offset Y: <input type="number" id="image_resizer_off2" style="width:60px;vertical-align:middle;" value="0" oninput="document.getElementById('image_resizer_off_slide2').value=this.value;imageResizerResize2();">px 
+			Image-Offset Y: <input type="number" id="image_resizer_off2" style="width:60px;vertical-align:middle;" value="0" oninput="document.getElementById('image_resizer_off_slide2').value=this.value;imageResizerResize2();">px
 		</td>
 		<td>
 			<input style="width:100%;vertical-align:middle;" value="0" id="image_resizer_off_slide2" type="range" min="-2000" max="2000" oninput="document.getElementById('image_resizer_off2').value=this.value;imageResizerResize2();"><br>
@@ -648,7 +572,7 @@ function b64x(){
 	</tr>
 	<tr>
 		<td>
-			Image-Angle: <input type="number" id="image_resizer_rot" style="width:60px;vertical-align:middle;" value="0" oninput="document.getElementById('image_resizer_rot_slide').value=this.value;imageResizerResize2();">deg 
+			Image-Angle: <input type="number" id="image_resizer_rot" style="width:60px;vertical-align:middle;" value="0" oninput="document.getElementById('image_resizer_rot_slide').value=this.value;imageResizerResize2();">deg
 		</td>
 		<td>
 			<input style="width:100%;vertical-align:middle;" value="0" id="image_resizer_rot_slide" type="range" min="0" max="360" step="0.1" oninput="document.getElementById('image_resizer_rot').value=this.value;imageResizerResize2();"><br>
@@ -660,7 +584,7 @@ function b64x(){
 	<img id="image_resizer_org" src="" style="position:absolute;top:-10000px;left:-10000px;">
 	<div style="text-align:center;">
 		<canvas id="image_resizer_resized" style="position:absolute;top:-10000px;left:-10000px;" width="34" height="34"></canvas>
-		<a id="image_link" href="data:image/jpeg;base64,/9j/4QDCRXhpZgAASUkqAAgAAAAHABIBAwABAAAAAQAAABoBBQABAAAAYgAAABsBBQABAAAAagAAACgBAwABAAAAAgAAADEBAgAOAAAAcgAAADIBAgAUAAAAgAAAAGmHBAABAAAAlAAAAAAAEABIAAAAAQAAAEgAAAABAAAAUGhvdG9GaWx0cmUgNwAyMDE5OjAyOjA4IDA5OjEyOjA2AAMAAJAHAAQAAAAwMjEwAqADAAEAAAAgAAAAA6ADAAEAAAAgAAAA/9sAQwACAQEBAQECAQEBAgICAgIEAwICAgIFBAQDBAYFBgYGBQYGBgcJCAYHCQcGBggLCAkKCgoKCgYICwwLCgwJCgoK/9sAQwECAgICAgIFAwMFCgcGBwoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK/8IAEQgAIAAgAwEiAAIRAQMRAf/EABkAAQACAwAAAAAAAAAAAAAAAAcDCAEFBv/EABQBAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhADEAAAAejyDWAIEXfiAHNi6flI31cgP//EAB0QAAICAgMBAAAAAAAAAAAAAAUHBAYAAwIIFwH/2gAIAQEAAQUCj9hGwa+e9NvPem3icfei7cgA+EVhEaSDiuoop0AEk9h1tRKZBp5UbyKvXs2Rqd8a7XONG4WFozGiqmuj+dmm7Ew792zxR15IQDcO7P/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8BH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8BH//EADMQAAAFAgIHBgUFAAAAAAAAAAECAwQFBhEAEgcTISIxQVEUMjRSltMkM0JhcnGBkdHw/9oACAEBAAY/An0tD0/TDWNayZ2ZFpaT1Nzhty3MoW426Y7+j31Kl72O/o99Spe9h9F1rIQjCQbv+ztk2r8Mrn8LmHPt5hxxExkk2Ks3caUTprJH4HKJUgEMN6Da6AI9SCURAykr2U/kuJs98oAA7uUdv8hhmzlqRh26r9fUs01QsKp7d0P9064px9S1LNWKytSIJqKIEsIlsYbYhIQHpO1hpP14t/q1Y6oAN+lwEMNKdodZNVOLXzS/MFzc0L8rBxHzfjgamcmO3SR3Y5sRTw5A+/m5iP8AQYplzLk+PjatbNnivJYchhKp+4cfviNqPR0jERMuwkgdndKMwDXGDaGYSl3toX24Msq/oQxjDcxjU+ncR6/Jx4ug/Tyfs4YMZ6o6ZQj2smm8UTi43UiJi7L7qZbjYR44/8QAHxABAQACAgIDAQAAAAAAAAAAAREhMQBRYYEQQXGR/9oACAEBAAE/IQtc3YdCWjh3182bJ95dMtxiIKlE8ghj6tr8Izlp6oUqhbbBSb4bSw8mY3Lj+o2BTNQTJjnVB9cYFmbh7lfsHDBnVmn2IRhkR2rOlFmZSCZPks+gF+YpaWOkMOimEBpMXWBElBQEa+0BveFNUuavxfI8KevwElCvvn//2gAMAwEAAgADAAAAECCGFP/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8QH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8QH//EABsQAQEBAQEBAQEAAAAAAAAAAAERIQAxEEFR/9oACAEBAAE/EAkHuPGt6MT8GvtWqj67MUfVhh/m84mRZYfERVkXx4ZFnmBZYiAxBLiiPufCi4R/NXiJ2nMZiKFed6eYk5DccJII21zieXfLp4hnKDEur0QiKPsHCAxE6GBShCCAxQZE4chlTRlF0hVRFHj0j9plQoKrqqvxj+VVsxhhGExud//Z" download="resized_image.jpg"><img src="data:image/jpeg;base64,/9j/4QDCRXhpZgAASUkqAAgAAAAHABIBAwABAAAAAQAAABoBBQABAAAAYgAAABsBBQABAAAAagAAACgBAwABAAAAAgAAADEBAgAOAAAAcgAAADIBAgAUAAAAgAAAAGmHBAABAAAAlAAAAAAAEABIAAAAAQAAAEgAAAABAAAAUGhvdG9GaWx0cmUgNwAyMDE5OjAyOjA4IDA5OjEyOjA2AAMAAJAHAAQAAAAwMjEwAqADAAEAAAAgAAAAA6ADAAEAAAAgAAAA/9sAQwACAQEBAQECAQEBAgICAgIEAwICAgIFBAQDBAYFBgYGBQYGBgcJCAYHCQcGBggLCAkKCgoKCgYICwwLCgwJCgoK/9sAQwECAgICAgIFAwMFCgcGBwoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK/8IAEQgAIAAgAwEiAAIRAQMRAf/EABkAAQACAwAAAAAAAAAAAAAAAAcDCAEFBv/EABQBAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhADEAAAAejyDWAIEXfiAHNi6flI31cgP//EAB0QAAICAgMBAAAAAAAAAAAAAAUHBAYAAwIIFwH/2gAIAQEAAQUCj9hGwa+e9NvPem3icfei7cgA+EVhEaSDiuoop0AEk9h1tRKZBp5UbyKvXs2Rqd8a7XONG4WFozGiqmuj+dmm7Ew792zxR15IQDcO7P/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8BH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8BH//EADMQAAAFAgIHBgUFAAAAAAAAAAECAwQFBhEAEgcTISIxQVEUMjRSltMkM0JhcnGBkdHw/9oACAEBAAY/An0tD0/TDWNayZ2ZFpaT1Nzhty3MoW426Y7+j31Kl72O/o99Spe9h9F1rIQjCQbv+ztk2r8Mrn8LmHPt5hxxExkk2Ks3caUTprJH4HKJUgEMN6Da6AI9SCURAykr2U/kuJs98oAA7uUdv8hhmzlqRh26r9fUs01QsKp7d0P9064px9S1LNWKytSIJqKIEsIlsYbYhIQHpO1hpP14t/q1Y6oAN+lwEMNKdodZNVOLXzS/MFzc0L8rBxHzfjgamcmO3SR3Y5sRTw5A+/m5iP8AQYplzLk+PjatbNnivJYchhKp+4cfviNqPR0jERMuwkgdndKMwDXGDaGYSl3toX24Msq/oQxjDcxjU+ncR6/Jx4ug/Tyfs4YMZ6o6ZQj2smm8UTi43UiJi7L7qZbjYR44/8QAHxABAQACAgIDAQAAAAAAAAAAAREhMQBRYYEQQXGR/9oACAEBAAE/IQtc3YdCWjh3182bJ95dMtxiIKlE8ghj6tr8Izlp6oUqhbbBSb4bSw8mY3Lj+o2BTNQTJjnVB9cYFmbh7lfsHDBnVmn2IRhkR2rOlFmZSCZPks+gF+YpaWOkMOimEBpMXWBElBQEa+0BveFNUuavxfI8KevwElCvvn//2gAMAwEAAgADAAAAECCGFP/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8QH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8QH//EABsQAQEBAQEBAQEAAAAAAAAAAAERIQAxEEFR/9oACAEBAAE/EAkHuPGt6MT8GvtWqj67MUfVhh/m84mRZYfERVkXx4ZFnmBZYiAxBLiiPufCi4R/NXiJ2nMZiKFed6eYk5DccJII21zieXfLp4hnKDEur0QiKPsHCAxE6GBShCCAxQZE4chlTRlF0hVRFHj0j9plQoKrqqvxj+VVsxhhGExud//Z" style="border: 1px solid rgb(0, 0, 0); margin: 15px; border-radius: 0px;" id="image_output"></a>
+		<a id="image_link" href="data:image/jpeg;base64,/9j/4QDCRXhpZgAASUkqAAgAAAAHABIBAwABAAAAAQAAABoBBQABAAAAYgAAABsBBQABAAAAagAAACgBAwABAAAAAgAAADEBAgAOAAAAcgAAADIBAgAUAAAAgAAAAGmHBAABAAAAlAAAAAAAEABIAAAAAQAAAEgAAAABAAAAUGhvdG9GaWx0cmUgNwAyMDE5OjAyOjA4IDA5OjEyOjA2AAMAAJAHAAQAAAAwMjEwAqADAAEAAAAgAAAAA6ADAAEAAAAgAAAA/9sAQwACAQEBAQECAQEBAgICAgIEAwICAgIFBAQDBAYFBgYGBQYGBgcJCAYHCQcGBggLCAkKCgoKCgYICwwLCgwJCgoK/9sAQwECAgICAgIFAwMFCgcGBwoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK/8IAEQgAIAAgAwEiAAIRAQMRAf/EABkAAQACAwAAAAAAAAAAAAAAAAcDCAEFBv/EABQBAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhADEAAAAejyDWAIEXfiAHNi6flI31cgP//EAB0QAAICAgMBAAAAAAAAAAAAAAUHBAYAAwIIFwH/2gAIAQEAAQUCj9hGwa+e9NvPem3icfei7cgA+EVhEaSDiuoop0AEk9h1tRKZBp5UbyKvXs2Rqd8a7XONG4WFozGiqmuj+dmm7Ew792zxR15IQDcO7P/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8BH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8BH//EADMQAAAFAgIHBgUFAAAAAAAAAAECAwQFBhEAEgcTISIxQVEUMjRSltMkM0JhcnGBkdHw/9oACAEBAAY/An0tD0/TDWNayZ2ZFpaT1Nzhty3MoW426Y7+j31Kl72O/o99Spe9h9F1rIQjCQbv+ztk2r8Mrn8LmHPt5hxxExkk2Ks3caUTprJH4HKJUgEMN6Da6AI9SCURAykr2U/kuJs98oAA7uUdv8hhmzlqRh26r9fUs01QsKp7d0P9064px9S1LNWKytSIJqKIEsIlsYbYhIQHpO1hpP14t/q1Y6oAN+lwEMNKdodZNVOLXzS/MFzc0L8rBxHzfjgamcmO3SR3Y5sRTw5A+/m5iP8AQYplzLk+PjatbNnivJYchhKp+4cfviNqPR0jERMuwkgdndKMwDXGDaGYSl3toX24Msq/oQxjDcxjU+ncR6/Jx4ug/Tyfs4YMZ6o6ZQj2smm8UTi43UiJi7L7qZbjYR44/8QAHxABAQACAgIDAQAAAAAAAAAAAREhMQBRYYEQQXGR/9oACAEBAAE/IQtc3YdCWjh3182bJ95dMtxiIKlE8ghj6tr8Izlp6oUqhbbBSb4bSw8mY3Lj+o2BTNQTJjnVB9cYFmbh7lfsHDBnVmn2IRhkR2rOlFmZSCZPks+gF+YpaWOkMOimEBpMXWBElBQEa+0BveFNUuavxfI8KevwElCvvn//2gAMAwEAAgADAAAAECCGFP/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8QH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8QH//EABsQAQEBAQEBAQEAAAAAAAAAAAERIQAxEEFR/9oACAEBAAE/EAkHuPGt6MT8GvtWqj67MUfVhh/m84mRZYfERVkXx4ZFnmBZYiAxBLiiPufCi4R/NXiJ2nMZiKFed6eYk5DccJII21zieXfLp4hnKDEur0QiKPsHCAxE6GBShCCAxQZE4chlTRlF0hVRFHj0j9plQoKrqqvxj+VVsxhhGExud//Z" download="resized_image.jpg"><img src="data:image/jpeg;base64,/9j/4QDCRXhpZgAASUkqAAgAAAAHABIBAwABAAAAAQAAABoBBQABAAAAYgAAABsBBQABAAAAagAAACgBAwABAAAAAgAAADEBAgAOAAAAcgAAADIBAgAUAAAAgAAAAGmHBAABAAAAlAAAAAAAEABIAAAAAQAAAEgAAAABAAAAUGhvdG9GaWx0cmUgNwAyMDE5OjAyOjA4IDA5OjEyOjA2AAMAAJAHAAQAAAAwMjEwAqADAAEAAAAgAAAAA6ADAAEAAAAgAAAA/9sAQwACAQEBAQECAQEBAgICAgIEAwICAgIFBAQDBAYFBgYGBQYGBgcJCAYHCQcGBggLCAkKCgoKCgYICwwLCgwJCgoK/9sAQwECAgICAgIFAwMFCgcGBwoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK/8IAEQgAIAAgAwEiAAIRAQMRAf/EABkAAQACAwAAAAAAAAAAAAAAAAcDCAEFBv/EABQBAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhADEAAAAejyDWAIEXfiAHNi6flI31cgP//EAB0QAAICAgMBAAAAAAAAAAAAAAUHBAYAAwIIFwH/2gAIAQEAAQUCj9hGwa+e9NvPem3icfei7cgA+EVhEaSDiuoop0AEk9h1tRKZBp5UbyKvXs2Rqd8a7XONG4WFozGiqmuj+dmm7Ew792zxR15IQDcO7P/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8BH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8BH//EADMQAAAFAgIHBgUFAAAAAAAAAAECAwQFBhEAEgcTISIxQVEUMjRSltMkM0JhcnGBkdHw/9oACAEBAAY/An0tD0/TDWNayZ2ZFpaT1Nzhty3MoW426Y7+j31Kl72O/o99Spe9h9F1rIQjCQbv+ztk2r8Mrn8LmHPt5hxxExkk2Ks3caUTprJH4HKJUgEMN6Da6AI9SCURAykr2U/kuJs98oAA7uUdv8hhmzlqRh26r9fUs01QsKp7d0P9064px9S1LNWKytSIJqKIEsIlsYbYhIQHpO1hpP14t/q1Y6oAN+lwEMNKdodZNVOLXzS/MFzc0L8rBxHzfjgamcmO3SR3Y5sRTw5A+/m5iP8AQYplzLk+PjatbNnivJYchhKp+4cfviNqPR0jERMuwkgdndKMwDXGDaGYSl3toX24Msq/oQxjDcxjU+ncR6/Jx4ug/Tyfs4YMZ6o6ZQj2smm8UTi43UiJi7L7qZbjYR44/8QAHxABAQACAgIDAQAAAAAAAAAAAREhMQBRYYEQQXGR/9oACAEBAAE/IQtc3YdCWjh3182bJ95dMtxiIKlE8ghj6tr8Izlp6oUqhbbBSb4bSw8mY3Lj+o2BTNQTJjnVB9cYFmbh7lfsHDBnVmn2IRhkR2rOlFmZSCZPks+gF+YpaWOkMOimEBpMXWBElBQEa+0BveFNUuavxfI8KevwElCvvn//2gAMAwEAAgADAAAAECCGFP/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8QH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8QH//EABsQAQEBAQEBAQEAAAAAAAAAAAERIQAxEEFR/9oACAEBAAE/EAkHuPGt6MT8GvtWqj67MUfVhh/m84mRZYfERVkXx4ZFnmBZYiAxBLiiPufCi4R/NXiJ2nMZiKFed6eYk5DccJII21zieXfLp4hnKDEur0QiKPsHCAxE6GBShCCAxQZE4chlTRlF0hVRFHj0j9plQoKrqqvxj+VVsxhhGExud//Z" style="border: 1px solid rgb(0, 0, 0); margin: 15px; border-radius: 0px; max-width:95%;" id="image_output"></a>
 	</div>
 	<div style="font-size:10px;">
 		^ click to save<hr>
@@ -701,10 +625,32 @@ function reDim(){
 		}
 	}
 }
+function resizeControls(isset){
+	all=document.getElementById('controls_container').getElementsByTagName('input');
+	for(x=0;x<all.length;x++){
+		if(all[x].type=='number'){
+			if(isset){
+				all[x].style.fontSize='100px';
+				all[x].style.width='250px';
+			}else{
+				all[x].style.fontSize='inherit';
+				all[x].style.width='60px';
+			}
+		}
+		if(all[x].type=='checkbox'){
+			if(isset){
+				all[x].style.width='75px';
+				all[x].style.height='75px';
+			}else{
+				all[x].style.width='inherit';
+				all[x].style.height='inherit';
+			}
+		}
+	}
+}
 document.onpaste=function(event){var items=(event.clipboardData || event.originalEvent.clipboardData).items;var blob=null;for(i=0;i<items.length;i++){if(items[i].type.indexOf("image")===0){blob=items[i].getAsFile();}}if(blob!==null){var reader=new FileReader();reader.onload = function(event){document.querySelector('#image_resizer_org').src=event.target.result;setTimeout('getDims();imageResizerResize1();reDim();',100);};reader.readAsDataURL(blob);}}
 document.getElementById('image_output').src='data:image/jpeg;base64,/9j/4QDCRXhpZgAASUkqAAgAAAAHABIBAwABAAAAAQAAABoBBQABAAAAYgAAABsBBQABAAAAagAAACgBAwABAAAAAgAAADEBAgAOAAAAcgAAADIBAgAUAAAAgAAAAGmHBAABAAAAlAAAAAAAEABIAAAAAQAAAEgAAAABAAAAUGhvdG9GaWx0cmUgNwAyMDE5OjAyOjA4IDA5OjEyOjA2AAMAAJAHAAQAAAAwMjEwAqADAAEAAAAgAAAAA6ADAAEAAAAgAAAA/9sAQwACAQEBAQECAQEBAgICAgIEAwICAgIFBAQDBAYFBgYGBQYGBgcJCAYHCQcGBggLCAkKCgoKCgYICwwLCgwJCgoK/9sAQwECAgICAgIFAwMFCgcGBwoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK/8IAEQgAIAAgAwEiAAIRAQMRAf/EABkAAQACAwAAAAAAAAAAAAAAAAcDCAEFBv/EABQBAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhADEAAAAejyDWAIEXfiAHNi6flI31cgP//EAB0QAAICAgMBAAAAAAAAAAAAAAUHBAYAAwIIFwH/2gAIAQEAAQUCj9hGwa+e9NvPem3icfei7cgA+EVhEaSDiuoop0AEk9h1tRKZBp5UbyKvXs2Rqd8a7XONG4WFozGiqmuj+dmm7Ew792zxR15IQDcO7P/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8BH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8BH//EADMQAAAFAgIHBgUFAAAAAAAAAAECAwQFBhEAEgcTISIxQVEUMjRSltMkM0JhcnGBkdHw/9oACAEBAAY/An0tD0/TDWNayZ2ZFpaT1Nzhty3MoW426Y7+j31Kl72O/o99Spe9h9F1rIQjCQbv+ztk2r8Mrn8LmHPt5hxxExkk2Ks3caUTprJH4HKJUgEMN6Da6AI9SCURAykr2U/kuJs98oAA7uUdv8hhmzlqRh26r9fUs01QsKp7d0P9064px9S1LNWKytSIJqKIEsIlsYbYhIQHpO1hpP14t/q1Y6oAN+lwEMNKdodZNVOLXzS/MFzc0L8rBxHzfjgamcmO3SR3Y5sRTw5A+/m5iP8AQYplzLk+PjatbNnivJYchhKp+4cfviNqPR0jERMuwkgdndKMwDXGDaGYSl3toX24Msq/oQxjDcxjU+ncR6/Jx4ug/Tyfs4YMZ6o6ZQj2smm8UTi43UiJi7L7qZbjYR44/8QAHxABAQACAgIDAQAAAAAAAAAAAREhMQBRYYEQQXGR/9oACAEBAAE/IQtc3YdCWjh3182bJ95dMtxiIKlE8ghj6tr8Izlp6oUqhbbBSb4bSw8mY3Lj+o2BTNQTJjnVB9cYFmbh7lfsHDBnVmn2IRhkR2rOlFmZSCZPks+gF+YpaWOkMOimEBpMXWBElBQEa+0BveFNUuavxfI8KevwElCvvn//2gAMAwEAAgADAAAAECCGFP/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8QH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8QH//EABsQAQEBAQEBAQEAAAAAAAAAAAERIQAxEEFR/9oACAEBAAE/EAkHuPGt6MT8GvtWqj67MUfVhh/m84mRZYfERVkXx4ZFnmBZYiAxBLiiPufCi4R/NXiJ2nMZiKFed6eYk5DccJII21zieXfLp4hnKDEur0QiKPsHCAxE6GBShCCAxQZE4chlTRlF0hVRFHj0j9plQoKrqqvxj+VVsxhhGExud//Z';
-</script>
-</div><div style="clear:both;">&nbsp;</div><hr><div style="width:65px;float:left;"><span title="Move up" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(0,'6826706718');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAdUlEQVR42m1NuQ2AMAw8sgNjsADL0FHTeQvkLZiAlJSpEYooMD2KMgQ4QUIgcc3Z99gACFwTlFm80qCTYal0LHSzUm0o0fQGmDcVETuXiOwZUtmKb8EiQdPcJucweIFQT3KmDEvInyj7bhn3OxHXfPDTevCvXjOnKXEFcZQuAAAAAElFTkSuQmCC">&nbsp;</span><span title="Move down" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(1,'6826706718');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAZ0lEQVR42mNgYChnmHD7CgOQBlFgZjkTAxgwggVjgawC1cUgsXwVIKENkZmQBlLyHKoUCJBZaS5AKgCsohyoFGhqGpQsRxiPBpgYrNxvb9OD8wO2dWxLA7sBzDXY9t/plnVfwTEQBwBlXiHWjsWwaQAAAABJRU5ErkJggg==">&nbsp;</span></div><div style="width:45px;float:right;"><span title="REMOVE" style="background-color:#770000;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="if(confirm('DELETE?')){removeWiki('6826706718');}">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAnUlEQVR42mNkwA12AbErlH0MiK2xKWLEophYADYUZsB/ICBJNyMjI4SC8mcDcQqJLpgL0gMzwMHd3X3/jh07iNLp4eHBsHPnTkcg8wCGAXFxcQyfP39mWL9+PZj9/v17hs2bNzOEhoYy/PjxA8zGawDUb6BAwckeNWDQGwCSfPXqFcO5c+fwsnEaQG5KlALii0AsQmQ+eAvERkD8CAD5O8gRRpPKTQAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></div><div style="width:45px;float:right;"><span title="EDIT" style="background-color:#007700;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="editWiki('6826706718');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABbElEQVR42rWTO2vCUBTH/7FDhoAEbA0dBEHBRdz9DnXo4mQJwUmnDAHN0EDTJWPmOqibg9BFp3wFN10sGHETHwQE6VBLmnP7oAUfaaEHLtzD5fe759wHhz9EJpO5c8fj5xfA4n4Lx2Ixs9Vq3eq6jqfRSOcCw7UPPARr54egQqGAbreLTqeDeDwORVHQaDSgaZpJFcwjkYiUSCT2wvl8Hu12G4ZhYDAYQBAEVCoV3JRK96v12iCBL4oiPM87WHa9XofruvB9n1VCQlmWWfsnBQRPp1Nst1v0+33UajWYpgme508LCF4sFmx8wtRKsVik/LiA4OVyyeBer8dgy7LYgVL+we4X2LaNZrMJSZLgOM4XTJFMJjGbzY4LcrkchsMhm3+HQwkmkwnS6TSy2SzK5TJUVf3R2kkBLe52O6RSqb23EqqFY/EvgjnHcVI0Gg0l2Gw29CJXwfSCCc6Aq9f3z3QZykAbAtXgAz5S8gbiBb+FSaOmpAAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></div><hr style="clear:both;position:relative;top:5px;"></div><!--~--></div><!-- CONTENT PANEL END -->
+</script></div><div style="clear:both;">&nbsp;</div><hr><div style="width:65px;float:left;"><span title="Move up" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(0,'6826706718');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAdUlEQVR42m1NuQ2AMAw8sgNjsADL0FHTeQvkLZiAlJSpEYooMD2KMgQ4QUIgcc3Z99gACFwTlFm80qCTYal0LHSzUm0o0fQGmDcVETuXiOwZUtmKb8EiQdPcJucweIFQT3KmDEvInyj7bhn3OxHXfPDTevCvXjOnKXEFcZQuAAAAAElFTkSuQmCC">&nbsp;</span><span title="Move down" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(1,'6826706718');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAZ0lEQVR42mNgYChnmHD7CgOQBlFgZjkTAxgwggVjgawC1cUgsXwVIKENkZmQBlLyHKoUCJBZaS5AKgCsohyoFGhqGpQsRxiPBpgYrNxvb9OD8wO2dWxLA7sBzDXY9t/plnVfwTEQBwBlXiHWjsWwaQAAAABJRU5ErkJggg==">&nbsp;</span></div><div style="width:45px;float:right;"><span title="REMOVE" style="background-color:#770000;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="if(confirm('DELETE?')){removeWiki('6826706718');}">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAnUlEQVR42mNkwA12AbErlH0MiK2xKWLEophYADYUZsB/ICBJNyMjI4SC8mcDcQqJLpgL0gMzwMHd3X3/jh07iNLp4eHBsHPnTkcg8wCGAXFxcQyfP39mWL9+PZj9/v17hs2bNzOEhoYy/PjxA8zGawDUb6BAwckeNWDQGwCSfPXqFcO5c+fwsnEaQG5KlALii0AsQmQ+eAvERkD8CAD5O8gRRpPKTQAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></div><div style="width:45px;float:right;"><span title="EDIT" style="background-color:#007700;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="editWiki('6826706718');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABbElEQVR42rWTO2vCUBTH/7FDhoAEbA0dBEHBRdz9DnXo4mQJwUmnDAHN0EDTJWPmOqibg9BFp3wFN10sGHETHwQE6VBLmnP7oAUfaaEHLtzD5fe759wHhz9EJpO5c8fj5xfA4n4Lx2Ixs9Vq3eq6jqfRSOcCw7UPPARr54egQqGAbreLTqeDeDwORVHQaDSgaZpJFcwjkYiUSCT2wvl8Hu12G4ZhYDAYQBAEVCoV3JRK96v12iCBL4oiPM87WHa9XofruvB9n1VCQlmWWfsnBQRPp1Nst1v0+33UajWYpgme508LCF4sFmx8wtRKsVik/LiA4OVyyeBer8dgy7LYgVL+we4X2LaNZrMJSZLgOM4XTJFMJjGbzY4LcrkchsMhm3+HQwkmkwnS6TSy2SzK5TJUVf3R2kkBLe52O6RSqb23EqqFY/EvgjnHcVI0Gg0l2Gw29CJXwfSCCc6Aq9f3z3QZykAbAtXgAz5S8gbiBb+FSaOmpAAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></div><hr style="clear:both;position:relative;top:5px;"></div><!--~--></div><!-- CONTENT PANEL END -->
 
 		<hr>
 		<div style="background-color:#cccccc; margin:5px; padding:5px; border-radius:5px;">
