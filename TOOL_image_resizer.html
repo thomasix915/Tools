@@ -174,8 +174,8 @@
 		<div style="float:right; width:300px; text-align:right;">
 			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px;" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
 			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
-			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="TOOL_image_resizer (1).html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
-			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">3/12/2025, 9:54:23 AM</span></div>
+			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="TOOL_image_resizer.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">3/14/2025, 1:48:44 PM</span></div>
 		</div>
 		<div style="clear:both; display:none;" id="help">
 			WHAT IS THIS?<br>
@@ -251,6 +251,7 @@ function imageResizerResize1(){
 		ctx.save();
 		ctx.translate(side_length/2,side_length/ratio/2);
 		ctx.rotate(document.getElementById('image_resizer_rot').value*0.0174533);
+		ctx.filter='contrast('+document.getElementById('image_contrast').value/100+') brightness('+document.getElementById('image_brightness').value/100+') saturate('+document.getElementById('image_saturation').value/100+')';
 		ctx.translate(side_length/-2,side_length/ratio/-2);
 		ctx.drawImage(img,offset_x,offset_y,side_length,side_length/ratio);
 
@@ -320,6 +321,7 @@ function imageResizerResize2(){
 		ctx.save();
 		ctx.translate(side_height*ratio/2,side_height/2);
 		ctx.rotate(document.getElementById('image_resizer_rot').value*0.0174533);
+		ctx.filter='contrast('+document.getElementById('image_contrast').value/100+') brightness('+document.getElementById('image_brightness').value/100+') saturate('+document.getElementById('image_saturation').value/100+')';
 		ctx.translate(side_height*ratio/-2,side_height/-2);
 		ctx.drawImage(img,offset_x,offset_y,side_height*ratio,side_height);
 
@@ -499,6 +501,7 @@ function b64x(){
 	}
 }
 </script>
+<div style="height:225px;overflow-y:auto;overflow-x:hidden;">
 <table style="width:100%" id="controls_container">
 	<tbody><tr>
 		<td colspan="2" style="text-align:center;">
@@ -578,7 +581,33 @@ function b64x(){
 			<input style="width:100%;vertical-align:middle;" value="0" id="image_resizer_rot_slide" type="range" min="0" max="360" step="0.1" oninput="document.getElementById('image_resizer_rot').value=this.value;imageResizerResize2();"><br>
 		</td>
 	</tr>
-</tbody></table>
+	<tr>
+		<td>
+			Image-Brightness: <input type="number" id="image_brightness" style="width:60px;vertical-align:middle;" value="100" oninput="document.getElementById('image_brightness_slide').value=this.value;imageResizerResize2();">%
+		</td>
+		<td>
+			<input style="width:100%;vertical-align:middle;" value="100" id="image_brightness_slide" type="range" min="50" max="250" step="1" oninput="document.getElementById('image_brightness').value=this.value;imageResizerResize2();"><br>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Image-Contrast: <input type="number" id="image_contrast" style="width:60px;vertical-align:middle;" value="100" oninput="document.getElementById('image_contrast_slide').value=this.value;imageResizerResize2();">%
+		</td>
+		<td>
+			<input style="width:100%;vertical-align:middle;" value="100" id="image_contrast_slide" type="range" min="50" max="250" step="1" oninput="document.getElementById('image_contrast').value=this.value;imageResizerResize2();"><br>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Image-Saturation: <input type="number" id="image_saturation" style="width:60px;vertical-align:middle;" value="100" oninput="document.getElementById('image_saturation_slide').value=this.value;imageResizerResize2();">%
+		</td>
+		<td>
+			<input style="width:100%;vertical-align:middle;" value="100" id="image_saturation_slide" type="range" min="50" max="250" step="1" oninput="document.getElementById('image_saturation').value=this.value;imageResizerResize2();"><br>
+		</td>
+	</tr>
+</tbody>
+</table>
+</div>
 <div style="text-align:center;">
 	<hr>
 	<img id="image_resizer_org" src="" style="position:absolute;top:-10000px;left:-10000px;">
