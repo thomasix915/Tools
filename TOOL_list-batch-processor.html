@@ -174,8 +174,8 @@
 		<div style="float:right; width:300px; text-align:right;">
 			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px; color: rgb(255, 255, 255); background-color: rgb(0, 153, 0);" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
 			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
-			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="TOOL_list-batch-processor.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
-			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">4/26/2024, 10:36:48 AM</span></div>
+			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="TOOL_list-batch-processor (2).html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">4/1/2025, 9:39:44 AM</span></div>
 		</div>
 		<div style="clear:both; display:none;" id="help">
 			WHAT IS THIS?<br>
@@ -223,18 +223,18 @@
 		<!-- CONTENT PANEL START --><div id="nanowiki_panel"><div id="4978550529" style="border:#cccccc solid 1px; margin:5px; padding:5px; border-radius:5px;"><div class="title" id="title4978550529">Enter prependix, search and replace (blank replace removes), appendix, and double-click on result lines to copy. Save tool with terms to re-use.</div><div id="content4978550529"><div id="message1" style="text-align: center; background-color: rgb(0, 153, 0); color: rgb(255, 255, 255); border-radius: 25px; padding: 5px; margin-bottom: 5px; font-family: monospace;">-ready-</div>
 <div style="display:flex;justify-content:space-around;flex-wrap:wrap;font-family:monospace;font-weight:bold;">
 	<div>Input Delimiter (CR or...)<br><textarea id="del_i" style="width:200px;height:30px;font-family:monospace;" oninput="process();" title="item separator"></textarea><script>document.getElementById('del_i').value=String.fromCharCode(10);</script></div>
-	<div>Prepend... <input type="text" id="pre" style="width:100px;font-family:monospace;" oninput="process();" title="[...] to preceed item"></div>
-	<div><span style="text-decoration:overline;">...keep containing...</span> <input type="text" id="keep" style="width:100px;font-family:monospace;" oninput="process();" title="remove items NOT containing [...]"></div>
-	<div><strike>...remove containing...</strike> <input type="text" id="kick" style="width:100px;font-family:monospace;" oninput="process();" title="retain items NOT containing [...]"></div>
-</div>
-<div style="display:flex;justify-content:space-around;flex-wrap:wrap;font-family:monospace;font-weight:bold;">
-	<div>???-Search-??? <input type="text" id="src" style="width:100px;font-family:monospace;" oninput="process();" title="item content search"></div>
-	<div>!!!-Replace-!!! <input type="text" id="rpl" style="width:100px;font-family:monospace;" oninput="process();" title="item content replace"></div>
-	<div>...Append <input type="text" id="app" style="width:100px;font-family:monospace;" oninput="process();" title="succeed item with [...]"></div>
+	<div>Prepend...<br><input type="text" id="pre" style="width:100px;font-family:monospace;" oninput="process();" title="[...] to preceed item"></div>
+	<div><span style="text-decoration:overline;">keep containing</span><br><input type="text" id="keep" style="width:100px;font-family:monospace;" oninput="process();" title="remove items NOT containing [...]"></div>
+	<div><strike>remove containing</strike><br><input type="text" id="kick" style="width:100px;font-family:monospace;" oninput="process();" title="retain items NOT containing [...]"></div>
+	<div>Search<br><input type="text" id="src" style="width:100px;font-family:monospace;" oninput="process();" title="item content search"></div>
+	<div>Replace<br><input type="text" id="rpl" style="width:100px;font-family:monospace;" oninput="process();" title="item content replace"></div>
+	<div>...Append<br><input type="text" id="app" style="width:100px;font-family:monospace;" oninput="process();" title="succeed item with [...]"></div>
 </div>
 <hr>
-<textarea id="in" style="width:49%;height:400px;vertical-align:top;resize:vertical;" placeholder="paste item list here" oninput="bak=this.value;process();"></textarea>
-<div id="out" style="display:inline-block;width:49%;height:400px;overflow:auto;border:#777 solid 1px;vertical-align:top;font-family:monospace;text-align:center;resize:vertical;"></div>
+<div style="display:flex;justify-content:space-around;flex-wrap:wrap;">
+<textarea id="in" style="width:47%;height:400px;vertical-align:top;resize:vertical;" placeholder="paste item list here" oninput="bak=this.value;process();"></textarea>
+<div id="out" style="display:inline-block;width:47%;height:400px;overflow:auto;border:#777 solid 1px;vertical-align:top;font-family:monospace;text-align:center;resize:vertical;"></div>
+</div>
 <hr>
 <input type="hidden" id="store1" value="">
 <input type="hidden" id="store2" value="">
@@ -249,21 +249,26 @@
 	<div>
 		 <input type="button" value="XX => X" onclick="dup=[];lines=document.getElementById('in').value.split(document.getElementById('del_i').value);for(x=0;x<lines.length;x++){if(!dup.includes(lines[x])){dup.push(lines[x]);}};document.getElementById('in').value=dup.join(document.getElementById('del_i').value);process();" title="removes duplicate entries from list">
 		 <input type="button" value="RESTORE" onclick="if(confirm('Restores last manual input!')){document.getElementById('in').value=bak;process();}" title="restores last manual input">
-		 <input type="button" value="IN <= Out" onclick="if(confirm('CAUTION! This function overwrites the input box content with the output box content and creates a new RESTORE point. This function is irreversible!')){consolidate();}" title="creates new input from current output">
+		 <input type="button" value="IN <= Out" onclick="if(confirm('CAUTION! This function overwrites the input box content with the output box content and creates a new RESTORE point. This function is irreversible!')){if(document.getElementById('consolidate').checked){document.getElementById('in').value=document.getElementById('out_console').value;}else{consolidate();}}" title="creates new input from current output">
 	</div>
-</div>
+</div><br>
 <div style="display:flex;justify-content:space-around;flex-wrap:wrap;font-family:monospace;font-weight:bold;">
 	<div>
-		<strong><span title="creates links for each item, must NOT be consolidated"><input type="checkbox" id="linkify" onclick="if(document.getElementById('consolidate').checked){alert('Consolidated output can\'t be linked!');this.checked=false;};document.getElementById('pre_trunc').checked=false;document.getElementById('post_trunc').checked=false;process();document.getElementById('split').checked=false;">Linkify</span></strong>
+		<fieldset>
+			<em style="color:#777;">UNCONSOLIDATED ONLY &gt;&gt;<br>USE ON OUTPUT LINES &gt;&gt;</em>
+		</fieldset>
 	</div>
 	<div>
-		<strong><span title="double-click truncates PRECEEDING content at selected item"><input type="checkbox" id="pre_trunc" onclick="if(document.getElementById('consolidate').checked){alert('Consolidated output can\'t be trunced!');this.checked=false;};document.getElementById('linkify').checked=false;document.getElementById('post_trunc').checked=false;document.getElementById('split').checked=false;process();">Pre-Trunc-Mode</span></strong>
+		<fieldset><strong><span title="creates links for each item, must NOT be consolidated"><input type="checkbox" id="linkify" onclick="if(document.getElementById('consolidate').checked){alert('Consolidated output can\'t be linked!');this.checked=false;};document.getElementById('pre_trunc').checked=false;document.getElementById('post_trunc').checked=false;process();document.getElementById('split').checked=false;">Linkify</span></strong></fieldset>
 	</div>
 	<div>
-		<strong><span title="double-click truncates SUCCEEDING content at selected item"><input type="checkbox" id="post_trunc" onclick="if(document.getElementById('consolidate').checked){alert('Consolidated output can\'t be trunced!');this.checked=false;};document.getElementById('linkify').checked=false;document.getElementById('pre_trunc').checked=false;document.getElementById('split').checked=false;process();">Post-Trunc-Mode</span></strong>
+		<fieldset><strong><span title="double-click truncates PRECEEDING content at selected item"><input type="checkbox" id="pre_trunc" onclick="if(document.getElementById('consolidate').checked){alert('Consolidated output can\'t be trunced!');this.checked=false;};document.getElementById('linkify').checked=false;document.getElementById('post_trunc').checked=false;document.getElementById('split').checked=false;process();">Pre-Trunc-Mode</span></strong></fieldset>
 	</div>
 	<div>
-		<strong><span title="double-click SPLITS content BEFORE selected item"><input type="checkbox" id="split" onclick="if(document.getElementById('consolidate').checked){alert('Consolidated output can\'t be split!');this.checked=false;};document.getElementById('linkify').checked=false;document.getElementById('pre_trunc').checked=false;document.getElementById('post_trunc').checked=false;process();">Split-Mode</span></strong>
+		<fieldset><strong><span title="double-click truncates SUCCEEDING content at selected item"><input type="checkbox" id="post_trunc" onclick="if(document.getElementById('consolidate').checked){alert('Consolidated output can\'t be trunced!');this.checked=false;};document.getElementById('linkify').checked=false;document.getElementById('pre_trunc').checked=false;document.getElementById('split').checked=false;process();">Post-Trunc-Mode</span></strong></fieldset>
+	</div>
+	<div>
+		<fieldset><strong><span title="double-click SPLITS content BEFORE selected item"><input type="checkbox" id="split" onclick="if(document.getElementById('consolidate').checked){alert('Consolidated output can\'t be split!');this.checked=false;};document.getElementById('linkify').checked=false;document.getElementById('pre_trunc').checked=false;document.getElementById('post_trunc').checked=false;process();">Split-Mode</span></strong></fieldset>
 	</div>
 	<div>
 		<strong><span title="posts all items in one list instead of form lines"><input type="checkbox" id="consolidate" onclick="document.getElementById('linkify').checked=false;document.getElementById('pre_trunc').checked=false;document.getElementById('post_trunc').checked=false;document.getElementById('split').checked=false;process();">Consolidate Output</span></strong>
