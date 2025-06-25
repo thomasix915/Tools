@@ -175,7 +175,7 @@
 			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px; color: rgb(255, 255, 255); background-color: rgb(0, 153, 0);" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
 			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
 			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('&lt;!DOCTYPE html&gt;&lt;html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'&gt;'+document.getElementsByTagName('HTML')[0].innerHTML+'&lt;/html&gt;');" onmouseout="this.href='#';" download="CODE_php-secure-login.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
-			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">6/20/2025, 11:04:25 AM</span></div>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">6/25/2025, 4:55:27 PM</span></div>
 		</div>
 		<div style="clear:both; display:none;" id="help">
 			WHAT IS THIS?<br>
@@ -228,7 +228,7 @@ NOTE: password cannot be sent by hitting keyboard [ENTER]/[RETURN], the button n
 <script>
 function msg(){document.getElementById('message').style.backgroundColor='#990000';document.getElementById('message').innerHTML='COPIED!';setTimeout('document.getElementById(\'message\').style.backgroundColor=\'#009900\';document.getElementById(\'message\').innerHTML=\'-ready-\';',1000);}
 </script>
-<div id="message" style="text-align:center;background-color:#009900;color:#ffffff;border-radius:25px; padding:5px; margin-bottom:5px;">-ready-</div>
+<div id="message" style="text-align: center; background-color: rgb(0, 153, 0); color: rgb(255, 255, 255); border-radius: 25px; padding: 5px; margin-bottom: 5px;">-ready-</div>
 <em>-double-click copies code sample-</em><br>
 <textarea style="width:100%;height:150px;" ondblclick="this.select();document.execCommand('copy');msg();">&lt;?php
 /***************
@@ -270,14 +270,15 @@ if(isset($_GET['exit'])){
 
 // logging in
 if(isset($_POST['password']) &amp;&amp; isset($_POST['user'])){
-	// use session salt on passwords
-	foreach($access as &amp;$y){
-		$y[0]=md5($y[0].$_SESSION['salt']);
-	}
-	unset($y);
 	$_SESSION['user']=$_POST['user'];
 	$_SESSION['passwd']=$_POST['password'];
 }
+
+// use session salt on passwords
+foreach($access as &amp;$y){
+	$y[0]=md5($y[0].$_SESSION['salt']);
+}
+unset($y);
 
 // wrong password
 $wrong_password='';
@@ -294,7 +295,7 @@ if(isset($_POST['user'])){
 }
 
 // log in validator
-if((!isset($_POST['password'])) || (!isset($_POST['user'])) || (!isset($_SESSION['passwd'])) || (!$_SESSION['user']) || ($_SESSION['passwd']!=$access[$_SESSION['user']][0])){
+if(!(isset($_SESSION['passwd']) &amp;&amp; isset($access[$_SESSION['user']][0]) &amp;&amp; ($_SESSION['passwd']==$access[$_SESSION['user']][0]))){
 
     // log in form
     echo'
@@ -366,6 +367,7 @@ $access=array(
 );
 
 /**/
+
 // logging out
 if(isset($_GET['exit'])){
     $_SESSION['passwd']='';
@@ -376,14 +378,15 @@ if(isset($_GET['exit'])){
 
 // logging in
 if(isset($_POST['password']) &amp;&amp; isset($_POST['user'])){
-	// use session salt on passwords
-	foreach($access as &amp;$y){
-		$y[0]=md5($y[0].$_SESSION['salt']);
-	}
-	unset($y);
 	$_SESSION['user']=$_POST['user'];
 	$_SESSION['passwd']=$_POST['password'];
 }
+
+// use session salt on passwords
+foreach($access as &amp;$y){
+	$y[0]=md5($y[0].$_SESSION['salt']);
+}
+unset($y);
 
 // wrong password
 $wrong_password='';
@@ -400,7 +403,7 @@ if(isset($_POST['user'])){
 }
 
 // log in validator
-if((!isset($_POST['password'])) || (!isset($_POST['user'])) || (!isset($_SESSION['passwd'])) || (!$_SESSION['user']) || ($_SESSION['passwd']!=$access[$_SESSION['user']][0])){
+if(!(isset($_SESSION['passwd']) &amp;&amp; isset($access[$_SESSION['user']][0]) &amp;&amp; ($_SESSION['passwd']==$access[$_SESSION['user']][0]))){
 
     // log in form
     echo'
@@ -441,27 +444,27 @@ echo'
 }
 // BODY AND HTML CLOSED ON INCLUDING PAGE
 ?&gt;
-
-
 </textarea>
 </p>
 <p><strong>protected_content.php</strong> - protected content
 <textarea style="width:100%;height:50px;" ondblclick="this.select();document.execCommand('copy');msg();">&lt;?php
 $page_title='[***individual page title***]';
-$fav_icon='[***base64-FavIcon(.ico)-here***]';
+$fav_icon='[***favicon here***]';
 include('login.php');
 /* user level from $access[$SESSION['user']][1] */
 
 // General Page Header
 echo '
-&lt;div style="display:flex;justify-content:space-between;flex-wrap:wrap;"&gt;
-&lt;div&gt; Hello '.$_SESSION['user'].'!&lt;/div&gt;
-&lt;div&gt;&lt;input type="button" value="log out" onclick="document.location.href=window.location.protocol+\'//\'+window.location.host+window.location.pathname+\'?exit\';" /&gt;&lt;/div&gt;
+&lt;div style="background-color:#990000;color:#ffffff;padding:15px;"&gt;
+	&lt;div style="display:flex;justify-content:space-between;flex-wrap:wrap;"&gt;
+	&lt;div&gt; Hello '.$_SESSION['user'].'!&lt;/div&gt;
+	&lt;div&gt;&lt;input type="button" value="log out" onclick="document.location.href=window.location.protocol+\'//\'+window.location.host+window.location.pathname+\'?exit\';" /&gt;&lt;/div&gt;
+	&lt;/div&gt;
 &lt;/div&gt;
 &lt;hr /&gt;
 ';
-
 ?&gt;
+&lt;!-- protected content here --&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 </textarea>
