@@ -172,10 +172,10 @@
 	<body cz-shortcut-listen="true">
 		<span style="font-size:24px;font-weight:bold;" id="page_title" ondblclick="changeTitle();">Universal Event Calendar</span>
 		<div style="float:right; width:300px; text-align:right;">
-			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px;" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
+			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px; color: rgb(255, 255, 255); background-color: rgb(0, 153, 0);" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
 			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
-			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="CODE_event-calendar.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
-			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">5/3/2024, 1:43:36 PM</span></div>
+			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('&lt;!DOCTYPE html&gt;&lt;html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'&gt;'+document.getElementsByTagName('HTML')[0].innerHTML+'&lt;/html&gt;');" onmouseout="this.href='#';" download="CODE_code-note-blank.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">7/9/2025, 3:53:45 PM</span></div>
 		</div>
 		<div style="clear:both; display:none;" id="help">
 			WHAT IS THIS?<br>
@@ -221,759 +221,521 @@
 		</div>
 		<hr style="clear:both;">
 		<!-- CONTENT PANEL START --><div id="nanowiki_panel"><div id="6741665439" style="border:#cccccc solid 1px; margin:5px; padding:5px; border-radius:5px;"><div class="title" id="title6741665439">simple event calendar grid with postings</div><div id="content6741665439"><hr>
-<style>
-	.event_calendar_search_container{
-		text-align:center;
-	}
-	.event_calendar_search{
-		width:84%;
-		font-size:12px;
-	}
-	.event_calendar_count{
-		width:10%;
-		text-align:right;
-		font-size:12px;
-		font-weight:bold;
-	}
-	.event_calendar{
-		width:95%;
-		table-layout: fixed;
-		margin:auto;
-	}
-	.event_calendar th{
-		font-family:sans-serif;
-		font-size:12px;
-		vertical-align:top;
-		background-color:#555;
-		color:#fff;
-		border-radius:5px;
-	}
-	.event_calendar td{
-		font-family:sans-serif;
-		font-size:11px;
-		vertical-align:top;
-		border-radius:5px;
-		height:0;
-	}
-	.event_calendar .event_calendar_title{
-		font-family:sans-serif;
-		font-size:14px;
-		vertical-align:middle;
-		background-color:#555;
-		color:#fff;
-		padding:5px;
-		font-weight:bold;
-		height:30px;
-		text-align:center;
-	}
-	.event_calendar .nav{
-		font-family:sans-serif;
-		font-size:12px;
-		vertical-align:middle;
-		background-color:#555;
-		color:#fff;
-		font-weight:bold;
-		padding:10px;
-	}
-	.event_calendar .day_number{
-		background-color:#eee;
-		padding:5px;
-		height:15px;
-		border-radius:5px;
-	}
-	.event_calendar .event_info{
-		padding:5px;
-		overflow:auto;
-		height:50px;
-		background-color:#fff;
-	}
-</style>
-<div class="event_calendar_search_container">
-	<input type="text" class="event_calendar_search" id="cal_search" placeholder="[search]" oninput="buildEventCalendar('event_calendar',this.value);">
-	<input type="text" class="event_calendar_count" id="cal_found" placeholder="[#]" readonly="">
-</div>
-<table class="event_calendar">
-	<tbody>
-		<tr>
-			<td class="event_calendar_title" colspan="7"><span id="event_calendar_prev" style="cursor:pointer;" onclick="current_month--;buildEventCalendar('event_calendar',document.getElementById('cal_search').value);">&lt;</span>&nbsp;<span id="event_calendar_title">&nbsp;</span>&nbsp;<span id="event_calendar_next" style="display:inline;cursor:pointer;" onclick="current_month++;buildEventCalendar('event_calendar',document.getElementById('cal_search').value);">&gt;</span></td>
-		</tr>
-		<tr>
-			<th><strong>Su</strong>
-			</th><th><strong>Mo</strong>
-			</th><th><strong>Tu</strong>
-			</th><th><strong>We</strong>
-			</th><th><strong>Th</strong>
-			</th><th><strong>Fr</strong>
-			</th><th><strong>Sa</strong>
-		</th></tr>
-		<tr>
-			<td id="event_calendar_0">&nbsp;</td>
-			<td id="event_calendar_1">&nbsp;</td>
-			<td id="event_calendar_2">&nbsp;</td>
-			<td id="event_calendar_3">&nbsp;</td>
-			<td id="event_calendar_4">&nbsp;</td>
-			<td id="event_calendar_5">&nbsp;</td>
-			<td id="event_calendar_6">&nbsp;</td>
-		</tr>
-		<tr>
-			<td id="event_calendar_7">&nbsp;</td>
-			<td id="event_calendar_8">&nbsp;</td>
-			<td id="event_calendar_9">&nbsp;</td>
-			<td id="event_calendar_10">&nbsp;</td>
-			<td id="event_calendar_11">&nbsp;</td>
-			<td id="event_calendar_12">&nbsp;</td>
-			<td id="event_calendar_13">&nbsp;</td>
-		</tr>
-		<tr>
-			<td id="event_calendar_14">&nbsp;</td>
-			<td id="event_calendar_15">&nbsp;</td>
-			<td id="event_calendar_16">&nbsp;</td>
-			<td id="event_calendar_17">&nbsp;</td>
-			<td id="event_calendar_18">&nbsp;</td>
-			<td id="event_calendar_19">&nbsp;</td>
-			<td id="event_calendar_20">&nbsp;</td>
-		</tr>
-		<tr>
-			<td id="event_calendar_21">&nbsp;</td>
-			<td id="event_calendar_22">&nbsp;</td>
-			<td id="event_calendar_23">&nbsp;</td>
-			<td id="event_calendar_24">&nbsp;</td>
-			<td id="event_calendar_25">&nbsp;</td>
-			<td id="event_calendar_26">&nbsp;</td>
-			<td id="event_calendar_27">&nbsp;</td>
-		</tr>
-		<tr>
-			<td id="event_calendar_28">&nbsp;</td>
-			<td id="event_calendar_29">&nbsp;</td>
-			<td id="event_calendar_30">&nbsp;</td>
-			<td id="event_calendar_31">&nbsp;</td>
-			<td id="event_calendar_32">&nbsp;</td>
-			<td id="event_calendar_33">&nbsp;</td>
-			<td id="event_calendar_34">&nbsp;</td>
-		</tr>
-		<tr>
-			<td id="event_calendar_35">&nbsp;</td>
-			<td id="event_calendar_36">&nbsp;</td>
-			<td id="event_calendar_37">&nbsp;</td>
-			<td id="event_calendar_38">&nbsp;</td>
-			<td id="event_calendar_39">&nbsp;</td>
-			<td id="event_calendar_40">&nbsp;</td>
-			<td id="event_calendar_41">&nbsp;</td>
-		</tr>
-	</tbody>
-</table>
-
-<p>&nbsp;</p>
-
-<script>
-/***************************************************************************************
-FLEXIBLE EVENT CALENDAR
-
-requires:
-- instance name
-- calendar grid, or list, or 'container constellation'
-- container fields with ID attribute value "[instance name]_0" to "[instance name]_41"
-- custom styling
-- calendar call "buildEventCalendar('[instance name]','[search]');"
-
-***************************************************************************************/
-
-var index_d=0;var index_m=0;var cal_entry=[[],[],[],[],[],[],[],[],[],[],[],[]];var current_month=0;
-
-/*********************
---- CONFIGURATION ---
-**********************/
-var year_start=2019;
-var month_start=10;
-var month_count=3;
-
-// EVENTS BY DATE - MUST MATCH MONTH COUNT!
-// - multi-day entries need to be copied - <<<< YES, YOU WILL APPRECIATE THAT!
-// - all entries need to be done in one line
-// - use '~' to separate "clickable" event title (non-HTML!) from pop-up event details (may contain HTML,e.g. links, tables, videos, etc., all one line)
-// - use ' || ' for linebreaks ('<br />'))
-// - use ' |~| ' to separate events on a single day
-// - use ' \' ' (backslash single-quote) for single quotes in postings
-//
-
-// --- CURRENT/START MONTH ---
-
-// - DATE/WEEKDAY REFERENCE HELPER - adjust and use this slider:
-// [PUSH] >>>       01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
-//            SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO
-
-/* 01 */ index_d++;cal_entry[index_m][index_d]='';
-/* 02 */ index_d++;cal_entry[index_m][index_d]='';
-/* 03 */ index_d++;cal_entry[index_m][index_d]='';
-/* 04 */ index_d++;cal_entry[index_m][index_d]='';
-/* 05 */ index_d++;cal_entry[index_m][index_d]='test~This is a test|~|test2~This is a second test|~|test3 - this is an intentionally very long title to demonstrate field overflow and scroll feature~This is a third test|| <p>&nbsp; </p><table border="1" cellpadding="1" cellspacing="1" style="width:500px;"> <tbody> <tr> <td>This </td> <td>That </td> </tr> <tr> <td>1 </td> <td>2 </td> </tr> <tr> <td>3 </td> <td>444444 </td> </tr> </tbody> </table> <p>&nbsp; </p>||<a href="https://www.google.com" target="_blank">LINK</a>';
-/* 06 */ index_d++;cal_entry[index_m][index_d]='';
-/* 07 */ index_d++;cal_entry[index_m][index_d]='';
-/* 08 */ index_d++;cal_entry[index_m][index_d]='';
-/* 09 */ index_d++;cal_entry[index_m][index_d]='';
-/* 10 */ index_d++;cal_entry[index_m][index_d]='';
-/* 11 */ index_d++;cal_entry[index_m][index_d]='';
-/* 12 */ index_d++;cal_entry[index_m][index_d]='';
-/* 13 */ index_d++;cal_entry[index_m][index_d]='';
-/* 14 */ index_d++;cal_entry[index_m][index_d]='testing a||test~this is another test';
-/* 15 */ index_d++;cal_entry[index_m][index_d]='';
-/* 16 */ index_d++;cal_entry[index_m][index_d]='';
-/* 17 */ index_d++;cal_entry[index_m][index_d]='';
-/* 18 */ index_d++;cal_entry[index_m][index_d]='';
-/* 19 */ index_d++;cal_entry[index_m][index_d]='';
-/* 20 */ index_d++;cal_entry[index_m][index_d]='';
-/* 21 */ index_d++;cal_entry[index_m][index_d]='';
-/* 22 */ index_d++;cal_entry[index_m][index_d]='hdfgjhsdfgh~WOTT?';
-/* 23 */ index_d++;cal_entry[index_m][index_d]='';
-/* 24 */ index_d++;cal_entry[index_m][index_d]='';
-/* 25 */ index_d++;cal_entry[index_m][index_d]='';
-/* 26 */ index_d++;cal_entry[index_m][index_d]='';
-/* 27 */ index_d++;cal_entry[index_m][index_d]='';
-/* 28 */ index_d++;cal_entry[index_m][index_d]='';
-/* 29 */ index_d++;cal_entry[index_m][index_d]='';
-/* 30 */ index_d++;cal_entry[index_m][index_d]='';
-/* 31 */ index_d++;cal_entry[index_m][index_d]='';
-index_m++;index_d=0;
-
-// --- NEXT MONTH ---
-
-// - DATE/WEEKDAY REFERENCE HELPER - adjust and use this slider:
-// [PUSH] >>>                01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
-//            SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO
-
-/* 01 */ index_d++;cal_entry[index_m][index_d]='';
-/* 02 */ index_d++;cal_entry[index_m][index_d]='';
-/* 03 */ index_d++;cal_entry[index_m][index_d]='';
-/* 04 */ index_d++;cal_entry[index_m][index_d]='';
-/* 05 */ index_d++;cal_entry[index_m][index_d]='test2~this is test2';
-/* 06 */ index_d++;cal_entry[index_m][index_d]='';
-/* 07 */ index_d++;cal_entry[index_m][index_d]='';
-/* 08 */ index_d++;cal_entry[index_m][index_d]='';
-/* 09 */ index_d++;cal_entry[index_m][index_d]='';
-/* 10 */ index_d++;cal_entry[index_m][index_d]='';
-/* 11 */ index_d++;cal_entry[index_m][index_d]='';
-/* 12 */ index_d++;cal_entry[index_m][index_d]='';
-/* 13 */ index_d++;cal_entry[index_m][index_d]='';
-/* 14 */ index_d++;cal_entry[index_m][index_d]='testing a||second test';
-/* 15 */ index_d++;cal_entry[index_m][index_d]='';
-/* 16 */ index_d++;cal_entry[index_m][index_d]='';
-/* 17 */ index_d++;cal_entry[index_m][index_d]='';
-/* 18 */ index_d++;cal_entry[index_m][index_d]='';
-/* 19 */ index_d++;cal_entry[index_m][index_d]='';
-/* 20 */ index_d++;cal_entry[index_m][index_d]='';
-/* 21 */ index_d++;cal_entry[index_m][index_d]='';
-/* 22 */ index_d++;cal_entry[index_m][index_d]='';
-/* 23 */ index_d++;cal_entry[index_m][index_d]='';
-/* 24 */ index_d++;cal_entry[index_m][index_d]='';
-/* 25 */ index_d++;cal_entry[index_m][index_d]='';
-/* 26 */ index_d++;cal_entry[index_m][index_d]='';
-/* 27 */ index_d++;cal_entry[index_m][index_d]='';
-/* 28 */ index_d++;cal_entry[index_m][index_d]='';
-/* 29 */ index_d++;cal_entry[index_m][index_d]='';
-/* 30 */ index_d++;cal_entry[index_m][index_d]='';
-/* 31 */ index_d++;cal_entry[index_m][index_d]='';
-index_m++;index_d=0;
-
-// --- NEXT MONTH ---
-
-// - DATE/WEEKDAY REFERENCE HELPER - adjust and use this slider:
-// [PUSH] >>> 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
-//            SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO
-
-/* 01 */ index_d++;cal_entry[index_m][index_d]='';
-/* 02 */ index_d++;cal_entry[index_m][index_d]='';
-/* 03 */ index_d++;cal_entry[index_m][index_d]='';
-/* 04 */ index_d++;cal_entry[index_m][index_d]='';
-/* 05 */ index_d++;cal_entry[index_m][index_d]='test3';
-/* 06 */ index_d++;cal_entry[index_m][index_d]='';
-/* 07 */ index_d++;cal_entry[index_m][index_d]='';
-/* 08 */ index_d++;cal_entry[index_m][index_d]='';
-/* 09 */ index_d++;cal_entry[index_m][index_d]='';
-/* 10 */ index_d++;cal_entry[index_m][index_d]='';
-/* 11 */ index_d++;cal_entry[index_m][index_d]='';
-/* 12 */ index_d++;cal_entry[index_m][index_d]='';
-/* 13 */ index_d++;cal_entry[index_m][index_d]='';
-/* 14 */ index_d++;cal_entry[index_m][index_d]='testing a||third test';
-/* 15 */ index_d++;cal_entry[index_m][index_d]='';
-/* 16 */ index_d++;cal_entry[index_m][index_d]='';
-/* 17 */ index_d++;cal_entry[index_m][index_d]='';
-/* 18 */ index_d++;cal_entry[index_m][index_d]='';
-/* 19 */ index_d++;cal_entry[index_m][index_d]='';
-/* 20 */ index_d++;cal_entry[index_m][index_d]='';
-/* 21 */ index_d++;cal_entry[index_m][index_d]='';
-/* 22 */ index_d++;cal_entry[index_m][index_d]='';
-/* 23 */ index_d++;cal_entry[index_m][index_d]='';
-/* 24 */ index_d++;cal_entry[index_m][index_d]='';
-/* 25 */ index_d++;cal_entry[index_m][index_d]='';
-/* 26 */ index_d++;cal_entry[index_m][index_d]='';
-/* 27 */ index_d++;cal_entry[index_m][index_d]='';
-/* 28 */ index_d++;cal_entry[index_m][index_d]='';
-/* 29 */ index_d++;cal_entry[index_m][index_d]='';
-/* 30 */ index_d++;cal_entry[index_m][index_d]='';
-/* 31 */ index_d++;cal_entry[index_m][index_d]='';
-index_m++;index_d=0;
-
-/****************** END CONFIG ******************/
-
-var month_label=['','January','February','March','April','May','June','July','August','September','October','November','December'];
-var cal_title=[];
-var cal_offset=[];
-var cal_days=[];
-
-var cur_month=month_start-1;
-var cur_year=year_start;
-for(x=0;x<month_count;x++){
-	cur_month++;
-	if(cur_month>12){
-		cur_month=1;
-		cur_year++;
-	}
-	cal_days.push(new Date(cur_year, cur_month, 0).getDate());
-	cal_offset.push(new Date(cur_year+'-'+cur_month+'-1').getDay());
-	cal_title.push(month_label[cur_month]+' '+cur_year);
-}
-
-function buildEventCalendar(instance_name,search_term){
-	var found_count=0;
-	var cal_occurrence;
-	if(cal_title.length+cal_offset.length+cal_days.length!=index_m*3){
-		alert('CALENDAR CANNOT BE BUILT!\n\nConfiguration error, please make sure\nyou have the same number of\nmonth titles('+cal_title.length+'), startday-offsets('+cal_offset.length+'),\nlengths('+cal_days.length+'), and events('+index_m+')!\n\nPLEASE CHECK CONFIGURATION!');
-	}else{
-		if(search_term.length){
-			for(x=0;x<index_m;x++){
-				for(y=1;y<cal_days[x];y++){
-					if(cal_entry[x][y].toLowerCase().replace(/<[^>]*>?/gm, '').indexOf(document.getElementById('cal_search').value.toLowerCase())>-1){
-						found_count++;
-					}
-				}
-			}
-		}
-		for(x=0;x<42;x++){document.getElementById(instance_name+'_'+x).innerHTML='';}
-		if(current_month<0){current_month=0;}else if(current_month>(index_m-1)){current_month=index_m-1;}
-		document.getElementById(instance_name+'_title').innerHTML=cal_title[current_month];
-		for(x=1;x<=cal_days[current_month];x++){
-			cal_entry_display='';
-			document.getElementById(instance_name+'_'+(x+cal_offset[current_month]-1)).innerHTML='<div class="day_number">'+(x)+'</div>';
-			if(cal_entry[current_month][x].length){
-				cal_occurrence='';
-				if(search_term.length){
-					if(cal_entry[current_month][x].replace(/<[^>]*>?/gm, '').toLowerCase().indexOf(document.getElementById('cal_search').value.toLowerCase())>-1){
-						cal_occurrence='style="background-color:#7f7";';
-					}
-				}
-				cal_entry_display='<div class="event_info" '+cal_occurrence+'>';
-				individual_events=cal_entry[current_month][x].split('|~|');
-				for(y=0;y<individual_events.length;y++){
-					event_segs=individual_events[y].split('~');
-					if(event_segs.length==1){
-						event_segs[1]='-no details-';
-					}
-					cal_entry_display+='<ul style="cursor:pointer;margin:0 0 5px -25px;" onclick="this.nextElementSibling.style.display=\'block\';"><li>'+event_segs[0].replaceAll('||','<br />')+'</li></ul><div class="modal" style="display:none;position:absolute;z-index: 1;padding:0;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgba(0,0,0,0.4);" ><div style="background-color:#fefefe;margin: 30vh auto;padding:20px;border:1px solid #888; width:80%;"><span style="color:#aaaaaa;float:right;font-size:16px;font-weight:bold;cursor:pointer;" onclick="this.parentNode.parentNode.style.display=\'none\';">[close]</span><p>'+event_segs[1].replaceAll('||','<br />')+'</p></div></div>';
-				}
-			}else{
-				document.getElementById(instance_name+'_'+(x+cal_offset[current_month]-1)).innerHTML+='<div class="event_info"></div>';
-			}
-			document.getElementById(instance_name+'_'+(x+cal_offset[current_month]-1)).innerHTML+=cal_entry_display+'</div>';
-		}
-	}
-	if(search_term.length){
-		if(found_count){
-			document.getElementById('cal_search').style.backgroundColor='#7f7';
-			document.getElementById('cal_found').style.backgroundColor='#7f7';
-		}else{
-			document.getElementById('cal_search').style.backgroundColor='#f77';
-			document.getElementById('cal_found').style.backgroundColor='#f77';
-		}
-		document.getElementById('cal_found').value='['+found_count+']';
-	}else{
-		document.getElementById('cal_search').style.backgroundColor='#fff';
-		document.getElementById('cal_found').style.backgroundColor='#fff';
-		document.getElementById('cal_found').value='';
-	}
-}
-
-buildEventCalendar('event_calendar','');
-</script>
+<img style="border-width:0px;" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAIyAdsDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD7LooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKRvun6UM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Of8A16PZT7B9Yp9zLq/oX/H2/wD1zP8AMVL/AGP/ANPH/jn/ANerljZpagkMWY9SRirhTkpJszq14ODSZzuuWy3iX1m0kkSziSMvGQGUNkZGQRkZ9KqaHptto2i2OkWYYW1jbx20O45OxFCjOO+BXT3empPKZFkMZPUYyKh/sf8A6eP/ABz/AOvUulK7sVHEU7K7/r+kZdFan9j/APTx/wCOf/Xo/sf/AKeP/HP/AK9L2U+xX1in3MuitT+x/wDp4/8AHP8A69H9j/8ATx/45/8AXo9lPsH1in3MurWk/wDIQi/H+Rq1/Y//AE8f+Of/AF6s2Ngls/mFy79AcYxVRpSTVyKmIg4tJlyiiiuo88KKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKq3N/BBJ5bbmYdQo6Vari/GOrQ6FpGsa3cxTTQ6fBNcyRwrukdUBYhR3OBxWVapyRudGGpKrKzOl/ta2/uS/kP8aP7Wtv7kv5D/GvOPAHi668RXWoafqWl21hfWUVtOwtb03UDxToXjIkKId3ytlduBwQSDXW1nKpOLszojQpSV0bX9rW39yX8h/jR/a1t/cl/If41i0VPtpFfVaZtf2tbf3JfyH+NH9rW39yX8h/jWLRR7aQfVaZ0NpeQ3JKoSGHOGHNF3eQ2xCuSWPOFHNZGk/8AIQj/AB/kaNXOL+Untj+Qq3VahzMx+rx9py9LGh/a1t/cl/If40f2tbf3JfyH+NeU+C/iBc69qOlx32hJptlrttNd6NOt6JpJo42XImj2L5TlHVwFaQY3AkEYPeVLqTW5qsPTZtf2tbf3JfyH+NH9rW39yX8h/jWLRS9tIf1WmbX9rW39yX8h/jR/a1t/cl/If41i0Ue2kH1WmbsOpW8sgT51J4G4cVYuZ47ePfIcDsO5rmq1df8A+WP/AAL+lXGq3Fsxnh4qcUupL/a1t/cl/If40f2tbf3JfyH+NeeyeL1HxHtvByaRfAS2c9y1/Khjh3RmL93HuGZOJQSw+UcDJO4Lm+E/iBJrWuWNnc6KLGx1iK5m0e6F15rXCQOFfzE2ARFgwdQGcFc5KkYMqrN7f1/Vn9xo8PSW56p/a1t/cl/If40f2tbf3JfyH+NYtFL20ivqtM2v7Wtv7kv5D/Gj+1rb+5L+Q/xrFoo9tIPqtM201S2ZgpEi57kDH86tyypFEZHYBR3rma1dRJ/sm399v/oJq4VW07mNTDxUopdSX+1rb+5L+Q/xo/ta2/uS/kP8a898XeLl0DXNE0pdIvrx9UvI7drhUKQW6uSAzSEYZsjhFy3c4HNGg+L11fxx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K5ACDdvPylSCDggny7xD4P8AGfjPWL2c6TF4dstXaFbqLVo4rwLFbQyKgljt7gZd5Zyy7JGCiBS2CdtdJ8P/AA1rkfjSPxL4hsHt7s6Bb2twwnRo5L0OyTShVY8vHFBhjzt2rwQwpLXf+v6f5hrb+vL+vkekUUUUhhRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAU2SWOPHmSImf7xxTq5y/ZnvJSxzhyB9AazqT5EbUaXtHY3vtNt/z8Rf8AfYo+023/AD8Rf99ivOT428L/ANh6lrcerJcafpl0bS6mt4nm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FJJP5Vq65E7xxuqkhM5x74/wrWKfIznqNKpH5nmOpaKkPxg0HVrLSVjSTT9Q+3XcNvgPITaBPMcDliqEDcc4U46VZ8GWl1ceKPE3iHUraaGaW8FhZCWMqVtIFGCuezSNK+R1BXrgV1tFZp2VvX8Xf/gGzjd/d+H9XCiiikUFFFFABWpqP/IItv8AgP8A6CazERnYKiliegFbOoQSHTY41G5o9uQPYYrWCdpHPWaUo+p5h8SNGS71Lw1qdrpKz30OtWqy3MdvulS3BdiGcDIjBIJycZriE0/VF+JcedD1MznxU14bMWUv9mpAYSg1AXONvnlMAx+Zt3Ejyt37yvbKKiEuV3/rp/l/W5rOHNf+u/8An/WwUUUVJYUUUUAFan/Mv/5/v1lgEnABJPYVtfZ5P7H8jHz4zj8c4rWmm7+hz12ly37nmHxp0ZNX+HuqeVpK6hqMNu32Lbb+bMjNgN5fBYErkHHUVxnxm0fXLvV9e0zw+2qLJ4l0y3spoxor3EEpDyLuW6VwlsUVyX80HK42ZavaCCDgggjsaKzi+V387/l/kjWUeb7v1f8AmNjXYirknAAye9OoopFJWVkFFFFAwrU07/kEXP8AwL/0EVl1tafBINNkjYbWk3YB9xitaS1OfENKK9Uef/EfxFfeG9AS603SLzUry4nW3iEFlPcpAWyTLKsKM+xQCcKMk4XIzkeeWtpD4em0LxDZ6f4k1iyNlqsF650S5S5kvrmSKYytbGMSIrtHIoO3YoKgnHJ9qdGRirqVI6g0lZdGn1/KzVvxfz9LG27T/ro/0+71Oa+FukXug/Dbw5oupKFvbLTIIJ1DbgjqgBXI4ODxkeldLRRVTk5ycn1CEeWKj2CiiipKCr+hf8fb/wDXM/zFUK09CicSvMVIXbtBPfmrp/EjGu7U2c1491mTw/ouqaxDpV9q0ttlo7OyhaWWZi2AoVQWxkjJAOBk4OK4zwJpum6zpGtX+q2dxqOq6jcx3V99u0S4tIlljUCFIY7mNSyxhVw4BJYFjgnA9N1GJ47uQspwzFgfXNV6ma+JPrp/X9di4aqLXQ5b4R2tzY/CzwrZ3tvNbXMGkWsc0MyFHjcRKCrKeQQeCDXU0UU5y55OXccY8qSCiiipKCrWk/8AIQi/H+RqrV3Rona7WUKdiA5P4YqofEjOq7QZuUUUV3HkhRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAH//Z">
 <hr>
 <script>
 function msg(){document.getElementById('message').style.backgroundColor='#990000';document.getElementById('message').innerHTML='COPIED!';setTimeout('document.getElementById(\'message\').style.backgroundColor=\'#009900\';document.getElementById(\'message\').innerHTML=\'-ready-\';',1000);}
 </script>
 <div id="message" style="text-align:center;background-color:#009900;color:#ffffff;border-radius:25px; padding:5px; margin-bottom:5px;">-ready-</div>
 <em>-double-click copies code sample-</em><br>
-<textarea style="width:100%;height:150px;" ondblclick="this.select();document.execCommand('copy');msg();">&lt;style&gt;
-	.event_calendar_search_container{
-		text-align:center;
-	}
-	.event_calendar_search{
-		width:84%;
-		font-size:12px;
-	}
-	.event_calendar_count{
-		width:10%;
-		text-align:right;
-		font-size:12px;
-		font-weight:bold;
-	}
-	.event_calendar{
-		width:95%;
-		table-layout: fixed;
-		margin:auto;
-	}
-	.event_calendar th{
-		font-family:sans-serif;
-		font-size:12px;
-		vertical-align:top;
-		background-color:#555;
-		color:#fff;
-		border-radius:5px;
-	}
-	.event_calendar td{
-		font-family:sans-serif;
-		font-size:11px;
-		vertical-align:top;
-		border-radius:5px;
-		height:0;
-	}
-	.event_calendar .event_calendar_title{
-		font-family:sans-serif;
-		font-size:14px;
-		vertical-align:middle;
-		background-color:#555;
-		color:#fff;
-		padding:5px;
-		font-weight:bold;
-		height:30px;
-		text-align:center;
-	}
-	.event_calendar .nav{
-		font-family:sans-serif;
-		font-size:12px;
-		vertical-align:middle;
-		background-color:#555;
-		color:#fff;
-		font-weight:bold;
-		padding:10px;
-	}
-	.event_calendar .day_number{
-		background-color:#eee;
-		padding:5px;
-		height:15px;
-		border-radius:5px;
-	}
-	.event_calendar .event_info{
-		padding:5px;
-		overflow:auto;
-		height:50px;
-		background-color:#fff;
-	}
-&lt;/style&gt;
-&lt;div class="event_calendar_search_container"&gt;
-	&lt;input type="text" class="event_calendar_search" id="cal_search" placeholder="[search]" oninput="buildEventCalendar('event_calendar',this.value);" /&gt;
-	&lt;input type="text" class="event_calendar_count" id="cal_found" placeholder="[#]" readonly /&gt;
-&lt;/div&gt;
-&lt;table class="event_calendar"&gt;
-	&lt;tbody&gt;
-		&lt;tr&gt;
-			&lt;td class="event_calendar_title" colspan="7"&gt;&lt;span id="event_calendar_prev" style="cursor:pointer;" onclick="current_month--;buildEventCalendar('event_calendar',document.getElementById('cal_search').value);"&gt;&lt;&lt;/span&gt;&nbsp;&lt;span id="event_calendar_title"&gt;&nbsp;&lt;/span&gt;&nbsp;&lt;span id="event_calendar_next" style="display:inline;cursor:pointer;" onclick="current_month++;buildEventCalendar('event_calendar',document.getElementById('cal_search').value);"&gt;&gt;&lt;/span&gt;&lt;/td&gt;
-		&lt;/tr&gt;
-		&lt;tr&gt;
-			&lt;th&gt;&lt;strong&gt;Su&lt;/strong&gt;&lt;/td&gt;
-			&lt;th&gt;&lt;strong&gt;Mo&lt;/strong&gt;&lt;/td&gt;
-			&lt;th&gt;&lt;strong&gt;Tu&lt;/strong&gt;&lt;/td&gt;
-			&lt;th&gt;&lt;strong&gt;We&lt;/strong&gt;&lt;/td&gt;
-			&lt;th&gt;&lt;strong&gt;Th&lt;/strong&gt;&lt;/td&gt;
-			&lt;th&gt;&lt;strong&gt;Fr&lt;/strong&gt;&lt;/td&gt;
-			&lt;th&gt;&lt;strong&gt;Sa&lt;/strong&gt;&lt;/td&gt;
-		&lt;/tr&gt;
-		&lt;tr&gt;
-			&lt;td id="event_calendar_0"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_1"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_2"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_3"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_4"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_5"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_6"&gt;&nbsp;&lt;/td&gt;
-		&lt;/tr&gt;
-		&lt;tr&gt;
-			&lt;td id="event_calendar_7"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_8"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_9"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_10"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_11"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_12"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_13"&gt;&nbsp;&lt;/td&gt;
-		&lt;/tr&gt;
-		&lt;tr&gt;
-			&lt;td id="event_calendar_14"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_15"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_16"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_17"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_18"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_19"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_20"&gt;&nbsp;&lt;/td&gt;
-		&lt;/tr&gt;
-		&lt;tr&gt;
-			&lt;td id="event_calendar_21"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_22"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_23"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_24"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_25"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_26"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_27"&gt;&nbsp;&lt;/td&gt;
-		&lt;/tr&gt;
-		&lt;tr&gt;
-			&lt;td id="event_calendar_28"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_29"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_30"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_31"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_32"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_33"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_34"&gt;&nbsp;&lt;/td&gt;
-		&lt;/tr&gt;
-		&lt;tr&gt;
-			&lt;td id="event_calendar_35"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_36"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_37"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_38"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_39"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_40"&gt;&nbsp;&lt;/td&gt;
-			&lt;td id="event_calendar_41"&gt;&nbsp;&lt;/td&gt;
-		&lt;/tr&gt;
-	&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;&nbsp;&lt;/p&gt;
-
-&lt;script&gt;
-/***************************************************************************************
-FLEXIBLE EVENT CALENDAR
-
-requires:
-- instance name
-- calendar grid, or list, or 'container constellation'
-- container fields with ID attribute value "[instance name]_0" to "[instance name]_41"
-- custom styling
-- calendar call "buildEventCalendar('[instance name]','[search]');"
-
-***************************************************************************************/
-
-var index_d=0;var index_m=0;var cal_entry=[[],[],[],[],[],[],[],[],[],[],[],[]];var current_month=0;
-
-/*********************
---- CONFIGURATION ---
-**********************/
-var year_start=2019;
-var month_start=10;
-var month_count=3;
-
-// EVENTS BY DATE - MUST MATCH MONTH COUNT!
-// - multi-day entries need to be copied - &lt;&lt;&lt;&lt; YES, YOU WILL APPRECIATE THAT!
-// - all entries need to be done in one line
-// - use '~' to separate "clickable" event title (non-HTML!) from pop-up event details (may contain HTML,e.g. links, tables, videos, etc., all one line)
-// - use ' || ' for linebreaks ('&lt;br /&gt;'))
-// - use ' |~| ' to separate events on a single day
-// - use ' \' ' (backslash single-quote) for single quotes in postings
-//
-
-// --- CURRENT/START MONTH ---
-
-// - DATE/WEEKDAY REFERENCE HELPER - adjust and use this slider:
-// [PUSH] &gt;&gt;&gt;       01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
-//            SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO
-
-/* 01 */ index_d++;cal_entry[index_m][index_d]='';
-/* 02 */ index_d++;cal_entry[index_m][index_d]='';
-/* 03 */ index_d++;cal_entry[index_m][index_d]='';
-/* 04 */ index_d++;cal_entry[index_m][index_d]='';
-/* 05 */ index_d++;cal_entry[index_m][index_d]='test~This is a test|~|test2~This is a second test|~|test3 - this is an intentionally very long title to demonstrate field overflow and scroll feature~This is a third test|| &lt;p&gt;&nbsp; &lt;/p&gt;&lt;table border="1" cellpadding="1" cellspacing="1" style="width:500px;"&gt; &lt;tbody&gt; &lt;tr&gt; &lt;td&gt;This &lt;/td&gt; &lt;td&gt;That &lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td&gt;1 &lt;/td&gt; &lt;td&gt;2 &lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td&gt;3 &lt;/td&gt; &lt;td&gt;444444 &lt;/td&gt; &lt;/tr&gt; &lt;/tbody&gt; &lt;/table&gt; &lt;p&gt;&nbsp; &lt;/p&gt;||&lt;a href="https://www.google.com" target="_blank"&gt;LINK&lt;/a&gt;';
-/* 06 */ index_d++;cal_entry[index_m][index_d]='';
-/* 07 */ index_d++;cal_entry[index_m][index_d]='';
-/* 08 */ index_d++;cal_entry[index_m][index_d]='';
-/* 09 */ index_d++;cal_entry[index_m][index_d]='';
-/* 10 */ index_d++;cal_entry[index_m][index_d]='';
-/* 11 */ index_d++;cal_entry[index_m][index_d]='';
-/* 12 */ index_d++;cal_entry[index_m][index_d]='';
-/* 13 */ index_d++;cal_entry[index_m][index_d]='';
-/* 14 */ index_d++;cal_entry[index_m][index_d]='testing a||test~this is another test';
-/* 15 */ index_d++;cal_entry[index_m][index_d]='';
-/* 16 */ index_d++;cal_entry[index_m][index_d]='';
-/* 17 */ index_d++;cal_entry[index_m][index_d]='';
-/* 18 */ index_d++;cal_entry[index_m][index_d]='';
-/* 19 */ index_d++;cal_entry[index_m][index_d]='';
-/* 20 */ index_d++;cal_entry[index_m][index_d]='';
-/* 21 */ index_d++;cal_entry[index_m][index_d]='';
-/* 22 */ index_d++;cal_entry[index_m][index_d]='hdfgjhsdfgh~WOTT?';
-/* 23 */ index_d++;cal_entry[index_m][index_d]='';
-/* 24 */ index_d++;cal_entry[index_m][index_d]='';
-/* 25 */ index_d++;cal_entry[index_m][index_d]='';
-/* 26 */ index_d++;cal_entry[index_m][index_d]='';
-/* 27 */ index_d++;cal_entry[index_m][index_d]='';
-/* 28 */ index_d++;cal_entry[index_m][index_d]='';
-/* 29 */ index_d++;cal_entry[index_m][index_d]='';
-/* 30 */ index_d++;cal_entry[index_m][index_d]='';
-/* 31 */ index_d++;cal_entry[index_m][index_d]='';
-index_m++;index_d=0;
-
-// --- NEXT MONTH ---
-
-// - DATE/WEEKDAY REFERENCE HELPER - adjust and use this slider:
-// [PUSH] &gt;&gt;&gt;                01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
-//            SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO
-
-/* 01 */ index_d++;cal_entry[index_m][index_d]='';
-/* 02 */ index_d++;cal_entry[index_m][index_d]='';
-/* 03 */ index_d++;cal_entry[index_m][index_d]='';
-/* 04 */ index_d++;cal_entry[index_m][index_d]='';
-/* 05 */ index_d++;cal_entry[index_m][index_d]='test2~this is test2';
-/* 06 */ index_d++;cal_entry[index_m][index_d]='';
-/* 07 */ index_d++;cal_entry[index_m][index_d]='';
-/* 08 */ index_d++;cal_entry[index_m][index_d]='';
-/* 09 */ index_d++;cal_entry[index_m][index_d]='';
-/* 10 */ index_d++;cal_entry[index_m][index_d]='';
-/* 11 */ index_d++;cal_entry[index_m][index_d]='';
-/* 12 */ index_d++;cal_entry[index_m][index_d]='';
-/* 13 */ index_d++;cal_entry[index_m][index_d]='';
-/* 14 */ index_d++;cal_entry[index_m][index_d]='testing a||second test';
-/* 15 */ index_d++;cal_entry[index_m][index_d]='';
-/* 16 */ index_d++;cal_entry[index_m][index_d]='';
-/* 17 */ index_d++;cal_entry[index_m][index_d]='';
-/* 18 */ index_d++;cal_entry[index_m][index_d]='';
-/* 19 */ index_d++;cal_entry[index_m][index_d]='';
-/* 20 */ index_d++;cal_entry[index_m][index_d]='';
-/* 21 */ index_d++;cal_entry[index_m][index_d]='';
-/* 22 */ index_d++;cal_entry[index_m][index_d]='';
-/* 23 */ index_d++;cal_entry[index_m][index_d]='';
-/* 24 */ index_d++;cal_entry[index_m][index_d]='';
-/* 25 */ index_d++;cal_entry[index_m][index_d]='';
-/* 26 */ index_d++;cal_entry[index_m][index_d]='';
-/* 27 */ index_d++;cal_entry[index_m][index_d]='';
-/* 28 */ index_d++;cal_entry[index_m][index_d]='';
-/* 29 */ index_d++;cal_entry[index_m][index_d]='';
-/* 30 */ index_d++;cal_entry[index_m][index_d]='';
-/* 31 */ index_d++;cal_entry[index_m][index_d]='';
-index_m++;index_d=0;
-
-// --- NEXT MONTH ---
-
-// - DATE/WEEKDAY REFERENCE HELPER - adjust and use this slider:
-// [PUSH] &gt;&gt;&gt; 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
-//            SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO
-
-/* 01 */ index_d++;cal_entry[index_m][index_d]='';
-/* 02 */ index_d++;cal_entry[index_m][index_d]='';
-/* 03 */ index_d++;cal_entry[index_m][index_d]='';
-/* 04 */ index_d++;cal_entry[index_m][index_d]='';
-/* 05 */ index_d++;cal_entry[index_m][index_d]='test3';
-/* 06 */ index_d++;cal_entry[index_m][index_d]='';
-/* 07 */ index_d++;cal_entry[index_m][index_d]='';
-/* 08 */ index_d++;cal_entry[index_m][index_d]='';
-/* 09 */ index_d++;cal_entry[index_m][index_d]='';
-/* 10 */ index_d++;cal_entry[index_m][index_d]='';
-/* 11 */ index_d++;cal_entry[index_m][index_d]='';
-/* 12 */ index_d++;cal_entry[index_m][index_d]='';
-/* 13 */ index_d++;cal_entry[index_m][index_d]='';
-/* 14 */ index_d++;cal_entry[index_m][index_d]='testing a||third test';
-/* 15 */ index_d++;cal_entry[index_m][index_d]='';
-/* 16 */ index_d++;cal_entry[index_m][index_d]='';
-/* 17 */ index_d++;cal_entry[index_m][index_d]='';
-/* 18 */ index_d++;cal_entry[index_m][index_d]='';
-/* 19 */ index_d++;cal_entry[index_m][index_d]='';
-/* 20 */ index_d++;cal_entry[index_m][index_d]='';
-/* 21 */ index_d++;cal_entry[index_m][index_d]='';
-/* 22 */ index_d++;cal_entry[index_m][index_d]='';
-/* 23 */ index_d++;cal_entry[index_m][index_d]='';
-/* 24 */ index_d++;cal_entry[index_m][index_d]='';
-/* 25 */ index_d++;cal_entry[index_m][index_d]='';
-/* 26 */ index_d++;cal_entry[index_m][index_d]='';
-/* 27 */ index_d++;cal_entry[index_m][index_d]='';
-/* 28 */ index_d++;cal_entry[index_m][index_d]='';
-/* 29 */ index_d++;cal_entry[index_m][index_d]='';
-/* 30 */ index_d++;cal_entry[index_m][index_d]='';
-/* 31 */ index_d++;cal_entry[index_m][index_d]='';
-index_m++;index_d=0;
-
-/****************** END CONFIG ******************/
-
-var month_label=['','January','February','March','April','May','June','July','August','September','October','November','December'];
-var cal_title=[];
-var cal_offset=[];
-var cal_days=[];
-
-var cur_month=month_start-1;
-var cur_year=year_start;
-for(x=0;x&lt;month_count;x++){
-	cur_month++;
-	if(cur_month&gt;12){
-		cur_month=1;
-		cur_year++;
-	}
-	cal_days.push(new Date(cur_year, cur_month, 0).getDate());
-	cal_offset.push(new Date(cur_year+'-'+cur_month+'-1').getDay());
-	cal_title.push(month_label[cur_month]+' '+cur_year);
-}
-
-function buildEventCalendar(instance_name,search_term){
-	var found_count=0;
-	var cal_occurrence;
-	if(cal_title.length+cal_offset.length+cal_days.length!=index_m*3){
-		alert('CALENDAR CANNOT BE BUILT!\n\nConfiguration error, please make sure\nyou have the same number of\nmonth titles('+cal_title.length+'), startday-offsets('+cal_offset.length+'),\nlengths('+cal_days.length+'), and events('+index_m+')!\n\nPLEASE CHECK CONFIGURATION!');
-	}else{
-		if(search_term.length){
-			for(x=0;x&lt;index_m;x++){
-				for(y=1;y&lt;cal_days[x];y++){
-					if(cal_entry[x][y].toLowerCase().replace(/&lt;[^&gt;]*&gt;?/gm, '').indexOf(document.getElementById('cal_search').value.toLowerCase())&gt;-1){
-						found_count++;
-					}
-				}
+<textarea style="width:100%;height:150px;" ondblclick="this.select();document.execCommand('copy');msg();">&lt;!DOCTYPE html&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+	&lt;head&gt;
+		&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+		&lt;title&gt;Universal Event Calendar&lt;/title&gt;
+		&lt;link rel="icon" type="image/x-icon" href="imgs/favicon.ico"&gt;
+		&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+		&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+		&lt;link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&amp;display=swap" rel="stylesheet"&gt;
+		&lt;link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'&gt;
+		&lt;style type="text/css"&gt;
+			body{
+				margin:0;
+				font-family:Poppins;
+				font-size:17px;
 			}
+			a{
+				text-decoration: none;
+			}
+			.menu{
+				padding:25px;
+				color:rgb(40, 64, 83);
+				font-weight:bold;
+			}
+			.banner{
+				background:black url('banner_events.jpg');
+				background-position: center center;
+				background-size: cover;
+				text-align:left;
+				padding: 0 75px;
+				color: white;
+				font-size: 7vh;
+				font-weight: bold;
+				font-family: sans-serif;
+				display:flex;
+				justify-content:sflex-start;
+				flex-wrap:wrap;
+				align-items:center;
+				height:60vh;
+			}
+			.logo{
+				padding:5px 25px;
+				font-family:sans-serif;
+				font-size:12px;
+				font-weight:bold;
+				color:rgb(40, 64, 83);
+			}
+			a{
+				color:#000;
+			}
+			li{margin:5px 0;}
+
+
+			.event_calendar_search_container{
+				width:95%;
+				margin:5px auto;
+				text-align:center;
+				display:flex;
+				justify-content:space-between;
+				flex-wrap:wrap;
+			}
+			.event_calendar_search{
+				width:80vw;
+				font-size:12px;
+				border-color:#ccc;
+			}
+			.event_calendar_count{
+				width:7vw;
+				text-align:right;
+				font-size:12px;
+				font-weight:bold;
+				border-color:#ccc;
+			}
+			.event_calendar_mode{
+				background-color:#F1562A;
+				font-size:12px;
+				color:#ffffff;
+				border:#F1562A solid 2px;
+				font-weight:bold;
+				border-radius:5px;
+			}
+			.event_calendar{
+				width:95%;
+				table-layout: fixed;
+				margin:auto;
+			}
+			.event_calendar th{
+				font-family:sans-serif;
+				font-size:12px;
+				vertical-align:top;
+				background-color:#F1562A;
+				color:#fff;
+				border-radius:5px;
+			}
+			.event_calendar td{
+				font-family:sans-serif;
+				font-size:12px;
+				vertical-align:top;
+				border-radius:5px;
+				height:0;
+			}
+			.event_calendar .event_calendar_title{
+				font-family:sans-serif;
+				font-size:14px;
+				vertical-align:middle;
+				background-color:#F1562A;
+				color:#fff;
+				padding:5px;
+				font-weight:bold;
+				height:30px;
+				text-align:center;
+			}
+			.event_calendar .nav{
+				font-family:sans-serif;
+				font-size:12px;
+				vertical-align:middle;
+				background-color:#F1562A;
+				color:#fff;
+				font-weight:bold;
+				padding:10px;
+			}
+			.event_calendar .day_number{
+				background-color:#FCDDD4;
+				padding:5px;
+				height:15px;
+				border-radius:5px;
+			}
+			.event_calendar .event_info{
+				font-family: "PT Sans Narrow", sans-serif;
+				font-weight: 400;
+				font-style: normal;
+  				padding:5px;
+				overflow:auto;
+				height:12vh;
+				background-color:#fff;
+			}
+			.event_calendar_list_month{
+				width:95%;
+				margin:5px auto;
+				font-family:sans-serif;
+				font-size:12px;
+				vertical-align:middle;
+				background-color:#F1562A;
+				color:#fff;
+				font-weight:bold;
+				padding:5px;
+				border-radius:5px;
+			}
+			.event_calendar_list_event_day{
+				width:95%;
+				margin:3px auto;
+				border-radius:5px;
+				font-family:sans-serif;
+				font-size:12px;
+				vertical-align:middle;
+				background-color:#FCDDD4;
+				padding:3px 0px 3px 10px;
+				border-radius:5px;
+			}
+			.event_calendar_list_event{
+				width:95%;
+				margin:5px auto;
+				padding:5px;
+				font-family:sans-serif;
+				font-size:12px;
+				vertical-align:middle;
+			}
+			.modal{
+				display:none;
+				position:fixed;
+				z-index: 1;
+				padding:0;
+				left:0;
+				top:0;
+				width:100%;
+				height:300vh;
+				overflow:auto;
+				background-color:rgba(0,0,0,0.4);
+				font-size:14px;
+			}
+
+		&lt;/style&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;div style="text-align:center;font-size:25px;font-weight:bold; padding:30px;"&gt;Upcoming Events&lt;/div&gt;
+		&lt;div class="event_calendar_search_container"&gt;
+			&lt;div style="text-align:left;"&gt;&lt;input type="text" class="event_calendar_search" id="cal_search" placeholder="[search]" oninput="buildEventCalendar('event_calendar',this.value);" /&gt;&lt;/div&gt;
+			&lt;div style="text-align:center;"&gt;&lt;input type="text" class="event_calendar_count" id="cal_found" placeholder="[#]" readonly /&gt;&lt;/div&gt;
+			&lt;div style="text-align:right;"&gt;&lt;input type="button" class="event_calendar_mode" id="cal_mode" value="AS LIST" onclick="switchCalendarMode();" /&gt;&lt;/div&gt;
+		&lt;/div&gt;
+		&lt;div id="cal_display_panel"&gt;
+			&lt;table class="event_calendar"&gt;
+				&lt;tbody&gt;
+					&lt;tr&gt;
+						&lt;td class="event_calendar_title" colspan="7"&gt;&lt;span id="event_calendar_prev" style="cursor:pointer;font-size:2em;vertical-align:middle;" onclick="current_month--;buildEventCalendar('event_calendar',document.getElementById('cal_search').value);"&gt;&nbsp;&lt;&nbsp;&lt;/span&gt; &lt;span id="event_calendar_title"&gt;&nbsp;&lt;/span&gt; &lt;span id="event_calendar_next" style="display:inline;cursor:pointer;font-size:2em;vertical-align:middle;" onclick="current_month++;buildEventCalendar('event_calendar',document.getElementById('cal_search').value);"&gt;&nbsp;&gt;&nbsp;&lt;/span&gt;&lt;/td&gt;
+					&lt;/tr&gt;
+					&lt;tr&gt;
+						&lt;th&gt;&lt;strong&gt;Su&lt;/strong&gt;&lt;/td&gt;
+						&lt;th&gt;&lt;strong&gt;Mo&lt;/strong&gt;&lt;/td&gt;
+						&lt;th&gt;&lt;strong&gt;Tu&lt;/strong&gt;&lt;/td&gt;
+						&lt;th&gt;&lt;strong&gt;We&lt;/strong&gt;&lt;/td&gt;
+						&lt;th&gt;&lt;strong&gt;Th&lt;/strong&gt;&lt;/td&gt;
+						&lt;th&gt;&lt;strong&gt;Fr&lt;/strong&gt;&lt;/td&gt;
+						&lt;th&gt;&lt;strong&gt;Sa&lt;/strong&gt;&lt;/td&gt;
+					&lt;/tr&gt;
+					&lt;tr&gt;
+						&lt;td id="event_calendar_0"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_1"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_2"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_3"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_4"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_5"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_6"&gt;&nbsp;&lt;/td&gt;
+					&lt;/tr&gt;
+					&lt;tr&gt;
+						&lt;td id="event_calendar_7"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_8"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_9"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_10"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_11"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_12"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_13"&gt;&nbsp;&lt;/td&gt;
+					&lt;/tr&gt;
+					&lt;tr&gt;
+						&lt;td id="event_calendar_14"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_15"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_16"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_17"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_18"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_19"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_20"&gt;&nbsp;&lt;/td&gt;
+					&lt;/tr&gt;
+					&lt;tr&gt;
+						&lt;td id="event_calendar_21"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_22"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_23"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_24"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_25"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_26"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_27"&gt;&nbsp;&lt;/td&gt;
+					&lt;/tr&gt;
+					&lt;tr&gt;
+						&lt;td id="event_calendar_28"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_29"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_30"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_31"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_32"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_33"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_34"&gt;&nbsp;&lt;/td&gt;
+					&lt;/tr&gt;
+					&lt;tr&gt;
+						&lt;td id="event_calendar_35"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_36"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_37"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_38"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_39"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_40"&gt;&nbsp;&lt;/td&gt;
+						&lt;td id="event_calendar_41"&gt;&nbsp;&lt;/td&gt;
+					&lt;/tr&gt;
+				&lt;/tbody&gt;
+			&lt;/table&gt;
+		&lt;/div&gt;
+
+		&lt;script&gt;
+
+		var month_count=0;var index_d=0;var index_m=0;var cal_entry=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]];var current_month=0;
+		&lt;/script&gt;
+		&lt;!---- &gt;
+
+		-USE THIS (external)-
+
+		&lt;!---- &gt;
+		&lt;script src="events.js?&lt;php echo time(); ?&gt;"&gt;&lt;/script&gt;
+
+		&lt;!---- &gt;
+
+		-OR USE THIS (internal)-
+
+		&lt;!----&gt;
+
+		&lt;script&gt;
+
+		/*********************
+		--- CONFIGURATION ---
+		**********************/
+		var year_start=2025;
+		var month_start=6;
+
+		// EVENTS BY DATE - MUST MATCH MONTH COUNT!
+		// - multi-day entries need to be copied - &lt;&lt;&lt;&lt; YES, YOU WILL APPRECIATE THAT!
+		// - all entries need to be done in one line
+		// - use ' ~~~ ' to separate "clickable" event title (non-HTML!) from pop-up event details (may contain HTML,e.g. links, tables, videos, etc., all one line)
+		// - use ' || ' for linebreaks ('&lt;br /&gt;'))
+		// - use ' |~| ' to separate events on a single day
+		// - use ' \' ' (backslash single-quote) for single quotes in postings
+		//
+
+		// --- CURRENT/START MONTH ---
+
+		// - DATE/WEEKDAY REFERENCE HELPER - adjust and use this slider:
+		// [PUSH] &gt;&gt;&gt; 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+		//            SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO
+
+		/* 01 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 02 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 03 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 04 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 05 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 06 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 07 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 08 */ index_d++;cal_entry[index_m][index_d]='NATIONAL TRAILS DAY~~~&lt;h2 style="text-align: center;"&gt;NATIONAL TRAILS DAY&lt;/h2&gt; &lt;p style="text-align: center;"&gt;The focus of this maintenance will be to reinstall several way markers that were vandalized. The BMBA will provide all the necessary tools and equipment for the job. Volunteers will be asked to haul water and equipment to the vandalized sites, dig holes, pound in fence post, attach carsonite boards&lt;/p&gt;&lt;hr&gt;&lt;p style="text-align: center;"&gt;&lt;img src="events/trailday.jpg" style="max-width:30vw;max-height:30vh;float:right;margin:0 5px;"&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Jun 07, 2025, 7:00 AM&lt;br&gt;&lt;/b&gt;&lt;a href="https://www.google.com/maps?q=Lost+Dog+Trailhead,+1651+Redd+Rd,+El+Paso,+TX+79911" target="_blank"&gt;Lost Dog Trailhead, 1651 Redd Rd&lt;/a&gt;&lt;/p&gt; &lt;p&gt;The focus of this maintenance will be to reinstall several way markers that were vandalized. The BMBA will provide all the necessary tools and equipment for the job.&nbsp; Volunteers will be asked to haul water and equipment to the vandalized sites, dig holes, pound in fence post, attach carsonite boards to fence post, and attach stickers to the boards.&nbsp;&lt;/p&gt;&lt;p&gt;Groups will hike to the sites starting at 7:00 a.m. and stop work at 10:00 a.m. At 10:00 a.m. groups are to gather their equipment and begin hiking back to the trailhead so that no-one is out on trail past 11:00 a.m.&lt;/p&gt;&lt;p&gt;See more information about National Trails Day &lt;a href="https://americanhiking.org/national-trails-day" target="_blank"&gt;here&lt;/a&gt;&lt;/p&gt;&lt;p&gt;The BMBA will provide water and snacks at the site for all participants.&lt;/p&gt;&lt;p style="text-align:center;"&gt;&lt;div style="display:inline-block; margin:auto; padding:25px; background-color:rgb(241, 86, 42); "&gt;&lt;a style="color:#ffffff;font-size:16px;" href="#" target="_blank"&gt;Register Here&lt;/a&gt;&lt;/div&gt;&lt;/p&gt;';
+		/* 09 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 10 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 11 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 12 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 13 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 14 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 15 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 16 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 17 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 18 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 19 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 20 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 21 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 22 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 23 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 24 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 25 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 26 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 27 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 28 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 29 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 30 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 31 */ index_d++;cal_entry[index_m][index_d]='';
+		index_m++;index_d=0;month_count++;
+
+		// --- NEXT MONTH ---
+
+		// - DATE/WEEKDAY REFERENCE HELPER - adjust and use this slider:
+		// [PUSH] &gt;&gt;&gt;       01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+		//            SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO TU WE TH FR SA SU MO
+
+		/* 01 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 02 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 03 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 04 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 05 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 06 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 07 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 08 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 09 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 10 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 11 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 12 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 13 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 14 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 15 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 16 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 17 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 18 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 19 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 20 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 21 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 22 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 23 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 24 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 25 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 26 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 27 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 28 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 29 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 30 */ index_d++;cal_entry[index_m][index_d]='';
+		/* 31 */ index_d++;cal_entry[index_m][index_d]='';
+		index_m++;index_d=0;month_count++;
+
+		&lt;/script&gt;
+		&lt;!----&gt;
+
+		&lt;script&gt;
+		var month_label=['DEC','JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+		var cal_title=[];
+		var cal_offset=[];
+		var cal_days=[];
+		var calendar_mode=0;
+
+		var dt = new Date();
+
+		var cur_month=month_start-1;
+		current_month=dt.getMonth()-cur_month;
+		if(current_month&lt;0){current_month+=12;}
+
+		var cur_year=year_start;
+
+		for(x=0;x&lt;month_count;x++){
+			cur_month++;
+			if(cur_month&gt;12){
+				cur_month=1;
+				cur_year++;
+			}
+			cal_days.push(new Date(cur_year, cur_month, 0).getDate());
+			cal_offset.push(new Date(cur_year+'-'+cur_month+'-1').getDay());
+			cal_title.push(month_label[cur_month]+' '+cur_year);
 		}
-		for(x=0;x&lt;42;x++){document.getElementById(instance_name+'_'+x).innerHTML='';}
-		if(current_month&lt;0){current_month=0;}else if(current_month&gt;(index_m-1)){current_month=index_m-1;}
-		document.getElementById(instance_name+'_title').innerHTML=cal_title[current_month];
-		for(x=1;x&lt;=cal_days[current_month];x++){
-			cal_entry_display='';
-			document.getElementById(instance_name+'_'+(x+cal_offset[current_month]-1)).innerHTML='&lt;div class="day_number"&gt;'+(x)+'&lt;/div&gt;';
-			if(cal_entry[current_month][x].length){
-				cal_occurrence='';
-				if(search_term.length){
-					if(cal_entry[current_month][x].replace(/&lt;[^&gt;]*&gt;?/gm, '').toLowerCase().indexOf(document.getElementById('cal_search').value.toLowerCase())&gt;-1){
-						cal_occurrence='style="background-color:#7f7";';
+
+		function switchCalendarMode(){
+			if(calendar_mode==0){
+				document.getElementById('cal_search').style.visibility='hidden';
+				document.getElementById('cal_found').style.visibility='hidden';
+				document.getElementById('cal_mode').value='AS GRID';
+				HTML_out='';
+				calendar_mode=1;
+				active=0;
+				grid=document.getElementById('cal_display_panel').innerHTML;
+				for(x=0;x&lt;month_count;x++){
+					if(cal_entry[x].toString().replaceAll(',','').length){
+						HTML_out+='&lt;div class="event_calendar_list_month"&gt;'+month_label[(x+month_start)%12]+'&lt;/div&gt;';
+						for(y=1;y&lt;31;y++){
+							if(cal_entry[x][y].length){
+								HTML_out+='&lt;div class="event_calendar_list_event_day"&gt;'+y+'&lt;/div&gt;&lt;div class="event_calendar_list_event"&gt;';
+								individual_events=cal_entry[x][y].split('|~|');
+								for(z=0;z&lt;individual_events.length;z++){
+									event_segs=individual_events[z].split('~~~');
+									if(event_segs.length==1){
+										HTML_out+='&lt;li&gt;'+event_segs[0].replaceAll('||','&lt;br /&gt;')+'&lt;/li&gt;';
+									}else{
+										HTML_out+='&lt;li style="cursor:pointer;margin:0 0 10px;" onclick="this.nextElementSibling.style.display=\'block\';"&gt;'+event_segs[0].replaceAll('||','&lt;br /&gt;')+'&lt;/li&gt;&lt;div class="modal" style="" &gt;&lt;div style="background-color:#fefefe;margin: 3vh auto;padding:20px;border:1px solid #888;width:80%;overflow:auto;max-height:88vh;"&gt;&lt;span style="color:#aaaaaa;float:right;font-size:16px;font-weight:bold;cursor:pointer;" onclick="this.parentNode.parentNode.style.display=\'none\';"&gt;[close]&lt;/span&gt;&lt;p style="overflow:auto;"&gt;'+event_segs[1].replaceAll('||','&lt;br /&gt;')+'&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;';
+									}
+								}
+								HTML_out+='&lt;/div&gt;';
+							}
+						}
 					}
 				}
-				cal_entry_display='&lt;div class="event_info" '+cal_occurrence+'&gt;';
-				individual_events=cal_entry[current_month][x].split('|~|');
-				for(y=0;y&lt;individual_events.length;y++){
-					event_segs=individual_events[y].split('~');
-					if(event_segs.length==1){
-						event_segs[1]='-no details-';
-					}
-					cal_entry_display+='&lt;ul style="cursor:pointer;margin:0 0 5px -25px;" onclick="this.nextElementSibling.style.display=\'block\';"&gt;&lt;li&gt;'+event_segs[0].replaceAll('||','&lt;br /&gt;')+'&lt;/li&gt;&lt;/ul&gt;&lt;div class="modal" style="display:none;position:absolute;z-index: 1;padding:0;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgba(0,0,0,0.4);" &gt;&lt;div style="background-color:#fefefe;margin: 30vh auto;padding:20px;border:1px solid #888; width:80%;"&gt;&lt;span style="color:#aaaaaa;float:right;font-size:16px;font-weight:bold;cursor:pointer;" onclick="this.parentNode.parentNode.style.display=\'none\';"&gt;[close]&lt;/span&gt;&lt;p&gt;'+event_segs[1].replaceAll('||','&lt;br /&gt;')+'&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;';
-				}
+				document.getElementById('cal_display_panel').innerHTML=HTML_out;
 			}else{
-				document.getElementById(instance_name+'_'+(x+cal_offset[current_month]-1)).innerHTML+='&lt;div class="event_info"&gt;&lt;/div&gt;';
+				calendar_mode=0;
+				document.getElementById('cal_search').style.visibility='visible';
+				document.getElementById('cal_found').style.visibility='visible';
+				document.getElementById('cal_mode').value='AS LIST';
+				document.getElementById('cal_display_panel').innerHTML=grid;
 			}
-			document.getElementById(instance_name+'_'+(x+cal_offset[current_month]-1)).innerHTML+=cal_entry_display+'&lt;/div&gt;';
 		}
-	}
-	if(search_term.length){
-		if(found_count){
-			document.getElementById('cal_search').style.backgroundColor='#7f7';
-			document.getElementById('cal_found').style.backgroundColor='#7f7';
-		}else{
-			document.getElementById('cal_search').style.backgroundColor='#f77';
-			document.getElementById('cal_found').style.backgroundColor='#f77';
-		}
-		document.getElementById('cal_found').value='['+found_count+']';
-	}else{
-		document.getElementById('cal_search').style.backgroundColor='#fff';
-		document.getElementById('cal_found').style.backgroundColor='#fff';
-		document.getElementById('cal_found').value='';
-	}
-}
 
-buildEventCalendar('event_calendar','');
-&lt;/script&gt;</textarea>
-</div><div style="clear:both;">&nbsp;</div><hr><div style="width:65px;float:left;"><span title="Move up" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(0,'6741665439');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAdUlEQVR42m1NuQ2AMAw8sgNjsADL0FHTeQvkLZiAlJSpEYooMD2KMgQ4QUIgcc3Z99gACFwTlFm80qCTYal0LHSzUm0o0fQGmDcVETuXiOwZUtmKb8EiQdPcJucweIFQT3KmDEvInyj7bhn3OxHXfPDTevCvXjOnKXEFcZQuAAAAAElFTkSuQmCC">&nbsp;</span><span title="Move down" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(1,'6741665439');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAZ0lEQVR42mNgYChnmHD7CgOQBlFgZjkTAxgwggVjgawC1cUgsXwVIKENkZmQBlLyHKoUCJBZaS5AKgCsohyoFGhqGpQsRxiPBpgYrNxvb9OD8wO2dWxLA7sBzDXY9t/plnVfwTEQBwBlXiHWjsWwaQAAAABJRU5ErkJggg==">&nbsp;</span></div><div style="width:45px;float:right;"><span title="REMOVE" style="background-color:#770000;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="if(confirm('DELETE?')){removeWiki('6741665439');}">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAnUlEQVR42mNkwA12AbErlH0MiK2xKWLEophYADYUZsB/ICBJNyMjI4SC8mcDcQqJLpgL0gMzwMHd3X3/jh07iNLp4eHBsHPnTkcg8wCGAXFxcQyfP39mWL9+PZj9/v17hs2bNzOEhoYy/PjxA8zGawDUb6BAwckeNWDQGwCSfPXqFcO5c+fwsnEaQG5KlALii0AsQmQ+eAvERkD8CAD5O8gRRpPKTQAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></div><div style="width:45px;float:right;"><span title="EDIT" style="background-color:#007700;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="editWiki('6741665439');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABbElEQVR42rWTO2vCUBTH/7FDhoAEbA0dBEHBRdz9DnXo4mQJwUmnDAHN0EDTJWPmOqibg9BFp3wFN10sGHETHwQE6VBLmnP7oAUfaaEHLtzD5fe759wHhz9EJpO5c8fj5xfA4n4Lx2Ixs9Vq3eq6jqfRSOcCw7UPPARr54egQqGAbreLTqeDeDwORVHQaDSgaZpJFcwjkYiUSCT2wvl8Hu12G4ZhYDAYQBAEVCoV3JRK96v12iCBL4oiPM87WHa9XofruvB9n1VCQlmWWfsnBQRPp1Nst1v0+33UajWYpgme508LCF4sFmx8wtRKsVik/LiA4OVyyeBer8dgy7LYgVL+we4X2LaNZrMJSZLgOM4XTJFMJjGbzY4LcrkchsMhm3+HQwkmkwnS6TSy2SzK5TJUVf3R2kkBLe52O6RSqb23EqqFY/EvgjnHcVI0Gg0l2Gw29CJXwfSCCc6Aq9f3z3QZykAbAtXgAz5S8gbiBb+FSaOmpAAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></div><hr style="clear:both;position:relative;top:5px;"></div><!--~--></div><!-- CONTENT PANEL END -->
+		function buildEventCalendar(instance_name,search_term){
+			var found_count=0;
+			var cal_occurrence;
+			if(cal_title.length+cal_offset.length+cal_days.length!=index_m*3){
+				alert('CALENDAR CANNOT BE BUILT!\n\nConfiguration error, please make sure\nyou have the same number of\nmonth titles('+cal_title.length+'), startday-offsets('+cal_offset.length+'),\nlengths('+cal_days.length+'), and events('+index_m+')!\n\nPLEASE CHECK CONFIGURATION!');
+			}else{
+				if(search_term.length){
+					for(x=0;x&lt;index_m;x++){
+						for(y=1;y&lt;cal_days[x];y++){
+							if(cal_entry[x][y].toLowerCase().replace(/&lt;[^&gt;]*&gt;?/gm, '').indexOf(document.getElementById('cal_search').value.toLowerCase())&gt;-1){
+								found_count++;
+							}
+						}
+					}
+				}
+				for(x=0;x&lt;42;x++){document.getElementById(instance_name+'_'+x).innerHTML='';}
+				if(current_month&lt;0){current_month=0;}else if(current_month&gt;(index_m-1)){current_month=index_m-1;}
+				document.getElementById(instance_name+'_title').innerHTML=cal_title[current_month];
+				for(x=1;x&lt;=cal_days[current_month];x++){
+					cal_entry_display='';
+					document.getElementById(instance_name+'_'+(x+cal_offset[current_month]-1)).innerHTML='&lt;div class="day_number"&gt;'+(x)+'&lt;/div&gt;';
+					if(cal_entry[current_month][x].length){
+						cal_occurrence='';
+						if(search_term.length){
+							if(cal_entry[current_month][x].replace(/&lt;[^&gt;]*&gt;?/gm, '').toLowerCase().indexOf(document.getElementById('cal_search').value.toLowerCase())&gt;-1){
+								cal_occurrence='style="background-color:#7f7";';
+							}
+						}
+						cal_entry_display='&lt;div class="event_info" '+cal_occurrence+'&gt;';
+						individual_events=cal_entry[current_month][x].split('|~|');
+						for(y=0;y&lt;individual_events.length;y++){
+							event_segs=individual_events[y].split('~~~');
+							if(event_segs.length==1){
+								cal_entry_display+='&lt;p&gt;'+event_segs[0].replaceAll('||','&lt;br /&gt;')+'&lt;/p&gt;';
+							}else{
+								cal_entry_display+='&lt;p style="cursor:pointer;margin:0 0 10px;" onclick="this.nextElementSibling.style.display=\'block\';"&gt;'+event_segs[0].replaceAll('||','&lt;br /&gt;')+'&lt;/p&gt;&lt;div class="modal" style="" &gt;&lt;div style="background-color:#fefefe;margin: 3vh auto;padding:20px;border:1px solid #888;width:80%;overflow:auto;max-height:88vh;"&gt;&lt;span style="color:#aaaaaa;float:right;font-size:16px;font-weight:bold;cursor:pointer;" onclick="this.parentNode.parentNode.style.display=\'none\';"&gt;[close]&lt;/span&gt;&lt;p style="overflow:auto;"&gt;'+event_segs[1].replaceAll('||','&lt;br /&gt;')+'&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;';
+							}
+						}
+					}else{
+						document.getElementById(instance_name+'_'+(x+cal_offset[current_month]-1)).innerHTML+='&lt;div class="event_info"&gt;&lt;/div&gt;';
+					}
+					document.getElementById(instance_name+'_'+(x+cal_offset[current_month]-1)).innerHTML+=cal_entry_display+'&lt;/div&gt;';
+				}
+			}
+			if(search_term.length){
+				if(found_count){
+					document.getElementById('cal_search').style.backgroundColor='#7f7';
+					document.getElementById('cal_found').style.backgroundColor='#7f7';
+				}else{
+					document.getElementById('cal_search').style.backgroundColor='#f77';
+					document.getElementById('cal_found').style.backgroundColor='#f77';
+				}
+				document.getElementById('cal_found').value='['+found_count+']';
+			}else{
+				document.getElementById('cal_search').style.backgroundColor='#fff';
+				document.getElementById('cal_found').style.backgroundColor='#fff';
+				document.getElementById('cal_found').value='';
+			}
+		}
+
+		buildEventCalendar('event_calendar','');
+		&lt;/script&gt;
+	&lt;/body&gt;
+&lt;/html&gt;
+</textarea></div><div style="clear:both;">&nbsp;</div><hr><div style="width:65px;float:left;"><span title="Move up" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(0,'6741665439');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAdUlEQVR42m1NuQ2AMAw8sgNjsADL0FHTeQvkLZiAlJSpEYooMD2KMgQ4QUIgcc3Z99gACFwTlFm80qCTYal0LHSzUm0o0fQGmDcVETuXiOwZUtmKb8EiQdPcJucweIFQT3KmDEvInyj7bhn3OxHXfPDTevCvXjOnKXEFcZQuAAAAAElFTkSuQmCC">&nbsp;</span><span title="Move down" style="background-color:#000077;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;" onclick="moveWiki(1,'6741665439');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAICAIAAAHNYULHAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAZ0lEQVR42mNgYChnmHD7CgOQBlFgZjkTAxgwggVjgawC1cUgsXwVIKENkZmQBlLyHKoUCJBZaS5AKgCsohyoFGhqGpQsRxiPBpgYrNxvb9OD8wO2dWxLA7sBzDXY9t/plnVfwTEQBwBlXiHWjsWwaQAAAABJRU5ErkJggg==">&nbsp;</span></div><div style="width:45px;float:right;"><span title="REMOVE" style="background-color:#770000;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="if(confirm('DELETE?')){removeWiki('6741665439');}">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAnUlEQVR42mNkwA12AbErlH0MiK2xKWLEophYADYUZsB/ICBJNyMjI4SC8mcDcQqJLpgL0gMzwMHd3X3/jh07iNLp4eHBsHPnTkcg8wCGAXFxcQyfP39mWL9+PZj9/v17hs2bNzOEhoYy/PjxA8zGawDUb6BAwckeNWDQGwCSfPXqFcO5c+fwsnEaQG5KlALii0AsQmQ+eAvERkD8CAD5O8gRRpPKTQAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></div><div style="width:45px;float:right;"><span title="EDIT" style="background-color:#007700;padding:1px;border:#F2F0EE outset 3px;border-radius:3px;cursor:default;" onclick="editWiki('6741665439');">&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABbElEQVR42rWTO2vCUBTH/7FDhoAEbA0dBEHBRdz9DnXo4mQJwUmnDAHN0EDTJWPmOqibg9BFp3wFN10sGHETHwQE6VBLmnP7oAUfaaEHLtzD5fe759wHhz9EJpO5c8fj5xfA4n4Lx2Ixs9Vq3eq6jqfRSOcCw7UPPARr54egQqGAbreLTqeDeDwORVHQaDSgaZpJFcwjkYiUSCT2wvl8Hu12G4ZhYDAYQBAEVCoV3JRK96v12iCBL4oiPM87WHa9XofruvB9n1VCQlmWWfsnBQRPp1Nst1v0+33UajWYpgme508LCF4sFmx8wtRKsVik/LiA4OVyyeBer8dgy7LYgVL+we4X2LaNZrMJSZLgOM4XTJFMJjGbzY4LcrkchsMhm3+HQwkmkwnS6TSy2SzK5TJUVf3R2kkBLe52O6RSqb23EqqFY/EvgjnHcVI0Gg0l2Gw29CJXwfSCCc6Aq9f3z3QZykAbAtXgAz5S8gbiBb+FSaOmpAAAAABJRU5ErkJggg==" style="margin-bottom:-3px;">&nbsp;</span></div><hr style="clear:both;position:relative;top:5px;"></div><!--~--></div><!-- CONTENT PANEL END -->
 
 		<hr>
 		<div style="background-color:#cccccc; margin:5px; padding:5px; border-radius:5px;">
