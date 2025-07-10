@@ -227,11 +227,11 @@
 		document.getElementById('visual').innerHTML=document.getElementById('source').value;
 	}
 	function addImage(f_text){
-		document.getElementById('source').value+='<img style="max-width:30vw;max-height:30vh;float:right;margin:0 5px;" src="event_imgs/'+f_text+'" />';
+		document.getElementById('source').value+='<img style="max-width:30vw;max-height:30vh;float:right;margin:0 5px;" src="'+f_text+'" />';
 		document.getElementById('visual').innerHTML=document.getElementById('source').value;
 	}
 	function remImage(f_text){
-		document.getElementById('source').value=document.getElementById('source').value.replace('<img style="max-width:30vw;max-height:30vh;float:right;margin:0 5px;" src="event_imgs/'+f_text+'" />','');
+		document.getElementById('source').value=document.getElementById('source').value.replace('<img style="max-width:30vw;max-height:30vh;float:right;margin:0 5px;" src="'+f_text+'" />','');
 		document.getElementById('visual').innerHTML=document.getElementById('source').value;
 	}
 	function addReg(f_text){
