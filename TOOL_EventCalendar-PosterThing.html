@@ -1,3 +1,4 @@
+
 <!DOCTYPE html><html lang="en-US"><head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width">
@@ -218,11 +219,13 @@
 		document.getElementById('visual').innerHTML=document.getElementById('source').value;
 	}
 	function addLead(f_text){
-		document.getElementById('source').value+='<p style="text-align:center;">'+f_text.replaceAll(String.fromCharCode(10),'<br />')+'</p>';
+		items=document.getElementById('source').value.split('~~~');
+		items[items.length-2]+='<p style="text-align:center;">'+f_text.replaceAll(String.fromCharCode(10),'<br />')+'</p>';
+		document.getElementById('source').value=items.join('~~~');
 		document.getElementById('visual').innerHTML=document.getElementById('source').value;
 	}
 	function remLead(f_text){
-		document.getElementById('source').value=document.getElementById('source').value.replace('<p>'+f_text.replaceAll(String.fromCharCode(10),'<br />')+'</p>','');
+		document.getElementById('source').value=document.getElementById('source').value.replace('<p style="text-align:center;">'+f_text.replaceAll(String.fromCharCode(10),'<br />')+'</p>','');
 		document.getElementById('visual').innerHTML=document.getElementById('source').value;
 	}
 	function addDetails(f_text){
@@ -234,7 +237,10 @@
 		document.getElementById('visual').innerHTML=document.getElementById('source').value;
 	}
 	function addImageTit(f_text){
-		document.getElementById('source').value+='<img style="max-width:100%;max-height:75px;float:right;margin:0 5px;" src="'+f_text+'" />';
+		items=document.getElementById('source').value.split('~~~');
+		items[items.length-2]+='<img style="max-width:100%;max-height:75px;float:right;margin:0 5px;" src="'+f_text+'" />';
+		document.getElementById('source').value=items.join('~~~');
+		document.getElementById('source').value=document.getElementById('source').value.replaceAll('~~~~~~','~~~');
 		document.getElementById('visual').innerHTML=document.getElementById('source').value;
 	}
 	function remImageTit(f_text){
@@ -270,7 +276,7 @@
 		<input type="text" style="width:300px;" placeholder="[-TITLE-]"><input type="button" value="+" onclick="this.previousElementSibling.value=this.previousElementSibling.value.toUpperCase();addTitle(this.previousElementSibling.value);">
 		<br>
 		<br>
-		<input type="text" style="width:300px;" placeholder="[-IMAGE-]"><input type="button" value="+" onclick="addImage(this.previousElementSibling.value);"><input type="button" value="-" onclick="remImage(this.previousElementSibling.previousElementSibling.value);">
+		<input type="text" style="width:300px;" placeholder="[-IMAGE-]"><input type="button" value="+" onclick="addImageTit(this.previousElementSibling.value);"><input type="button" value="-" onclick="remImageTit(this.previousElementSibling.previousElementSibling.value);">
 		<br>
 		<br>
 		<input type="text" style="width:300px;" placeholder="[-LEAD-]"><input type="button" value="+" onclick="addLead(this.previousElementSibling.value);"><input type="button" value="-" onclick="remLead(this.previousElementSibling.previousElementSibling.value);">
@@ -295,7 +301,8 @@
 		<input type="text" style="width:300px;" placeholder="[-REGISTRATION URL-]"><input type="button" value="+" onclick="addReg(this.previousElementSibling.value);"><input type="button" value="-" onclick="remReg(this.previousElementSibling.previousElementSibling.value);">
 		<br>
 		<br>
-		ADD SAME-DAY EVENT <input type="button" value="+" onclick="addImage(this.previousElementSibling.value);"><input type="button" value="-" onclick="remImage(this.previousElementSibling.previousElementSibling.value);">
+		ADD SAME-DAY EVENT <input type="button" value="+" onclick="document.getElementById('source').value+='<div style='+String.fromCharCode(34)+'clear:both;'+String.fromCharCode(34)+'></div>|~|';
+		document.getElementById('visual').innerHTML=document.getElementById('source').value;">
 	</div>
 </div>
 <hr>
