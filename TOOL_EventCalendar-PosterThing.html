@@ -1,4 +1,3 @@
-
 <!DOCTYPE html><html lang="en-US"><head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width">
@@ -125,11 +124,11 @@
 	<body cz-shortcut-listen="true">
 		<span style="font-size:24px;font-weight:bold;" id="page_title" ondblclick="changeTitle();">Event Calendar Poster-Thing</span>
 		<div style="float:right; width:500px; text-align:right;">
-			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px;" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
+			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px; color: rgb(255, 255, 255); background-color: rgb(0, 153, 0);" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
 			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
 			<span title="EXPORT TOOL ONLY" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save_t" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('&lt;!DOCTYPE html&gt;&lt;html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'&gt;&lt;head&gt;&lt;meta charset='+String.fromCharCode(34)+'UTF-8'+String.fromCharCode(34)+'&gt;&lt;meta name='+String.fromCharCode(34)+'viewport'+String.fromCharCode(34)+' content='+String.fromCharCode(34)+'width=device-width'+String.fromCharCode(34)+'&gt;&lt;/head&gt;&lt;body&gt;'+document.getElementById('nanowiki_panel').firstElementChild.firstElementChild.nextElementSibling.innerHTML+'&lt;/body&gt;&lt;/html&gt;');" onmouseout="this.href='#';" download="TOOL_EC-PosterThing.html">&nbsp;=&gt;&nbsp;[T]&nbsp;</a></span>
 			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save_n" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('&lt;!DOCTYPE html&gt;&lt;html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'&gt;'+document.getElementsByTagName('HTML')[0].innerHTML+'&lt;/html&gt;');" onmouseout="this.href='#';" download="TOOL_EC-PosterThing.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
-			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">7/11/2025, 11:00:35 AM</span></div>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">7/14/2025, 2:48:17 PM</span></div>
 		</div>
 		<div style="clear:both; display:none;" id="help">
 			WHAT IS THIS?<br>
@@ -190,7 +189,7 @@
 		document.getElementById('visual').innerHTML=document.getElementById('source').value;
 	}
 	function addLocation(f_text){
-		document.getElementById('source').value+='<a href="https://www.google.com/maps?q='+f_text.split(' ').join('+')+'" target="_blank">'+f_text+' '+String.fromCharCode(187)+'</a><br />';
+		document.getElementById('source').value+='<a href="https://www.google.com/maps?q='+f_text.split(' ').join('+')+'" target="_blank" style="color:#F1562A;">'+f_text+' '+String.fromCharCode(187)+'</a><br />';
 		document.getElementById('visual').innerHTML=document.getElementById('source').value;
 	}
 	function remLocation(f_text){
@@ -219,13 +218,11 @@
 		document.getElementById('visual').innerHTML=document.getElementById('source').value;
 	}
 	function addLead(f_text){
-		items=document.getElementById('source').value.split('~~~');
-		items[items.length-2]+='<p style="text-align:center;">'+f_text.replaceAll(String.fromCharCode(10),'<br />')+'</p>';
-		document.getElementById('source').value=items.join('~~~');
+		document.getElementById('source').value+='<p style="text-align:center;">'+f_text+'</p>';
 		document.getElementById('visual').innerHTML=document.getElementById('source').value;
 	}
 	function remLead(f_text){
-		document.getElementById('source').value=document.getElementById('source').value.replace('<p style="text-align:center;">'+f_text.replaceAll(String.fromCharCode(10),'<br />')+'</p>','');
+		document.getElementById('source').value=document.getElementById('source').value.replace('<p style="text-align:center;">'+f_text+'</p>','');
 		document.getElementById('visual').innerHTML=document.getElementById('source').value;
 	}
 	function addDetails(f_text){
@@ -238,17 +235,17 @@
 	}
 	function addImageTit(f_text){
 		items=document.getElementById('source').value.split('~~~');
-		items[items.length-2]+='<img style="max-width:100%;max-height:75px;float:right;margin:0 5px;" src="'+f_text+'" />';
+		items[items.length-2]+='||<img style="max-width:100%;max-height:75px;float:right;margin:0 5px;" src="'+f_text+'" />';
 		document.getElementById('source').value=items.join('~~~');
 		document.getElementById('source').value=document.getElementById('source').value.replaceAll('~~~~~~','~~~');
 		document.getElementById('visual').innerHTML=document.getElementById('source').value;
 	}
 	function remImageTit(f_text){
-		document.getElementById('source').value=document.getElementById('source').value.replace('<img style="max-width:100%;max-height:75px;float:right;margin:0 5px;" src="'+f_text+'" />','');
+		document.getElementById('source').value=document.getElementById('source').value.replace('||<img style="max-width:100%;max-height:75px;float:right;margin:0 5px;" src="'+f_text+'" />','');
 		document.getElementById('visual').innerHTML=document.getElementById('source').value;
 	}
 	function addImageDet(f_text){
-		document.getElementById('source').value+='<img style="max-width:50vh;max-height:50vh;float:right;margin:0 5px;" src="'+f_text+'" />';
+		document.getElementById('source').value+='<img style="max-width:50vh;max-height:50vh;float:right;margin:10px 5px;" src="'+f_text+'" />';
 		document.getElementById('visual').innerHTML=document.getElementById('source').value;
 	}
 	function remImageDet(f_text){
@@ -276,19 +273,19 @@
 		<input type="text" style="width:300px;" placeholder="[-TITLE-]"><input type="button" value="+" onclick="this.previousElementSibling.value=this.previousElementSibling.value.toUpperCase();addTitle(this.previousElementSibling.value);">
 		<br>
 		<br>
-		<input type="text" style="width:300px;" placeholder="[-IMAGE-]"><input type="button" value="+" onclick="addImageTit(this.previousElementSibling.value);"><input type="button" value="-" onclick="remImageTit(this.previousElementSibling.previousElementSibling.value);">
-		<br>
-		<br>
-		<input type="text" style="width:300px;" placeholder="[-LEAD-]"><input type="button" value="+" onclick="addLead(this.previousElementSibling.value);"><input type="button" value="-" onclick="remLead(this.previousElementSibling.previousElementSibling.value);">
+		<input type="text" id="image" style="width:300px;" placeholder="[-IMAGE-]"><input type="button" value="+" onclick="addImageTit(document.getElementById('image').value);"><input type="button" value="-" onclick="remImageTit(document.getElementById('image').value);">
 		<br>
 		<br>
 		<input type="button" value="---line---" onclick="document.getElementById('source').value+='&lt;hr /&gt;';document.getElementById('visual').innerHTML=document.getElementById('source').value;">
 		<br>
 		<br>
-		Add [-IMAGE-] to [-DETAILS-] <input type="button" value="+" onclick="addImageDet(this.previousElementSibling.value);"><input type="button" value="-" onclick="addImageDet(this.previousElementSibling.previousElementSibling.value);">
+		Add [-IMAGE-] to [-DETAILS-] <input type="button" value="+" onclick="addImageDet(document.getElementById('image').value);"><input type="button" value="-" onclick="remImageDet(document.getElementById('image').value);">
 		<br>
 		<br>
-		<input id="dt1" type="date" placeholder="[-DATE-]"> - OR - <input id="dt2" type="text" style="width:200px;" placeholder="[-DATE RANGE-]"> -AND- 
+		<input type="text" style="width:300px;" placeholder="[-LEAD-]"><input type="button" value="+" onclick="addLead(this.previousElementSibling.value);"><input type="button" value="-" onclick="remLead(this.previousElementSibling.previousElementSibling.value);">
+		<br>
+		<br>
+		<input id="dt1" type="date" placeholder="[-DATE-]"> - OR - <input id="dt2" type="text" style="width:200px;" placeholder="[-DATE RANGE-]"> -AND-
 		<input id="dt3" type="text" style="width:100px;" placeholder="[-TIME-]"><input type="button" value="+" onclick="addDT();"><input type="button" value="-" onclick="remDT();">
 	</div>
 	<div style="margin:5px 15px;">
@@ -301,7 +298,7 @@
 		<input type="text" style="width:300px;" placeholder="[-REGISTRATION URL-]"><input type="button" value="+" onclick="addReg(this.previousElementSibling.value);"><input type="button" value="-" onclick="remReg(this.previousElementSibling.previousElementSibling.value);">
 		<br>
 		<br>
-		ADD SAME-DAY EVENT <input type="button" value="+" onclick="document.getElementById('source').value+='<div style='+String.fromCharCode(34)+'clear:both;'+String.fromCharCode(34)+'></div>|~|';
+		ADD SAME-DAY EVENT <input type="button" value="+" onclick="document.getElementById('source').value+='&lt;div style='+String.fromCharCode(34)+'clear:both;'+String.fromCharCode(34)+'&gt;&lt;/div&gt;|~|';
 		document.getElementById('visual').innerHTML=document.getElementById('source').value;">
 	</div>
 </div>
