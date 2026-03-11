@@ -175,7 +175,7 @@
 			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px; color: rgb(255, 255, 255); background-color: rgb(0, 153, 0);" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
 			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
 			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('&lt;!DOCTYPE html&gt;&lt;html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'&gt;'+document.getElementsByTagName('HTML')[0].innerHTML+'&lt;/html&gt;');" onmouseout="this.href='#';" download="index.htm">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
-			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">11/19/2025, 1:46:18 PM</span></div>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">3/11/2026, 4:41:11 PM</span></div>
 		</div>
 		<div style="clear:both; display:none;" id="help">
 			WHAT IS THIS?<br>
@@ -269,10 +269,6 @@
 <p style="display: block;"><a href="./TOOL_batchlinkopener.html" target="_blank"><strong>Batch Link Opener</strong></a>
   <br>
   - like link checker tool, but in tabs
-</p>
-<p style="display: block;"><a href="./TOOL_bulge.html" target="_blank"><strong>Bulge</strong></a>
-  <br>
-  - bulge or pinch image areas, nonsense tool, but...
 </p>
 <p style="display: block;"><a href="./TOOL_calculator.html" target="_blank"><strong>Calculator</strong></a>
   <br>
@@ -443,6 +439,10 @@
   <br>
   - tile high-quality images for poster printing
 </p>
+<p style="display: block;"><a href="./TOOL_Inclusive-Removal.html" target="_blank"><strong>Inclusive Removal Tool</strong></a>
+  <br>
+  - removes sequences framed by and including specified delimiters
+</p>
 <p style="display: block;"><a href="./TOOL_input-roster-generator.html" target="_blank"><strong>Input Roster Generator</strong></a>
   <br>
   - creates customizable input-roster (Table-to-HTML) script
@@ -541,11 +541,6 @@
 <p style="display: block;"><a href="./TOOL_posterthing.html" target="_blank"><strong>Poster Thing</strong></a>
   <br>
   - Consistent Event Posting Creation Tool
-</p>
-<p style="display: block;"><a href="./TOOL_EventCalendar-PosterThing.html" target="_blank"><strong>Poster Thing - Event Calendar</strong></a>
-  <br>
-  - Consistent Event Posting Creation Tool
-  - Creates single-line calendar entry for Universal Event Calender
 </p>
 <p style="display: block;"><a href="./TOOL_PunchPad.html" target="_blank"><strong>Punchpad</strong></a>
   <br>
@@ -694,14 +689,6 @@
 <p style="display: block;"><a href="./CODE_ajax-form-submission.html" target="_blank"><strong>AJAX Form Submission</strong></a>
   <br>
   - form-submission without page reload
-</p>
-<p style="display: block;"><a href="./CODE_auto-archive.html" target="_blank"><strong>File Auto-Archive</strong></a>
-  <br>
-  - creates automated file archive, based on file presence in a specified directory
-  - current file shows link - past files show as dropdown
-  - file order and link labels are based on file names, in chonologically reverse order
-  - may be adjusted to create simple, alphabetized file listing
-  - recommended to be used with [Server-Side File Manager]
 </p>
 <p style="display: block;"><a href="./CODE_click-to-copy.html" target="_blank"><strong>Click To Copy</strong></a>
   <br>
