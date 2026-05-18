@@ -174,8 +174,8 @@
 		<div style="float:right; width:300px; text-align:right;">
 			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px;" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
 			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
-			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('<!DOCTYPE html><html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'>'+document.getElementsByTagName('HTML')[0].innerHTML+'</html>');" onmouseout="this.href='#';" download="TOOL_image_resizer.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
-			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">3/14/2025, 1:48:44 PM</span></div>
+			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('&lt;!DOCTYPE html&gt;&lt;html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'&gt;'+document.getElementsByTagName('HTML')[0].innerHTML+'&lt;/html&gt;');" onmouseout="this.href='#';" download="TOOL_image_resizer.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">5/18/2026, 12:00:43 PM</span></div>
 		</div>
 		<div style="clear:both; display:none;" id="help">
 			WHAT IS THIS?<br>
@@ -226,6 +226,7 @@
 <script>
 var org_width=34;
 var org_height=34;
+var filename='resized_image';
 
 function msg(){
 	document.getElementById('message').style.backgroundColor='#900';
@@ -266,8 +267,10 @@ function imageResizerResize1(){
 		ctx.restore;
 		if(document.getElementById('jpg').checked){
 			document.getElementById('image_output').src=canvas.toDataURL('image/jpeg',0.9);
-		}else{
+		}else if(document.getElementById('png').checked){
 			document.getElementById('image_output').src=canvas.toDataURL('image/png');
+		}else{
+			document.getElementById('image_output').src=canvas.toDataURL('image/webp',0.9);
 		}
 		document.getElementById('image_resizer_dim2').value=Math.round(side_length/ratio);
 		document.getElementById('image_resizer_dim_slide2').value=Math.round(side_length/ratio);
@@ -275,6 +278,7 @@ function imageResizerResize1(){
 		ctx.save();
 		ctx.translate(side_length/2,side_length/ratio/2);
 		ctx.rotate(document.getElementById('image_resizer_rot').value*0.0174533);
+		ctx.filter='contrast('+document.getElementById('image_contrast').value/100+') brightness('+document.getElementById('image_brightness').value/100+') saturate('+document.getElementById('image_saturation').value/100+')';
 		ctx.translate(side_length/-2,side_length/ratio/-2);
 		ctx.drawImage(img,offset_x,offset_y,side_length,side_length/ratio);
 
@@ -289,8 +293,10 @@ function imageResizerResize1(){
 		ctx.restore;
 		if(document.getElementById('jpg').checked){
 			document.getElementById('image_output').src=canvas.toDataURL('image/jpeg',0.9);
-		}else{
+		}else if(document.getElementById('png').checked){
 			document.getElementById('image_output').src=canvas.toDataURL('image/png');
+		}else{
+			document.getElementById('image_output').src=canvas.toDataURL('image/webp',0.9);
 		}
 		document.getElementById('image_resizer_dim2').value=Math.round(side_length/ratio);
 		document.getElementById('image_resizer_dim_slide2').value=Math.round(side_length/ratio);
@@ -336,8 +342,10 @@ function imageResizerResize2(){
 		ctx.restore;
 		if(document.getElementById('jpg').checked){
 			document.getElementById('image_output').src=canvas.toDataURL('image/jpeg',0.9);
-		}else{
+		}else if(document.getElementById('png').checked){
 			document.getElementById('image_output').src=canvas.toDataURL('image/png');
+		}else{
+			document.getElementById('image_output').src=canvas.toDataURL('image/webp',0.9);
 		}
 		document.getElementById('image_resizer_dim1').value=Math.round(side_height*ratio);
 		document.getElementById('image_resizer_dim_slide1').value=Math.round(side_height*ratio);
@@ -345,6 +353,7 @@ function imageResizerResize2(){
 		ctx.save();
 		ctx.translate(side_height*ratio/2,side_height/2);
 		ctx.rotate(document.getElementById('image_resizer_rot').value*0.0174533);
+		ctx.filter='contrast('+document.getElementById('image_contrast').value/100+') brightness('+document.getElementById('image_brightness').value/100+') saturate('+document.getElementById('image_saturation').value/100+')';
 		ctx.translate(side_height*ratio/-2,side_height/-2);
 		ctx.drawImage(img,offset_x,offset_y,side_height*ratio,side_height);
 
@@ -358,9 +367,11 @@ function imageResizerResize2(){
 
 		ctx.restore;
 		if(document.getElementById('jpg').checked){
-			document.getElementById('image_output').src=canvas.toDataURL('image/jpeg');
-		}else{
+			document.getElementById('image_output').src=canvas.toDataURL('image/jpeg',0.9);
+		}else if(document.getElementById('png').checked){
 			document.getElementById('image_output').src=canvas.toDataURL('image/png');
+		}else{
+			document.getElementById('image_output').src=canvas.toDataURL('image/webp',0.9);
 		}
 		document.getElementById('image_resizer_dim1').value=Math.round(side_height*ratio);
 		document.getElementById('image_resizer_dim_slide1').value=Math.round(side_height*ratio);
@@ -495,9 +506,11 @@ function b64x(){
 	document.getElementById('b64image').value='<img style='+String.fromCharCode(34)+'max-width:100%;height:auto;'+String.fromCharCode(34)+' src='+String.fromCharCode(34)+document.getElementById('image_output').src+String.fromCharCode(34)+' />';
 	document.getElementById('image_link').href=document.getElementById('image_output').src;
 	if(document.getElementById('jpg').checked){
-		document.getElementById('image_link').setAttribute('download','resized_image.jpg');
+		document.getElementById('image_link').setAttribute('download',filename+'.jpg');
+	}else if(document.getElementById('png').checked){
+		document.getElementById('image_link').setAttribute('download',filename+'.png');
 	}else{
-		document.getElementById('image_link').setAttribute('download','resized_image.png');
+		document.getElementById('image_link').setAttribute('download',filename+'.webp');
 	}
 }
 </script>
@@ -505,7 +518,7 @@ function b64x(){
 <table style="width:100%" id="controls_container">
 	<tbody><tr>
 		<td colspan="2" style="text-align:center;">
-			PASTE ([CTRL]+[V]) or LOAD IMAGE: <input type="file" id="file" onchange="var reader=new FileReader();reader.readAsDataURL(this.files[0]);reader.onload=function(){document.querySelector('#image_resizer_org').src=reader.result;setTimeout('getDims();imageResizerResize1();reDim()',100);}"> | <input type="checkbox" id="oversize" onclick="resizeControls(this.checked);"> OVERSIZE CONTROLS (for zooming out)<br>
+			PASTE ([CTRL]+[V]) or LOAD IMAGE: <input type="file" id="file" onchange="filename=this.files[0].name.substring(0,this.files[0].name.lastIndexOf('.'))+'_resized';var reader=new FileReader();reader.readAsDataURL(this.files[0]);reader.onload=function(){document.querySelector('#image_resizer_org').src=reader.result;setTimeout('getDims();imageResizerResize1();reDim();',100);}"><br>
 		</td>
 	</tr>
 	<tr>
@@ -536,7 +549,7 @@ function b64x(){
 			<input type="checkbox" id="sharpen" onclick="imageResizerResize1();"> SHARPEN - <input type="radio" id="quick_sharpen1" name="quick_sharpen" onclick="imageResizerResize1();" checked="">Quick <input type="radio" id="quick_sharpen2" name="quick_sharpen" onclick="imageResizerResize1();">Unsharp-Mask 
 			R:<input title="radius" type="number" id="sharp_r" step="1" style="width:30px;vertical-align:middle;text-align:right;" value="3" oninput="imageResizerResize1();">
 			A:<input title="amount" type="number" id="sharp_a" step="0.1" style="width:50px;vertical-align:middle;text-align:right;" value="0.5" oninput="imageResizerResize1();">
-			| OUTPUT: <input type="radio" name="image_type" id="jpg" checked="checked" onclick="imageResizerResize1();">JPG <input type="radio" name="image_type" id="png" onclick="imageResizerResize1();">PNG
+			| OUTPUT: <input type="radio" name="image_type" id="jpg" checked="checked" onclick="imageResizerResize1();">JPG <input type="radio" name="image_type" id="png" onclick="imageResizerResize1();">PNG <input type="radio" name="image_type" id="webp" onclick="imageResizerResize1();">WEBP
 		</td>
 	</tr>
 	<tr>
@@ -613,7 +626,7 @@ function b64x(){
 	<img id="image_resizer_org" src="" style="position:absolute;top:-10000px;left:-10000px;">
 	<div style="text-align:center;">
 		<canvas id="image_resizer_resized" style="position:absolute;top:-10000px;left:-10000px;" width="34" height="34"></canvas>
-		<a id="image_link" href="data:image/jpeg;base64,/9j/4QDCRXhpZgAASUkqAAgAAAAHABIBAwABAAAAAQAAABoBBQABAAAAYgAAABsBBQABAAAAagAAACgBAwABAAAAAgAAADEBAgAOAAAAcgAAADIBAgAUAAAAgAAAAGmHBAABAAAAlAAAAAAAEABIAAAAAQAAAEgAAAABAAAAUGhvdG9GaWx0cmUgNwAyMDE5OjAyOjA4IDA5OjEyOjA2AAMAAJAHAAQAAAAwMjEwAqADAAEAAAAgAAAAA6ADAAEAAAAgAAAA/9sAQwACAQEBAQECAQEBAgICAgIEAwICAgIFBAQDBAYFBgYGBQYGBgcJCAYHCQcGBggLCAkKCgoKCgYICwwLCgwJCgoK/9sAQwECAgICAgIFAwMFCgcGBwoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK/8IAEQgAIAAgAwEiAAIRAQMRAf/EABkAAQACAwAAAAAAAAAAAAAAAAcDCAEFBv/EABQBAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhADEAAAAejyDWAIEXfiAHNi6flI31cgP//EAB0QAAICAgMBAAAAAAAAAAAAAAUHBAYAAwIIFwH/2gAIAQEAAQUCj9hGwa+e9NvPem3icfei7cgA+EVhEaSDiuoop0AEk9h1tRKZBp5UbyKvXs2Rqd8a7XONG4WFozGiqmuj+dmm7Ew792zxR15IQDcO7P/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8BH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8BH//EADMQAAAFAgIHBgUFAAAAAAAAAAECAwQFBhEAEgcTISIxQVEUMjRSltMkM0JhcnGBkdHw/9oACAEBAAY/An0tD0/TDWNayZ2ZFpaT1Nzhty3MoW426Y7+j31Kl72O/o99Spe9h9F1rIQjCQbv+ztk2r8Mrn8LmHPt5hxxExkk2Ks3caUTprJH4HKJUgEMN6Da6AI9SCURAykr2U/kuJs98oAA7uUdv8hhmzlqRh26r9fUs01QsKp7d0P9064px9S1LNWKytSIJqKIEsIlsYbYhIQHpO1hpP14t/q1Y6oAN+lwEMNKdodZNVOLXzS/MFzc0L8rBxHzfjgamcmO3SR3Y5sRTw5A+/m5iP8AQYplzLk+PjatbNnivJYchhKp+4cfviNqPR0jERMuwkgdndKMwDXGDaGYSl3toX24Msq/oQxjDcxjU+ncR6/Jx4ug/Tyfs4YMZ6o6ZQj2smm8UTi43UiJi7L7qZbjYR44/8QAHxABAQACAgIDAQAAAAAAAAAAAREhMQBRYYEQQXGR/9oACAEBAAE/IQtc3YdCWjh3182bJ95dMtxiIKlE8ghj6tr8Izlp6oUqhbbBSb4bSw8mY3Lj+o2BTNQTJjnVB9cYFmbh7lfsHDBnVmn2IRhkR2rOlFmZSCZPks+gF+YpaWOkMOimEBpMXWBElBQEa+0BveFNUuavxfI8KevwElCvvn//2gAMAwEAAgADAAAAECCGFP/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8QH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8QH//EABsQAQEBAQEBAQEAAAAAAAAAAAERIQAxEEFR/9oACAEBAAE/EAkHuPGt6MT8GvtWqj67MUfVhh/m84mRZYfERVkXx4ZFnmBZYiAxBLiiPufCi4R/NXiJ2nMZiKFed6eYk5DccJII21zieXfLp4hnKDEur0QiKPsHCAxE6GBShCCAxQZE4chlTRlF0hVRFHj0j9plQoKrqqvxj+VVsxhhGExud//Z" download="resized_image.jpg"><img src="data:image/jpeg;base64,/9j/4QDCRXhpZgAASUkqAAgAAAAHABIBAwABAAAAAQAAABoBBQABAAAAYgAAABsBBQABAAAAagAAACgBAwABAAAAAgAAADEBAgAOAAAAcgAAADIBAgAUAAAAgAAAAGmHBAABAAAAlAAAAAAAEABIAAAAAQAAAEgAAAABAAAAUGhvdG9GaWx0cmUgNwAyMDE5OjAyOjA4IDA5OjEyOjA2AAMAAJAHAAQAAAAwMjEwAqADAAEAAAAgAAAAA6ADAAEAAAAgAAAA/9sAQwACAQEBAQECAQEBAgICAgIEAwICAgIFBAQDBAYFBgYGBQYGBgcJCAYHCQcGBggLCAkKCgoKCgYICwwLCgwJCgoK/9sAQwECAgICAgIFAwMFCgcGBwoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK/8IAEQgAIAAgAwEiAAIRAQMRAf/EABkAAQACAwAAAAAAAAAAAAAAAAcDCAEFBv/EABQBAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhADEAAAAejyDWAIEXfiAHNi6flI31cgP//EAB0QAAICAgMBAAAAAAAAAAAAAAUHBAYAAwIIFwH/2gAIAQEAAQUCj9hGwa+e9NvPem3icfei7cgA+EVhEaSDiuoop0AEk9h1tRKZBp5UbyKvXs2Rqd8a7XONG4WFozGiqmuj+dmm7Ew792zxR15IQDcO7P/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8BH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8BH//EADMQAAAFAgIHBgUFAAAAAAAAAAECAwQFBhEAEgcTISIxQVEUMjRSltMkM0JhcnGBkdHw/9oACAEBAAY/An0tD0/TDWNayZ2ZFpaT1Nzhty3MoW426Y7+j31Kl72O/o99Spe9h9F1rIQjCQbv+ztk2r8Mrn8LmHPt5hxxExkk2Ks3caUTprJH4HKJUgEMN6Da6AI9SCURAykr2U/kuJs98oAA7uUdv8hhmzlqRh26r9fUs01QsKp7d0P9064px9S1LNWKytSIJqKIEsIlsYbYhIQHpO1hpP14t/q1Y6oAN+lwEMNKdodZNVOLXzS/MFzc0L8rBxHzfjgamcmO3SR3Y5sRTw5A+/m5iP8AQYplzLk+PjatbNnivJYchhKp+4cfviNqPR0jERMuwkgdndKMwDXGDaGYSl3toX24Msq/oQxjDcxjU+ncR6/Jx4ug/Tyfs4YMZ6o6ZQj2smm8UTi43UiJi7L7qZbjYR44/8QAHxABAQACAgIDAQAAAAAAAAAAAREhMQBRYYEQQXGR/9oACAEBAAE/IQtc3YdCWjh3182bJ95dMtxiIKlE8ghj6tr8Izlp6oUqhbbBSb4bSw8mY3Lj+o2BTNQTJjnVB9cYFmbh7lfsHDBnVmn2IRhkR2rOlFmZSCZPks+gF+YpaWOkMOimEBpMXWBElBQEa+0BveFNUuavxfI8KevwElCvvn//2gAMAwEAAgADAAAAECCGFP/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8QH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8QH//EABsQAQEBAQEBAQEAAAAAAAAAAAERIQAxEEFR/9oACAEBAAE/EAkHuPGt6MT8GvtWqj67MUfVhh/m84mRZYfERVkXx4ZFnmBZYiAxBLiiPufCi4R/NXiJ2nMZiKFed6eYk5DccJII21zieXfLp4hnKDEur0QiKPsHCAxE6GBShCCAxQZE4chlTRlF0hVRFHj0j9plQoKrqqvxj+VVsxhhGExud//Z" style="border: 1px solid rgb(0, 0, 0); margin: 15px; border-radius: 0px; max-width:95%;" id="image_output"></a>
+		<a id="image_link" href="data:image/jpeg;base64,/9j/4QDCRXhpZgAASUkqAAgAAAAHABIBAwABAAAAAQAAABoBBQABAAAAYgAAABsBBQABAAAAagAAACgBAwABAAAAAgAAADEBAgAOAAAAcgAAADIBAgAUAAAAgAAAAGmHBAABAAAAlAAAAAAAEABIAAAAAQAAAEgAAAABAAAAUGhvdG9GaWx0cmUgNwAyMDE5OjAyOjA4IDA5OjEyOjA2AAMAAJAHAAQAAAAwMjEwAqADAAEAAAAgAAAAA6ADAAEAAAAgAAAA/9sAQwACAQEBAQECAQEBAgICAgIEAwICAgIFBAQDBAYFBgYGBQYGBgcJCAYHCQcGBggLCAkKCgoKCgYICwwLCgwJCgoK/9sAQwECAgICAgIFAwMFCgcGBwoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK/8IAEQgAIAAgAwEiAAIRAQMRAf/EABkAAQACAwAAAAAAAAAAAAAAAAcDCAEFBv/EABQBAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhADEAAAAejyDWAIEXfiAHNi6flI31cgP//EAB0QAAICAgMBAAAAAAAAAAAAAAUHBAYAAwIIFwH/2gAIAQEAAQUCj9hGwa+e9NvPem3icfei7cgA+EVhEaSDiuoop0AEk9h1tRKZBp5UbyKvXs2Rqd8a7XONG4WFozGiqmuj+dmm7Ew792zxR15IQDcO7P/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8BH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8BH//EADMQAAAFAgIHBgUFAAAAAAAAAAECAwQFBhEAEgcTISIxQVEUMjRSltMkM0JhcnGBkdHw/9oACAEBAAY/An0tD0/TDWNayZ2ZFpaT1Nzhty3MoW426Y7+j31Kl72O/o99Spe9h9F1rIQjCQbv+ztk2r8Mrn8LmHPt5hxxExkk2Ks3caUTprJH4HKJUgEMN6Da6AI9SCURAykr2U/kuJs98oAA7uUdv8hhmzlqRh26r9fUs01QsKp7d0P9064px9S1LNWKytSIJqKIEsIlsYbYhIQHpO1hpP14t/q1Y6oAN+lwEMNKdodZNVOLXzS/MFzc0L8rBxHzfjgamcmO3SR3Y5sRTw5A+/m5iP8AQYplzLk+PjatbNnivJYchhKp+4cfviNqPR0jERMuwkgdndKMwDXGDaGYSl3toX24Msq/oQxjDcxjU+ncR6/Jx4ug/Tyfs4YMZ6o6ZQj2smm8UTi43UiJi7L7qZbjYR44/8QAHxABAQACAgIDAQAAAAAAAAAAAREhMQBRYYEQQXGR/9oACAEBAAE/IQtc3YdCWjh3182bJ95dMtxiIKlE8ghj6tr8Izlp6oUqhbbBSb4bSw8mY3Lj+o2BTNQTJjnVB9cYFmbh7lfsHDBnVmn2IRhkR2rOlFmZSCZPks+gF+YpaWOkMOimEBpMXWBElBQEa+0BveFNUuavxfI8KevwElCvvn//2gAMAwEAAgADAAAAECCGFP/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8QH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8QH//EABsQAQEBAQEBAQEAAAAAAAAAAAERIQAxEEFR/9oACAEBAAE/EAkHuPGt6MT8GvtWqj67MUfVhh/m84mRZYfERVkXx4ZFnmBZYiAxBLiiPufCi4R/NXiJ2nMZiKFed6eYk5DccJII21zieXfLp4hnKDEur0QiKPsHCAxE6GBShCCAxQZE4chlTRlF0hVRFHj0j9plQoKrqqvxj+VVsxhhGExud//Z" download="resized_image.jpg"><img src="data:image/jpeg;base64,/9j/4QDCRXhpZgAASUkqAAgAAAAHABIBAwABAAAAAQAAABoBBQABAAAAYgAAABsBBQABAAAAagAAACgBAwABAAAAAgAAADEBAgAOAAAAcgAAADIBAgAUAAAAgAAAAGmHBAABAAAAlAAAAAAAEABIAAAAAQAAAEgAAAABAAAAUGhvdG9GaWx0cmUgNwAyMDE5OjAyOjA4IDA5OjEyOjA2AAMAAJAHAAQAAAAwMjEwAqADAAEAAAAgAAAAA6ADAAEAAAAgAAAA/9sAQwACAQEBAQECAQEBAgICAgIEAwICAgIFBAQDBAYFBgYGBQYGBgcJCAYHCQcGBggLCAkKCgoKCgYICwwLCgwJCgoK/9sAQwECAgICAgIFAwMFCgcGBwoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK/8IAEQgAIAAgAwEiAAIRAQMRAf/EABkAAQACAwAAAAAAAAAAAAAAAAcDCAEFBv/EABQBAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhADEAAAAejyDWAIEXfiAHNi6flI31cgP//EAB0QAAICAgMBAAAAAAAAAAAAAAUHBAYAAwIIFwH/2gAIAQEAAQUCj9hGwa+e9NvPem3icfei7cgA+EVhEaSDiuoop0AEk9h1tRKZBp5UbyKvXs2Rqd8a7XONG4WFozGiqmuj+dmm7Ew792zxR15IQDcO7P/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8BH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8BH//EADMQAAAFAgIHBgUFAAAAAAAAAAECAwQFBhEAEgcTISIxQVEUMjRSltMkM0JhcnGBkdHw/9oACAEBAAY/An0tD0/TDWNayZ2ZFpaT1Nzhty3MoW426Y7+j31Kl72O/o99Spe9h9F1rIQjCQbv+ztk2r8Mrn8LmHPt5hxxExkk2Ks3caUTprJH4HKJUgEMN6Da6AI9SCURAykr2U/kuJs98oAA7uUdv8hhmzlqRh26r9fUs01QsKp7d0P9064px9S1LNWKytSIJqKIEsIlsYbYhIQHpO1hpP14t/q1Y6oAN+lwEMNKdodZNVOLXzS/MFzc0L8rBxHzfjgamcmO3SR3Y5sRTw5A+/m5iP8AQYplzLk+PjatbNnivJYchhKp+4cfviNqPR0jERMuwkgdndKMwDXGDaGYSl3toX24Msq/oQxjDcxjU+ncR6/Jx4ug/Tyfs4YMZ6o6ZQj2smm8UTi43UiJi7L7qZbjYR44/8QAHxABAQACAgIDAQAAAAAAAAAAAREhMQBRYYEQQXGR/9oACAEBAAE/IQtc3YdCWjh3182bJ95dMtxiIKlE8ghj6tr8Izlp6oUqhbbBSb4bSw8mY3Lj+o2BTNQTJjnVB9cYFmbh7lfsHDBnVmn2IRhkR2rOlFmZSCZPks+gF+YpaWOkMOimEBpMXWBElBQEa+0BveFNUuavxfI8KevwElCvvn//2gAMAwEAAgADAAAAECCGFP/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8QH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8QH//EABsQAQEBAQEBAQEAAAAAAAAAAAERIQAxEEFR/9oACAEBAAE/EAkHuPGt6MT8GvtWqj67MUfVhh/m84mRZYfERVkXx4ZFnmBZYiAxBLiiPufCi4R/NXiJ2nMZiKFed6eYk5DccJII21zieXfLp4hnKDEur0QiKPsHCAxE6GBShCCAxQZE4chlTRlF0hVRFHj0j9plQoKrqqvxj+VVsxhhGExud//Z" style="border: 1px solid rgb(0, 0, 0); margin: 15px; border-radius: 0px; max-height:50vh;" id="image_output"></a>
 	</div>
 	<div style="font-size:10px;">
 		^ click to save<hr>
