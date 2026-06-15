@@ -125,11 +125,11 @@
 	<body cz-shortcut-listen="true">
 		<span style="font-size:24px;font-weight:bold;" id="page_title" ondblclick="changeTitle();">Photo Improve</span>
 		<div style="float:right; width:500px; text-align:right;">
-			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px;" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
+			<div id="localstorage_updated" style="width: 100px; display: inline; padding: 3px; color: rgb(255, 255, 255); background-color: rgb(0, 153, 0);" title="Store changes in BROWSER MEMORY of LOCAL DEVICE.">&nbsp;Memorize<span style="cursor:help;" onclick="alert('=== MEMORIZATON ===\nStores changes in BROWSER MEMORY of local device.\nMemory bank used is dependent on Wiki filename.\nWrite to FILE SYSTEM with black button (local copy).');">[?]</span>:<input type="checkbox" id="nanowiki_panel_autosave" style="vertical-align:middle;" onclick="updateLocalStorage();" checked="true">&nbsp;</div>&nbsp;<span title="Download a 'blank' copy" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="nanowiki.html" download="nanowiki_blank.html" style="text-decoration:none;color:#000000;cursor:default;">&nbsp;[+]&nbsp;</a></span>
 			<span title="Help" style="background-color:#D4D0C8;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;color:#000000;cursor:default;" onclick="if(visible2){visible2=0;document.getElementById('help').style.display='none';this.innerHTML='&nbsp;???&nbsp;';}else{visible2=1;document.getElementById('help').style.display='block';this.innerHTML='&nbsp;-close-&nbsp;';}">&nbsp;???&nbsp;</span>
 			<span title="EXPORT TOOL ONLY" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save_t" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('&lt;!DOCTYPE html&gt;&lt;html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'&gt;&lt;head&gt;&lt;meta charset='+String.fromCharCode(34)+'UTF-8'+String.fromCharCode(34)+'&gt;&lt;meta name='+String.fromCharCode(34)+'viewport'+String.fromCharCode(34)+' content='+String.fromCharCode(34)+'width=device-width'+String.fromCharCode(34)+'&gt;&lt;/head&gt;&lt;body&gt;'+document.getElementById('nanowiki_panel').firstElementChild.firstElementChild.nextElementSibling.innerHTML+'&lt;/body&gt;&lt;/html&gt;');" onmouseout="this.href='#';" download="TOOL_Single-Photo-Improve.html">&nbsp;=&gt;&nbsp;[T]&nbsp;</a></span>
 			<span title="SAVE ALL CHANGES (OVERWRITE OLD FILE)" style="background-color:#111111;padding:1px;border:#F2F0EE outset 3px;border-radius:5px;cursor:default;"><a href="#" id="save_n" style="text-decoration:none;color:#ffffff; font-weight:bold;cursor:default;" onmouseover="this.href='data:text/json;charset=utf-8,'+escape('&lt;!DOCTYPE html&gt;&lt;html lang='+String.fromCharCode(34)+'en-US'+String.fromCharCode(34)+'&gt;'+document.getElementsByTagName('HTML')[0].innerHTML+'&lt;/html&gt;');" onmouseout="this.href='#';" download="TOOL_Single-Photo-Improve.html">&nbsp;=&gt;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAIAAAECyEFfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVR42k2MAQ4AIAgCsS/5V75bJDljc+DJRGbin126BpJ4eajgsDaW2r4XLeUli5JRiHl3f+6uHI8CSM+MQGJ9AAAAAElFTkSuQmCC">&nbsp;</a></span>
-			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">5/18/2026, 12:01:57 PM</span></div>
+			<div style="color:#aaaaaa; font-size:11px; padding-top:5px;">LATEST UPDATE: <span id="last_update">6/15/2026, 3:38:37 PM</span></div>
 		</div>
 		<div style="clear:both; display:none;" id="help">
 			WHAT IS THIS?<br>
@@ -179,6 +179,7 @@
 var org_width=34;
 var org_height=34;
 var toggle=0;
+var toggle_z=0;
 var store_brightness;
 var store_contrast;
 var store_saturation;
@@ -441,22 +442,44 @@ function toggleApply(){
 		document.getElementById('image_contrast_slide').value=store_contrast;
 		document.getElementById('image_saturation').value=store_saturation;
 		document.getElementById('image_saturation_slide').value=store_saturation;
-
 		imageResizerResize1();
 	}else{
 		toggle=1;
 		document.getElementById('apply_toggle').style.backgroundColor='#880000';
-
 		store_brightness=document.getElementById('image_brightness').value;
 		store_contrast=document.getElementById('image_contrast').value;
 		store_saturation=document.getElementById('image_saturation').value;
-
 		document.getElementById('image_brightness').value=100;
 		document.getElementById('image_brightness_slide').value=100;
 		document.getElementById('image_contrast').value=100;
 		document.getElementById('image_contrast_slide').value=100;
 		document.getElementById('image_saturation').value=100;
 		document.getElementById('image_saturation_slide').value=100;
+		imageResizerResize1();
+	}
+}
+
+function resetVals(){
+	toggle=0;
+	document.getElementById('image_brightness').value=100;
+	document.getElementById('image_brightness_slide').value=100;
+	document.getElementById('image_contrast').value=125;
+	document.getElementById('image_contrast_slide').value=125;
+	document.getElementById('image_saturation').value=125;
+	document.getElementById('image_saturation_slide').value=125;
+	imageResizerResize1();
+}
+
+function toggleZoom(){
+	if(toggle_z){
+		toggle_z=0;
+		document.getElementById('apply_zoom').style.backgroundColor='#000000';
+		document.getElementById('image_output').style.maxHeight='65vh';
+		imageResizerResize1();
+	}else{
+		toggle_z=1;
+		document.getElementById('apply_zoom').style.backgroundColor='#880000';
+		document.getElementById('image_output').style.maxHeight='none';
 		imageResizerResize1();
 	}
 }
@@ -506,7 +529,9 @@ function toggleApply(){
 	</tr>
 	<tr>
 		<td colspan="2" style="text-align:center;">
-			<input type="button" id="apply_toggle" value="COMPARE TO ORIGINAL" onclick="toggleApply();" style="border-radius:25px;background-color:#008800;color:#ffffff;"><br>
+			<input type="button" value="RESET VALUES" onclick="resetVals();" style="border-radius:25px;background-color:#0000ff;color:#ffffff;">
+			<input type="button" id="apply_toggle" value="COMPARE TO ORIGINAL" onclick="toggleApply();" style="border-radius:25px;background-color:#008800;color:#ffffff;">
+			<input type="button" id="apply_zoom" value="ZOOM IMAGE" onclick="toggleZoom();" style="border-radius:25px;background-color:#000000;color:#ffffff;">
 		</td>
 	</tr>
 </tbody>
@@ -517,7 +542,7 @@ function toggleApply(){
 	<img id="image_resizer_org" src="" style="position:absolute;top:-10000px;left:-10000px;">
 	<div style="text-align:center;">
 		<canvas id="image_resizer_resized" style="position:absolute;top:-10000px;left:-10000px;" width="34" height="34"></canvas>
-		<a id="image_link" href="data:image/jpeg;base64,/9j/4QDCRXhpZgAASUkqAAgAAAAHABIBAwABAAAAAQAAABoBBQABAAAAYgAAABsBBQABAAAAagAAACgBAwABAAAAAgAAADEBAgAOAAAAcgAAADIBAgAUAAAAgAAAAGmHBAABAAAAlAAAAAAAEABIAAAAAQAAAEgAAAABAAAAUGhvdG9GaWx0cmUgNwAyMDE5OjAyOjA4IDA5OjEyOjA2AAMAAJAHAAQAAAAwMjEwAqADAAEAAAAgAAAAA6ADAAEAAAAgAAAA/9sAQwACAQEBAQECAQEBAgICAgIEAwICAgIFBAQDBAYFBgYGBQYGBgcJCAYHCQcGBggLCAkKCgoKCgYICwwLCgwJCgoK/9sAQwECAgICAgIFAwMFCgcGBwoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK/8IAEQgAIAAgAwEiAAIRAQMRAf/EABkAAQACAwAAAAAAAAAAAAAAAAcDCAEFBv/EABQBAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhADEAAAAejyDWAIEXfiAHNi6flI31cgP//EAB0QAAICAgMBAAAAAAAAAAAAAAUHBAYAAwIIFwH/2gAIAQEAAQUCj9hGwa+e9NvPem3icfei7cgA+EVhEaSDiuoop0AEk9h1tRKZBp5UbyKvXs2Rqd8a7XONG4WFozGiqmuj+dmm7Ew792zxR15IQDcO7P/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8BH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8BH//EADMQAAAFAgIHBgUFAAAAAAAAAAECAwQFBhEAEgcTISIxQVEUMjRSltMkM0JhcnGBkdHw/9oACAEBAAY/An0tD0/TDWNayZ2ZFpaT1Nzhty3MoW426Y7+j31Kl72O/o99Spe9h9F1rIQjCQbv+ztk2r8Mrn8LmHPt5hxxExkk2Ks3caUTprJH4HKJUgEMN6Da6AI9SCURAykr2U/kuJs98oAA7uUdv8hhmzlqRh26r9fUs01QsKp7d0P9064px9S1LNWKytSIJqKIEsIlsYbYhIQHpO1hpP14t/q1Y6oAN+lwEMNKdodZNVOLXzS/MFzc0L8rBxHzfjgamcmO3SR3Y5sRTw5A+/m5iP8AQYplzLk+PjatbNnivJYchhKp+4cfviNqPR0jERMuwkgdndKMwDXGDaGYSl3toX24Msq/oQxjDcxjU+ncR6/Jx4ug/Tyfs4YMZ6o6ZQj2smm8UTi43UiJi7L7qZbjYR44/8QAHxABAQACAgIDAQAAAAAAAAAAAREhMQBRYYEQQXGR/9oACAEBAAE/IQtc3YdCWjh3182bJ95dMtxiIKlE8ghj6tr8Izlp6oUqhbbBSb4bSw8mY3Lj+o2BTNQTJjnVB9cYFmbh7lfsHDBnVmn2IRhkR2rOlFmZSCZPks+gF+YpaWOkMOimEBpMXWBElBQEa+0BveFNUuavxfI8KevwElCvvn//2gAMAwEAAgADAAAAECCGFP/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8QH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8QH//EABsQAQEBAQEBAQEAAAAAAAAAAAERIQAxEEFR/9oACAEBAAE/EAkHuPGt6MT8GvtWqj67MUfVhh/m84mRZYfERVkXx4ZFnmBZYiAxBLiiPufCi4R/NXiJ2nMZiKFed6eYk5DccJII21zieXfLp4hnKDEur0QiKPsHCAxE6GBShCCAxQZE4chlTRlF0hVRFHj0j9plQoKrqqvxj+VVsxhhGExud//Z" download="resized_image.jpg"><img src="data:image/jpeg;base64,/9j/4QDCRXhpZgAASUkqAAgAAAAHABIBAwABAAAAAQAAABoBBQABAAAAYgAAABsBBQABAAAAagAAACgBAwABAAAAAgAAADEBAgAOAAAAcgAAADIBAgAUAAAAgAAAAGmHBAABAAAAlAAAAAAAEABIAAAAAQAAAEgAAAABAAAAUGhvdG9GaWx0cmUgNwAyMDE5OjAyOjA4IDA5OjEyOjA2AAMAAJAHAAQAAAAwMjEwAqADAAEAAAAgAAAAA6ADAAEAAAAgAAAA/9sAQwACAQEBAQECAQEBAgICAgIEAwICAgIFBAQDBAYFBgYGBQYGBgcJCAYHCQcGBggLCAkKCgoKCgYICwwLCgwJCgoK/9sAQwECAgICAgIFAwMFCgcGBwoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK/8IAEQgAIAAgAwEiAAIRAQMRAf/EABkAAQACAwAAAAAAAAAAAAAAAAcDCAEFBv/EABQBAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhADEAAAAejyDWAIEXfiAHNi6flI31cgP//EAB0QAAICAgMBAAAAAAAAAAAAAAUHBAYAAwIIFwH/2gAIAQEAAQUCj9hGwa+e9NvPem3icfei7cgA+EVhEaSDiuoop0AEk9h1tRKZBp5UbyKvXs2Rqd8a7XONG4WFozGiqmuj+dmm7Ew792zxR15IQDcO7P/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8BH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8BH//EADMQAAAFAgIHBgUFAAAAAAAAAAECAwQFBhEAEgcTISIxQVEUMjRSltMkM0JhcnGBkdHw/9oACAEBAAY/An0tD0/TDWNayZ2ZFpaT1Nzhty3MoW426Y7+j31Kl72O/o99Spe9h9F1rIQjCQbv+ztk2r8Mrn8LmHPt5hxxExkk2Ks3caUTprJH4HKJUgEMN6Da6AI9SCURAykr2U/kuJs98oAA7uUdv8hhmzlqRh26r9fUs01QsKp7d0P9064px9S1LNWKytSIJqKIEsIlsYbYhIQHpO1hpP14t/q1Y6oAN+lwEMNKdodZNVOLXzS/MFzc0L8rBxHzfjgamcmO3SR3Y5sRTw5A+/m5iP8AQYplzLk+PjatbNnivJYchhKp+4cfviNqPR0jERMuwkgdndKMwDXGDaGYSl3toX24Msq/oQxjDcxjU+ncR6/Jx4ug/Tyfs4YMZ6o6ZQj2smm8UTi43UiJi7L7qZbjYR44/8QAHxABAQACAgIDAQAAAAAAAAAAAREhMQBRYYEQQXGR/9oACAEBAAE/IQtc3YdCWjh3182bJ95dMtxiIKlE8ghj6tr8Izlp6oUqhbbBSb4bSw8mY3Lj+o2BTNQTJjnVB9cYFmbh7lfsHDBnVmn2IRhkR2rOlFmZSCZPks+gF+YpaWOkMOimEBpMXWBElBQEa+0BveFNUuavxfI8KevwElCvvn//2gAMAwEAAgADAAAAECCGFP/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8QH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8QH//EABsQAQEBAQEBAQEAAAAAAAAAAAERIQAxEEFR/9oACAEBAAE/EAkHuPGt6MT8GvtWqj67MUfVhh/m84mRZYfERVkXx4ZFnmBZYiAxBLiiPufCi4R/NXiJ2nMZiKFed6eYk5DccJII21zieXfLp4hnKDEur0QiKPsHCAxE6GBShCCAxQZE4chlTRlF0hVRFHj0j9plQoKrqqvxj+VVsxhhGExud//Z" style="border: 1px solid rgb(0, 0, 0); margin: 15px; border-radius: 0px; max-height:65vh;" id="image_output"></a>
+		<div style="max-height:70vh;overflow:auto;padding:5px;"><a id="image_link" href="data:image/jpeg;base64,/9j/4QDCRXhpZgAASUkqAAgAAAAHABIBAwABAAAAAQAAABoBBQABAAAAYgAAABsBBQABAAAAagAAACgBAwABAAAAAgAAADEBAgAOAAAAcgAAADIBAgAUAAAAgAAAAGmHBAABAAAAlAAAAAAAEABIAAAAAQAAAEgAAAABAAAAUGhvdG9GaWx0cmUgNwAyMDE5OjAyOjA4IDA5OjEyOjA2AAMAAJAHAAQAAAAwMjEwAqADAAEAAAAgAAAAA6ADAAEAAAAgAAAA/9sAQwACAQEBAQECAQEBAgICAgIEAwICAgIFBAQDBAYFBgYGBQYGBgcJCAYHCQcGBggLCAkKCgoKCgYICwwLCgwJCgoK/9sAQwECAgICAgIFAwMFCgcGBwoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK/8IAEQgAIAAgAwEiAAIRAQMRAf/EABkAAQACAwAAAAAAAAAAAAAAAAcDCAEFBv/EABQBAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhADEAAAAejyDWAIEXfiAHNi6flI31cgP//EAB0QAAICAgMBAAAAAAAAAAAAAAUHBAYAAwIIFwH/2gAIAQEAAQUCj9hGwa+e9NvPem3icfei7cgA+EVhEaSDiuoop0AEk9h1tRKZBp5UbyKvXs2Rqd8a7XONG4WFozGiqmuj+dmm7Ew792zxR15IQDcO7P/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8BH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8BH//EADMQAAAFAgIHBgUFAAAAAAAAAAECAwQFBhEAEgcTISIxQVEUMjRSltMkM0JhcnGBkdHw/9oACAEBAAY/An0tD0/TDWNayZ2ZFpaT1Nzhty3MoW426Y7+j31Kl72O/o99Spe9h9F1rIQjCQbv+ztk2r8Mrn8LmHPt5hxxExkk2Ks3caUTprJH4HKJUgEMN6Da6AI9SCURAykr2U/kuJs98oAA7uUdv8hhmzlqRh26r9fUs01QsKp7d0P9064px9S1LNWKytSIJqKIEsIlsYbYhIQHpO1hpP14t/q1Y6oAN+lwEMNKdodZNVOLXzS/MFzc0L8rBxHzfjgamcmO3SR3Y5sRTw5A+/m5iP8AQYplzLk+PjatbNnivJYchhKp+4cfviNqPR0jERMuwkgdndKMwDXGDaGYSl3toX24Msq/oQxjDcxjU+ncR6/Jx4ug/Tyfs4YMZ6o6ZQj2smm8UTi43UiJi7L7qZbjYR44/8QAHxABAQACAgIDAQAAAAAAAAAAAREhMQBRYYEQQXGR/9oACAEBAAE/IQtc3YdCWjh3182bJ95dMtxiIKlE8ghj6tr8Izlp6oUqhbbBSb4bSw8mY3Lj+o2BTNQTJjnVB9cYFmbh7lfsHDBnVmn2IRhkR2rOlFmZSCZPks+gF+YpaWOkMOimEBpMXWBElBQEa+0BveFNUuavxfI8KevwElCvvn//2gAMAwEAAgADAAAAECCGFP/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8QH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8QH//EABsQAQEBAQEBAQEAAAAAAAAAAAERIQAxEEFR/9oACAEBAAE/EAkHuPGt6MT8GvtWqj67MUfVhh/m84mRZYfERVkXx4ZFnmBZYiAxBLiiPufCi4R/NXiJ2nMZiKFed6eYk5DccJII21zieXfLp4hnKDEur0QiKPsHCAxE6GBShCCAxQZE4chlTRlF0hVRFHj0j9plQoKrqqvxj+VVsxhhGExud//Z" download="resized_image.jpg"><img src="data:image/jpeg;base64,/9j/4QDCRXhpZgAASUkqAAgAAAAHABIBAwABAAAAAQAAABoBBQABAAAAYgAAABsBBQABAAAAagAAACgBAwABAAAAAgAAADEBAgAOAAAAcgAAADIBAgAUAAAAgAAAAGmHBAABAAAAlAAAAAAAEABIAAAAAQAAAEgAAAABAAAAUGhvdG9GaWx0cmUgNwAyMDE5OjAyOjA4IDA5OjEyOjA2AAMAAJAHAAQAAAAwMjEwAqADAAEAAAAgAAAAA6ADAAEAAAAgAAAA/9sAQwACAQEBAQECAQEBAgICAgIEAwICAgIFBAQDBAYFBgYGBQYGBgcJCAYHCQcGBggLCAkKCgoKCgYICwwLCgwJCgoK/9sAQwECAgICAgIFAwMFCgcGBwoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK/8IAEQgAIAAgAwEiAAIRAQMRAf/EABkAAQACAwAAAAAAAAAAAAAAAAcDCAEFBv/EABQBAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhADEAAAAejyDWAIEXfiAHNi6flI31cgP//EAB0QAAICAgMBAAAAAAAAAAAAAAUHBAYAAwIIFwH/2gAIAQEAAQUCj9hGwa+e9NvPem3icfei7cgA+EVhEaSDiuoop0AEk9h1tRKZBp5UbyKvXs2Rqd8a7XONG4WFozGiqmuj+dmm7Ew792zxR15IQDcO7P/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8BH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8BH//EADMQAAAFAgIHBgUFAAAAAAAAAAECAwQFBhEAEgcTISIxQVEUMjRSltMkM0JhcnGBkdHw/9oACAEBAAY/An0tD0/TDWNayZ2ZFpaT1Nzhty3MoW426Y7+j31Kl72O/o99Spe9h9F1rIQjCQbv+ztk2r8Mrn8LmHPt5hxxExkk2Ks3caUTprJH4HKJUgEMN6Da6AI9SCURAykr2U/kuJs98oAA7uUdv8hhmzlqRh26r9fUs01QsKp7d0P9064px9S1LNWKytSIJqKIEsIlsYbYhIQHpO1hpP14t/q1Y6oAN+lwEMNKdodZNVOLXzS/MFzc0L8rBxHzfjgamcmO3SR3Y5sRTw5A+/m5iP8AQYplzLk+PjatbNnivJYchhKp+4cfviNqPR0jERMuwkgdndKMwDXGDaGYSl3toX24Msq/oQxjDcxjU+ncR6/Jx4ug/Tyfs4YMZ6o6ZQj2smm8UTi43UiJi7L7qZbjYR44/8QAHxABAQACAgIDAQAAAAAAAAAAAREhMQBRYYEQQXGR/9oACAEBAAE/IQtc3YdCWjh3182bJ95dMtxiIKlE8ghj6tr8Izlp6oUqhbbBSb4bSw8mY3Lj+o2BTNQTJjnVB9cYFmbh7lfsHDBnVmn2IRhkR2rOlFmZSCZPks+gF+YpaWOkMOimEBpMXWBElBQEa+0BveFNUuavxfI8KevwElCvvn//2gAMAwEAAgADAAAAECCGFP/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8QH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8QH//EABsQAQEBAQEBAQEAAAAAAAAAAAERIQAxEEFR/9oACAEBAAE/EAkHuPGt6MT8GvtWqj67MUfVhh/m84mRZYfERVkXx4ZFnmBZYiAxBLiiPufCi4R/NXiJ2nMZiKFed6eYk5DccJII21zieXfLp4hnKDEur0QiKPsHCAxE6GBShCCAxQZE4chlTRlF0hVRFHj0j9plQoKrqqvxj+VVsxhhGExud//Z" style="border: 1px solid rgb(0, 0, 0); margin: 15px; border-radius: 0px; max-height:65vh;" id="image_output"></a></div>
 	</div>
 	<div style="font-size:10px;">
 		^ click to save<hr>
